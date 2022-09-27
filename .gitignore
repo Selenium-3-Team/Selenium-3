@@ -92,7 +92,7 @@ local.properties
 .sts4-cache/
 
 # Report
-TestReport/
-test-output/
+SeleniumFramework/TestReport/
+SeleniumFramework/test-output/
 
 # End of https://www.toptal.com/developers/gitignore/api/eclipse
