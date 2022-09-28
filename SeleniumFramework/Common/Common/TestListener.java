@@ -12,6 +12,8 @@ import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.Status;
 
+import io.qameta.allure.Attachment;
+
 public class TestListener implements ITestListener {
 
 	public static ConcurrentHashMap<String, ExtentTest> testSuite = new ConcurrentHashMap<String, ExtentTest>();
@@ -40,6 +42,11 @@ public class TestListener implements ITestListener {
 				"*** TEST EXECUTION COMPLETE - PASSED: " + result.getMethod().getMethodName());
 	}
 
+	@Attachment(value = "Screenshot of {0}", type = "image/png")
+	public byte[] saveScreenshot(String name) {
+		return Utilities.takeScreenShot();
+	}
+	
 	public void onTestFailure(ITestResult result) {
 
 		if (result.getThrowable() instanceof AssertionError) {
@@ -50,6 +57,7 @@ public class TestListener implements ITestListener {
 			String screenshotFileName = UUID.randomUUID().toString();
 			String screenshotFilePath = "";
 			try {
+				saveScreenshot(result.getName());
 				screenshotFilePath = Utilities.takeScreenShot(screenshotFileName,
 						ExtentReportManager.getScreenshotFolder());
 			} catch (Exception e1) {

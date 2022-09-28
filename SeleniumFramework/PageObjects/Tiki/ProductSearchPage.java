@@ -4,6 +4,7 @@ import Common.RandomHelper;
 import Common.Utilities;
 import Constant.Constant;
 import ElementWrapper.Element;
+import io.qameta.allure.Step;
 
 public class ProductSearchPage extends GeneralPage {
 
@@ -35,10 +36,12 @@ public class ProductSearchPage extends GeneralPage {
 		return this;
 	}
 	
+	@Step("Get search result title")
 	public String getSearchResultTitle() {
 		return resultSearchTitle.getText();
 	}
 	
+	@Step("Get random product")
 	public Product getRandomProductInformation() {
 		Utilities.waitForPageLoad(Constant.DEFAULT_TIMEOUT);
 		productItems.waitForAllElementsPresent(Constant.DEFAULT_TIMEOUT);
@@ -53,6 +56,7 @@ public class ProductSearchPage extends GeneralPage {
 		return new Product(name, price);
 	}
 	
+	@Step("Select product name {0}")
 	public ProductPage selectProduct(Product product) {
 		productName.getDynamicElement(product.getName()).click();
 		return new ProductPage().waitForLoading(product);

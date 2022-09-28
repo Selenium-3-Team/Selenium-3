@@ -1,6 +1,8 @@
 package Common;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
@@ -30,6 +32,11 @@ public class Utilities {
 		SimpleDateFormat formatter = new SimpleDateFormat(format);
 		Date date = new Date();
 		return formatter.format(date);
+	}
+	
+	public static byte[] takeScreenShot() {
+		TakesScreenshot scrShot = ((TakesScreenshot) DriverManagement.getDriver());
+		return (byte[]) (scrShot.getScreenshotAs(OutputType.BYTES));
 	}
 
 	public static String takeScreenShot(String filename, String filepath) throws Exception {
@@ -168,5 +175,20 @@ public class Utilities {
 	public static String removeAllCharacterInString(String originalString, String character) {
 		String newString = originalString.replaceAll(character, "").trim();
 		return newString;
+	}
+	
+	public static void runAllureReport() throws IOException {
+		Runtime runtime = Runtime.getRuntime();
+		try {
+			Process p = runtime.exec("cmd /c "+ getProjectPath() + "\\test-resources\\AllureReport.bat");
+			InputStream is = p.getInputStream();
+		     int i = 0;
+		     while( (i = is.read() ) != -1)
+		     {
+		       System.out.print((char)i);
+		     }
+		}catch(IOException ex) {
+			throw(ex);
+		}
 	}
 }

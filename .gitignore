@@ -11,7 +11,7 @@
 .mtj.tmp/
 
 # Package Files #
-*.jar
+#*.jar
 *.war
 *.nar
 *.ear
@@ -95,6 +95,7 @@ local.properties
 # Report
 TestReport/
 test-output/
+allure-results/
 
 
 # End of https://www.toptal.com/developers/gitignore/api/eclipse

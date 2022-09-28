@@ -7,7 +7,6 @@ import org.testng.annotations.Test;
 
 import Common.Logger;
 import Constant.Constant;
-import Enum.Tiki.MenuItem;
 
 public class TikiTest extends BaseTest{
 	

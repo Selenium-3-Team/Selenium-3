@@ -4,6 +4,7 @@ import Common.Utilities;
 import Constant.Constant;
 import ElementWrapper.Element;
 import Enum.Tiki.MenuItem;
+import io.qameta.allure.Step;
 
 public class GeneralPage {
 
@@ -23,14 +24,17 @@ public class GeneralPage {
 		  
 	// Methods
 	
+	@Step("Check if search textbox is displayed")
 	public boolean isSearchTextBoxDisplayed() {
 		return txtSearch.isDisplayed();
 	}
 	
+	@Step("Get search value from search textbox")
 	public String getSearchPlaceHolderText() {
 		return txtSearch.getAttribute("placeholder");
 	}
 	
+	@Step("Check if search button is displayed")
 	public boolean isSearchButtonDisplayed() {
 		return btnSearch.isDisplayed();
 	}
@@ -45,12 +49,14 @@ public class GeneralPage {
 		return this;
 	}
 	
+	@Step("Search product name {0}")
 	public ProductSearchPage searchProduct(String product) {
 		enterSearchForm(product);
 		submitSearchForm();
 		return new ProductSearchPage().waitForSearchTitleLoading(product);
 	}
 	
+	@Step("Check if the breadcumb displayed {0}")
 	public boolean isBreadCrumbDisplayed(String value) {
 		String[] breadCrumbItems = Utilities.splitString(value, Constant.BREAD_CRUMB_ITEM_REGEX);
 		String[] actualBreadCrumbItems = breadCrumbItem.getAllTexts();
