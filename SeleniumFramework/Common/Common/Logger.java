@@ -4,14 +4,18 @@ import org.testng.Reporter;
 
 import com.aventstack.extentreports.Status;
 
+import io.qameta.allure.Step;
+
 public class Logger {
 
+	@Step("{0}")
 	public static void info(String message) {
 		Reporter.log("<b>INFO: </b>" + message);
 		Reporter.log(Utilities.getDateNow("MM.dd.yyyy - HH:mm:ss") + " - INFO: " + message, true);
 		ExtentTestManager.getTest().log(Status.INFO, message);
 	}
 
+	@Step("{0}")
 	public static void bug(String bugId, String bugDesc) {
 		String bugInfo = String.format("Bug %s - %s", bugId, bugDesc);
 		String message = "<a target=\"_blank\" href=\"" + bugDesc
@@ -20,12 +24,14 @@ public class Logger {
 		ExtentTestManager.getTest().log(Status.WARNING, message);
 	}
 
+	@Step("{0}")
 	public static void warning(String message) {
 		message = "<b style=\"color: darkorange;word-break:break-word;\"><i>WARNING: </i>" + message + "</b>";
 		Reporter.log(message);
 		ExtentTestManager.getTest().log(Status.WARNING, message);
 	}
 
+	@Step("{0}")
 	public static void verify(String message) {
 		String messageLog = message;
 		message = "<b style=\"color: blue;word-break:break-word;\"><i style=\"color: orange\">VERIFY POINT: </i>"
@@ -36,6 +42,7 @@ public class Logger {
 		ExtentTestManager.getTest().log(Status.INFO, message);
 	}
 
+	@Step("{0}")
 	public static void passedAssertion(String message) {
 		message = "<b style=\"color: blue;word-break:break-word;\"><i style=\"color: #00af00\">" + message
 				+ " </i></b>";
@@ -43,6 +50,7 @@ public class Logger {
 		ExtentTestManager.getTest().log(Status.PASS, message);
 	}
 
+	@Step("{0}")
 	public static void failedAssertion(String message) {
 		message = "<b style=\"color: blue;word-break:break-word;\"><i style=\"color: red\">" + message + " </i></b>";
 		Reporter.log(message);

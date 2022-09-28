@@ -2,6 +2,7 @@ package Tiki;
 
 import Constant.Constant;
 import ElementWrapper.Element;
+import io.qameta.allure.Step;
 
 public class ProductPage extends GeneralPage {
 
@@ -16,10 +17,12 @@ public class ProductPage extends GeneralPage {
 		return this;
 	}
 	
+	@Step("Get product name")
 	public String getProductName() {
 		return lblProductName.getText();
 	}
 	
+	@Step("Get product price")
 	public String getProductPrice() {
 		return lblProductPrice.getText();
 	}
