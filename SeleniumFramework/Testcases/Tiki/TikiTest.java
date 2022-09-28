@@ -48,42 +48,42 @@ public class TikiTest extends BaseTest{
 		assertEquals(product.getPrice(), productPage.getProductPrice(), "Product price should be as same as selected product");
 	}
 	
-//	@Test
-//	public void TestCase002() {
-//		Logger.info("Test case 002: Verify user can filter search condition for product");
-//		
-//		Logger.info("Step 1: Navigate to \"TIKI\" website");
-//		homePage.open(Constant.TIKI_URL);
-//		
-//		Logger.info("Step 2: Select left menu");
-//		ProductSearchPage productSearchPage = homePage.selectMenuItem(MenuItem.ELECTRIC_APPLIANCE, "Lò vi sóng");
-//		
-//		Logger.verify("Verify that: Breadcrumb is \"Trang chủ > Điện Gia Dụng > Đồ dùng nhà bếp > Lò vi sóng\"");
-//		assertTrue(productSearchPage.isBreadCrumbDisplayed("Trang chủ > Điện Gia Dụng > Đồ dùng nhà bếp > Lò vi sóng"), "The Breadcrumb should be displayed as expected");
-//		
-//		Logger.verify("Verify that: \"Lò vi sóng\" title is displayed");
-//		assertEquals(productSearchPage.getSearchResultTitle(), "Lò vi sóng", "'Lò vi sóng' title is not displayed");
-//		
-//		Logger.info("Step 3: Select \"Nhà cung cấp\"");
-//		productSearchPage.selectFilterOption("Nhà cung cấp", "Tiki Trading");
-//		
-//		Logger.info("Check on \"TIKINOW Giao nhanh\" checkbox");
-//		productSearchPage.selectServiceFilterOption("Giao Siêu Tốc 2h");
-//		
-//		Logger.info("Enter price range, then select OK button");
-//		productSearchPage.filterProductByRangeOfPrice(1000000, 2000000);
-//		
-//		Logger.verify("\"Nhà cung cấp: Tiki Trading\", Giao hàng nhanh 2h: Có\",  \"Giá: 1.500.000đ đến 3.000.000đ\" are displayed as keyword tags");
-//		Logger.warning("Tags displayed are: Tiki Trading, 1.000.000đ đến 2.000.000đ and TIKINOW image is selected");
-//		assertTrue(productSearchPage.isKeyworkTagDisplayed("Nhà cung cấp: Tiki Trading"), "\"Nhà cung cấp: Tiki Trading\" tag is not displayed as expected");
-//		assertTrue(productSearchPage.isKeyworkTagDisplayed("Giao hàng nhanh 2h: Có"), "\"Giao hàng nhanh 2h: Có\" tag is not displayed as expected");
-//		assertTrue(productSearchPage.isKeyworkTagDisplayed("Giá: 1.500.000đ đến 3.000.000đ"), "\"Giá: 1.500.000đ đến 3.000.000đ\" tag is not displayed as expected");
-//		
-//		Logger.verify("Verify that the name of all displayed items in the result grid contains \"Lò Vi Sóng\"");
-//		assertTrue(productSearchPage.isTextContainedInProductName("Lò Vi Sóng"), "the name of all displayed items in the result grid does not contains \"Lò Vi Sóng\"");
-//	
-//		Logger.verify("Verify that the price of all displayed items in the result grid is within the range \"1.500.000đ - 3.000.000đ\"");
-//		assertTrue(productSearchPage.isProductDisplayedPriceInRange(1500000, 3000000), "the price of all displayed items in the result grid is within the range \"1.500.000đ - 3.000.000đ\"");
-//	}
+	@Test
+	public void TestCase002() {
+		Logger.info("Test case 002: Verify user can filter search condition for product");
+		
+		Logger.info("Step 1: Navigate to \"TIKI\" website");
+		homePage.open(Constant.TIKI_URL);
+		
+		Logger.info("Step 2: Select left menu");
+		ProductSearchPage productSearchPage = homePage.selectMenuItem(MenuItem.ELECTRIC_APPLIANCE, "Lò vi sóng");
+		
+		Logger.verify("Verify that: Breadcrumb is \"Trang chủ > Điện Gia Dụng > Đồ dùng nhà bếp > Lò vi sóng\"");
+		assertTrue(productSearchPage.isBreadCrumbDisplayed("Trang chủ > Điện Gia Dụng > Đồ dùng nhà bếp > Lò vi sóng"), "The Breadcrumb should be displayed as expected");
+		
+		Logger.verify("Verify that: \"Lò vi sóng\" title is displayed");
+		assertEquals(productSearchPage.getSearchResultTitle(), "Lò vi sóng", "'Lò vi sóng' title is not displayed");
+		
+		Logger.info("Step 3: Select \"Nhà cung cấp\"");
+		productSearchPage.selectFilterOption("Nhà cung cấp", "Tiki Trading");
+		
+		Logger.info("Check on \"TIKINOW Giao nhanh\" checkbox");
+		productSearchPage.selectServiceFilterOption("Giao Siêu Tốc 2h");
+		
+		Logger.info("Enter price range, then select OK button");
+		productSearchPage.filterProductByRangeOfPrice(1000000, 2000000);
+		
+		Logger.verify("\"Nhà cung cấp: Tiki Trading\", Giao hàng nhanh 2h: Có\",  \"Giá: 1.500.000đ đến 3.000.000đ\" are displayed as keyword tags");
+		Logger.warning("Tags displayed are: Tiki Trading, 1.000.000đ đến 2.000.000đ and TIKINOW image is selected");
+		assertTrue(productSearchPage.isKeyworkTagDisplayed("Nhà cung cấp: Tiki Trading"), "\"Nhà cung cấp: Tiki Trading\" tag is not displayed as expected");
+		assertTrue(productSearchPage.isKeyworkTagDisplayed("Giao hàng nhanh 2h: Có"), "\"Giao hàng nhanh 2h: Có\" tag is not displayed as expected");
+		assertTrue(productSearchPage.isKeyworkTagDisplayed("Giá: 1.500.000đ đến 3.000.000đ"), "\"Giá: 1.500.000đ đến 3.000.000đ\" tag is not displayed as expected");
+		
+		Logger.verify("Verify that the name of all displayed items in the result grid contains \"Lò Vi Sóng\"");
+		assertTrue(productSearchPage.isTextContainedInProductName("Lò Vi Sóng"), "the name of all displayed items in the result grid does not contains \"Lò Vi Sóng\"");
+	
+		Logger.verify("Verify that the price of all displayed items in the result grid is within the range \"1.500.000đ - 3.000.000đ\"");
+		assertTrue(productSearchPage.isProductDisplayedPriceInRange(1500000, 3000000), "the price of all displayed items in the result grid is within the range \"1.500.000đ - 3.000.000đ\"");
+	}
 
 }
