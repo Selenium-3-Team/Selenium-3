@@ -1,8 +1,10 @@
 package Tiki;
 
+import java.util.List;
+
 import Common.Utilities;
 import Constant.Constant;
-import ElementWrapper.Element;
+import ElementBase.Element;
 import Enum.Tiki.MenuItem;
 import io.qameta.allure.Step;
 
@@ -59,9 +61,9 @@ public class GeneralPage {
 	@Step("Check if the breadcumb displayed {0}")
 	public boolean isBreadCrumbDisplayed(String value) {
 		String[] breadCrumbItems = Utilities.splitString(value, Constant.BREAD_CRUMB_ITEM_REGEX);
-		String[] actualBreadCrumbItems = breadCrumbItem.getAllTexts();
-		for(int i = 0; i < actualBreadCrumbItems.length; i++) {
-			if(breadCrumbItems[i].trim().equals(actualBreadCrumbItems[i].trim())) {
+		List<String> actualBreadCrumbItems = breadCrumbItem.getAllTexts();
+		for(int i = 0; i < actualBreadCrumbItems.size(); i++) {
+			if(breadCrumbItems[i].trim().equals(actualBreadCrumbItems.get(i).trim())) {
 				return true;
 			}
 		}
@@ -71,11 +73,11 @@ public class GeneralPage {
 	public ProductSearchPage selectMenuItem(MenuItem menu, String subMenu) {
 		btnMenu.click();
 		if(subMenu == null) {
-			menuItem.getDynamicElement(menu.getMenuItem()).click();
+			menuItem.generateDynamic(menu.getMenuItem()).click();
 		}
 		else{
-			menuItem.getDynamicElement(menu.getMenuItem()).hoverTo(Constant.DEFAULT_TIMEOUT);
-			subMenuItem.getDynamicElement(subMenu).click();
+			menuItem.generateDynamic(menu.getMenuItem()).moveToElement();
+			subMenuItem.generateDynamic(subMenu).click();
 		}
 		return new ProductSearchPage().waitForLoading();
 	}

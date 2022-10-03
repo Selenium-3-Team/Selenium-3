@@ -1,7 +1,7 @@
 package Tiki;
 
 import Constant.Constant;
-import ElementWrapper.Element;
+import ElementBase.Element;
 import io.qameta.allure.Step;
 
 public class ProductPage extends GeneralPage {
@@ -11,9 +11,9 @@ public class ProductPage extends GeneralPage {
 	private final Element lblProductPrice = new Element("((//div[contains(@class,'product-price')]/div[contains(@class,'current-price')]) | (//div[@class='flash-sale-price']/span))");
 	
 	public ProductPage waitForLoading(Product product) {
-		breadCrumbProductName.getDynamicElement(product.getName()).waitForVisibility(Constant.DEFAULT_TIMEOUT);
-		lblProductName.waitForVisibility(Constant.DEFAULT_TIMEOUT);
-		lblProductPrice.waitForVisibility(Constant.DEFAULT_TIMEOUT);
+		breadCrumbProductName.generateDynamic(product.getName()).waitForDisplayed(Constant.DEFAULT_TIMEOUT);
+		lblProductName.waitForDisplayed(Constant.DEFAULT_TIMEOUT);
+		lblProductPrice.waitForDisplayed(Constant.DEFAULT_TIMEOUT);
 		return this;
 	}
 	
