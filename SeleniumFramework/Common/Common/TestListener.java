@@ -46,34 +46,33 @@ public class TestListener implements ITestListener {
 	public byte[] saveScreenshot(String name) {
 		return Utilities.takeScreenShot();
 	}
-	
+
 	public void onTestFailure(ITestResult result) {
 
-		if (result.getThrowable() instanceof AssertionError) {
-			ExtentTestManager.getTest().fail("*** TEST EXECUTION COMPLETE - FAILED: "
-					+ result.getMethod().getMethodName() + " - " + result.getThrowable().getMessage());
-		} else {
-			// capture screenshot
-			String screenshotFileName = UUID.randomUUID().toString();
-			String screenshotFilePath = "";
-			try {
-				saveScreenshot(result.getName());
-				screenshotFilePath = Utilities.takeScreenShot(screenshotFileName,
-						ExtentReportManager.getScreenshotFolder());
-			} catch (Exception e1) {
-				e1.printStackTrace();
+		// capture screenshot
+		String screenshotFileName = UUID.randomUUID().toString();
+		String screenshotFilePath = "";
+		try {
+			saveScreenshot(result.getName());
+			screenshotFilePath = Utilities.takeScreenShot(screenshotFileName,
+					ExtentReportManager.getScreenshotFolder());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		try {
+			String methodName = result.getMethod().getMethodName();
+			String throwMessage = result.getThrowable().getMessage();
+			String message = String.format("*** TEST EXECUTION COMPLETE - ERROR: %s - %s", methodName, throwMessage);
+			if (result.getThrowable() instanceof AssertionError) {
+				message = String.format("*** TEST EXECUTION COMPLETE - FAILED: %s - %s", methodName, throwMessage);
 			}
 			// attach screenshots to report
-			try {
-				ExtentTestManager.getTest()
-						.error("*** TEST EXECUTION COMPLETE - ERROR: " + result.getMethod().getMethodName() + " - "
-								+ result.getThrowable().getMessage(),
-								MediaEntityBuilder.createScreenCaptureFromPath(screenshotFilePath).build());
-			} catch (IOException e) {
-				ExtentTestManager.getTest().error("*** TEST EXECUTION COMPLETE - ERROR: "
-						+ result.getMethod().getMethodName() + " - " + result.getThrowable().getMessage());
-				Logger.info("An exception occured while taking screenshot " + e.getCause());
-			}
+			ExtentTestManager.getTest().fail(message,
+					MediaEntityBuilder.createScreenCaptureFromPath(screenshotFilePath).build());
+		} catch (IOException e) {
+			Logger.info("An exception occured while taking screenshot " + e.getCause());
+			e.printStackTrace();
 		}
 	}
 
@@ -85,5 +84,5 @@ public class TestListener implements ITestListener {
 	public void onTestFailedButWithinSuccessPercentage(ITestResult result) {
 		Logger.info("*** Test failed but within percentage % " + result.getMethod().getMethodName());
 	}
-	
+
 }
