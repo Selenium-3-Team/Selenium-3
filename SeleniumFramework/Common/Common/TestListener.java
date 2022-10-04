@@ -12,6 +12,7 @@ import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.Status;
 
+import io.qameta.allure.Allure;
 import io.qameta.allure.Attachment;
 
 public class TestListener implements ITestListener {
@@ -59,17 +60,22 @@ public class TestListener implements ITestListener {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 		try {
 			String methodName = result.getMethod().getMethodName();
 			String throwMessage = result.getThrowable().getMessage();
+			// attach screenshots to report
 			String message = String.format("*** TEST EXECUTION COMPLETE - ERROR: %s - %s", methodName, throwMessage);
 			if (result.getThrowable() instanceof AssertionError) {
 				message = String.format("*** TEST EXECUTION COMPLETE - FAILED: %s - %s", methodName, throwMessage);
+				ExtentTestManager.getTest().fail(message,
+						MediaEntityBuilder.createScreenCaptureFromPath(screenshotFilePath).build());
+			} else {
+				ExtentTestManager.getTest().error(message,
+						MediaEntityBuilder.createScreenCaptureFromPath(screenshotFilePath).build());
+
 			}
-			// attach screenshots to report
-			ExtentTestManager.getTest().fail(message,
-					MediaEntityBuilder.createScreenCaptureFromPath(screenshotFilePath).build());
+			Allure.attachment(message, screenshotFilePath);
+
 		} catch (IOException e) {
 			Logger.info("An exception occured while taking screenshot " + e.getCause());
 			e.printStackTrace();
