@@ -407,6 +407,27 @@ public class Element implements IWaiter, IAction, IInfo {
 		}
 		return null;
 	}
+	
+	@Override
+	public String getClassName() {
+		logger.info(String.format("Get ClassName of %s", getLocator().toString()));
+		int i = 0;
+		while (i < Constant.SHORT_TIMEOUT) {
+			i++;
+			try {
+				return getElement().getAttribute("class");
+			} catch (StaleElementReferenceException staleEx) {
+				if (i == Constant.SHORT_TIMEOUT)
+					return null;
+				logger.severe(String.format("Try to get ClassName from control %s again", getLocator().toString()));
+			} catch (Exception e) {
+				logger.severe(
+						String.format("Has error with control '%s': %s", getLocator().toString(), e.getMessage()));
+				return null;
+			}
+		}
+		return null;
+	}
 
 	@Override
 	public String getTagName() {

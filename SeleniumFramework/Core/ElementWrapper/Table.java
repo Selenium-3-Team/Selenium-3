@@ -49,4 +49,8 @@ public class Table extends Element {
 		return this;
 	}
 	
+	public void select() {
+		super.select();
+	}
+	
 }
