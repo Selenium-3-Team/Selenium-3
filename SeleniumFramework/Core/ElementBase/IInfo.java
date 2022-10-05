@@ -32,6 +32,8 @@ public interface IInfo {
 	
 	String getTagName();
 	
+	String getClassName();
+	
 	int getSize();
 	
 }

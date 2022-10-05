@@ -48,5 +48,6 @@ public class Table extends Element {
 		super.generateDynamic(arguments);
 		return this;
 	}
+
 	
 }
