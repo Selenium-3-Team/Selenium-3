@@ -56,4 +56,8 @@ public class Image extends Element{
 		   return getElement().getAttribute("src");
 	}
 	
+	public String getAlt() {
+		   return getElement().getAttribute("alt");
+	}
+	
 }

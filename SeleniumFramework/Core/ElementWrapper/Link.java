@@ -56,4 +56,8 @@ public class Link extends Element{
 		super.clickByJS();
 	}
 	
+	public String getReference() {
+		return getElement().getAttribute("href");
+	}
+	
 }
