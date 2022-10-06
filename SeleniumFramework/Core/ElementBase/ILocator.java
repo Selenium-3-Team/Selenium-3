@@ -1,35 +1,35 @@
 package ElementBase;
 
-import org.javatuples.Pair;
 import org.openqa.selenium.By;
 
 import ElementSetting.FindBy;
 import Helper.LocatorHelper;
-
+import Helper.Pair;
 
 public interface ILocator {
 
 	/**
 	 * Create identity get element's locator methods
 	 */
-	
+
 	/**
 	 * Get element's By locator
 	 * 
 	 * @return By locator of the element
 	 */
 	By getLocator();
-	
+
 	/**
 	 * Get parent element's By locator
 	 * 
 	 * @return By locator of the parent element
 	 */
 	By getParentLocator();
-	
+
 	/**
 	 * Get Element from web page
-	 * @param by - Locator type of element
+	 * 
+	 * @param by    - Locator type of element
 	 * @param value - Locator value of element
 	 * 
 	 * @return - Find element By
@@ -56,23 +56,28 @@ public interface ILocator {
 			return By.xpath(value);
 		}
 	}
-	
+
 	/**
 	 * Get by locator with given pair of FindBy and Locator
+	 * 
 	 * @param locator - a new pair of element <FindBy, Locator>
-	 * @return use getByLocator to identify type of locator and find element by following it's type
+	 * @return use getByLocator to identify type of locator and find element by
+	 *         following it's type
 	 */
 	public default By getByLocator(Pair<FindBy, String> locator) {
-		return getByLocator(locator.getValue0(), locator.getValue1());
+		return getByLocator(locator.getKey(), locator.getValue());
 	}
-	
+
 	/**
 	 * Get by locator with given string
-	 * @param locator - a string 
-	 * @return use Locator Helper to separate, add to new pair of findBy and value and pass this pair through getByLocator to identify type of locator and return element following it's type
+	 * 
+	 * @param locator - a string
+	 * @return use Locator Helper to separate, add to new pair of findBy and value
+	 *         and pass this pair through getByLocator to identify type of locator
+	 *         and return element following it's type
 	 */
 	public default By getByLocator(String locator) {
 		Pair<FindBy, String> pairLocator = LocatorHelper.getPairLocator(locator);
-		return getByLocator(pairLocator.getValue0(), pairLocator.getValue1());
+		return getByLocator(pairLocator.getKey(), pairLocator.getValue());
 	}
 }
