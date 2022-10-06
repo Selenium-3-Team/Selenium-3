@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
-import org.javatuples.Pair;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.StaleElementReferenceException;
@@ -21,6 +20,7 @@ import DriverWrapper.DriverManagement;
 import ElementSetting.FindBy;
 import ElementSetting.Status;
 import Helper.LocatorHelper;
+import Helper.Pair;
 
 /**
  * Element control implementation
@@ -61,7 +61,8 @@ public class Element implements IWaiter, IAction, IInfo {
 	 * Initializes element with given string of locator
 	 * 
 	 * @param locator - start it with a string, takes given string to identify type
-	 *                of locator and tries to initialize, locator without type is assigned to xpath
+	 *                of locator and tries to initialize, locator without type is
+	 *                assigned to xpath
 	 */
 	public Element(String locator) {
 		this.byLocator = getByLocator(locator);
@@ -112,46 +113,57 @@ public class Element implements IWaiter, IAction, IInfo {
 
 	/**
 	 * Initializes element with a Pair type of FindBy and String
-	 * @param locator - type of Pair<FindBy, String>, takes given locator to identify type of locator
+	 * 
+	 * @param locator - type of Pair<FindBy, String>, takes given locator to
+	 *                identify type of locator
 	 */
 	public Element(Pair<FindBy, String> locator) {
 		this.byLocator = getByLocator(locator);
 		this.pairLocator = locator;
 	}
-	
+
 	/**
 	 * Initializes element via parent element with a Pair type of FindBy and String
+	 * 
 	 * @param parentElement - Parent panel instance
-	 * @param locator - type of Pair<FindBy, String>, takes given locator to identify type of locator
+	 * @param locator       - type of Pair<FindBy, String>, takes given locator to
+	 *                      identify type of locator
 	 */
 	public Element(Element parentElement, Pair<FindBy, String> locator) {
 		this.byLocator = getByLocator(locator);
 		this.pairLocator = locator;
 		this.parentElement = parentElement;
 	}
-	
+
 	/**
 	 * Initializes dynamic element with a Pair type of FindBy and String
-	 * @param locator - type of Pair<FindBy, String>, takes given locator to identify type of locator
-	 * @param arguments - variable-length arguments of type Object, use for dynamic locator 
+	 * 
+	 * @param locator   - type of Pair<FindBy, String>, takes given locator to
+	 *                  identify type of locator
+	 * @param arguments - variable-length arguments of type Object, use for dynamic
+	 *                  locator
 	 */
 	public Element(Pair<FindBy, String> locator, Object... arguments) {
-		this.byLocator = getByLocator(locator.getValue0(), String.format(locator.getValue1(), arguments));
+		this.byLocator = getByLocator(locator.getKey(), String.format(locator.getValue(), arguments));
 		this.pairLocator = locator;
 	}
-	
+
 	/**
-	 * Initializes dynamic element via parent element with a Pair type of FindBy and String
+	 * Initializes dynamic element via parent element with a Pair type of FindBy and
+	 * String
+	 * 
 	 * @param parentElement - Parent panel instance
-	 * @param locator - type of Pair<FindBy, String>, takes given locator to identify type of locator
-	 * @param arguments - variable-length arguments of type Object, use for dynamic locator 
+	 * @param locator       - type of Pair<FindBy, String>, takes given locator to
+	 *                      identify type of locator
+	 * @param arguments     - variable-length arguments of type Object, use for
+	 *                      dynamic locator
 	 */
 	public Element(Element parentElement, Pair<FindBy, String> locator, Object... arguments) {
-		this.byLocator = getByLocator(locator.getValue0(), String.format(locator.getValue1(), arguments));
+		this.byLocator = getByLocator(locator.getKey(), String.format(locator.getValue(), arguments));
 		this.pairLocator = locator;
 		this.parentElement = parentElement;
 	}
-	
+
 	/**
 	 * Initializes element with given FindBy and value String
 	 * 
@@ -214,8 +226,8 @@ public class Element implements IWaiter, IAction, IInfo {
 	 */
 	public Element generateDynamic(Object... arguments) {
 		if (this.pairLocator != null)
-			this.byLocator = getByLocator(this.pairLocator.getValue0(),
-					String.format(this.pairLocator.getValue1(), arguments));
+			this.byLocator = getByLocator(this.pairLocator.getKey(),
+					String.format(this.pairLocator.getValue(), arguments));
 		return this;
 	}
 
@@ -226,12 +238,11 @@ public class Element implements IWaiter, IAction, IInfo {
 	/**
 	 * Override methods find element from IFinder interface
 	 */
-	
+
 	/**
-	 * Get web element from web page
-	 * Locator without type is assigned to xpath
+	 * Get web element from web page Locator without type is assigned to xpath
 	 * 
-	 *  @return element
+	 * @return element
 	 */
 	@Override
 	public WebElement getElement() {
@@ -241,7 +252,9 @@ public class Element implements IWaiter, IAction, IInfo {
 	}
 
 	/**
-	 * Get web element child from a element in web page. We use By locator for this. Where locator start it with type "id", "css", "xpath",...
+	 * Get web element child from a element in web page. We use By locator for this.
+	 * Where locator start it with type "id", "css", "xpath",...
+	 * 
 	 * @param locator - Type of locator
 	 * 
 	 * @return element
@@ -252,22 +265,28 @@ public class Element implements IWaiter, IAction, IInfo {
 	}
 
 	/**
-	 * Get web element child from a element in web page. We use a Pair<FindBy, String> for this. Where locator FindBy start it with type "id", "css", "xpath",... and value locator string of element
+	 * Get web element child from a element in web page. We use a Pair<FindBy,
+	 * String> for this. Where locator FindBy start it with type "id", "css",
+	 * "xpath",... and value locator string of element
+	 * 
 	 * @param locator - Type Pair<FindBy, String> of element
 	 * 
-	 *  @return element
+	 * @return element
 	 */
 	@Override
 	public WebElement getChildElement(Pair<FindBy, String> locator) {
 		return getElement().findElement(getByLocator(locator));
 	}
-	
+
 	/**
-	 * Get web element child from a element in web page. We use FindBy type and locator string for this. Where locator FindBy start it with type "id", "css", "xpath",... and value locator string of element
-	 * @param by - locator type of element
+	 * Get web element child from a element in web page. We use FindBy type and
+	 * locator string for this. Where locator FindBy start it with type "id", "css",
+	 * "xpath",... and value locator string of element
+	 * 
+	 * @param by    - locator type of element
 	 * @param value - a string contains locator value of element
 	 * 
-	 *  @return element
+	 * @return element
 	 */
 	@Override
 	public WebElement getChildElement(FindBy by, String value) {
@@ -275,9 +294,11 @@ public class Element implements IWaiter, IAction, IInfo {
 	}
 
 	/**
-	 * Get web element child from a element in web page. We use locator for this. Where locator start it with type "id", "css", "xpath",...
-	 * Locator without type is assigned to xpath
-	 * @param locator - a value of string 
+	 * Get web element child from a element in web page. We use locator for this.
+	 * Where locator start it with type "id", "css", "xpath",... Locator without
+	 * type is assigned to xpath
+	 * 
+	 * @param locator - a value of string
 	 * 
 	 * @return element
 	 */
@@ -287,10 +308,10 @@ public class Element implements IWaiter, IAction, IInfo {
 	}
 
 	/**
-	 * Get list of web element from web page
-	 * Locator without type is assigned to xpath
+	 * Get list of web element from web page Locator without type is assigned to
+	 * xpath
 	 * 
-	 *  @return a list of elements
+	 * @return a list of elements
 	 */
 	@Override
 	public List<WebElement> getElements() {
@@ -300,7 +321,9 @@ public class Element implements IWaiter, IAction, IInfo {
 	}
 
 	/**
-	 * Get list of web element child from a element in web page. We use By locator for this. Where locator start it with type "id", "css", "xpath",...
+	 * Get list of web element child from a element in web page. We use By locator
+	 * for this. Where locator start it with type "id", "css", "xpath",...
+	 * 
 	 * @param locator - Type of locator
 	 * 
 	 * @return a list of elements
@@ -309,12 +332,15 @@ public class Element implements IWaiter, IAction, IInfo {
 	public List<WebElement> getChildElements(By locator) {
 		return getElement().findElements(locator);
 	}
-	
+
 	/**
-	 * Get list of web element child from a element in web page. We use a Pair<FindBy, String> for this. Where locator FindBy start it with type "id", "css", "xpath",... and value locator string of element
+	 * Get list of web element child from a element in web page. We use a
+	 * Pair<FindBy, String> for this. Where locator FindBy start it with type "id",
+	 * "css", "xpath",... and value locator string of element
+	 * 
 	 * @param locator - Type Pair<FindBy, String> of element
 	 * 
-	 *  @return a list of elements
+	 * @return a list of elements
 	 */
 	@Override
 	public List<WebElement> getChildElements(Pair<FindBy, String> locator) {
@@ -322,11 +348,14 @@ public class Element implements IWaiter, IAction, IInfo {
 	}
 
 	/**
-	 * Get list of web element child from a element in web page. We use FindBy type and locator string for this. Where locator FindBy start it with type "id", "css", "xpath",... and value locator string of element
-	 * @param by - locator type of element
+	 * Get list of web element child from a element in web page. We use FindBy type
+	 * and locator string for this. Where locator FindBy start it with type "id",
+	 * "css", "xpath",... and value locator string of element
+	 * 
+	 * @param by    - locator type of element
 	 * @param value - a string contains locator value of element
 	 * 
-	 *  @return a list of elements
+	 * @return a list of elements
 	 */
 	@Override
 	public List<WebElement> getChildElements(FindBy by, String value) {
@@ -334,9 +363,11 @@ public class Element implements IWaiter, IAction, IInfo {
 	}
 
 	/**
-	 * Get list of web element child from a element in web page. We use locator for this. Where locator start it with type "id", "css", "xpath",...
-	 * Locator without type is assigned to xpath
-	 * @param locator - a value of string 
+	 * Get list of web element child from a element in web page. We use locator for
+	 * this. Where locator start it with type "id", "css", "xpath",... Locator
+	 * without type is assigned to xpath
+	 * 
+	 * @param locator - a value of string
 	 * 
 	 * @return a list of elements
 	 */
@@ -352,7 +383,7 @@ public class Element implements IWaiter, IAction, IInfo {
 	/**
 	 * Override methods get element's locator from ILocator interface
 	 */
-	
+
 	/**
 	 * Get element's By locator
 	 * 
@@ -382,12 +413,12 @@ public class Element implements IWaiter, IAction, IInfo {
 	/**
 	 * Override methods check element status from IFinder interface
 	 */
-	
+
 	/**
-	 * Is this element displayed or not? This method avoids the problem of having to parse an
-     * element's "style" attribute.
-     * 
-     * @return Whether or not the element is displayed
+	 * Is this element displayed or not? This method avoids the problem of having to
+	 * parse an element's "style" attribute.
+	 * 
+	 * @return Whether or not the element is displayed
 	 */
 	@Override
 	public boolean isDisplayed() {
@@ -395,11 +426,12 @@ public class Element implements IWaiter, IAction, IInfo {
 	}
 
 	/**
-	 * Is this element displayed or not? This method avoids the problem of having to parse an
-     * element's "style" attribute.
-     * 
-     * @param timeOutInSeconds - seconds to wait until element become visible or undiscovered
-     * @return Whether or not the element is displayed
+	 * Is this element displayed or not? This method avoids the problem of having to
+	 * parse an element's "style" attribute.
+	 * 
+	 * @param timeOutInSeconds - seconds to wait until element become visible or
+	 *                         undiscovered
+	 * @return Whether or not the element is displayed
 	 */
 	@Override
 	public boolean isDisplayed(int timeOutInSeconds) {
@@ -416,10 +448,10 @@ public class Element implements IWaiter, IAction, IInfo {
 	}
 
 	/**
-	 * Is the element currently enabled or not? This will generally return true for everything but
-     * disabled input elements.
-     * 
-     * @return True if the element is enabled, false otherwise
+	 * Is the element currently enabled or not? This will generally return true for
+	 * everything but disabled input elements.
+	 * 
+	 * @return True if the element is enabled, false otherwise
 	 */
 	@Override
 	public boolean isEnabled() {
@@ -427,11 +459,13 @@ public class Element implements IWaiter, IAction, IInfo {
 	}
 
 	/**
-	 * Is the element currently enabled or not? This will generally return false for everything but
-     * disabled input elements.
-     * @param timeOutInSeconds - seconds to wait until element become enabled or undiscovered
-     * 
-     * @return True if the element is enabled, false otherwise
+	 * Is the element currently enabled or not? This will generally return false for
+	 * everything but disabled input elements.
+	 * 
+	 * @param timeOutInSeconds - seconds to wait until element become enabled or
+	 *                         undiscovered
+	 * 
+	 * @return True if the element is enabled, false otherwise
 	 */
 	@Override
 	public boolean isEnabled(int timeOutInSeconds) {
@@ -459,10 +493,10 @@ public class Element implements IWaiter, IAction, IInfo {
 	}
 
 	/**
-	 * Is the element currently selected or not? This will generally return true for everything but
-     * disabled input elements
-     * 
-     * @return True if the element is selected, false otherwise
+	 * Is the element currently selected or not? This will generally return true for
+	 * everything but disabled input elements
+	 * 
+	 * @return True if the element is selected, false otherwise
 	 */
 	@Override
 	public boolean isSelected() {
@@ -470,11 +504,13 @@ public class Element implements IWaiter, IAction, IInfo {
 	}
 
 	/**
-	 * Is the element currently selected or not? This will generally return true for everything but
-     * disabled input elements
-     * @param timeOutInSeconds - seconds to wait until element become selected or undiscovered
-     * 
-     * @return True if the element is selected, false otherwise
+	 * Is the element currently selected or not? This will generally return true for
+	 * everything but disabled input elements
+	 * 
+	 * @param timeOutInSeconds - seconds to wait until element become selected or
+	 *                         undiscovered
+	 * 
+	 * @return True if the element is selected, false otherwise
 	 */
 	@Override
 	public boolean isSelected(int timeOutInSeconds) {
@@ -492,15 +528,16 @@ public class Element implements IWaiter, IAction, IInfo {
 	}
 
 	/**
-     * Get the value of a given CSS property. This is probably not going to return what you expect it
-     * to unless you've already had a look at the element using something like firebug. Seriously,
-     * even then you'll be lucky for this to work cross-browser. Colour values should be returned as
-     * hex strings, so, for example if the "background-color" property is set as "green" in the HTML
-     * source, the returned value will be "#008000"
-     *
-     * @param propertyName - css name
-     * @return The current, computed value of the property
-     */
+	 * Get the value of a given CSS property. This is probably not going to return
+	 * what you expect it to unless you've already had a look at the element using
+	 * something like firebug. Seriously, even then you'll be lucky for this to work
+	 * cross-browser. Colour values should be returned as hex strings, so, for
+	 * example if the "background-color" property is set as "green" in the HTML
+	 * source, the returned value will be "#008000"
+	 *
+	 * @param propertyName - css name
+	 * @return The current, computed value of the property
+	 */
 	@Override
 	public String getCssValue(String propertyName) {
 		logger.info(String.format("Get Css value '%s' of %s", propertyName, getLocator().toString()));
@@ -524,12 +561,12 @@ public class Element implements IWaiter, IAction, IInfo {
 	}
 
 	/**
-     * Get the value of a the given attribute of the element. Will return the current value, even if
-     * this has been modified after the page has been loaded
-     *
-     * @param attributeName - The name of the attribute
-     * @return The attribute's current value or null if the value is not set
-     */
+	 * Get the value of a the given attribute of the element. Will return the
+	 * current value, even if this has been modified after the page has been loaded
+	 *
+	 * @param attributeName - The name of the attribute
+	 * @return The attribute's current value or null if the value is not set
+	 */
 	@Override
 	public String getAttribute(String attributeName) {
 		logger.info(String.format("Get Attribute value '%s' of %s", attributeName, getLocator().toString()));
@@ -553,11 +590,11 @@ public class Element implements IWaiter, IAction, IInfo {
 	}
 
 	/**
-     * Get the visible (i.e. not hidden by CSS) innerText of this element, including sub-elements,
-     * without any leading or trailing whitespace
-     *
-     * @return The innerText of this element
-     */
+	 * Get the visible (i.e. not hidden by CSS) innerText of this element, including
+	 * sub-elements, without any leading or trailing whitespace
+	 *
+	 * @return The innerText of this element
+	 */
 	@Override
 	public String getText() {
 		logger.info(String.format("Get Text of %s", getLocator().toString()));
@@ -580,11 +617,11 @@ public class Element implements IWaiter, IAction, IInfo {
 	}
 
 	/**
-     * Get value of the value attribute (i.e. not hidden by CSS) of this element, including sub-elements,
-     * without any leading or trailing whitespace
-     *
-     * @return The value of this element
-     */
+	 * Get value of the value attribute (i.e. not hidden by CSS) of this element,
+	 * including sub-elements, without any leading or trailing whitespace
+	 *
+	 * @return The value of this element
+	 */
 	@Override
 	public String getValue() {
 		logger.info(String.format("Get Value of %s", getLocator().toString()));
@@ -605,13 +642,13 @@ public class Element implements IWaiter, IAction, IInfo {
 		}
 		return null;
 	}
-	
+
 	/**
-     * Get class name of the class attribute (i.e. not hidden by CSS) of this element, including sub-elements,
-     * without any leading or trailing whitespace
-     *
-     * @return The class name of this element
-     */
+	 * Get class name of the class attribute (i.e. not hidden by CSS) of this
+	 * element, including sub-elements, without any leading or trailing whitespace
+	 *
+	 * @return The class name of this element
+	 */
 	@Override
 	public String getClassName() {
 		logger.info(String.format("Get ClassName of %s", getLocator().toString()));
@@ -634,11 +671,12 @@ public class Element implements IWaiter, IAction, IInfo {
 	}
 
 	/**
-     * Get the tag name of this element. <b>Not</b> the value of the name attribute: will return
-     * <code>"input"</code> for the element <code><input name="foo" /></code>
-     *
-     * @return The tag name of this element
-     */
+	 * Get the tag name of this element. <b>Not</b> the value of the name attribute:
+	 * will return <code>"input"</code> for the element
+	 * <code><input name="foo" /></code>
+	 *
+	 * @return The tag name of this element
+	 */
 	@Override
 	public String getTagName() {
 		logger.info(String.format("Get TagName of %s", getLocator().toString()));
@@ -661,10 +699,10 @@ public class Element implements IWaiter, IAction, IInfo {
 	}
 
 	/**
-     * Get number of elements
-     *
-     * @return The number of the element on the page
-     */
+	 * Get number of elements
+	 *
+	 * @return The number of the element on the page
+	 */
 	@Override
 	public int getNumber() {
 		int size = 0;
@@ -711,33 +749,32 @@ public class Element implements IWaiter, IAction, IInfo {
 	}
 
 	/**
-     * What is the width and height of the rendered element?
-     * We can use:
-     * - getElement().getSize().width or getElement().getSize().getHeight()
-     *
-     * @return The size of the element on the page
-     */
+	 * What is the width and height of the rendered element? We can use: -
+	 * getElement().getSize().width or getElement().getSize().getHeight()
+	 *
+	 * @return The size of the element on the page
+	 */
 	@Override
 	public Dimension getSize() {
 		logger.info(String.format("Get Size of %s", getLocator().toString()));
 		int tries = 0;
 		while (tries < Constant.SHORT_TIMEOUT) {
-		    tries++;
-		    try {
-		    	return getElement().getSize();
-		    } catch (StaleElementReferenceException staleEx) {
-		    	if (tries == Constant.SHORT_TIMEOUT)
-		    		return null;
-		    	logger.severe(String.format("Try to get Size from control %s again", getLocator().toString()));
-		    } catch (Exception e) {
-		    	logger.severe(String.format("Has error with control '%s': %s", getLocator().toString(),
-						e.getMessage()));
-		    	return null;
-		    }
+			tries++;
+			try {
+				return getElement().getSize();
+			} catch (StaleElementReferenceException staleEx) {
+				if (tries == Constant.SHORT_TIMEOUT)
+					return null;
+				logger.severe(String.format("Try to get Size from control %s again", getLocator().toString()));
+			} catch (Exception e) {
+				logger.severe(
+						String.format("Has error with control '%s': %s", getLocator().toString(), e.getMessage()));
+				return null;
+			}
 		}
 		return null;
 	}
-	
+
 	/*
 	 * ========================= Action
 	 * ===========================================================================
@@ -745,9 +782,9 @@ public class Element implements IWaiter, IAction, IInfo {
 	/**
 	 * Override methods action of element status from IAction interface
 	 */
-	
+
 	/**
-	 * Performs a click on the element. Try seconds of timeout for element clickable  
+	 * Performs a click on the element. Try seconds of timeout for element clickable
 	 */
 	@Override
 	public void click() {
@@ -772,8 +809,8 @@ public class Element implements IWaiter, IAction, IInfo {
 	}
 
 	/**
-     * Click on the Element by JS. Try seconds of timeout for element present  
-     */
+	 * Click on the Element by JS. Try seconds of timeout for element present
+	 */
 	@Override
 	public void clickByJS() {
 		logger.info(String.format("Click by JS on %s", getLocator().toString()));
@@ -797,8 +834,9 @@ public class Element implements IWaiter, IAction, IInfo {
 	}
 
 	/**
-     * Performs a double-click on the Element. Try seconds of timeout for element clickable  
-     */
+	 * Performs a double-click on the Element. Try seconds of timeout for element
+	 * clickable
+	 */
 	@Override
 	public void doubleClick() {
 		logger.info(String.format("Double-click on %s", getLocator().toString()));
@@ -826,11 +864,11 @@ public class Element implements IWaiter, IAction, IInfo {
 	}
 
 	/**
-     * Wait time out for element present
-     * Use this method to simulate typing into an element, which may set its value
-     *
-     * @param keysToSend - CharSequence to send
-     */
+	 * Wait time out for element present Use this method to simulate typing into an
+	 * element, which may set its value
+	 *
+	 * @param keysToSend - CharSequence to send
+	 */
 	@Override
 	public void sendKeys(CharSequence... keysToEnter) {
 		logger.info(String.format("Send keys '%s' to %s", keysToEnter, getLocator().toString()));
@@ -855,9 +893,9 @@ public class Element implements IWaiter, IAction, IInfo {
 	}
 
 	/**
-     * Wait time out for element present
-     * Use this method to simulate clear text value for an element
-     */
+	 * Wait time out for element present Use this method to simulate clear text
+	 * value for an element
+	 */
 	@Override
 	public void clear() {
 		logger.info(String.format("Clear text in element %s", getLocator().toString()));
@@ -881,9 +919,9 @@ public class Element implements IWaiter, IAction, IInfo {
 	}
 
 	/**
-     * Wait time out for element present
-     * Use this method to submit for an element (Button)
-     */
+	 * Wait time out for element present Use this method to submit for an element
+	 * (Button)
+	 */
 	@Override
 	public void submit() {
 		logger.info(String.format("Submit %s", getLocator().toString()));
@@ -907,8 +945,8 @@ public class Element implements IWaiter, IAction, IInfo {
 	}
 
 	/**
-     * Performs focus to an element by JS. Wait time out for element present
-     */
+	 * Performs focus to an element by JS. Wait time out for element present
+	 */
 	@Override
 	public void focus() {
 		logger.info(String.format("Focus on %s", getLocator().toString()));
@@ -931,9 +969,10 @@ public class Element implements IWaiter, IAction, IInfo {
 		}
 	}
 
-	 /**
-     * Performs a mover at the current mouse location. Wait time out for element present
-     */
+	/**
+	 * Performs a mover at the current mouse location. Wait time out for element
+	 * present
+	 */
 	@Override
 	public void hover() {
 		logger.info(String.format("Hover on %s", getLocator().toString()));
@@ -958,8 +997,8 @@ public class Element implements IWaiter, IAction, IInfo {
 	}
 
 	/**
-     * Mouse Over on the the given element. Wait time out for element present
-     */
+	 * Mouse Over on the the given element. Wait time out for element present
+	 */
 	@Override
 	public void moveToElement() {
 		logger.info(String.format("Hover on %s", getLocator().toString()));
@@ -984,8 +1023,8 @@ public class Element implements IWaiter, IAction, IInfo {
 	}
 
 	/**
-     * Scroll to an element by JS. Wait time out for element present
-     */
+	 * Scroll to an element by JS. Wait time out for element present
+	 */
 	@Override
 	public void scrollIntoView() {
 		logger.info(String.format("Scroll to %s", getLocator().toString()));
@@ -1035,7 +1074,8 @@ public class Element implements IWaiter, IAction, IInfo {
 	}
 
 	/**
-	 * Check on an element. Check if element is selected of not in seconds of timeout
+	 * Check on an element. Check if element is selected of not in seconds of
+	 * timeout
 	 */
 	@Override
 	public void check() {
@@ -1045,7 +1085,8 @@ public class Element implements IWaiter, IAction, IInfo {
 	}
 
 	/**
-	 * Uncheck on an element. Check if element is selected of not in seconds of timeout
+	 * Uncheck on an element. Check if element is selected of not in seconds of
+	 * timeout
 	 */
 	@Override
 	public void uncheck() {
@@ -1053,4 +1094,5 @@ public class Element implements IWaiter, IAction, IInfo {
 		if (isSelected())
 			click();
 	}
+
 }

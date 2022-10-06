@@ -1,13 +1,12 @@
 package Helper;
 
-import org.javatuples.Pair;
-
 import ElementSetting.FindBy;
 
 public class LocatorHelper {
 
 	/**
 	 * Separate a string to get find type locator
+	 * 
 	 * @param locator - a string locator of element
 	 * @return type of locator
 	 */
@@ -17,6 +16,7 @@ public class LocatorHelper {
 
 	/**
 	 * Separate a string to get value of locator
+	 * 
 	 * @param locator - a string locator of element
 	 * @return value of locator
 	 */
@@ -25,7 +25,9 @@ public class LocatorHelper {
 	}
 
 	/**
-	 * Identify type and value of a string locator of an element, locator without type is assigned to xpath 
+	 * Identify type and value of a string locator of an element, locator without
+	 * type is assigned to xpath
+	 * 
 	 * @param locator - a string locator of element
 	 * @return a pair of type and value of locator
 	 */

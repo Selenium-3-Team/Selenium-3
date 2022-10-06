@@ -2,12 +2,9 @@ package Tiki;
 
 import java.util.List;
 
-import org.javatuples.Pair;
-
 import Common.Utilities;
 import Constant.Constant;
 import ElementBase.Element;
-import ElementSetting.FindBy;
 import Enum.Tiki.MenuItem;
 import io.qameta.allure.Step;
 
@@ -21,9 +18,9 @@ public class GeneralPage {
 	// Search elements
 	protected final Element txtSearch = new Element("xpath=//input[@data-view-id='main_search_form_input']");
 	protected final Element btnSearch = new Element("//button[@data-view-id='main_search_form_button']");
-	protected final Element iconSearch = new Element("class= icon-search");
-	protected final Element iconSearch1 = new Element(new Pair<FindBy, String>(FindBy.CLASS_NAME, "icon-search"));
-	
+//	protected final Element iconSearch = new Element("class= icon-search");
+//	protected final Element iconSearch = new Element(FindBy.CLASS_NAME, "icon-search");
+
 	// Menu elements
 	protected final Element btnMenu = new Element("//a[@class='Menu-button']");
 	protected final Element menuItem = new Element(
