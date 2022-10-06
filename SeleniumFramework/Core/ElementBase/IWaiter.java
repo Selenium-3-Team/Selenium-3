@@ -23,7 +23,7 @@ public interface IWaiter extends IFinder{
 	 * Wait for element following to condition with timeout
 	 * @param status - element's status, start it with "displayed, not displayed,..."
 	 * @param timeOut - a time out in seconds
-	 * @param throwable - wait status: True or False
+	 * @param throwable - throwable status: True or False, if waits of element are false. it will throw a exception
 	 */
 	public default void waitForCondition(Status status, int timeOut, boolean throwable) {
 		try {
@@ -164,38 +164,74 @@ public interface IWaiter extends IFinder{
 		}
 	}
 	
+	/**
+	 * Wait for element is presented in DOM
+	 * @param timeOut - wait for seconds time out 
+	 */
 	public default void waitForPresent(int timeOut) {
 		waitForCondition(Status.PRESENT, timeOut, true);
 	}
 	
+	/**
+	 * Wait for element is not presented in DOM
+	 * @param timeOut - wait for seconds time out 
+	 */
 	public default void waitForNotPresent(int timeOut) {
 		waitForCondition(Status.NOT_PRESENT, timeOut, true);
 	}
 
+	/**
+	 * Wait for element is clickable
+	 * @param timeOut - wait for seconds time out 
+	 */
 	public default void waitForClickable(int timeOut) {
 		waitForCondition(Status.CLICKABLE, timeOut, true);
 	}
 	
+	/**
+	 * Wait for element is not clickable
+	 * @param timeOut - wait for seconds time out 
+	 */
 	public default void waitForNotClickable(int timeOut) {
 		waitForCondition(Status.NOT_CLICKABLE, timeOut, true);
 	}
 
+	/**
+	 * Wait for element is displayed
+	 * @param timeOut - wait for seconds time out 
+	 */
 	public default void waitForDisplayed(int timeOut) {
 		waitForCondition(Status.DISPLAYED, timeOut, true);
 	}
 	
+	/**
+	 * Wait for element is not displayed
+	 * @param timeOut - wait for seconds time out 
+	 */
 	public default void waitForNotDisplayed(int timeOut) {
 		waitForCondition(Status.NOT_DISPLAYED, timeOut, true);
 	}
 	
+	/**
+	 * Wait for element is enabled
+	 * @param timeOut - wait for seconds time out 
+	 */
 	public default void waitForEnabled(int timeOut) {
 		waitForCondition(Status.ENABLED, timeOut, true);
 	}
 	
+	/**
+	 * Wait for element is disabled
+	 * @param timeOut - wait for seconds time out 
+	 */
 	public default void waitForDisabled(int timeOut) {
 		waitForCondition(Status.DISABLED, timeOut, true);
 	}
 	
+	/**
+	 * Wait for element is selected
+	 * @param timeOut - wait for seconds time out 
+	 */
 	public default void waitForSelected(int timeOut) {
 		waitForCondition(Status.SELECTED, timeOut, true);
 	}

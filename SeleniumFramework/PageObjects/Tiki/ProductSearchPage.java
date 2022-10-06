@@ -46,7 +46,7 @@ public class ProductSearchPage extends GeneralPage {
 	public Product getRandomProductInformation() {
 		Utilities.waitForPageLoad(Constant.DEFAULT_TIMEOUT);
 		productItems.waitForPresent(Constant.DEFAULT_TIMEOUT);
-		int totalOfProducts = productItems.getSize();
+		int totalOfProducts = productItems.getNumber();
 		int randomProductNumber = RandomHelper.randomNumbers(totalOfProducts);
 		if(randomProductNumber==0) {
 			randomProductNumber+=1;
