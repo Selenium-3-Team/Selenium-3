@@ -30,21 +30,6 @@ public final class Pair<KEY, VALUE> {
 	}
 
 	/**
-	 * <p>
-	 * Factory method for creating a typed Pair immutable instance.
-	 * </p>
-	 * 
-	 * @param <KEY>   the first value, we define it as a key of tuple.
-	 * @param <VALUE> the second value, we define it as value of corresponding key
-	 *                in tuple.
-	 * 
-	 * @return new Pair of KEY and VALUE
-	 */
-	public static <KEY, VALUE> Pair<KEY, VALUE> of(KEY key, VALUE value) {
-		return new Pair<>(key, value);
-	}
-
-	/**
 	 * 
 	 * @return KEY
 	 * 
