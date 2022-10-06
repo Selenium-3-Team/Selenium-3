@@ -133,15 +133,15 @@ public class Image extends Element{
 	/**
 	 * Get source of image
 	 */
-	public String getSource() {
-		   return getElement().getAttribute("src");
+	public void getSource() {
+		super.getAttribute("src");
 	}
 	
 	/**
 	 * Get alt of image
 	 */
-	public String getAlt() {
-		   return getElement().getAttribute("alt");
+	public void getAlt() {
+		super.getAttribute("alt");
 	}
 	
 }

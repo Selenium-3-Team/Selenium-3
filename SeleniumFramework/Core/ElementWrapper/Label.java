@@ -123,4 +123,11 @@ public class Label extends Element{
 		return this;
 	}
 	
+	/**
+	 * Get text of label
+	 */
+	public void getTextLabel() {
+		super.getText();
+	}
+	
 }
