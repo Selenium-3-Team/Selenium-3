@@ -10,7 +10,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
-import CoreCommon.Constant;
+import core.common.Constant;
 
 public class Driver extends BaseDriver {
 	
@@ -25,7 +25,7 @@ public class Driver extends BaseDriver {
 			case "chrome":
 				System.setProperty("webdriver.chrome.driver", Constant.CHROME_PATH);
 				if(runningMode.equalsIgnoreCase("remote")) {
-					capabilities = DesiredCapabilities.chrome();
+					capabilities = new DesiredCapabilities();
 					driver = new RemoteWebDriver(new URL(hub), capabilities);
 				}else if (runningMode.equalsIgnoreCase("local")){
 					driver = new ChromeDriver();
@@ -34,7 +34,7 @@ public class Driver extends BaseDriver {
 			case "firefox":
 				System.setProperty("webdriver.gecko.driver", Constant.FIREFOX_PATH);
 				if(runningMode.equalsIgnoreCase("remote")) {
-					capabilities = DesiredCapabilities.firefox();
+					capabilities = new DesiredCapabilities();
 					driver = new RemoteWebDriver(new URL(hub), capabilities);
 				}else if (runningMode.equalsIgnoreCase("local")) {
 					driver = new FirefoxDriver();

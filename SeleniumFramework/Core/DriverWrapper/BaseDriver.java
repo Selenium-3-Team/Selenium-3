@@ -8,7 +8,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import CoreCommon.Constant;
+import core.common.Constant;
 
 abstract class BaseDriver implements WebDriver {
 

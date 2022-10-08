@@ -4,7 +4,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Logger;
 import org.openqa.selenium.WebDriver;
 
-import CoreCommon.Constant;
+import core.common.Constant;
 
 public class DriverManagement {
 
