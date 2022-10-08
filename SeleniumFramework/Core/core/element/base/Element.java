@@ -1,4 +1,4 @@
-package ElementBase;
+package core.element.base;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,12 +15,12 @@ import org.openqa.selenium.interactions.Actions;
 
 import com.google.common.base.Stopwatch;
 
-import CoreCommon.Constant;
 import DriverWrapper.Driver;
 import DriverWrapper.DriverManagement;
-import ElementSetting.FindBy;
-import ElementSetting.Status;
-import Helper.LocatorHelper;
+import core.common.Constant;
+import core.element.setting.FindBy;
+import core.element.setting.Status;
+import core.helper.LocatorHelper;
 
 /**
  * Element control implementation

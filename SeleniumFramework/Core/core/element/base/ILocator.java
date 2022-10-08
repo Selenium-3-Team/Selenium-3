@@ -1,10 +1,10 @@
-package ElementBase;
+package core.element.base;
 
 import org.javatuples.Pair;
 import org.openqa.selenium.By;
 
-import ElementSetting.FindBy;
-import Helper.LocatorHelper;
+import core.element.setting.FindBy;
+import core.helper.LocatorHelper;
 
 
 public interface ILocator {

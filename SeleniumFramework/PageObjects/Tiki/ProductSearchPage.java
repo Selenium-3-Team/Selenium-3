@@ -5,7 +5,7 @@ import java.util.List;
 import Common.RandomHelper;
 import Common.Utilities;
 import Constant.Constant;
-import ElementBase.Element;
+import core.element.base.Element;
 import io.qameta.allure.Step;
 
 public class ProductSearchPage extends GeneralPage {

@@ -1,57 +1,57 @@
-package ElementWrapper;
+package core.element.wrapper;
 
 import org.openqa.selenium.By;
 
-import ElementBase.Element;
-import ElementSetting.FindBy;
+import core.element.base.Element;
+import core.element.setting.FindBy;
 
-public class Button extends Element{
+public class TextBox extends Element{
 
 	/**
 	 * Extends Element class
 	 */
 	
 	/**
-	 * Initialize button control start with By (id, css, xpath,...)
+	 * Initialize text box control start with By (id, css, xpath,...)
 	 * @param locator - type find By of element
 	 */
-	public Button(By locator) {
+	public TextBox(By locator) {
 		super(locator);
 	}
 	
 	/**
-	 * Initialize button control start with given string of locator
+	 * Initialize text box control start with given string of locator
 	 * @param locator - string of element
 	 */
-	public Button(String locator) {
+	public TextBox(String locator) {
 		super(locator);
 	}
 	
 	/**
-	 * Initializes button with parent of current element and string
+	 * Initializes text box with parent of current element and string
 	 * 
 	 * @param parentElement - Parent Element instance
 	 * @param locator       - start it with a string, takes given string to identify
 	 *                      type of locator and tries to initialize
 	 */
-	public Button(Element parentElement, String locator) {
+	public TextBox(Element parentElement, String locator) {
 		super(parentElement, locator);
 	}
 	
 	/**
-	 * Initializes button with given dynamic string of locator
+	 * Initializes text box with given dynamic string of locator
 	 * 
 	 * @param locator   - start it with a string, takes given string to identify
 	 *                  type of locator by separate value to pair<FindBy, String>
 	 * @param arguments - variable-length arguments of type Object, use for dynamic
 	 *                  string
 	 */
-	public Button(String locator, Object... arguments) {
+	public TextBox(String locator, Object... arguments) {
 		super(locator, arguments);
 	}
 	
 	/**
-	 * Initializes button via parent element
+	 * Initializes text box via parent element
 	 * 
 	 * @param parentElement - Parent Element instance
 	 * @param locator       - start it with a string, takes given string to identify
@@ -60,45 +60,45 @@ public class Button extends Element{
 	 * @param arguments     - variable-length arguments of type Object, use for
 	 *                      dynamic string
 	 */
-	public Button(Element parentElement, String locator, Object... arguments) {
+	public TextBox(Element parentElement, String locator, Object... arguments) {
 		super(parentElement, locator, arguments);
 	}
 	
 	/**
-	 * Initializes Button with given FindBy and value String
+	 * Initializes text box with given FindBy and value String
 	 * 
 	 * @param by    - Type of locator
 	 * @param value - value of Locator
 	 */
-	public Button(FindBy by, String value) {
+	public TextBox(FindBy by, String value) {
 		super(by, value);
 	}
 	
 	/**
-	 * Initializes Button via parent element with given FindBy and value String
+	 * Initializes text box via parent element with given FindBy and value String
 	 * 
 	 * @param parentElement - Parent Element instance
 	 * @param by            - Type of locator
 	 * @param value         - value of Locator
 	 */
-	public Button(Element parentElement, FindBy by, String value) {
+	public TextBox(Element parentElement, FindBy by, String value) {
 		super(parentElement, by, value);
 	}
 	
 	/**
-	 * Initializes Button element with given FindBy and value String
+	 * Initializes text box element with given FindBy and value String
 	 * 
 	 * @param by        - Type of locator
 	 * @param value     - value of Locator
 	 * @param arguments - variable-length arguments of type Object, use for dynamic
 	 *                  locator
 	 */
-	public Button(FindBy by, String value, Object... arguments) {
+	public TextBox(FindBy by, String value, Object... arguments) {
 		super(by, value, arguments);
 	}
 	
 	/**
-	 * Initializes dynamic Button via parent element with given FindBy and value
+	 * Initializes dynamic text box via parent element with given FindBy and value
 	 * String
 	 * 
 	 * @param parentElement - Parent Element instance
@@ -107,48 +107,33 @@ public class Button extends Element{
 	 * @param arguments     - variable-length arguments of type Object, use for
 	 *                      dynamic locator
 	 */
-	public Button(Element parentElement, FindBy by, String value, Object... arguments) {
+	public TextBox(Element parentElement, FindBy by, String value, Object... arguments) {
 		super(parentElement, by, value, arguments);
 	}
 	
 	/**
-	 * Generate dynamic Button
+	 * Generate dynamic text box
 	 * 
 	 * @param arguments - variable-length arguments of type Object, use for dynamic
 	 *                  locator
-	 * @return new Button
+	 * @return new text box
 	 */
-	public Button generateDynamic(Object... arguments) {
+	public TextBox generateDynamic(Object... arguments) {
 		super.generateDynamic(arguments);
 		return this;
 	}
 	
 	/**
-	 * Click on button
+	 * Sendkeys into text box
 	 */
-	public void click() {
-		super.click();
+	public void sendKeys(CharSequence... keysToEnter) {
+		super.sendKeys(keysToEnter);
 	}
 	
 	/**
-	 * Click by JS on button
+	 * Clear text of text box
 	 */
-	public void clickByJS() {
-		super.clickByJS();
+	public void clear() {
+		super.clear();
 	}
-	
-	/**
-	 * Double click on button
-	 */
-	public void doubleClick() {
-		super.doubleClick();
-	}
-	
-	/**
-	 * Submit by button
-	 */
-	public void submit() {
-		super.submit();
-	}
-	
 }

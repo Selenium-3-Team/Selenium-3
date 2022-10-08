@@ -1,4 +1,4 @@
-package ElementBase;
+package core.element.base;
 
 public interface IAction {
 	

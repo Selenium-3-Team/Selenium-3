@@ -1,9 +1,9 @@
-package ElementWrapper;
+package core.element.wrapper;
 
 import org.openqa.selenium.By;
 
-import ElementBase.Element;
-import ElementSetting.FindBy;
+import core.element.base.Element;
+import core.element.setting.FindBy;
 
 public class CheckBox extends Element{
 

@@ -1,4 +1,4 @@
-package ElementSetting;
+package core.element.setting;
 
 public enum Status {
 	/**

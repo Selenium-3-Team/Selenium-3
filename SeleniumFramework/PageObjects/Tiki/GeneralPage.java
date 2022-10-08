@@ -6,9 +6,9 @@ import org.javatuples.Pair;
 
 import Common.Utilities;
 import Constant.Constant;
-import ElementBase.Element;
-import ElementSetting.FindBy;
 import Enum.Tiki.MenuItem;
+import core.element.base.Element;
+import core.element.setting.FindBy;
 import io.qameta.allure.Step;
 
 public class GeneralPage {

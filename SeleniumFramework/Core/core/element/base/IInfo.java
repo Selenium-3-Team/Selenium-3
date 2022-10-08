@@ -1,4 +1,4 @@
-package ElementBase;
+package core.element.base;
 
 import java.util.List;
 

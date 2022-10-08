@@ -1,4 +1,4 @@
-package CoreCommon;
+package core.common;
 
 import java.util.logging.Logger;
 
@@ -14,7 +14,7 @@ public class Constant {
 	public static final String FIREFOX_PATH = Utilities.getProjectPath() + "\\Executables\\geckodriver.exe";
 	
 	static {
-		String path = Utilities.getProjectPath() + "\\Core\\CoreCommon\\logger.properties";
+		String path = Utilities.getProjectPath() + "\\Core\\core.common\\logger.properties";
 		System.setProperty("java.util.logging.config.file", path);
 	}
 	

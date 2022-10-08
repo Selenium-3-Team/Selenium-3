@@ -1,4 +1,4 @@
-package ElementBase;
+package core.element.base;
 
 import java.util.List;
 
@@ -6,7 +6,7 @@ import org.javatuples.Pair;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import ElementSetting.FindBy;
+import core.element.setting.FindBy;
 
 
 

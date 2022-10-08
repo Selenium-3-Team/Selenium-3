@@ -1,57 +1,57 @@
-package ElementWrapper;
+package core.element.wrapper;
 
 import org.openqa.selenium.By;
 
-import ElementBase.Element;
-import ElementSetting.FindBy;
+import core.element.base.Element;
+import core.element.setting.FindBy;
 
-public class TextBox extends Element{
+public class Label extends Element{
 
 	/**
 	 * Extends Element class
 	 */
 	
 	/**
-	 * Initialize text box control start with By (id, css, xpath,...)
+	 * Initialize label control start with By (id, css, xpath,...)
 	 * @param locator - type find By of element
 	 */
-	public TextBox(By locator) {
+	public Label(By locator) {
 		super(locator);
 	}
 	
 	/**
-	 * Initialize text box control start with given string of locator
+	 * Initialize label control start with given string of locator
 	 * @param locator - string of element
 	 */
-	public TextBox(String locator) {
+	public Label(String locator) {
 		super(locator);
 	}
 	
 	/**
-	 * Initializes text box with parent of current element and string
+	 * Initializes label with parent of current element and string
 	 * 
 	 * @param parentElement - Parent Element instance
 	 * @param locator       - start it with a string, takes given string to identify
 	 *                      type of locator and tries to initialize
 	 */
-	public TextBox(Element parentElement, String locator) {
+	public Label(Element parentElement, String locator) {
 		super(parentElement, locator);
 	}
 	
 	/**
-	 * Initializes text box with given dynamic string of locator
+	 * Initializes label with given dynamic string of locator
 	 * 
 	 * @param locator   - start it with a string, takes given string to identify
 	 *                  type of locator by separate value to pair<FindBy, String>
 	 * @param arguments - variable-length arguments of type Object, use for dynamic
 	 *                  string
 	 */
-	public TextBox(String locator, Object... arguments) {
+	public Label(String locator, Object... arguments) {
 		super(locator, arguments);
 	}
 	
 	/**
-	 * Initializes text box via parent element
+	 * Initializes label via parent element
 	 * 
 	 * @param parentElement - Parent Element instance
 	 * @param locator       - start it with a string, takes given string to identify
@@ -60,45 +60,45 @@ public class TextBox extends Element{
 	 * @param arguments     - variable-length arguments of type Object, use for
 	 *                      dynamic string
 	 */
-	public TextBox(Element parentElement, String locator, Object... arguments) {
+	public Label(Element parentElement, String locator, Object... arguments) {
 		super(parentElement, locator, arguments);
 	}
 	
 	/**
-	 * Initializes text box with given FindBy and value String
+	 * Initializes label with given FindBy and value String
 	 * 
 	 * @param by    - Type of locator
 	 * @param value - value of Locator
 	 */
-	public TextBox(FindBy by, String value) {
+	public Label(FindBy by, String value) {
 		super(by, value);
 	}
 	
 	/**
-	 * Initializes text box via parent element with given FindBy and value String
+	 * Initializes label via parent element with given FindBy and value String
 	 * 
 	 * @param parentElement - Parent Element instance
 	 * @param by            - Type of locator
 	 * @param value         - value of Locator
 	 */
-	public TextBox(Element parentElement, FindBy by, String value) {
+	public Label(Element parentElement, FindBy by, String value) {
 		super(parentElement, by, value);
 	}
 	
 	/**
-	 * Initializes text box element with given FindBy and value String
+	 * Initializes label element with given FindBy and value String
 	 * 
 	 * @param by        - Type of locator
 	 * @param value     - value of Locator
 	 * @param arguments - variable-length arguments of type Object, use for dynamic
 	 *                  locator
 	 */
-	public TextBox(FindBy by, String value, Object... arguments) {
+	public Label(FindBy by, String value, Object... arguments) {
 		super(by, value, arguments);
 	}
 	
 	/**
-	 * Initializes dynamic text box via parent element with given FindBy and value
+	 * Initializes dynamic label via parent element with given FindBy and value
 	 * String
 	 * 
 	 * @param parentElement - Parent Element instance
@@ -107,33 +107,27 @@ public class TextBox extends Element{
 	 * @param arguments     - variable-length arguments of type Object, use for
 	 *                      dynamic locator
 	 */
-	public TextBox(Element parentElement, FindBy by, String value, Object... arguments) {
+	public Label(Element parentElement, FindBy by, String value, Object... arguments) {
 		super(parentElement, by, value, arguments);
 	}
 	
 	/**
-	 * Generate dynamic text box
+	 * Generate dynamic label
 	 * 
 	 * @param arguments - variable-length arguments of type Object, use for dynamic
 	 *                  locator
-	 * @return new text box
+	 * @return new label
 	 */
-	public TextBox generateDynamic(Object... arguments) {
+	public Label generateDynamic(Object... arguments) {
 		super.generateDynamic(arguments);
 		return this;
 	}
 	
 	/**
-	 * Sendkeys into text box
+	 * Get text of label
 	 */
-	public void sendKeys(CharSequence... keysToEnter) {
-		super.sendKeys(keysToEnter);
+	public void getTextLabel() {
+		super.getText();
 	}
 	
-	/**
-	 * Clear text of text box
-	 */
-	public void clear() {
-		super.clear();
-	}
 }
