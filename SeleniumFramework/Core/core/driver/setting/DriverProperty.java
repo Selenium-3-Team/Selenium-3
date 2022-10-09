@@ -1,12 +1,16 @@
 package core.driver.setting;
 
+import java.lang.reflect.Type;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 import java.util.Map;
 
+import com.google.gson.reflect.TypeToken;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.remote.DesiredCapabilities;
+
+import core.helper.JsonHelper;
 
 /**
  *	Driver properties defined 
@@ -201,8 +205,8 @@ public class DriverProperty {
 	 * Set driver arguments
 	 * @param arguments - a String of arguments
 	 */
-	public void setArguments(String arguments) {
-		
+	public void setArguments(String arguments) throws Exception{
+		this.arguments = JsonHelper.convertJsonToArguments(arguments);
 	}
 	
 	/**
@@ -225,8 +229,9 @@ public class DriverProperty {
 	 *	Set user preference 
 	 * @param userProfilePreference - a string of user profile preference
 	 */
-	public void setUserProfilePreference(String userProfilePreference) {
-		
+	public void setUserProfilePreference(String userProfilePreference) throws Exception {
+		Type mapType = new TypeToken<Map<String, Object>>(){}.getType();
+		this.userProfilePreference = JsonHelper.getData(userProfilePreference, mapType);
 	}
 	
 	/**
@@ -250,7 +255,7 @@ public class DriverProperty {
 	 * @param capabilities - a string of browser property
 	 */
 	public void setCapabilities(String capabilities){
-		
+		this.capabilities = JsonHelper.convertJsonToCapabilities(capabilities);
 	}
 	
 	/**

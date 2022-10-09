@@ -8,7 +8,7 @@ import org.testng.annotations.Test;
 import Common.Logger;
 import Constant.Constant;
 
-public class TikiTest extends BaseTest{
+public class TikiTest extends TestBase{
 	
 	HomePage homePage = new HomePage();
 	
