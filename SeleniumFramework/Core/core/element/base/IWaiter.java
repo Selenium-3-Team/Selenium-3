@@ -10,8 +10,8 @@ import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import DriverWrapper.DriverManagement;
 import core.common.Constant;
+import core.driver.manager.DriverManager;
 import core.element.setting.Status;
 
 public interface IWaiter extends IFinder{
@@ -28,7 +28,7 @@ public interface IWaiter extends IFinder{
 	 */
 	public default void waitForCondition(Status status, int timeOut, boolean throwable) {
 		try {
-			WebDriverWait wait = new WebDriverWait(DriverManagement.getDriver(), Duration.ofSeconds(timeOut));
+			WebDriverWait wait = new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(timeOut));
 			switch (status) {
 			case PRESENT:
 				wait.until(new Function<WebDriver, Boolean>(){

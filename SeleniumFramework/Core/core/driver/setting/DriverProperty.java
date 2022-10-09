@@ -230,8 +230,7 @@ public class DriverProperty {
 	 * @param userProfilePreference - a string of user profile preference
 	 */
 	public void setUserProfilePreference(String userProfilePreference) throws Exception {
-		Type mapType = new TypeToken<Map<String, Object>>(){}.getType();
-		this.userProfilePreference = JsonHelper.getData(userProfilePreference, mapType);
+		
 	}
 	
 	/**

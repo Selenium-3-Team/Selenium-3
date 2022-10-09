@@ -109,7 +109,7 @@ public class JsonHelper {
 	 * 			Create a data.json file and enter the values as follows: [{"Selenium": 3, "Team": 4}]
 	 * 			{@code String path = file.getAbsolutePath();} //Get absolute path of data file
 	 * 			{@code Type mapType = new TypeToken<Map<String, String>>() {}.getType();} //Create Type type variable, use to convert from json to type
-	 * 			{@code Map<String, String> info = JsonHelper.getListData(path, mapType);} //Convert to map, return Map<String, String>
+	 * 			{@code Map<String, String> info = JsonHelper.getData(path, mapType);} //Convert to map, return Map<String, String>
 	 * 			{@code info.get("Selenium"); info.get("Team");} //Get data in map
 	 */
 	public static <T> T getData(String jsonPath, Type type) {
