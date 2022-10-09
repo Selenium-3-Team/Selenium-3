@@ -11,6 +11,7 @@ public class Constant {
 	public static final String DEFAULT_DELEMITER = ",";
 	public static final String UPPER_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	public static final String LOWER_CHARS = "abcdefghijklmnopqrstuvwxyz";
+	public static final String DRIVER_SETTING_FILE = "test-resources/driver.setting.properties";
 	
 	// Timeout
 	public static final int DEFAULT_TIMEOUT = 30;

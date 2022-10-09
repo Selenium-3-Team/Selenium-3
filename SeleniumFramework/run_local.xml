@@ -5,17 +5,13 @@
 <!-- Run parallel with number of threads -->
 <suite name="Suite" thread-count="2" parallel="methods">
 
-	<!-- Supported browser names: Chrome; Firefox -->
-	<parameter name="broswer" value="Chrome"></parameter>
-	
-	<!-- Value parameters: Local, Remote -->
-	<parameter name="runningMode" value="Local"></parameter>
-
 	<listeners>
 		<listener class-name="Common.TestListener" />
 	</listeners>
 	
   	<test name="Run Local Suit Test">
+  		<parameter name="driverConfig" value="chrome.local" />
+		<parameter name="platform" value="windows" />	
   		<classes>
 			<class name="Tiki.TikiTest"><methods><include name="TestCase001"></include></methods></class>
   		</classes>
