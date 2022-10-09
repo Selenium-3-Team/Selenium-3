@@ -5,6 +5,7 @@ import java.util.List;
 import Common.Utilities;
 import Constant.Constant;
 import core.element.base.Element;
+import core.element.setting.FindBy;
 import Enum.Tiki.MenuItem;
 import io.qameta.allure.Step;
 
@@ -17,9 +18,9 @@ public class GeneralPage {
 
 	// Search elements
 	protected final Element txtSearch = new Element("xpath=//input[@data-view-id='main_search_form_input']");
-	protected final Element btnSearch = new Element("//button[@data-view-id='main_search_form_button']");
+//	protected final Element btnSearch = new Element("//button[@data-view-id='main_search_form_button']");
 //	protected final Element iconSearch = new Element("class= icon-search");
-//	protected final Element iconSearch = new Element(FindBy.CLASS_NAME, "icon-search");
+	protected final Element btnSearch = new Element(FindBy.CLASS_NAME, "icon-search");
 
 	// Menu elements
 	protected final Element btnMenu = new Element("//a[@class='Menu-button']");

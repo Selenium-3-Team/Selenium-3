@@ -1,10 +1,10 @@
 package core.element.base;
 
-import org.javatuples.Pair;
 import org.openqa.selenium.By;
 
 import core.element.setting.FindBy;
 import core.helper.LocatorHelper;
+import core.utilities.Pair;
 
 
 public interface ILocator {
@@ -63,7 +63,7 @@ public interface ILocator {
 	 * @return use getByLocator to identify type of locator and find element by following it's type
 	 */
 	public default By getByLocator(Pair<FindBy, String> locator) {
-		return getByLocator(locator.getValue0(), locator.getValue1());
+		return getByLocator(locator.getKey(), locator.getValue());
 	}
 	
 	/**
@@ -73,6 +73,6 @@ public interface ILocator {
 	 */
 	public default By getByLocator(String locator) {
 		Pair<FindBy, String> pairLocator = LocatorHelper.getPairLocator(locator);
-		return getByLocator(pairLocator.getValue0(), pairLocator.getValue1());
+		return getByLocator(pairLocator.getKey(), pairLocator.getValue());
 	}
 }

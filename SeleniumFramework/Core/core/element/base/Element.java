@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
-import org.javatuples.Pair;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.StaleElementReferenceException;
@@ -21,6 +20,7 @@ import core.common.Constant;
 import core.element.setting.FindBy;
 import core.element.setting.Status;
 import core.helper.LocatorHelper;
+import core.utilities.Pair;
 
 /**
  * Element control implementation
@@ -136,7 +136,7 @@ public class Element implements IWaiter, IAction, IInfo {
 	 * @param arguments - variable-length arguments of type Object, use for dynamic locator 
 	 */
 	public Element(Pair<FindBy, String> locator, Object... arguments) {
-		this.byLocator = getByLocator(locator.getValue0(), String.format(locator.getValue1(), arguments));
+		this.byLocator = getByLocator(locator.getKey(), String.format(locator.getValue(), arguments));
 		this.pairLocator = locator;
 	}
 	
@@ -147,7 +147,7 @@ public class Element implements IWaiter, IAction, IInfo {
 	 * @param arguments - variable-length arguments of type Object, use for dynamic locator 
 	 */
 	public Element(Element parentElement, Pair<FindBy, String> locator, Object... arguments) {
-		this.byLocator = getByLocator(locator.getValue0(), String.format(locator.getValue1(), arguments));
+		this.byLocator = getByLocator(locator.getKey(), String.format(locator.getValue(), arguments));
 		this.pairLocator = locator;
 		this.parentElement = parentElement;
 	}
@@ -214,8 +214,8 @@ public class Element implements IWaiter, IAction, IInfo {
 	 */
 	public Element generateDynamic(Object... arguments) {
 		if (this.pairLocator != null)
-			this.byLocator = getByLocator(this.pairLocator.getValue0(),
-					String.format(this.pairLocator.getValue1(), arguments));
+			this.byLocator = getByLocator(this.pairLocator.getKey(),
+					String.format(this.pairLocator.getValue(), arguments));
 		return this;
 	}
 
