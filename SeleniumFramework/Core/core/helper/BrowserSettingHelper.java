@@ -2,14 +2,10 @@ package core.helper;
 
 import java.io.FileReader;
 
-import org.apache.commons.lang3.EnumUtils;
 import org.ini4j.Ini;
 import org.ini4j.Profile.Section;
 
 import core.driver.setting.DriverProperty;
-import core.driver.setting.DriverType;
-import core.driver.setting.Platform;
-import core.driver.setting.RunningMode;
 
 /**
  * <p>
@@ -35,9 +31,9 @@ public class BrowserSettingHelper {
 			String args = section.get("arguments");
 			String userPrefs = section.get("userProfilePreference");
 
-			property.setMode(toRunningMode(mode));
-			property.setPlatform(toPlatformType(platform));
-			property.setDriverType(toDriverType(browserName));
+			property.setMode(mode);
+			property.setPlatform(platform);
+			property.setDriverType(browserName);
 			property.setRemoteUrl(remoteUrl);
 			property.setCapabilities(capabilities);
 			property.setArguments(args);
@@ -48,30 +44,4 @@ public class BrowserSettingHelper {
 		return property;
 	}
 
-	private static RunningMode toRunningMode(String mode) throws Exception {
-		if (EnumUtils.isValidEnum(RunningMode.class, mode)) {
-			return EnumUtils.getEnum(RunningMode.class, mode);
-		} else {
-			throw new Exception(String.format("Don't allow the '%s'. Please use %s for your configuration", mode,
-					RunningMode.fromString(mode)));
-		}
-	}
-
-	private static Platform toPlatformType(String type) throws Exception {
-		if (EnumUtils.isValidEnum(Platform.class, type)) {
-			return EnumUtils.getEnum(Platform.class, type);
-		} else {
-			throw new Exception(String.format("Don't allow the '%s'. Please use %s for your configuration", type,
-					Platform.fromString(type)));
-		}
-	}
-
-	private static DriverType toDriverType(String type) throws Exception {
-		if (EnumUtils.isValidEnum(DriverType.class, type)) {
-			return EnumUtils.getEnum(DriverType.class, type);
-		} else {
-			throw new Exception(String.format("Don't allow the '%s'. Please use %s for your configuration", type,
-					DriverType.fromString(type)));
-		}
-	}
 }
