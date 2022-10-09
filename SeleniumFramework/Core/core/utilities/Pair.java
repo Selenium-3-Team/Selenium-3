@@ -1,4 +1,4 @@
-package core.helper;
+package core.utilities;
 
 /**
  * <p>
@@ -8,9 +8,6 @@ package core.helper;
  */
 public final class Pair<KEY, VALUE> {
 
-	/**
-	 * 
-	 */
 	private final KEY key;
 	private final VALUE value;
 
@@ -19,10 +16,8 @@ public final class Pair<KEY, VALUE> {
 	 * Constructs a new pair with specified values.
 	 * </p>
 	 * 
-	 * @param <KEY>   the first value, we define it as a key of tuple.
-	 * @param <VALUE> the second value, we define it as value of corresponding key
-	 *                in tuple.
-	 * 
+	 * @param <KEY>   the first value, we define it as a key of tuple
+	 * @param <VALUE> the second value, we define it as value of corresponding key in tuple
 	 */
 	public Pair(final KEY key, final VALUE value) {
 		this.key = key;

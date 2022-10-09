@@ -1,8 +1,7 @@
 package core.helper;
 
-import org.javatuples.Pair;
-
 import core.element.setting.FindBy;
+import core.utilities.Pair;
 
 public class LocatorHelper {
 
