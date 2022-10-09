@@ -7,10 +7,12 @@ import java.util.Map;
 import java.util.logging.Logger;
 
 import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
 import core.common.Constant;
@@ -240,5 +242,13 @@ public class Driver {
 			logger.severe("An error occurred when capturing screen shot: " + e.getMessage());
 		}
 		return path;
+	}
+	
+	public static WebElement findElement(By by) {
+		return getDriver().findElement(by);
+	}
+
+	public static List<WebElement> findElements(By by) {
+		return getDriver().findElements(by);
 	}
 }

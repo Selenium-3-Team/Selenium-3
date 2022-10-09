@@ -10,13 +10,11 @@ import org.openqa.selenium.Dimension;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 
 import com.google.common.base.Stopwatch;
 
-import DriverWrapper.Driver;
-import DriverWrapper.DriverManagement;
 import core.common.Constant;
+import core.driver.manager.Driver;
 import core.element.setting.FindBy;
 import core.element.setting.Status;
 import core.helper.LocatorHelper;
@@ -237,7 +235,7 @@ public class Element implements IWaiter, IAction, IInfo {
 	public WebElement getElement() {
 		if (parentElement != null)
 			return parentElement.getChildElement(getLocator());
-		return DriverManagement.getDriver().findElement(getLocator());
+		return Driver.findElement(getLocator());
 	}
 
 	/**
@@ -296,7 +294,7 @@ public class Element implements IWaiter, IAction, IInfo {
 	public List<WebElement> getElements() {
 		if (parentElement != null)
 			return parentElement.getChildElements(getLocator());
-		return DriverManagement.getDriver().findElements(getLocator());
+		return Driver.findElements(getLocator());
 	}
 
 	/**
@@ -782,7 +780,7 @@ public class Element implements IWaiter, IAction, IInfo {
 			i++;
 			try {
 				waitForCondition(Status.PRESENT, Constant.TIMEOUT, true);
-				Driver.executeScript("arguments[0].click();", getElement());
+				Driver.executeJavaScript("arguments[0].click();", getElement());
 				return;
 			} catch (StaleElementReferenceException staleEx) {
 				if (i == Constant.SHORT_TIMEOUT)
@@ -917,7 +915,7 @@ public class Element implements IWaiter, IAction, IInfo {
 			i++;
 			try {
 				waitForCondition(Status.PRESENT, Constant.TIMEOUT, true);
-				Driver.executeScript("arguments[0].focus();", getElement());
+				Driver.executeJavaScript("arguments[0].focus();", getElement());
 				return;
 			} catch (StaleElementReferenceException staleEx) {
 				if (i == Constant.SHORT_TIMEOUT)
@@ -943,7 +941,7 @@ public class Element implements IWaiter, IAction, IInfo {
 			try {
 				String mouseHoverScript = "if(document.createEvent){var evObj = document.createEvent('MouseEvents');evObj.initEvent('mouseover', true, false); arguments[0].dispatchEvent(evObj);} else if(document.createEventObject) { arguments[0].fireEvent('onmouseover');}";
 				waitForCondition(Status.PRESENT, Constant.TIMEOUT, true);
-				Driver.executeScript(mouseHoverScript, getElement());
+				Driver.executeJavaScript(mouseHoverScript, getElement());
 				return;
 			} catch (StaleElementReferenceException staleEx) {
 				if (i == Constant.SHORT_TIMEOUT)
@@ -968,8 +966,7 @@ public class Element implements IWaiter, IAction, IInfo {
 			i++;
 			try {
 				waitForCondition(Status.PRESENT, Constant.TIMEOUT, true);
-				Actions action = new Actions(DriverManagement.getDriver());
-				action.moveToElement(getElement()).build().perform();
+				Driver.getActions().moveToElement(getElement()).build().perform();
 				return;
 			} catch (StaleElementReferenceException staleEx) {
 				if (i == Constant.SHORT_TIMEOUT)
@@ -994,7 +991,7 @@ public class Element implements IWaiter, IAction, IInfo {
 			i++;
 			try {
 				waitForCondition(Status.PRESENT, Constant.TIMEOUT, true);
-				Driver.executeScript("arguments[0].scrollIntoView(true);", getElement());
+				Driver.executeJavaScript("arguments[0].scrollIntoView(true);", getElement());
 				return;
 			} catch (StaleElementReferenceException staleEx) {
 				if (i == Constant.SHORT_TIMEOUT)
