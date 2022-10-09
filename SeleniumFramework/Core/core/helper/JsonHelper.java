@@ -45,10 +45,10 @@ public class JsonHelper {
 	 * 			{@code Map<String, String> info = JsonHelper.convertJsonToMap(jsonString);} //Convert to map, return Map<String, String>
 	 * 			{@code info.get("Selenium"); info.get("Team");} //Get data in map
 	 */
-	public static Map<String, String> convertJsonToMap(String json) {
+	public static <T> Map<String, T> convertJsonToMap(String json){
 		try {
 			logger.info("JsonHelper: convertJsonToMap");
-			Type mapType = new TypeToken<Map<String, String>>() {
+			Type mapType = new TypeToken<Map<String, T>>() {
 			}.getType();
 			Gson gson = new Gson();
 			return gson.fromJson(json, mapType);
@@ -202,7 +202,7 @@ public class JsonHelper {
 	 * 			{@code DesiredCapabilities info = JsonHelper.convertJsonToCapabilities(jsonString);} //Convert to capabilities, return DesiredCapabilities
 	 * 			{@code info.getBrowserName(); info.getVersion();} //Get data in capabilities
 	 */
-	public static DesiredCapabilities convertJsonToCapabilities(String json) {
+	public static DesiredCapabilities convertJsonToCapabilities(String json){
 		DesiredCapabilities capabilities = new DesiredCapabilities();
 		Map<String, String> caps = convertJsonToMap(json);
 		if (caps != null) {
@@ -230,7 +230,7 @@ public class JsonHelper {
 	 * 			{@code List<String> info = JsonHelper.convertJsonToArguments(jsonString);} //Convert to list arguments, return List<String>
 	 * 			{@code info.get(0); info.get(1);} //Get data in list arguments
 	 */
-	public static List<String> convertJsonToArguments(String json) {
+	public static List<String> convertJsonToArguments(String json){
 		List<String> args = new ArrayList<String>();
 		Map<String, String> maps = convertJsonToMap(json);
 		if (maps != null) {
