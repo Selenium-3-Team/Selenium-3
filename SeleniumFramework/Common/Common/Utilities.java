@@ -1,9 +1,8 @@
 package Common;
 
 import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
 import java.text.SimpleDateFormat;
+import java.time.Duration;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -18,9 +17,10 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import core.driver.manager.Driver;
 import core.driver.manager.DriverManager;
+import core.helper.JsonHelper;
 import Constant.Constant;
-import DriverWrapper.Driver;
 
 public class Utilities {
 
@@ -56,21 +56,21 @@ public class Utilities {
 	public static void waitForPageLoad(int timeOutInSecond) {
 		ExpectedCondition<Boolean> pageLoadCondition = new ExpectedCondition<Boolean>() {
 			public Boolean apply(WebDriver driver) {
-				return (Driver.executeScript("return document.readyState").equals("complete"));
+				return (Driver.executeJavaScript("return document.readyState").equals("complete"));
 			}
 		};
-		WebDriverWait wait = new WebDriverWait(DriverManager.getDriver(), timeOutInSecond);
+		WebDriverWait wait = new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(timeOutInSecond));
 		wait.until(pageLoadCondition);
 	}
 
 	private static Alert switchToAlert() {
-		new WebDriverWait(DriverManager.getDriver(), Constant.DEFAULT_TIMEOUT).until(ExpectedConditions.alertIsPresent());
+		new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(Constant.DEFAULT_TIMEOUT)).until(ExpectedConditions.alertIsPresent());
 		return DriverManager.getDriver().switchTo().alert();
 	}
 
 	public static boolean isAlertPresent() {
 		boolean foundAlert = false;
-		WebDriverWait wait = new WebDriverWait(DriverManager.getDriver(), Constant.DEFAULT_TIMEOUT);
+		WebDriverWait wait = new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(Constant.DEFAULT_TIMEOUT));
 		try {
 			wait.until(ExpectedConditions.alertIsPresent());
 			foundAlert = true;
@@ -177,18 +177,13 @@ public class Utilities {
 		return newString;
 	}
 	
-	public static void runAllureReport() throws IOException {
-		Runtime runtime = Runtime.getRuntime();
+	public static String getValue(String filePath, String key) {
+		String value = "";
 		try {
-			Process p = runtime.exec("cmd /c "+ getProjectPath() + "\\test-resources\\AllureReport.bat");
-			InputStream is = p.getInputStream();
-		     int i = 0;
-		     while( (i = is.read() ) != -1)
-		     {
-		       System.out.print((char)i);
-		     }
-		}catch(IOException ex) {
-			throw(ex);
+			value = JsonHelper.getJsonObject(filePath).get(key).toString();
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
+		return value;
 	}
 }

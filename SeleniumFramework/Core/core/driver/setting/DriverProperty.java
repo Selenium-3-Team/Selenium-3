@@ -1,12 +1,10 @@
 package core.driver.setting;
 
-import java.lang.reflect.Type;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 import java.util.Map;
 
-import com.google.gson.reflect.TypeToken;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
@@ -230,7 +228,7 @@ public class DriverProperty {
 	 * @param userProfilePreference - a string of user profile preference
 	 */
 	public void setUserProfilePreference(String userProfilePreference) throws Exception {
-		
+		this.userProfilePreference = JsonHelper.convertJsonToMap(userProfilePreference);
 	}
 	
 	/**

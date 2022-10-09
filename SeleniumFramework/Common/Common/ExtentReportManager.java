@@ -7,6 +7,10 @@ import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import com.aventstack.extentreports.reporter.configuration.ChartLocation;
 import com.aventstack.extentreports.reporter.configuration.Theme;
 
+/**
+ * In this class, we created an ExtentReport object and it can be reachable via createInstance() method
+ * and set all options we need to ExtentReport report HTML file location 
+ */
 public class ExtentReportManager {
 	
 	private static ExtentReports extent;
@@ -16,12 +20,20 @@ public class ExtentReportManager {
 	private static String reportFilepath = System.getProperty("user.dir") + fileSeperator + "TestReport";
 	private static String reportFileLocation = reportFilepath + fileSeperator + reportFileName;
 	
+	/**
+	 * Get instance of executing session for create extent report
+	 * @return ExtentReport object
+	 */
 	public static ExtentReports getInstance() {
 		if (extent == null)
 			createInstance();
 		return extent;
 	}
 	
+	/**
+	 * Create extent report with set all HTML report options
+	 * @return ExtentReport object
+	 */
 	public static ExtentReports createInstance() {
 		String fileName = getReportPath(reportFilepath);
 		ExtentHtmlReporter htmlReporter = new ExtentHtmlReporter(fileName);
@@ -40,12 +52,19 @@ public class ExtentReportManager {
 		return extent;
 	}
 	
+	/**
+	 * After finishing write info into report, terminate the current instance
+	 */
 	public static void flushReport() {
 		System.out.println("Report: " + reportFileLocation + " is created!");
 		getInstance().flush();  
 	}
 	
-	// Create the report path
+	/**
+	 * Get report file location
+	 * @param path - report file location
+	 * @return a string of file location with all info (Name, Time,..)
+	 */
 	private static String getReportPath(String path) {
 		File testDirectory = new File(path);
 		if (!testDirectory.exists()) {
@@ -62,6 +81,10 @@ public class ExtentReportManager {
 		return reportFileLocation;
 	}
 
+	/**
+	 * Get screenshot photo location, if the folder is not existed, then this will create a new one
+	 * @return Screenshot file folder 
+	 */
 	public static synchronized String getScreenshotFolder() {
 		String path = reportFilepath + fileSeperator + "screenshots";
 		File output = new File(path);
