@@ -20,6 +20,11 @@ import com.google.gson.stream.JsonReader;
 
 import core.common.Constant;
 
+/**
+ * <p>
+ * A Collection of helper methods for json.
+ * </p>
+ */
 public class JsonHelper {
 
 	private static final Logger logger = Constant.createLogger(FileHelper.class.getName());
