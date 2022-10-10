@@ -13,7 +13,7 @@
   		<parameter name="driverConfig" value="chrome.local" />
 		<parameter name="platform" value="windows" />	
   		<classes>
-			<class name="Tiki.TikiTest"><methods><include name="TestCase001"></include></methods></class>
+			<class name="OrangeHRM.LoginTest"><methods><include name="TC01"></include></methods></class>
   		</classes>
   	</test>
   
