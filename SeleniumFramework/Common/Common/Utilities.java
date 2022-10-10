@@ -28,19 +28,22 @@ import Constant.Constant;
 import core.driver.manager.Driver;
 import core.driver.manager.DriverManager;
 import core.helper.JsonHelper;
+import core.utilities.AlertModal;
+import core.driver.manager.Driver;
+import core.driver.manager.DriverManager;
 
 public class Utilities {
 
 	public static String getProjectPath() {
 		return System.getProperty("user.dir");
 	}
-	
+
 	public static String getDateNow(String format) {
 		SimpleDateFormat formatter = new SimpleDateFormat(format);
 		Date date = new Date();
 		return formatter.format(date);
 	}
-	
+
 	public static byte[] takeScreenShot() {
 		TakesScreenshot scrShot = ((TakesScreenshot) DriverManager.getDriver());
 		return (byte[]) (scrShot.getScreenshotAs(OutputType.BYTES));
@@ -59,7 +62,7 @@ public class Utilities {
 		}
 		return path;
 	}
-	
+
 	public static void waitForPageLoad(int timeOutInSecond) {
 		ExpectedCondition<Boolean> pageLoadCondition = new ExpectedCondition<Boolean>() {
 			public Boolean apply(WebDriver driver) {
@@ -68,11 +71,6 @@ public class Utilities {
 		};
 		WebDriverWait wait = new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(timeOutInSecond));
 		wait.until(pageLoadCondition);
-	}
-
-	private static Alert switchToAlert() {
-		new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(Constant.DEFAULT_TIMEOUT)).until(ExpectedConditions.alertIsPresent());
-		return DriverManager.getDriver().switchTo().alert();
 	}
 
 	public static boolean isAlertPresent() {
@@ -88,15 +86,19 @@ public class Utilities {
 	}
 
 	public static String getAlertMessage() {
-		return switchToAlert().getText();
+		return new AlertModal(DriverManager.getDriver()).getAlertText();
+	}
+
+	public static void promptAlert(String inputText) {
+		new AlertModal(DriverManager.getDriver()).prompt(inputText);
 	}
 
 	public static void acceptAlert() {
-		switchToAlert().accept();
+		new AlertModal(DriverManager.getDriver()).confirm();
 	}
 
 	public static void dismissAlert() {
-		switchToAlert().dismiss();
+		new AlertModal(DriverManager.getDriver()).dismiss();
 	}
 
 	public static String convertToNbsp(String input) {
@@ -108,8 +110,8 @@ public class Utilities {
 	}
 
 	public static String replaceEscapeCharacters(String string) {
-		final String[] characters = { "\\", "^", "$", "{", "}", "[", "]", "(", ")", ".", "*", "+", "?", "|", "<",
-				">", "-", "&", "%" };
+		final String[] characters = { "\\", "^", "$", "{", "}", "[", "]", "(", ")", ".", "*", "+", "?", "|", "<", ">",
+				"-", "&", "%" };
 		for (int i = 0; i < characters.length; i++) {
 			if (string.contains(characters[i])) {
 				string = string.replace(characters[i], "\\").trim();
@@ -143,7 +145,7 @@ public class Utilities {
 	public static boolean isContains(String[] outer, String[] inner) {
 		return Arrays.asList(outer).containsAll(Arrays.asList(inner));
 	}
-	
+
 	public static boolean isContains(String[] outer, String string) {
 		return Arrays.asList(outer).contains(string);
 	}
@@ -156,29 +158,29 @@ public class Utilities {
 		}
 		return existed;
 	}
-	
-	public static boolean isSorted(String[] array){
-        boolean isSorted=true;
-        for(int i=1;i < array.length;i++){
-            if(array[i-1].toLowerCase().compareTo(array[i].toLowerCase()) > 0){
-                isSorted= false;
-                break;
-            }
-        }
-        return isSorted;
-    }
-	
-	public static String replaceCharFromStringByIndex(String str, int index, char replace) { 
-        StringBuilder string = new StringBuilder(str);
-        string.setCharAt(index, replace);
-        return string.toString();
+
+	public static boolean isSorted(String[] array) {
+		boolean isSorted = true;
+		for (int i = 1; i < array.length; i++) {
+			if (array[i - 1].toLowerCase().compareTo(array[i].toLowerCase()) > 0) {
+				isSorted = false;
+				break;
+			}
+		}
+		return isSorted;
 	}
-	
+
+	public static String replaceCharFromStringByIndex(String str, int index, char replace) {
+		StringBuilder string = new StringBuilder(str);
+		string.setCharAt(index, replace);
+		return string.toString();
+	}
+
 	public static String removeSubString(String originalString, String subString) {
 		String newString = originalString.replace(subString, "").trim();
 		return newString;
 	}
-	
+
 	public static String removeAllCharacterInString(String originalString, String character) {
 		String newString = originalString.replaceAll(character, "").trim();
 		return newString;
@@ -215,4 +217,5 @@ public class Utilities {
 		}
 		return null;
 	}
+
 }

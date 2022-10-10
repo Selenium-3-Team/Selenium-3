@@ -1,12 +1,13 @@
 package Constant;
 
-import Common.Utilities;
-
 public class Constant {
 	
 	public static final String TIKI_URL = "https://tiki.vn/";
+<<<<<<< HEAD
 	public static final String ORANGEHRM_URL = "https://opensource-demo.orangehrmlive.com/";
 	public static final String HUB_URL = Utilities.getValue(Utilities.getProjectPath() + "\\Grid\\node_config.json", "hub") + "/wd/hub";
+=======
+>>>>>>> febac29a56d81cb272dbe69af609a011783fb7ef
 	public static final String BREAD_CRUMB_ITEM_REGEX = ">";
 	public static final String DEFAULT_DELEMITER = ",";
 	public static final String UPPER_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
