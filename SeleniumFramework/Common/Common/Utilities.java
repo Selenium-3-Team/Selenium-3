@@ -17,10 +17,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import Constant.Constant;
-import core.common.AlertModal;
+import core.utilities.AlertModal;
 import core.driver.manager.Driver;
 import core.driver.manager.DriverManager;
-import core.helper.JsonHelper;
 
 public class Utilities {
 
@@ -176,13 +175,4 @@ public class Utilities {
 		return newString;
 	}
 
-	public static String getValue(String filePath, String key) {
-		String value = "";
-		try {
-			value = JsonHelper.getJsonObject(filePath).get(key).toString();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return value;
-	}
 }
