@@ -15,7 +15,6 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.TimeoutException;
@@ -29,8 +28,6 @@ import core.driver.manager.Driver;
 import core.driver.manager.DriverManager;
 import core.helper.JsonHelper;
 import core.utilities.AlertModal;
-import core.driver.manager.Driver;
-import core.driver.manager.DriverManager;
 
 public class Utilities {
 
@@ -200,8 +197,7 @@ public class Utilities {
 		JSONParser parser = new JSONParser();
 		String locatorTestPath = System.getProperty("user.dir");
 
-		String locatorResourcePath = File.separator + "Data" + File.separator + folderName + File.separator
-				+ fileName + ".json";
+		String locatorResourcePath = File.separator + "Data" + File.separator + folderName + File.separator + fileName + ".json";
 		try {
 			JSONArray a = (JSONArray) parser.parse(new FileReader(locatorTestPath + locatorResourcePath));
 			for (Object o : a) {
