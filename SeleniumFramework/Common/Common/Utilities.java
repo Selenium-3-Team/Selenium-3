@@ -1,6 +1,9 @@
 package Common;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.util.Arrays;
@@ -8,6 +11,10 @@ import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -17,10 +24,10 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import Constant.Constant;
 import core.driver.manager.Driver;
 import core.driver.manager.DriverManager;
 import core.helper.JsonHelper;
-import Constant.Constant;
 
 public class Utilities {
 
@@ -185,5 +192,27 @@ public class Utilities {
 			e.printStackTrace();
 		}
 		return value;
+	}
+	
+	public static Object getDataFromJsonFile(String folderName, String fileName) {
+		JSONParser parser = new JSONParser();
+		String locatorTestPath = System.getProperty("user.dir");
+
+		String locatorResourcePath = File.separator + "Data" + File.separator + folderName + File.separator
+				+ fileName + ".json";
+		try {
+			JSONArray a = (JSONArray) parser.parse(new FileReader(locatorTestPath + locatorResourcePath));
+			for (Object o : a) {
+				return (JSONObject) o;
+			}
+
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 }

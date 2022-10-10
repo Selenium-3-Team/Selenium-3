@@ -5,6 +5,7 @@ import Common.Utilities;
 public class Constant {
 	
 	public static final String TIKI_URL = "https://tiki.vn/";
+	public static final String ORANGEHRM_URL = "https://opensource-demo.orangehrmlive.com/";
 	public static final String HUB_URL = Utilities.getValue(Utilities.getProjectPath() + "\\Grid\\node_config.json", "hub") + "/wd/hub";
 	public static final String BREAD_CRUMB_ITEM_REGEX = ">";
 	public static final String DEFAULT_DELEMITER = ",";
