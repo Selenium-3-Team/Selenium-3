@@ -6,6 +6,7 @@ import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 
 import Common.ExtentTestManager;
@@ -18,7 +19,7 @@ public class TestBase {
 
 	@Parameters({ "driverConfig", "platform"})
 	@BeforeMethod(alwaysRun = true)
-	public void beforeMethod(String driverConfig, String platform, ITestContext context, Method method)
+	public void beforeMethod(@Optional("chrome.local")String driverConfig, @Optional("Windows")String platform, ITestContext context, Method method)
 			throws Throwable {
 		ExtentTestManager.startTest(method.getName(), TestListener.testSuite.get(context.getName()));
 		DriverManager.loadDriverProperty(Constant.DRIVER_SETTING_FILE, platform, driverConfig);
