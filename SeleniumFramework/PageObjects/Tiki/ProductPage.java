@@ -1,7 +1,7 @@
 package Tiki;
 
 import Constant.Constant;
-import ElementBase.Element;
+import core.element.base.Element;
 import io.qameta.allure.Step;
 
 public class ProductPage extends GeneralPage {
