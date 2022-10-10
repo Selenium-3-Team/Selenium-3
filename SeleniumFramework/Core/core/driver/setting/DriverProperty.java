@@ -65,6 +65,16 @@ public class DriverProperty {
 	 */
 	private int elementTimeOut = 0; 
 	
+	private boolean isHeadless;
+	
+	public boolean getHeadless() {
+		return isHeadless;
+	}
+	
+	public void setHeadless(boolean isHeadless) {
+		this.isHeadless = isHeadless;
+	}
+	
 	/**
 	 * Get driver platform
 	 * @return platform

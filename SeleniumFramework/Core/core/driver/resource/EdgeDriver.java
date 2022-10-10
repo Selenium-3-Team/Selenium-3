@@ -27,13 +27,13 @@ public class EdgeDriver extends BaseDriver{
 	 */
 	public EdgeDriver(DriverProperty property) {
 		super(property);
-		loadOptions();
+		loadOptions(property);
 	}
 	
 	/**
 	 * Set properties for Edge to customize driver sessions 
 	 */
-	private void loadOptions() {
+	private void loadOptions(DriverProperty property) {
 		options = new EdgeOptions();
 		if (driverProperty.getArguments() != null) {
 			Map<String, Object> map = new HashMap<>();
@@ -44,6 +44,7 @@ public class EdgeDriver extends BaseDriver{
 			options.setExperimentalOption("prefs", driverProperty.getUserProfilePreference());
 		}
 		options.merge(driverProperty.getCapabilities());
+		options.setHeadless(property.getHeadless());
 	}
 	
 	/**
