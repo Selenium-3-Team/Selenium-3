@@ -1,7 +1,11 @@
-package core.common;
+package core.utilities;
+
+import java.util.logging.Logger;
 
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.WebDriver;
+
+import core.common.Constant;
 
 /**
  * <p>
@@ -9,6 +13,11 @@ import org.openqa.selenium.WebDriver;
  * </p>
  */
 public class AlertModal {
+	
+	/**
+	 * Contains log of the alert used
+	 */
+	private static final Logger logger = Constant.createLogger(AlertModal.class.getName());
 	
 	private Alert alert;
 
@@ -35,7 +44,13 @@ public class AlertModal {
 	 *          {@code modal.confirm();} //Click on confirm button
 	 */
 	public void confirm() {
-		alert.accept();
+		logger.info("Click accept alert button");
+		try {
+			alert.accept();
+		}catch(Exception e) {
+			logger.severe(String.format("Has error when click accept alert button: %s", e.getMessage()));
+		}
+		
 	}
 
 	/**
@@ -48,9 +63,15 @@ public class AlertModal {
 	 *          {@code modal.prompt("Simple text to pop-up");} //Enter "Simple text to pop-up" to Pop-Up and click Ok/accept button
 	 */
 	public void prompt(String inputText) {
-		if (inputText != null)
-			alert.sendKeys(inputText);
-		alert.accept();
+		logger.info(String.format("Enter %s into alert", inputText));
+		try {
+			if (inputText != null)
+				alert.sendKeys(inputText);
+			alert.accept();
+		}catch(Exception e) {
+			logger.severe(String.format("Has error when enter %s into alert text box: %s", inputText, e.getMessage()));
+		}
+		
 	}
 
 	/**
@@ -62,7 +83,12 @@ public class AlertModal {
 	 *          {@code modal.dismiss();} //Click Cancel or Dismiss button on Pop-Up
 	 */
 	public void dismiss() {
-		alert.dismiss();
+		logger.info("Click dismiss alert button");
+		try {
+			alert.dismiss();
+		}catch(Exception e) {
+			logger.severe(String.format("Has error when click dismiss alert button: %s", e.getMessage()));
+		}
 	}
 
 	/**
@@ -76,6 +102,12 @@ public class AlertModal {
 	 *          {@code String message = modal.getAlertText();} //Get Alert text to message String
 	 */
 	public String getAlertText() {
-		return alert.getText();
+		logger.info("Get text alert pop-up");
+		try {
+			return alert.getText();
+		}catch(Exception e) {
+			logger.severe(String.format("Has error when get text alert pop-up: %s", e.getMessage()));
+			return null;
+		}
 	}
 }
