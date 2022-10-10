@@ -4,14 +4,18 @@ import org.openqa.selenium.Alert;
 import org.openqa.selenium.WebDriver;
 
 /**
+ * <p>
  * Modal is class for browser alert pop-up.
+ * </p>
  */
 public class AlertModal {
 	
 	private Alert alert;
 
 	/**
+	 * <p>
 	 * Create a Modal for browser alert pop-up.
+	 * </p>
 	 * 
 	 * @param driver		the driver to be used
 	 *
@@ -23,7 +27,9 @@ public class AlertModal {
 	}
 
 	/**
+	 * <p>
 	 * Click confirm button on pop-up.
+	 * </p>
 	 *
 	 * @example {@code Modal newPopUp = new Modal(Driver.getDriver());} //Create an instance Modal
 	 *          {@code modal.confirm();} //Click on confirm button
@@ -33,7 +39,9 @@ public class AlertModal {
 	}
 
 	/**
+	 * <p>
 	 * Enter text to pop-up.
+	 * </p>
 	 *
 	 * @param inputText if not null, sets value in prompt dialog input
 	 * @example {@code Modal newPopUp = new Modal(Driver.getDriver());} //Create an instance Modal
@@ -46,7 +54,9 @@ public class AlertModal {
 	}
 
 	/**
+	 * <p>
 	 * Click confirm dismiss on pop-up.
+	 * </p>
 	 *
 	 * @example {@code Modal newPopUp = new Modal(Driver.getDriver());} //Create an instance Modal
 	 *          {@code modal.dismiss();} //Click Cancel or Dismiss button on Pop-Up
@@ -56,7 +66,9 @@ public class AlertModal {
 	}
 
 	/**
+	 * <p>
 	 * Get Alert message on pop-up.
+	 * </p>
 	 * 
 	 * @return String, the message on pop-up
 	 *
