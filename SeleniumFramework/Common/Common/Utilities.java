@@ -26,7 +26,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import Constant.Constant;
 import core.driver.manager.Driver;
 import core.driver.manager.DriverManager;
-import core.helper.JsonHelper;
 import core.utilities.AlertModal;
 
 public class Utilities {
@@ -182,22 +181,13 @@ public class Utilities {
 		String newString = originalString.replaceAll(character, "").trim();
 		return newString;
 	}
-	
-	public static String getValue(String filePath, String key) {
-		String value = "";
-		try {
-			value = JsonHelper.getJsonObject(filePath).get(key).toString();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return value;
-	}
-	
+
 	public static Object getDataFromJsonFile(String folderName, String fileName) {
 		JSONParser parser = new JSONParser();
 		String locatorTestPath = System.getProperty("user.dir");
 
-		String locatorResourcePath = File.separator + "Data" + File.separator + folderName + File.separator + fileName + ".json";
+		String locatorResourcePath = File.separator + "Data" + File.separator + folderName + File.separator + fileName
+				+ ".json";
 		try {
 			JSONArray a = (JSONArray) parser.parse(new FileReader(locatorTestPath + locatorResourcePath));
 			for (Object o : a) {
