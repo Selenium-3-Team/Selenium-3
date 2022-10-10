@@ -24,13 +24,13 @@ public class ChromeDriver extends BaseDriver{
 	 */
 	public ChromeDriver(DriverProperty property) {
 		super(property);
-		loadOptions();
+		loadOptions(property);
 	}
 	
 	/**
 	 * Set properties for chrome to customize driver sessions 
 	 */
-	private void loadOptions() {
+	private void loadOptions(DriverProperty property) {
 		options = new ChromeOptions();
 		if(driverProperty.getArguments() != null) {
 			options.addArguments(driverProperty.getArguments());
@@ -39,6 +39,7 @@ public class ChromeDriver extends BaseDriver{
 			options.setExperimentalOption("prefs", driverProperty.getUserProfilePreference());
 		}
 		options.merge(driverProperty.getCapabilities());
+		options.setHeadless(property.getHeadless());
 	}
 
 	/**

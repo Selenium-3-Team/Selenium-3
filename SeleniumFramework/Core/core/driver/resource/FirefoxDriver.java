@@ -25,13 +25,13 @@ public class FirefoxDriver extends BaseDriver{
 	 */
 	public FirefoxDriver(DriverProperty property) {
 		super(property);
-		loadOptions();
+		loadOptions(property);
 	}
 
 	/**
 	 * Set properties for Firefox to customize driver sessions 
 	 */
-	private void loadOptions()
+	private void loadOptions(DriverProperty property)
 	{
 		options = new FirefoxOptions();
 		if (driverProperty.getArguments() != null) {
@@ -44,6 +44,7 @@ public class FirefoxDriver extends BaseDriver{
 			options.setProfile(profile);
 		}
 		options.merge(driverProperty.getCapabilities());
+		options.setHeadless(property.getHeadless());
 	}
 	
 	/**

@@ -1,12 +1,4 @@
-/DriverResource/
-/ElementBase/
-/DriverManager/
-/DriverWrapper/
+/AccountData/
+/OrangeHRM/
+/selenium-server-standalone-3.141.59.jar
 /core/
-/Helper/
-/ElementWrapper/
-/Tiki/
-/Constant/
-/Common/
-/IEDriverServer.exe
-/msedgedriver.exe

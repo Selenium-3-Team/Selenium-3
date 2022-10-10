@@ -30,6 +30,7 @@ public class BrowserSettingHelper {
 			String capabilities = section.get("capabilities");
 			String args = section.get("arguments");
 			String userPrefs = section.get("userProfilePreference");
+			String isHeadless = section.get("headless");
 
 			property.setMode(mode);
 			property.setPlatform(platform);
@@ -38,6 +39,7 @@ public class BrowserSettingHelper {
 			property.setCapabilities(capabilities);
 			property.setArguments(args);
 			property.setUserProfilePreference(userPrefs);
+			property.setHeadless(Boolean.parseBoolean(isHeadless.toLowerCase()));
 		} catch (Exception ex) {
 			throw new RuntimeException(ex);
 		}
