@@ -1,19 +1,20 @@
 package OrangeHRM;
 
-import org.json.simple.JSONObject;
+import com.google.gson.JsonObject;
 
 import Common.Utilities;
+import Constant.Constant;
+import Enum.OrangeHRM.UserRole;
+import core.helper.JsonHelper;
 
 public class Account {
 	private String username;
 	private String password;
 
-	public Account(String accountFileName) {
-		JSONObject data = (JSONObject) Utilities.getDataFromJsonFile("AccountData", accountFileName);
-		if (data != null) {
-			this.username = data.get("username").toString();
-			this.password = data.get("password").toString();
-		}
+	public Account(UserRole userRole) {
+		JsonObject account = JsonHelper.getJsonObject(Utilities.getProjectPath() + Constant.ACCOUNT_DATA);
+		this.username = account.get(userRole.getUserRole()).getAsJsonObject().get("username").toString();
+		this.password = account.get(userRole.getUserRole()).getAsJsonObject().get("password").toString();
 	}
 
 	public String getUsername() {
