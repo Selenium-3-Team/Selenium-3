@@ -65,12 +65,23 @@ public class DriverProperty {
 	 */
 	private int elementTimeOut = 0; 
 	
+	/**
+	 * Run the test cases in Non-UI mode
+	 */
 	private boolean isHeadless;
 	
+	/**
+	 * Get headless status
+	 * @return True or False
+	 */
 	public boolean getHeadless() {
 		return isHeadless;
 	}
 	
+	/**
+	 * Set headless status
+	 * @param isHeadless
+	 */
 	public void setHeadless(boolean isHeadless) {
 		this.isHeadless = isHeadless;
 	}
