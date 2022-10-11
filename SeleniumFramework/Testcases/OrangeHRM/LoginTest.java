@@ -37,5 +37,8 @@ public class LoginTest extends TestBase {
 		assertTrue(loginPage.isCopyRightTextDisplayed(), "OrangeHRM copyright text should be displayed.");
 
 	}
+	
+	@Test
+	public void TC02() {}
 
 }
