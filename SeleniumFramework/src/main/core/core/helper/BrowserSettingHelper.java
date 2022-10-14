@@ -1,9 +1,6 @@
 package core.helper;
 
-import java.io.FileReader;
-
 import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 
 import com.google.gson.Gson;
 
@@ -25,10 +22,7 @@ public class BrowserSettingHelper {
 	 */
 	public static DriverProperty getDriverProperty(String file, String sectionName) {
 		try {
-			JSONParser parser = new JSONParser();
-			FileReader reader = new FileReader(file);
-			Object obj = parser.parse(reader);
-			JSONObject jObject = (JSONObject) obj;
+			JSONObject jObject = JsonHelper.getJSONObject(file);
 			DriverProperty property = new Gson().fromJson(jObject.get(sectionName).toString(), DriverProperty.class);
 
 			return property;
