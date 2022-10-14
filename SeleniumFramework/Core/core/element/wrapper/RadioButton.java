@@ -5,28 +5,30 @@ import org.openqa.selenium.By;
 import core.element.base.Element;
 import core.element.setting.FindBy;
 
-public class RadioButton extends Element{
-	
+public class RadioButton extends Element {
+
 	/**
 	 * Extends Element class
 	 */
-	
+
 	/**
 	 * Initialize radio button control start with By (id, css, xpath,...)
+	 * 
 	 * @param locator - type find By of element
 	 */
 	public RadioButton(By locator) {
 		super(locator);
 	}
-	
+
 	/**
 	 * Initialize radio button control start with given string of locator
+	 * 
 	 * @param locator - string of element
 	 */
 	public RadioButton(String locator) {
 		super(locator);
 	}
-	
+
 	/**
 	 * Initializes radio button with parent of current element and string
 	 * 
@@ -37,7 +39,7 @@ public class RadioButton extends Element{
 	public RadioButton(Element parentElement, String locator) {
 		super(parentElement, locator);
 	}
-	
+
 	/**
 	 * Initializes radio button with given dynamic string of locator
 	 * 
@@ -49,7 +51,7 @@ public class RadioButton extends Element{
 	public RadioButton(String locator, Object... arguments) {
 		super(locator, arguments);
 	}
-	
+
 	/**
 	 * Initializes radio button via parent element
 	 * 
@@ -63,7 +65,7 @@ public class RadioButton extends Element{
 	public RadioButton(Element parentElement, String locator, Object... arguments) {
 		super(parentElement, locator, arguments);
 	}
-	
+
 	/**
 	 * Initializes radio button with given FindBy and value String
 	 * 
@@ -73,9 +75,10 @@ public class RadioButton extends Element{
 	public RadioButton(FindBy by, String value) {
 		super(by, value);
 	}
-	
+
 	/**
-	 * Initializes radio button via parent element with given FindBy and value String
+	 * Initializes radio button via parent element with given FindBy and value
+	 * String
 	 * 
 	 * @param parentElement - Parent Element instance
 	 * @param by            - Type of locator
@@ -84,7 +87,7 @@ public class RadioButton extends Element{
 	public RadioButton(Element parentElement, FindBy by, String value) {
 		super(parentElement, by, value);
 	}
-	
+
 	/**
 	 * Initializes radio button element with given FindBy and value String
 	 * 
@@ -96,10 +99,10 @@ public class RadioButton extends Element{
 	public RadioButton(FindBy by, String value, Object... arguments) {
 		super(by, value, arguments);
 	}
-	
+
 	/**
-	 * Initializes dynamic radio button via parent element with given FindBy and value
-	 * String
+	 * Initializes dynamic radio button via parent element with given FindBy and
+	 * value String
 	 * 
 	 * @param parentElement - Parent Element instance
 	 * @param by            - Type of locator
@@ -110,7 +113,7 @@ public class RadioButton extends Element{
 	public RadioButton(Element parentElement, FindBy by, String value, Object... arguments) {
 		super(parentElement, by, value, arguments);
 	}
-	
+
 	/**
 	 * Generate dynamic radio button
 	 * 
@@ -122,12 +125,12 @@ public class RadioButton extends Element{
 		super.generateDynamic(arguments);
 		return this;
 	}
-	
+
 	/**
 	 * Select on radio button
 	 */
 	public void select() {
 		super.select();
 	}
-	
+
 }

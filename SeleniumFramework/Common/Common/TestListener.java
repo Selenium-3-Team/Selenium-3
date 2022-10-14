@@ -16,15 +16,18 @@ import io.qameta.allure.Allure;
 import io.qameta.allure.Attachment;
 
 /**
- * This class will implements ITestListener which listens to specificevents and executes the code written 
- * inside the method and put these events to a extentTest map for each thread 	 
+ * This class will implements ITestListener which listens to specificevents and
+ * executes the code written inside the method and put these events to a
+ * extentTest map for each thread
  */
 public class TestListener implements ITestListener {
 
 	public static ConcurrentHashMap<String, ExtentTest> testSuite = new ConcurrentHashMap<String, ExtentTest>();
 
 	/**
-	 * This method invokes when the test class is instantiated and before executing any test method
+	 * This method invokes when the test class is instantiated and before executing
+	 * any test method
+	 * 
 	 * @param context - The test context
 	 */
 	public void onStart(ITestContext context) {
@@ -38,6 +41,7 @@ public class TestListener implements ITestListener {
 
 	/**
 	 * This method invokes every time a test method is called and executed
+	 * 
 	 * @param result - the partially filled <code>context</code>
 	 */
 	public void onTestStart(ITestResult result) {
@@ -52,7 +56,9 @@ public class TestListener implements ITestListener {
 
 	/**
 	 * This method is invoked every time a test case passes (succeeds).
-	 * @param result - <code>ITestResult</code> containing information about the run test
+	 * 
+	 * @param result - <code>ITestResult</code> containing information about the run
+	 *               test
 	 */
 	public void onTestSuccess(ITestResult result) {
 		ExtentTestManager.getTest().log(Status.PASS,
@@ -61,6 +67,7 @@ public class TestListener implements ITestListener {
 
 	/**
 	 * Take screenshot for allure report attachment
+	 * 
 	 * @param name - screenshot name
 	 * @return Object in which is stored information about the screenshot
 	 */
@@ -70,8 +77,11 @@ public class TestListener implements ITestListener {
 	}
 
 	/**
-	 * This method invokes every time a test case fails and capture screenshot for report attatachment.
-	 * @param result - <code>ITestResult</code> containing information about the run test
+	 * This method invokes every time a test case fails and capture screenshot for
+	 * report attatachment.
+	 * 
+	 * @param result - <code>ITestResult</code> containing information about the run
+	 *               test
 	 */
 	public void onTestFailure(ITestResult result) {
 
@@ -109,7 +119,9 @@ public class TestListener implements ITestListener {
 
 	/**
 	 * This method invokes every time a test skips
-	 * @param result - <code>ITestResult</code> containing information about the run test
+	 * 
+	 * @param result - <code>ITestResult</code> containing information about the run
+	 *               test
 	 */
 	public void onTestSkipped(ITestResult result) {
 		Logger.info("*** Test " + result.getMethod().getMethodName() + " skipped...");
@@ -117,9 +129,11 @@ public class TestListener implements ITestListener {
 	}
 
 	/**
-	 * This method invokes when the test method fails as a whole but has passed a certain success percentage 
-	 * which is defined by the user
-	 * @param result - <code>ITestResult</code> containing information about the run test
+	 * This method invokes when the test method fails as a whole but has passed a
+	 * certain success percentage which is defined by the user
+	 * 
+	 * @param result - <code>ITestResult</code> containing information about the run
+	 *               test
 	 */
 	public void onTestFailedButWithinSuccessPercentage(ITestResult result) {
 		Logger.info("*** Test failed but within percentage % " + result.getMethod().getMethodName());

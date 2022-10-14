@@ -10,23 +10,25 @@ public class Table extends Element {
 	/**
 	 * Extends Element class
 	 */
-	
+
 	/**
 	 * Initialize table control start with By (id, css, xpath,...)
+	 * 
 	 * @param locator - type find By of element
 	 */
 	public Table(By locator) {
 		super(locator);
 	}
-	
+
 	/**
 	 * Initialize table control start with given string of locator
+	 * 
 	 * @param locator - string of element
 	 */
 	public Table(String locator) {
 		super(locator);
 	}
-	
+
 	/**
 	 * Initializes table with parent of current element and string
 	 * 
@@ -37,7 +39,7 @@ public class Table extends Element {
 	public Table(Element parentElement, String locator) {
 		super(parentElement, locator);
 	}
-	
+
 	/**
 	 * Initializes table with given dynamic string of locator
 	 * 
@@ -49,7 +51,7 @@ public class Table extends Element {
 	public Table(String locator, Object... arguments) {
 		super(locator, arguments);
 	}
-	
+
 	/**
 	 * Initializes table via parent element
 	 * 
@@ -73,7 +75,7 @@ public class Table extends Element {
 	public Table(FindBy by, String value) {
 		super(by, value);
 	}
-	
+
 	/**
 	 * Initializes table via parent element with given FindBy and value String
 	 * 
@@ -96,7 +98,7 @@ public class Table extends Element {
 	public Table(FindBy by, String value, Object... arguments) {
 		super(by, value, arguments);
 	}
-	
+
 	/**
 	 * Initializes dynamic table via parent element with given FindBy and value
 	 * String
@@ -110,7 +112,7 @@ public class Table extends Element {
 	public Table(Element parentElement, FindBy by, String value, Object... arguments) {
 		super(parentElement, by, value, arguments);
 	}
-	
+
 	/**
 	 * Generate dynamic table
 	 * 
@@ -118,11 +120,9 @@ public class Table extends Element {
 	 *                  locator
 	 * @return new table
 	 */
-	public Table generateDynamic(Object... arguments)
-	{
+	public Table generateDynamic(Object... arguments) {
 		super.generateDynamic(arguments);
 		return this;
 	}
 
-	
 }

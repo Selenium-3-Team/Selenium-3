@@ -5,28 +5,30 @@ import org.openqa.selenium.By;
 import core.element.base.Element;
 import core.element.setting.FindBy;
 
-public class TextBox extends Element{
+public class TextBox extends Element {
 
 	/**
 	 * Extends Element class
 	 */
-	
+
 	/**
 	 * Initialize text box control start with By (id, css, xpath,...)
+	 * 
 	 * @param locator - type find By of element
 	 */
 	public TextBox(By locator) {
 		super(locator);
 	}
-	
+
 	/**
 	 * Initialize text box control start with given string of locator
+	 * 
 	 * @param locator - string of element
 	 */
 	public TextBox(String locator) {
 		super(locator);
 	}
-	
+
 	/**
 	 * Initializes text box with parent of current element and string
 	 * 
@@ -37,7 +39,7 @@ public class TextBox extends Element{
 	public TextBox(Element parentElement, String locator) {
 		super(parentElement, locator);
 	}
-	
+
 	/**
 	 * Initializes text box with given dynamic string of locator
 	 * 
@@ -49,7 +51,7 @@ public class TextBox extends Element{
 	public TextBox(String locator, Object... arguments) {
 		super(locator, arguments);
 	}
-	
+
 	/**
 	 * Initializes text box via parent element
 	 * 
@@ -63,7 +65,7 @@ public class TextBox extends Element{
 	public TextBox(Element parentElement, String locator, Object... arguments) {
 		super(parentElement, locator, arguments);
 	}
-	
+
 	/**
 	 * Initializes text box with given FindBy and value String
 	 * 
@@ -73,7 +75,7 @@ public class TextBox extends Element{
 	public TextBox(FindBy by, String value) {
 		super(by, value);
 	}
-	
+
 	/**
 	 * Initializes text box via parent element with given FindBy and value String
 	 * 
@@ -84,7 +86,7 @@ public class TextBox extends Element{
 	public TextBox(Element parentElement, FindBy by, String value) {
 		super(parentElement, by, value);
 	}
-	
+
 	/**
 	 * Initializes text box element with given FindBy and value String
 	 * 
@@ -96,7 +98,7 @@ public class TextBox extends Element{
 	public TextBox(FindBy by, String value, Object... arguments) {
 		super(by, value, arguments);
 	}
-	
+
 	/**
 	 * Initializes dynamic text box via parent element with given FindBy and value
 	 * String
@@ -110,7 +112,7 @@ public class TextBox extends Element{
 	public TextBox(Element parentElement, FindBy by, String value, Object... arguments) {
 		super(parentElement, by, value, arguments);
 	}
-	
+
 	/**
 	 * Generate dynamic text box
 	 * 
@@ -122,14 +124,14 @@ public class TextBox extends Element{
 		super.generateDynamic(arguments);
 		return this;
 	}
-	
+
 	/**
 	 * Sendkeys into text box
 	 */
 	public void sendKeys(CharSequence... keysToEnter) {
 		super.sendKeys(keysToEnter);
 	}
-	
+
 	/**
 	 * Clear text of text box
 	 */

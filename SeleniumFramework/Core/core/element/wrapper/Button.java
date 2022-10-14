@@ -5,28 +5,30 @@ import org.openqa.selenium.By;
 import core.element.base.Element;
 import core.element.setting.FindBy;
 
-public class Button extends Element{
+public class Button extends Element {
 
 	/**
 	 * Extends Element class
 	 */
-	
+
 	/**
 	 * Initialize button control start with By (id, css, xpath,...)
+	 * 
 	 * @param locator - type find By of element
 	 */
 	public Button(By locator) {
 		super(locator);
 	}
-	
+
 	/**
 	 * Initialize button control start with given string of locator
+	 * 
 	 * @param locator - string of element
 	 */
 	public Button(String locator) {
 		super(locator);
 	}
-	
+
 	/**
 	 * Initializes button with parent of current element and string
 	 * 
@@ -37,7 +39,7 @@ public class Button extends Element{
 	public Button(Element parentElement, String locator) {
 		super(parentElement, locator);
 	}
-	
+
 	/**
 	 * Initializes button with given dynamic string of locator
 	 * 
@@ -49,7 +51,7 @@ public class Button extends Element{
 	public Button(String locator, Object... arguments) {
 		super(locator, arguments);
 	}
-	
+
 	/**
 	 * Initializes button via parent element
 	 * 
@@ -63,7 +65,7 @@ public class Button extends Element{
 	public Button(Element parentElement, String locator, Object... arguments) {
 		super(parentElement, locator, arguments);
 	}
-	
+
 	/**
 	 * Initializes Button with given FindBy and value String
 	 * 
@@ -73,7 +75,7 @@ public class Button extends Element{
 	public Button(FindBy by, String value) {
 		super(by, value);
 	}
-	
+
 	/**
 	 * Initializes Button via parent element with given FindBy and value String
 	 * 
@@ -84,7 +86,7 @@ public class Button extends Element{
 	public Button(Element parentElement, FindBy by, String value) {
 		super(parentElement, by, value);
 	}
-	
+
 	/**
 	 * Initializes Button element with given FindBy and value String
 	 * 
@@ -96,7 +98,7 @@ public class Button extends Element{
 	public Button(FindBy by, String value, Object... arguments) {
 		super(by, value, arguments);
 	}
-	
+
 	/**
 	 * Initializes dynamic Button via parent element with given FindBy and value
 	 * String
@@ -110,7 +112,7 @@ public class Button extends Element{
 	public Button(Element parentElement, FindBy by, String value, Object... arguments) {
 		super(parentElement, by, value, arguments);
 	}
-	
+
 	/**
 	 * Generate dynamic Button
 	 * 
@@ -122,33 +124,33 @@ public class Button extends Element{
 		super.generateDynamic(arguments);
 		return this;
 	}
-	
+
 	/**
 	 * Click on button
 	 */
 	public void click() {
 		super.click();
 	}
-	
+
 	/**
 	 * Click by JS on button
 	 */
 	public void clickByJS() {
 		super.clickByJS();
 	}
-	
+
 	/**
 	 * Double click on button
 	 */
 	public void doubleClick() {
 		super.doubleClick();
 	}
-	
+
 	/**
 	 * Submit by button
 	 */
 	public void submit() {
 		super.submit();
 	}
-	
+
 }

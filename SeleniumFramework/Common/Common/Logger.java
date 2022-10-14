@@ -7,12 +7,14 @@ import com.aventstack.extentreports.Status;
 import io.qameta.allure.Step;
 
 /**
- *	This class is designed for get log messages and put into ExtentTestManager base on current test 
+ * This class is designed for get log messages and put into ExtentTestManager
+ * base on current test
  */
 public class Logger {
 
 	/**
 	 * Log info
+	 * 
 	 * @param message - a string of message
 	 */
 	@Step("{0}")
@@ -24,7 +26,8 @@ public class Logger {
 
 	/**
 	 * Log bug
-	 * @param bugId - a string of ID
+	 * 
+	 * @param bugId   - a string of ID
 	 * @param bugDesc - a string of description
 	 */
 	@Step("{0}")
@@ -38,6 +41,7 @@ public class Logger {
 
 	/**
 	 * Log warning
+	 * 
 	 * @param message - a string of message
 	 */
 	@Step("{0}")
@@ -49,6 +53,7 @@ public class Logger {
 
 	/**
 	 * Log verify
+	 * 
 	 * @param message - a string of message
 	 */
 	@Step("{0}")
@@ -56,7 +61,7 @@ public class Logger {
 		String messageLog = message;
 		message = "<b style=\"color: blue;word-break:break-word;\"><i style=\"color: orange\">VERIFY POINT: </i>"
 				+ message + "</b>";
-		
+
 		Reporter.log(message);
 		Reporter.log(Utilities.getDateNow("MM.dd.yyyy - HH:mm:ss") + " - VERIFY POINT: " + messageLog, true);
 		ExtentTestManager.getTest().log(Status.INFO, message);
@@ -64,6 +69,7 @@ public class Logger {
 
 	/**
 	 * Log passed assertion
+	 * 
 	 * @param message - a string of message
 	 */
 	@Step("{0}")
@@ -76,6 +82,7 @@ public class Logger {
 
 	/**
 	 * Log failed assertion
+	 * 
 	 * @param message - a string of message
 	 */
 	@Step("{0}")
@@ -84,5 +91,5 @@ public class Logger {
 		Reporter.log(message);
 		ExtentTestManager.getTest().log(Status.FAIL, message);
 	}
-	
+
 }

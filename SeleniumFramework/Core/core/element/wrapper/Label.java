@@ -5,28 +5,30 @@ import org.openqa.selenium.By;
 import core.element.base.Element;
 import core.element.setting.FindBy;
 
-public class Label extends Element{
+public class Label extends Element {
 
 	/**
 	 * Extends Element class
 	 */
-	
+
 	/**
 	 * Initialize label control start with By (id, css, xpath,...)
+	 * 
 	 * @param locator - type find By of element
 	 */
 	public Label(By locator) {
 		super(locator);
 	}
-	
+
 	/**
 	 * Initialize label control start with given string of locator
+	 * 
 	 * @param locator - string of element
 	 */
 	public Label(String locator) {
 		super(locator);
 	}
-	
+
 	/**
 	 * Initializes label with parent of current element and string
 	 * 
@@ -37,7 +39,7 @@ public class Label extends Element{
 	public Label(Element parentElement, String locator) {
 		super(parentElement, locator);
 	}
-	
+
 	/**
 	 * Initializes label with given dynamic string of locator
 	 * 
@@ -49,7 +51,7 @@ public class Label extends Element{
 	public Label(String locator, Object... arguments) {
 		super(locator, arguments);
 	}
-	
+
 	/**
 	 * Initializes label via parent element
 	 * 
@@ -63,7 +65,7 @@ public class Label extends Element{
 	public Label(Element parentElement, String locator, Object... arguments) {
 		super(parentElement, locator, arguments);
 	}
-	
+
 	/**
 	 * Initializes label with given FindBy and value String
 	 * 
@@ -73,7 +75,7 @@ public class Label extends Element{
 	public Label(FindBy by, String value) {
 		super(by, value);
 	}
-	
+
 	/**
 	 * Initializes label via parent element with given FindBy and value String
 	 * 
@@ -84,7 +86,7 @@ public class Label extends Element{
 	public Label(Element parentElement, FindBy by, String value) {
 		super(parentElement, by, value);
 	}
-	
+
 	/**
 	 * Initializes label element with given FindBy and value String
 	 * 
@@ -96,7 +98,7 @@ public class Label extends Element{
 	public Label(FindBy by, String value, Object... arguments) {
 		super(by, value, arguments);
 	}
-	
+
 	/**
 	 * Initializes dynamic label via parent element with given FindBy and value
 	 * String
@@ -110,7 +112,7 @@ public class Label extends Element{
 	public Label(Element parentElement, FindBy by, String value, Object... arguments) {
 		super(parentElement, by, value, arguments);
 	}
-	
+
 	/**
 	 * Generate dynamic label
 	 * 
@@ -122,12 +124,12 @@ public class Label extends Element{
 		super.generateDynamic(arguments);
 		return this;
 	}
-	
+
 	/**
 	 * Get text of label
 	 */
 	public void getTextLabel() {
 		super.getText();
 	}
-	
+
 }

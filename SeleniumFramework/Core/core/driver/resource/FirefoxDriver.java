@@ -10,17 +10,19 @@ import core.driver.setting.DriverProperty;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 /**
- * Firefox driver implementation, override methods from BaseDriver 
+ * Firefox driver implementation, override methods from BaseDriver
  */
-public class FirefoxDriver extends BaseDriver{
+public class FirefoxDriver extends BaseDriver {
 
 	/**
-	 * a concept in Selenium WebDriver for manipulation various properties of Firefox driver
+	 * a concept in Selenium WebDriver for manipulation various properties of
+	 * Firefox driver
 	 */
 	protected FirefoxOptions options;
-	
+
 	/**
 	 * Initializes Firefox driver properties with given properties
+	 * 
 	 * @param property - driver properties
 	 */
 	public FirefoxDriver(DriverProperty property) {
@@ -29,24 +31,22 @@ public class FirefoxDriver extends BaseDriver{
 	}
 
 	/**
-	 * Set properties for Firefox to customize driver sessions 
+	 * Set properties for Firefox to customize driver sessions
 	 */
-	private void loadOptions(DriverProperty property)
-	{
+	private void loadOptions(DriverProperty property) {
 		options = new FirefoxOptions();
 		if (driverProperty.getArguments() != null) {
 			options.addArguments(driverProperty.getArguments());
 		}
-		if (driverProperty.getUserProfilePreference() != null)
-		{
+		if (driverProperty.getUserProfilePreference() != null) {
 			FirefoxProfile profile = new FirefoxProfile();
-			driverProperty.getUserProfilePreference().forEach((key, value) -> profile.setPreference(key, value.toString()));
+			driverProperty.getUserProfilePreference()
+					.forEach((key, value) -> profile.setPreference(key, value.toString()));
 			options.setProfile(profile);
 		}
-		options.merge(driverProperty.getCapabilities());
 		options.setHeadless(property.getHeadless());
 	}
-	
+
 	/**
 	 * Create Firefox local driver with customized driver sessions
 	 */
@@ -54,7 +54,7 @@ public class FirefoxDriver extends BaseDriver{
 	public void createLocalDriver() {
 		if (StringUtils.isNotBlank(driverProperty.getDriverExecutable())) {
 			System.setProperty("webdriver.gecko.driver", driverProperty.getDriverExecutable());
-		}else {
+		} else {
 			WebDriverManager.firefoxdriver().setup();
 		}
 		webDriver = new org.openqa.selenium.firefox.FirefoxDriver(options);

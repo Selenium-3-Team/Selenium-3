@@ -14,7 +14,8 @@ public enum FindBy {
 	private String by;
 
 	/**
-	 * Initializes find type of locator with given string of by 
+	 * Initializes find type of locator with given string of by
+	 * 
 	 * @param by - Find type of locator
 	 */
 	FindBy(String by) {
@@ -23,6 +24,7 @@ public enum FindBy {
 
 	/**
 	 * Get value find type
+	 * 
 	 * @return type of locator
 	 */
 	public String getValue() {
@@ -31,9 +33,11 @@ public enum FindBy {
 
 	/**
 	 * Get find type of locator
+	 * 
 	 * @param by - Find type of locator
-	 * @return this method will run a loop that check if the parameter by is equal one of those constanted types
-	 * it will return find by that type otherwise it will default return find by xpath
+	 * @return this method will run a loop that check if the parameter by is equal
+	 *         one of those constanted types it will return find by that type
+	 *         otherwise it will default return find by xpath
 	 */
 	public static FindBy getByLocator(String by) {
 		for (FindBy item : FindBy.values()) {

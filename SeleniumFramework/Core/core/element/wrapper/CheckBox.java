@@ -5,28 +5,30 @@ import org.openqa.selenium.By;
 import core.element.base.Element;
 import core.element.setting.FindBy;
 
-public class CheckBox extends Element{
+public class CheckBox extends Element {
 
 	/**
 	 * Extends Element class
 	 */
-	
+
 	/**
 	 * Initialize CheckBox control start with By (id, css, xpath,...)
+	 * 
 	 * @param locator - type find By of element
 	 */
 	public CheckBox(By locator) {
 		super(locator);
 	}
-	
+
 	/**
 	 * Initialize CheckBox control start with given string of locator
+	 * 
 	 * @param locator - string of element
 	 */
 	public CheckBox(String locator) {
 		super(locator);
 	}
-	
+
 	/**
 	 * Initializes CheckBox with parent of current element and string
 	 * 
@@ -37,7 +39,7 @@ public class CheckBox extends Element{
 	public CheckBox(Element parentElement, String locator) {
 		super(parentElement, locator);
 	}
-	
+
 	/**
 	 * Initializes CheckBox with given dynamic string of locator
 	 * 
@@ -49,7 +51,7 @@ public class CheckBox extends Element{
 	public CheckBox(String locator, Object... arguments) {
 		super(locator, arguments);
 	}
-	
+
 	/**
 	 * Initializes CheckBox via parent element
 	 * 
@@ -63,7 +65,7 @@ public class CheckBox extends Element{
 	public CheckBox(Element parentElement, String locator, Object... arguments) {
 		super(parentElement, locator, arguments);
 	}
-	
+
 	/**
 	 * Initializes CheckBox with given FindBy and value String
 	 * 
@@ -73,7 +75,7 @@ public class CheckBox extends Element{
 	public CheckBox(FindBy by, String value) {
 		super(by, value);
 	}
-	
+
 	/**
 	 * Initializes CheckBox via parent element with given FindBy and value String
 	 * 
@@ -84,7 +86,7 @@ public class CheckBox extends Element{
 	public CheckBox(Element parentElement, FindBy by, String value) {
 		super(parentElement, by, value);
 	}
-	
+
 	/**
 	 * Initializes CheckBox element with given FindBy and value String
 	 * 
@@ -96,7 +98,7 @@ public class CheckBox extends Element{
 	public CheckBox(FindBy by, String value, Object... arguments) {
 		super(by, value, arguments);
 	}
-	
+
 	/**
 	 * Initializes dynamic CheckBox via parent element with given FindBy and value
 	 * String
@@ -110,7 +112,7 @@ public class CheckBox extends Element{
 	public CheckBox(Element parentElement, FindBy by, String value, Object... arguments) {
 		super(parentElement, by, value, arguments);
 	}
-	
+
 	/**
 	 * Generate dynamic CheckBox
 	 * 
@@ -122,14 +124,14 @@ public class CheckBox extends Element{
 		super.generateDynamic(arguments);
 		return this;
 	}
-	
+
 	/**
 	 * Check on button
 	 */
 	public void check() {
 		super.check();
 	}
-	
+
 	/**
 	 * Uncheck on button
 	 */

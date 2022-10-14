@@ -15,10 +15,10 @@ import core.driver.setting.DriverProperty;
 import core.helper.BrowserSettingHelper;
 
 /**
- * Driver manager class to manage the WebDriver instanct alongside browsers.
- * We use ThreadLocal to make the WebDriver session exclusive to each thread when we try to achive
- * parallel execution of our tests.
- * Every thread created to parallelize tests tries to overwrite the WebDriver reference.
+ * Driver manager class to manage the WebDriver instanct alongside browsers. We
+ * use ThreadLocal to make the WebDriver session exclusive to each thread when
+ * we try to achive parallel execution of our tests. Every thread created to
+ * parallelize tests tries to overwrite the WebDriver reference.
  */
 public class DriverManager {
 
@@ -26,35 +26,36 @@ public class DriverManager {
 	 * Contains log of the class
 	 */
 	private static final Logger logger = Constant.createLogger(DriverManager.class.getName());
-	
+
 	/**
 	 * A thread map contains webdriver each session when executing tests parallel
 	 */
 	private static ThreadLocal<Map<String, BaseDriver>> driverThreadMap = new ThreadLocal<Map<String, BaseDriver>>();
-	
+
 	/**
 	 * List of keys for driver sessions when executing tests parallel
 	 */
 	private static ThreadLocal<List<String>> keys = new ThreadLocal<List<String>>();
-	
+
 	/**
 	 * Default key for driver session
 	 */
 	private static ThreadLocal<String> defaultKey = new ThreadLocal<String>();
-	
+
 	/**
 	 * Current key for driver session
 	 */
 	private static ThreadLocal<String> currentKey = new ThreadLocal<String>();
-	
+
 	/**
 	 * Driver property map for each driver session
 	 */
 	private static ThreadLocal<DriverProperty> driverPropertyMap = new ThreadLocal<DriverProperty>();
 
-	
 	/**
-	 * Get base driver where containing abstract methods for driver by checking current key existed
+	 * Get base driver where containing abstract methods for driver by checking
+	 * current key existed
+	 * 
 	 * @return driver session of the current key
 	 */
 	private static BaseDriver getBaseDriver() {
@@ -66,8 +67,9 @@ public class DriverManager {
 	}
 
 	/**
-	 * Generate driver key which for identify driver session
-	 * When executing test parallel, the number of key is increased based on number of driver session
+	 * Generate driver key which for identify driver session When executing test
+	 * parallel, the number of key is increased based on number of driver session
+	 * 
 	 * @param prefix - a string of letter added to the beginning
 	 * @return a string of key
 	 */
@@ -84,7 +86,8 @@ public class DriverManager {
 
 	/**
 	 * Get driver map with each key and value
-	 * @return a map of driver 
+	 * 
+	 * @return a map of driver
 	 */
 	protected static Map<String, BaseDriver> getdriverThreadMap() {
 		return driverThreadMap.get();
@@ -107,6 +110,7 @@ public class DriverManager {
 
 	/**
 	 * Get current driver session
+	 * 
 	 * @return a string of current key
 	 */
 	public static String getCurrentDriverKey() {
@@ -115,6 +119,7 @@ public class DriverManager {
 
 	/**
 	 * Get default driver session
+	 * 
 	 * @return a string of default key
 	 */
 	public static String getDefaultDriverKey() {
@@ -123,6 +128,7 @@ public class DriverManager {
 
 	/**
 	 * Get driver session
+	 * 
 	 * @return web driver
 	 */
 	public static WebDriver getDriver() {
@@ -131,6 +137,7 @@ public class DriverManager {
 
 	/**
 	 * Get driver session properties
+	 * 
 	 * @return driver properties
 	 */
 	public static DriverProperty getDriverProperty() {
@@ -139,6 +146,7 @@ public class DriverManager {
 
 	/**
 	 * Get driver session properties by key
+	 * 
 	 * @param key - a string of key for driver session
 	 * @return driver properties
 	 */
@@ -147,10 +155,11 @@ public class DriverManager {
 	}
 
 	/**
-	 * Load of set identified of driver attributes 
+	 * Load of set identified of driver attributes
+	 * 
 	 * @param propertyFile - property file name
-	 * @param platform - a string of driver platform
-	 * @param sectionName - a string of section 
+	 * @param platform     - a string of driver platform
+	 * @param sectionName  - a string of section
 	 * @throws Exception - if platform is not supported
 	 */
 	public static void loadDriverProperty(String propertyFile, String platform, String sectionName) throws Exception {
@@ -174,7 +183,8 @@ public class DriverManager {
 	}
 
 	/**
-	 * Create driver with generate key by driver type prefix from driver property map
+	 * Create driver with generate key by driver type prefix from driver property
+	 * map
 	 */
 	public static void createDriver() {
 		String key = generateDriverKey(driverPropertyMap.get().getDriverType().toString());
@@ -183,6 +193,7 @@ public class DriverManager {
 
 	/**
 	 * Create driver with a key
+	 * 
 	 * @param key - a string of key
 	 */
 	public static void createDriver(String key) {
@@ -191,6 +202,7 @@ public class DriverManager {
 
 	/**
 	 * Create driver with generate key by driver type prefix from a driver property
+	 * 
 	 * @param property - a class of driver property
 	 */
 	public static void createDriver(DriverProperty property) {
@@ -199,9 +211,10 @@ public class DriverManager {
 	}
 
 	/**
-	 * Create driver
-	 * This will create a new instance (driver type, mode) of driver via driver property to add into thread for parallel execution
-	 * @param key - a string of key
+	 * Create driver This will create a new instance (driver type, mode) of driver
+	 * via driver property to add into thread for parallel execution
+	 * 
+	 * @param key      - a string of key
 	 * @param property - a class of driver property
 	 */
 	public static void createDriver(String key, DriverProperty property) {
@@ -215,6 +228,7 @@ public class DriverManager {
 
 	/**
 	 * Switch to another driver
+	 * 
 	 * @param key - a string of driver key
 	 */
 	public static void switchToDriver(String key) {

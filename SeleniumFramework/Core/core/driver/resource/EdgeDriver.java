@@ -12,26 +12,28 @@ import core.driver.setting.DriverProperty;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 /**
- * Edge driver implementation, override methods from BaseDriver 
+ * Edge driver implementation, override methods from BaseDriver
  */
-public class EdgeDriver extends BaseDriver{
+public class EdgeDriver extends BaseDriver {
 
 	/**
-	 * a concept in Selenium WebDriver for manipulation various properties of Edge driver
+	 * a concept in Selenium WebDriver for manipulation various properties of Edge
+	 * driver
 	 */
 	protected EdgeOptions options;
-	
+
 	/**
 	 * Initializes Edge driver properties with given properties
+	 * 
 	 * @param property - driver properties
 	 */
 	public EdgeDriver(DriverProperty property) {
 		super(property);
 		loadOptions(property);
 	}
-	
+
 	/**
-	 * Set properties for Edge to customize driver sessions 
+	 * Set properties for Edge to customize driver sessions
 	 */
 	private void loadOptions(DriverProperty property) {
 		options = new EdgeOptions();
@@ -43,10 +45,9 @@ public class EdgeDriver extends BaseDriver{
 		if (driverProperty.getUserProfilePreference() != null) {
 			options.setExperimentalOption("prefs", driverProperty.getUserProfilePreference());
 		}
-		options.merge(driverProperty.getCapabilities());
 		options.setHeadless(property.getHeadless());
 	}
-	
+
 	/**
 	 * Create Edge local driver with customized driver sessions
 	 */
@@ -54,7 +55,7 @@ public class EdgeDriver extends BaseDriver{
 	public void createLocalDriver() {
 		if (StringUtils.isNotBlank(driverProperty.getDriverExecutable())) {
 			System.setProperty("webdriver.edge.driver", driverProperty.getDriverExecutable());
-		}else {
+		} else {
 			WebDriverManager.edgedriver().setup();
 		}
 		webDriver = new org.openqa.selenium.edge.EdgeDriver(options);

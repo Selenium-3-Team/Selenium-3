@@ -8,20 +8,22 @@ import com.aventstack.extentreports.reporter.configuration.ChartLocation;
 import com.aventstack.extentreports.reporter.configuration.Theme;
 
 /**
- * In this class, we created an ExtentReport object and it can be reachable via createInstance() method
- * and set all options we need to ExtentReport report HTML file location 
+ * In this class, we created an ExtentReport object and it can be reachable via
+ * createInstance() method and set all options we need to ExtentReport report
+ * HTML file location
  */
 public class ExtentReportManager {
-	
+
 	private static ExtentReports extent;
 	private static String reportFileName = "Test-Automation-Report " + Utilities.getDateNow("MM.dd.yyyy - HH.mm.ss")
-	+ ".html";
+			+ ".html";
 	private static String fileSeperator = System.getProperty("file.separator");
 	private static String reportFilepath = System.getProperty("user.dir") + fileSeperator + "TestReport";
 	private static String reportFileLocation = reportFilepath + fileSeperator + reportFileName;
-	
+
 	/**
 	 * Get instance of executing session for create extent report
+	 * 
 	 * @return ExtentReport object
 	 */
 	public static ExtentReports getInstance() {
@@ -29,9 +31,10 @@ public class ExtentReportManager {
 			createInstance();
 		return extent;
 	}
-	
+
 	/**
 	 * Create extent report with set all HTML report options
+	 * 
 	 * @return ExtentReport object
 	 */
 	public static ExtentReports createInstance() {
@@ -51,17 +54,18 @@ public class ExtentReportManager {
 		extent.setSystemInfo("AUT", "QA");
 		return extent;
 	}
-	
+
 	/**
 	 * After finishing write info into report, terminate the current instance
 	 */
 	public static void flushReport() {
 		System.out.println("Report: " + reportFileLocation + " is created!");
-		getInstance().flush();  
+		getInstance().flush();
 	}
-	
+
 	/**
 	 * Get report file location
+	 * 
 	 * @param path - report file location
 	 * @return a string of file location with all info (Name, Time,..)
 	 */
@@ -82,8 +86,10 @@ public class ExtentReportManager {
 	}
 
 	/**
-	 * Get screenshot photo location, if the folder is not existed, then this will create a new one
-	 * @return Screenshot file folder 
+	 * Get screenshot photo location, if the folder is not existed, then this will
+	 * create a new one
+	 * 
+	 * @return Screenshot file folder
 	 */
 	public static synchronized String getScreenshotFolder() {
 		String path = reportFilepath + fileSeperator + "screenshots";
@@ -92,5 +98,5 @@ public class ExtentReportManager {
 			output.mkdir();
 		return path;
 	}
-		
+
 }

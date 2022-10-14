@@ -10,17 +10,19 @@ import core.driver.setting.DriverProperty;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 /**
- * IE driver implementation, override methods from BaseDriver 
+ * IE driver implementation, override methods from BaseDriver
  */
-public class IEDriver extends BaseDriver{
+public class IEDriver extends BaseDriver {
 
 	/**
-	 * a concept in Selenium WebDriver for manipulation various properties of IE driver
+	 * a concept in Selenium WebDriver for manipulation various properties of IE
+	 * driver
 	 */
 	protected InternetExplorerOptions options;
-	
+
 	/**
 	 * Initializes IE driver properties with given properties
+	 * 
 	 * @param property - driver properties
 	 */
 	public IEDriver(DriverProperty property) {
@@ -29,16 +31,14 @@ public class IEDriver extends BaseDriver{
 	}
 
 	/**
-	 * Set properties for IE to customize driver sessions 
+	 * Set properties for IE to customize driver sessions
 	 */
-	private void loadOptions()
-	{
+	private void loadOptions() {
 		options = new InternetExplorerOptions();
 		if (driverProperty.getArguments() != null)
 			options.addCommandSwitches(driverProperty.getArgumentsAsArray());
-		options.merge(driverProperty.getCapabilities());
 	}
-	
+
 	/**
 	 * Create IE local driver with customized driver sessions
 	 */
@@ -48,7 +48,7 @@ public class IEDriver extends BaseDriver{
 			System.setProperty("webdriver.ie.driver", driverProperty.getDriverExecutable());
 		else
 			WebDriverManager.iedriver().arch32().setup();
-		
+
 		webDriver = new InternetExplorerDriver(options);
 	}
 
