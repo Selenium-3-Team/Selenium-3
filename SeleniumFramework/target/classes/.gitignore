@@ -1,7 +1,7 @@
-/AccountData/
-/selenium-server-standalone-3.141.59.jar
 /core/
-/Constant/
-/OrangeHRM/
-/Tiki/
-/Common/
+/dataType/
+/utils/
+/tests/
+/drivers/
+/suites/
+/grid/
