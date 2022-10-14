@@ -2,8 +2,10 @@ package core.helper;
 
 import java.io.FileReader;
 
-import org.ini4j.Ini;
-import org.ini4j.Profile.Section;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+
+import com.google.gson.Gson;
 
 import core.driver.setting.DriverProperty;
 
@@ -14,36 +16,25 @@ import core.driver.setting.DriverProperty;
  */
 public class BrowserSettingHelper {
 
+	/**
+	 * This method will parse browser setting value json to DriverProperty
+	 * 
+	 * @param file        - a string path of file
+	 * @param sectionName - a string of key driver config
+	 * @return - Driver property
+	 */
 	public static DriverProperty getDriverProperty(String file, String sectionName) {
-		DriverProperty property = new DriverProperty();
 		try {
-			Ini ini = new Ini(new FileReader(file));
-			Section section = ini.get(sectionName);
-			if (section == null) {
-				throw new Exception(String.format("Cannot find '%s' in file '%s'", sectionName, file));
-			}
-			String mode = section.get("mode");
-			String platform = section.get("platform");
-			String driverType = section.get("driver");
-			String browserName = driverType.toLowerCase();
-			String remoteUrl = section.get("remoteUrl");
-			String capabilities = section.get("capabilities");
-			String args = section.get("arguments");
-			String userPrefs = section.get("userProfilePreference");
-			String isHeadless = section.get("headless");
+			JSONParser parser = new JSONParser();
+			FileReader reader = new FileReader(file);
+			Object obj = parser.parse(reader);
+			JSONObject jObject = (JSONObject) obj;
+			DriverProperty property = new Gson().fromJson(jObject.get(sectionName).toString(), DriverProperty.class);
 
-			property.setMode(mode);
-			property.setPlatform(platform);
-			property.setDriverType(browserName);
-			property.setRemoteUrl(remoteUrl);
-			property.setCapabilities(capabilities);
-			property.setArguments(args);
-			property.setUserProfilePreference(userPrefs);
-			property.setHeadless(Boolean.parseBoolean(isHeadless.toLowerCase()));
+			return property;
 		} catch (Exception ex) {
 			throw new RuntimeException(ex);
 		}
-		return property;
 	}
 
 }

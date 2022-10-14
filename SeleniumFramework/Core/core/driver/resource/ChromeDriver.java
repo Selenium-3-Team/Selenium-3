@@ -9,36 +9,37 @@ import core.driver.setting.DriverProperty;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 /**
- * Chrome driver implementation, override methods from BaseDriver 
+ * Chrome driver implementation, override methods from BaseDriver
  */
-public class ChromeDriver extends BaseDriver{
+public class ChromeDriver extends BaseDriver {
 
 	/**
-	 * a concept in Selenium WebDriver for manipulation various properties of Chrome driver
+	 * a concept in Selenium WebDriver for manipulation various properties of Chrome
+	 * driver
 	 */
 	protected ChromeOptions options;
-	
+
 	/**
 	 * Initializes Chrome driver properties with given properties
+	 * 
 	 * @param property - driver properties
 	 */
 	public ChromeDriver(DriverProperty property) {
 		super(property);
 		loadOptions(property);
 	}
-	
+
 	/**
-	 * Set properties for chrome to customize driver sessions 
+	 * Set properties for chrome to customize driver sessions
 	 */
 	private void loadOptions(DriverProperty property) {
 		options = new ChromeOptions();
-		if(driverProperty.getArguments() != null) {
+		if (driverProperty.getArguments() != null) {
 			options.addArguments(driverProperty.getArguments());
 		}
 		if (driverProperty.getUserProfilePreference() != null) {
 			options.setExperimentalOption("prefs", driverProperty.getUserProfilePreference());
 		}
-		options.merge(driverProperty.getCapabilities());
 		options.setHeadless(property.getHeadless());
 	}
 
@@ -47,14 +48,14 @@ public class ChromeDriver extends BaseDriver{
 	 */
 	@Override
 	public void createLocalDriver() {
-		if(StringUtils.isNotBlank(driverProperty.getDriverExecutable())) {
+		if (StringUtils.isNotBlank(driverProperty.getDriverExecutable())) {
 			System.setProperty("webdriver.chrome.driver", driverProperty.getDriverExecutable());
-		}else {
+		} else {
 			WebDriverManager.chromedriver().setup();
 		}
 		webDriver = new org.openqa.selenium.chrome.ChromeDriver(options);
 	}
-	
+
 	/**
 	 * Create chrome remote driver with remote url and customized driver sessions
 	 */

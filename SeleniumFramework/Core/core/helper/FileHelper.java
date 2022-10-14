@@ -32,9 +32,12 @@ public class FileHelper {
 	 * 
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 * 
-	 * @example {@code File sourceFile = new File("/resources/copyfile.txt");} //Create the source file
-	 *          {@code File targetFile = new File("/resources/demo/copyfile.txt");} //Create the destination file
-	 *          {@code FileHelper.copyFile(sourceFile, targetFile);} //Copy the file from source to destination location
+	 * @example {@code File sourceFile = new File("/resources/copyfile.txt");}
+	 *          //Create the source file
+	 *          {@code File targetFile = new File("/resources/demo/copyfile.txt");}
+	 *          //Create the destination file
+	 *          {@code FileHelper.copyFile(sourceFile, targetFile);} //Copy the file
+	 *          from source to destination location
 	 */
 	public static void copyFile(File sourceFile, File targetFile) throws IOException {
 		try (FileInputStream in = new FileInputStream(sourceFile)) {
@@ -51,10 +54,14 @@ public class FileHelper {
 	 * @param targetFile location of the target file
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 * 
-	 * @example {@code File sourceFile = new File("/resources/copyfile.txt");} //Create the source file 
-	 *          {@code File targetFile = new File("/resources/demo/copyfile.txt");} //Create the destination file 
-	 *          {@code FileInputStream in = new FileInputStream(sourceFile);} //Create an input file stream to read from the source file 
-	 *          {@code FileHelper.copyFile(in, targetFile);} //Write the content to the destination file  
+	 * @example {@code File sourceFile = new File("/resources/copyfile.txt");}
+	 *          //Create the source file
+	 *          {@code File targetFile = new File("/resources/demo/copyfile.txt");}
+	 *          //Create the destination file
+	 *          {@code FileInputStream in = new FileInputStream(sourceFile);}
+	 *          //Create an input file stream to read from the source file
+	 *          {@code FileHelper.copyFile(in, targetFile);} //Write the content to
+	 *          the destination file
 	 */
 	public static void copyFile(InputStream in, File targetFile) throws IOException {
 		ensureParentFolderExists(targetFile);
@@ -75,8 +82,10 @@ public class FileHelper {
 	 *
 	 * @param targetFile the file to create parent folder
 	 * 
-	 * @example {@code File targetFile = new File("/resources/demo/copyfile.txt");} //Create the file
-	 *          {@code FileHelper.ensureParentFolderExists(targetFile)} //Create the parent folder of this file if not existed
+	 * @example {@code File targetFile = new File("/resources/demo/copyfile.txt");}
+	 *          //Create the file
+	 *          {@code FileHelper.ensureParentFolderExists(targetFile)} //Create the
+	 *          parent folder of this file if not existed
 	 */
 	public static void ensureParentFolderExists(File targetFile) {
 		ensureFolderExists(targetFile.getParentFile());
@@ -91,9 +100,9 @@ public class FileHelper {
 	 * 
 	 * @return File, the folder location
 	 * 
-	 * @example {@code File folder = new File("/resources/demo");} //Create the folder location 
-	 *          {@code FileHelper.ensureFolderExists(folder)} //Create a folder if
-	 *          not existed.
+	 * @example {@code File folder = new File("/resources/demo");} //Create the
+	 *          folder location {@code FileHelper.ensureFolderExists(folder)}
+	 *          //Create a folder if not existed.
 	 */
 	public static File ensureFolderExists(File folder) {
 		if (!folder.exists()) {
@@ -113,9 +122,12 @@ public class FileHelper {
 	 * @param srcFile  the location of source file
 	 * @param destFile the location of the destination file
 	 * 
-	 * @example {@code File srcFile = new File("/resources/movefile.txt");} //Create the source file
-	 *          {@code File destFile = new File("/resources/demo/movefile.txt");} //Create the destination file
-	 *          {@code FileHelper.moveFile(srcFile, destFile);} //Move file from the source file to destination file
+	 * @example {@code File srcFile = new File("/resources/movefile.txt");} //Create
+	 *          the source file
+	 *          {@code File destFile = new File("/resources/demo/movefile.txt");}
+	 *          //Create the destination file
+	 *          {@code FileHelper.moveFile(srcFile, destFile);} //Move file from the
+	 *          source file to destination file
 	 */
 	public static void moveFile(File srcFile, File destFile) {
 		try {
@@ -133,8 +145,9 @@ public class FileHelper {
 	 *
 	 * @param folder the folder location
 	 * 
-	 * @example {@code File folder = new File("/resources/demo");} //Create the folder location
-	 *          {@code FileHelper.deleteFolderIfEmpty(folder);} //Delete folder if empty.
+	 * @example {@code File folder = new File("/resources/demo");} //Create the
+	 *          folder location {@code FileHelper.deleteFolderIfEmpty(folder);}
+	 *          //Delete folder if empty.
 	 */
 	public static void deleteFolderIfEmpty(@Nonnull File folder) {
 		if (folder.isDirectory()) {
@@ -150,4 +163,3 @@ public class FileHelper {
 	}
 
 }
-

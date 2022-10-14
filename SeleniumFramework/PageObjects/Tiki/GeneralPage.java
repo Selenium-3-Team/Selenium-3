@@ -18,9 +18,7 @@ public class GeneralPage {
 
 	// Search elements
 	protected final Element txtSearch = new Element("xpath=//input[@data-view-id='main_search_form_input']");
-//	protected final Element btnSearch = new Element("//button[@data-view-id='main_search_form_button']");
-//	protected final Element iconSearch = new Element("class= icon-search");
-	protected final Element btnSearch = new Element(FindBy.CLASS_NAME, "icon-search");
+	protected final Element btnSearch = new Element(FindBy.XPATH, "//button[@data-view-id='main_search_form_button']");
 
 	// Menu elements
 	protected final Element btnMenu = new Element("//a[@class='Menu-button']");

@@ -5,28 +5,30 @@ import org.openqa.selenium.By;
 import core.element.base.Element;
 import core.element.setting.FindBy;
 
-public class Image extends Element{
+public class Image extends Element {
 
 	/**
 	 * Extends Element class
 	 */
-	
+
 	/**
 	 * Initialize Image control start with By (id, css, xpath,...)
+	 * 
 	 * @param locator - type find By of element
 	 */
 	public Image(By locator) {
 		super(locator);
 	}
-	
+
 	/**
 	 * Initialize Image control start with given string of locator
+	 * 
 	 * @param locator - string of element
 	 */
 	public Image(String locator) {
 		super(locator);
 	}
-	
+
 	/**
 	 * Initializes Image with parent of current element and string
 	 * 
@@ -37,7 +39,7 @@ public class Image extends Element{
 	public Image(Element parentElement, String locator) {
 		super(parentElement, locator);
 	}
-	
+
 	/**
 	 * Initializes Image with given dynamic string of locator
 	 * 
@@ -49,7 +51,7 @@ public class Image extends Element{
 	public Image(String locator, Object... arguments) {
 		super(locator, arguments);
 	}
-	
+
 	/**
 	 * Initializes Image via parent element
 	 * 
@@ -63,7 +65,7 @@ public class Image extends Element{
 	public Image(Element parentElement, String locator, Object... arguments) {
 		super(parentElement, locator, arguments);
 	}
-	
+
 	/**
 	 * Initializes Image with given FindBy and value String
 	 * 
@@ -73,7 +75,7 @@ public class Image extends Element{
 	public Image(FindBy by, String value) {
 		super(by, value);
 	}
-	
+
 	/**
 	 * Initializes Image via parent element with given FindBy and value String
 	 * 
@@ -84,7 +86,7 @@ public class Image extends Element{
 	public Image(Element parentElement, FindBy by, String value) {
 		super(parentElement, by, value);
 	}
-	
+
 	/**
 	 * Initializes Image element with given FindBy and value String
 	 * 
@@ -96,7 +98,7 @@ public class Image extends Element{
 	public Image(FindBy by, String value, Object... arguments) {
 		super(by, value, arguments);
 	}
-	
+
 	/**
 	 * Initializes dynamic Image via parent element with given FindBy and value
 	 * String
@@ -110,7 +112,7 @@ public class Image extends Element{
 	public Image(Element parentElement, FindBy by, String value, Object... arguments) {
 		super(parentElement, by, value, arguments);
 	}
-	
+
 	/**
 	 * Generate dynamic Image
 	 * 
@@ -122,26 +124,26 @@ public class Image extends Element{
 		super.generateDynamic(arguments);
 		return this;
 	}
-	
+
 	/**
 	 * Click on Image
 	 */
 	public void click() {
 		super.click();
 	}
-	
+
 	/**
 	 * Get source of image
 	 */
 	public void getSource() {
 		super.getAttribute("src");
 	}
-	
+
 	/**
 	 * Get alt of image
 	 */
 	public void getAlt() {
 		super.getAttribute("alt");
 	}
-	
+
 }

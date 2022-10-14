@@ -5,28 +5,30 @@ import org.openqa.selenium.By;
 import core.element.base.Element;
 import core.element.setting.FindBy;
 
-public class Link extends Element{
+public class Link extends Element {
 
 	/**
 	 * Extends Element class
 	 */
-	
+
 	/**
 	 * Initialize link control start with By (id, css, xpath,...)
+	 * 
 	 * @param locator - type find By of element
 	 */
 	public Link(By locator) {
 		super(locator);
 	}
-	
+
 	/**
 	 * Initialize link control start with given string of locator
+	 * 
 	 * @param locator - string of element
 	 */
 	public Link(String locator) {
 		super(locator);
 	}
-	
+
 	/**
 	 * Initializes link with parent of current element and string
 	 * 
@@ -37,7 +39,7 @@ public class Link extends Element{
 	public Link(Element parentElement, String locator) {
 		super(parentElement, locator);
 	}
-	
+
 	/**
 	 * Initializes link with given dynamic string of locator
 	 * 
@@ -49,7 +51,7 @@ public class Link extends Element{
 	public Link(String locator, Object... arguments) {
 		super(locator, arguments);
 	}
-	
+
 	/**
 	 * Initializes link via parent element
 	 * 
@@ -63,7 +65,7 @@ public class Link extends Element{
 	public Link(Element parentElement, String locator, Object... arguments) {
 		super(parentElement, locator, arguments);
 	}
-	
+
 	/**
 	 * Initializes link with given FindBy and value String
 	 * 
@@ -73,7 +75,7 @@ public class Link extends Element{
 	public Link(FindBy by, String value) {
 		super(by, value);
 	}
-	
+
 	/**
 	 * Initializes link via parent element with given FindBy and value String
 	 * 
@@ -84,7 +86,7 @@ public class Link extends Element{
 	public Link(Element parentElement, FindBy by, String value) {
 		super(parentElement, by, value);
 	}
-	
+
 	/**
 	 * Initializes link element with given FindBy and value String
 	 * 
@@ -96,7 +98,7 @@ public class Link extends Element{
 	public Link(FindBy by, String value, Object... arguments) {
 		super(by, value, arguments);
 	}
-	
+
 	/**
 	 * Initializes dynamic link via parent element with given FindBy and value
 	 * String
@@ -110,7 +112,7 @@ public class Link extends Element{
 	public Link(Element parentElement, FindBy by, String value, Object... arguments) {
 		super(parentElement, by, value, arguments);
 	}
-	
+
 	/**
 	 * Generate dynamic link
 	 * 
@@ -122,26 +124,26 @@ public class Link extends Element{
 		super.generateDynamic(arguments);
 		return this;
 	}
-	
+
 	/**
 	 * Click on link
 	 */
 	public void click() {
 		super.click();
 	}
-	
+
 	/**
 	 * Click by JS on link
 	 */
 	public void clickByJS() {
 		super.clickByJS();
 	}
-	
+
 	/**
 	 * Get href of link
 	 */
 	public void getReference() {
 		super.getAttribute("href");
 	}
-	
+
 }
