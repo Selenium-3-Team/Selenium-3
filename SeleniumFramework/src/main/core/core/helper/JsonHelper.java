@@ -2,6 +2,7 @@ package core.helper;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,6 +10,9 @@ import java.util.Map;
 import java.util.Set;
 import java.util.logging.Logger;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
@@ -308,6 +312,29 @@ public class JsonHelper {
 		} catch (FileNotFoundException e) {
 			return null;
 		}
+	}
+
+	/**
+	 * Get data from a file with values in file must be Json type.
+	 * 
+	 * @param jsonPath path the string
+	 * @return an object of JSONObject
+	 * @throws ParseException        if json is not a valid representation for an
+	 *                               object of type typeOfT
+	 * @throws FileNotFoundException if file is not found
+	 * @throws IOException           if something wrong with the file existences or
+	 *                               something went wrong
+	 * 
+	 * @example {@code FileReader file = new FileReader("\\data.json");} //File path
+	 *          to file and enter the values as follows: {"Selenium":{"level": 3},
+	 *          "Team": {"number": 4}} data file
+	 *          {@code JSONObject info = new JSONParser().parse(file) //Convert to JSONObject
+	 * 			return info.get("Selenium").toString() // return JSONObject
+	 */
+	public static JSONObject getJSONObject(String jsonPath) throws ParseException, FileNotFoundException, IOException {
+		JSONParser parser = new JSONParser();
+		Object obj = parser.parse(new FileReader(jsonPath));
+		return (JSONObject) obj;
 	}
 
 }
