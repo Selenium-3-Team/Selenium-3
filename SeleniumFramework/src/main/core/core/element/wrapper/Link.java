@@ -118,11 +118,9 @@ public class Link extends Element {
 	 * 
 	 * @param arguments - variable-length arguments of type Object, use for dynamic
 	 *                  locator
-	 * @return new link
 	 */
-	public Link generateDynamic(Object... arguments) {
+	public void generateDynamic(Object... arguments) {
 		super.generateDynamic(arguments);
-		return this;
 	}
 
 	/**
