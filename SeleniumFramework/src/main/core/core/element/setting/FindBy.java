@@ -6,7 +6,7 @@ public enum FindBy {
 	 * Declare constants for locator type
 	 */
 	CSS_SELECTOR("cssSelector"), ID("id"), CLASS_NAME("class"), LINK_TEXT("linkText"), NAME("name"),
-	PARTIAL_LINK_TEXT("partialLinkText"), TAG_NAME("tagName"), XPATH("xpath");
+	PARTIAL_LINK_TEXT("partialLinkText"), TAG_NAME("tagName"), XPATH(Constants.xpathValue);
 
 	/**
 	 * Type of locator
@@ -22,6 +22,9 @@ public enum FindBy {
 		this.by = by;
 	}
 
+	public static class Constants{
+		public static final String xpathValue = "xpath";
+	}
 	/**
 	 * Get value find type
 	 * 

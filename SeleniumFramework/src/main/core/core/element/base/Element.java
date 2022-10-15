@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
-import org.javatuples.Pair;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.StaleElementReferenceException;
@@ -18,7 +17,6 @@ import core.common.Constant;
 import core.driver.manager.Driver;
 import core.element.setting.FindBy;
 import core.element.setting.Status;
-import core.helper.LocatorHelper;
 
 /**
  * Element control implementation
@@ -36,9 +34,9 @@ public class Element implements IWaiter, IAction, IInfo {
 	private By byLocator;
 
 	/**
-	 * Pair different types of locators
+	 * Dynamic locator
 	 */
-	private Pair<FindBy, String> pairLocator;
+	private String dynamicLocator;
 
 	/**
 	 * Parent element instance
@@ -63,8 +61,8 @@ public class Element implements IWaiter, IAction, IInfo {
 	 *                assigned to xpath
 	 */
 	public Element(String locator) {
+		this.dynamicLocator = locator;
 		this.byLocator = getByLocator(locator);
-		this.pairLocator = LocatorHelper.getPairLocator(locator);
 	}
 
 	/**
@@ -75,8 +73,8 @@ public class Element implements IWaiter, IAction, IInfo {
 	 *                      type of locator and tries to initialize
 	 */
 	public Element(Element parentElement, String locator) {
+		this.dynamicLocator = locator;
 		this.byLocator = getByLocator(locator);
-		this.pairLocator = LocatorHelper.getPairLocator(locator);
 		this.parentElement = parentElement;
 	}
 
@@ -89,8 +87,8 @@ public class Element implements IWaiter, IAction, IInfo {
 	 *                  string
 	 */
 	public Element(String locator, Object... arguments) {
+		this.dynamicLocator = locator;
 		this.byLocator = getByLocator(String.format(locator, arguments));
-		this.pairLocator = LocatorHelper.getPairLocator(locator);
 	}
 
 	/**
@@ -104,8 +102,8 @@ public class Element implements IWaiter, IAction, IInfo {
 	 *                      dynamic string
 	 */
 	public Element(Element parentElement, String locator, Object... arguments) {
+		this.dynamicLocator = locator;
 		this.byLocator = getByLocator(String.format(locator, arguments));
-		this.pairLocator = LocatorHelper.getPairLocator(locator);
 		this.parentElement = parentElement;
 	}
 
@@ -117,7 +115,6 @@ public class Element implements IWaiter, IAction, IInfo {
 	 */
 	public Element(FindBy by, String value) {
 		this.byLocator = getByLocator(by, value);
-		this.pairLocator = new Pair<FindBy, String>(by, value);
 	}
 
 	/**
@@ -129,7 +126,6 @@ public class Element implements IWaiter, IAction, IInfo {
 	 */
 	public Element(Element parentElement, FindBy by, String value) {
 		this.byLocator = getByLocator(by, value);
-		this.pairLocator = new Pair<FindBy, String>(by, value);
 		this.parentElement = parentElement;
 	}
 
@@ -143,7 +139,7 @@ public class Element implements IWaiter, IAction, IInfo {
 	 */
 	public Element(FindBy by, String value, Object... arguments) {
 		this.byLocator = getByLocator(by, String.format(value, arguments));
-		this.pairLocator = new Pair<FindBy, String>(by, value);
+		this.dynamicLocator = value;
 	}
 
 	/**
@@ -158,7 +154,7 @@ public class Element implements IWaiter, IAction, IInfo {
 	 */
 	public Element(Element parentElement, FindBy by, String value, Object... arguments) {
 		this.byLocator = getByLocator(by, String.format(value, arguments));
-		this.pairLocator = new Pair<FindBy, String>(by, value);
+		this.dynamicLocator = value;
 		this.parentElement = parentElement;
 	}
 
@@ -167,15 +163,9 @@ public class Element implements IWaiter, IAction, IInfo {
 	 * 
 	 * @param arguments - variable-length arguments of type Object, use for dynamic
 	 *                  locator
-	 * @return element
 	 */
-	public Element generateDynamic(Object... arguments) {
-		if (this.pairLocator != null)
-			// getValue0() -> return FindBy type of element
-			// getValue1() -> return string locator of element
-			this.byLocator = getByLocator(this.pairLocator.getValue0(),
-					String.format(this.pairLocator.getValue1(), arguments));
-		return this;
+	public void generateDynamic(Object... arguments) {
+		this.byLocator = getByLocator(String.format(this.dynamicLocator, arguments));
 	}
 
 	/*

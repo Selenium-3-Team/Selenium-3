@@ -21,8 +21,6 @@ public class LoginPage extends GeneralPage {
 
 	@Step("Login to OrangeHRM page")
 	public HomePage loginOrangeHRM(Account account) {
-		System.out.println(account.getUsername());
-		System.out.println(account.getPassword());
 		txtUsername.sendKeys(account.getUsername());
 		txtPassword.sendKeys(account.getPassword());
 		btnLogin.click();

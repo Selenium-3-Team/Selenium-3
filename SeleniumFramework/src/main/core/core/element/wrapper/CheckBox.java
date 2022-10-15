@@ -118,11 +118,9 @@ public class CheckBox extends Element {
 	 * 
 	 * @param arguments - variable-length arguments of type Object, use for dynamic
 	 *                  locator
-	 * @return new Button
 	 */
-	public CheckBox generateDynamic(Object... arguments) {
+	public void generateDynamic(Object... arguments) {
 		super.generateDynamic(arguments);
-		return this;
 	}
 
 	/**
