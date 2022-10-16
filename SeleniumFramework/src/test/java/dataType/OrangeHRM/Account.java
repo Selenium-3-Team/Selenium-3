@@ -12,8 +12,8 @@ public class Account {
 
 	public Account(UserRole userRole) {
 		JsonObject account = JsonHelper.getJsonObject(Utilities.getProjectPath() + Constant.ACCOUNT_DATA);
-		this.username = account.get(userRole.getUserRole()).getAsJsonObject().get("username").toString();
-		this.password = account.get(userRole.getUserRole()).getAsJsonObject().get("password").toString();
+		this.username = account.get(userRole.getUserRole()).getAsJsonObject().get("username").getAsString();
+		this.password = account.get(userRole.getUserRole()).getAsJsonObject().get("password").getAsString();
 	}
 
 	public String getUsername() {
