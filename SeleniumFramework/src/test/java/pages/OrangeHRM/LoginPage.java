@@ -10,7 +10,14 @@ public class LoginPage extends GeneralPage {
 	private final Element txtUsername = new Element("//input[@name='username']");
 	private final Element txtPassword = new Element("//input[@name='password']");
 	private final Element btnLogin = new Element("//button[contains(@class,'orangehrm-login-button')]");
-	
+
+	private static LoginPage instance;
+
+	public static LoginPage newInstance() {
+		if (LoginPage.instance == null)
+			LoginPage.instance = new LoginPage();
+		return LoginPage.instance;
+	}
 
 	// Methods
 	@Step("Navigate to {0}")
