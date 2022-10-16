@@ -98,7 +98,7 @@
                     <configuration>
                         <suiteXmlFiles>
                             <!-- Call Suite name global set up above -->
-                            <suiteXmlFile>run_local.xml</suiteXmlFile>
+                            <suiteXmlFile>src/test/resource/suites/run_local.xml</suiteXmlFile>
                         </suiteXmlFiles>
                         <argLine>
                             -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/1.9.9.1/aspectjweaver-1.9.9.1.jar"
