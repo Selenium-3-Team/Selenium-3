@@ -2,7 +2,8 @@ package core.common;
 
 import java.util.logging.Logger;
 
-import utils.helper.Utilities;
+import core.utilities.Utilities;
+
 
 /**
  * A Constants class for drivers and elements
