@@ -1,6 +1,6 @@
 package utils.constant;
 
-import utils.helper.Utilities;
+import core.utilities.Utilities;
 
 public class Constant {
 
