@@ -38,7 +38,7 @@
 			<groupId>org.testng</groupId>
 			<artifactId>testng</artifactId>
 			<version>7.4.0</version>
-			<scope>test</scope>
+			<scope>compile</scope>
 		</dependency>
 
 		<dependency>
@@ -108,6 +108,18 @@
 	</dependencies>
 
 	<build>
+		<sourceDirectory>target/classes</sourceDirectory>
+		<resources>
+			<resource>
+				<directory>src/main/core</directory>
+			</resource>	
+			<resource>
+				<directory>src/test/java</directory>
+			</resource>	
+			<resource>
+				<directory>src/test/resource</directory>
+			</resource>	
+		</resources>
 		<pluginManagement>
 			<plugins>
 				<plugin>
