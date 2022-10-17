@@ -61,7 +61,7 @@ local.properties
 .buildpath
 
 # sbteclipse plugin
-.target
+target/
 
 # Tern plugin
 .tern-project
@@ -96,7 +96,6 @@ local.properties
 TestReport/
 test-output/
 allure-results/
-target/
 
 
 # End of https://www.toptal.com/developers/gitignore/api/eclipse

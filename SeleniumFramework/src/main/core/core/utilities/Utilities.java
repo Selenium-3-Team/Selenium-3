@@ -12,6 +12,10 @@ import core.driver.manager.DriverManager;
 import core.helper.AlertModal;
 
 public class Utilities {
+	
+	public static String getProjectPath() {
+		return System.getProperty("user.dir");
+	}
 
 	public static String getDateNow(String format) {
 		SimpleDateFormat formatter = new SimpleDateFormat(format);

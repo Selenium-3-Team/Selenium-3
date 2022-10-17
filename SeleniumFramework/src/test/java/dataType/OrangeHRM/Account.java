@@ -3,8 +3,8 @@ package dataType.OrangeHRM;
 import com.google.gson.JsonObject;
 
 import core.helper.JsonHelper;
+import core.utilities.Utilities;
 import utils.constant.Constant;
-import utils.helper.Utilities;
 
 public class Account {
 	private String username;

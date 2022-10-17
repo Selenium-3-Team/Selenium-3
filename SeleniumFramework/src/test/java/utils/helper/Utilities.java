@@ -16,10 +16,6 @@ import utils.constant.Constant;
 
 public class Utilities {
 
-	public static String getProjectPath() {
-		return System.getProperty("user.dir");
-	}
-
 	public static void waitForPageLoad(int timeOutInSecond) {
 		ExpectedCondition<Boolean> pageLoadCondition = new ExpectedCondition<Boolean>() {
 			public Boolean apply(WebDriver driver) {
