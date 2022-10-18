@@ -19,12 +19,13 @@ public class TestBase {
 
 	@Parameters({ "driverConfig", "platform"})
 	@BeforeMethod(alwaysRun = true)
-	public void beforeMethod(@Optional("remote.local") String driverConfig,@Optional("Windows") String platform, ITestContext context, Method method)
+	public void beforeMethod(@Optional("chrome.local") String driverConfig,@Optional("Windows") String platform, ITestContext context, Method method)
 			throws Throwable {
 		ExtentTestManager.startTest(method.getName(), TestListener.testSuite.get(context.getName()));
 		DriverManager.loadDriverProperty(Constant.DRIVER_SETTING_FILE, platform, driverConfig);
 		DriverManager.initDriver();
 		Driver.maximizeBrowser();
+		Driver.navigate(Constant.ORANGEHRM_URL);
 	}
 
 	@AfterMethod(alwaysRun = true)

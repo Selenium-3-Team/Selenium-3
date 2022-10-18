@@ -13,7 +13,6 @@ import pages.OrangeHRM.HomePage;
 import pages.OrangeHRM.LoginPage;
 import pages.OrangeHRM.PIMPage;
 import tests.TestBase;
-import utils.constant.Constant;
 
 public class PIMTest extends TestBase {
 
@@ -33,14 +32,13 @@ public class PIMTest extends TestBase {
 		String employeeId = "123";
 
 		Logger.info("Precondition: Login successfully with a valid account");
-		loginPage.open(Constant.ORANGEHRM_URL);
 		pimPage = loginPage.loginOrangeHRM(account);
 
 		Logger.info("Step 1: Click \"Add\" or \"Add Employee\" button");
 		pimPage.clickTopMenuButton(PIMItem.ADDEMPLOYEELIST.getName());
 
 		Logger.verify("1. User is redirected to \"Add Employee\" page.");
-		assertTrue(pimPage.isTopMenuButtonActived(PIMItem.ADDEMPLOYEELIST.getName()),
+		assertTrue(pimPage.isTopMenuButtonActived(PIMItem.ADDEMPLOYEELIST),
 				"User is redirected to \"Add Employee\" page.");
 
 		Logger.info("Step 2: Enter all required information and turn off \"Create Login Details\" option");
