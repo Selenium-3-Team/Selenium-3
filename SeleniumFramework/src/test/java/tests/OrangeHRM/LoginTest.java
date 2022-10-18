@@ -27,29 +27,30 @@ public class LoginTest extends TestBase {
 
 		Account account = new Account(UserRole.ADMIN);
 		Logger.info("Step 1: Navigate to OrangeHRM");
-		loginPage.open(Constant.ORANGEHRM_URL);
 
 		Logger.verify("1.1. The login form should be displayed.");
 		assertTrue(loginPage.isDisplayed(), "The login form should be displayed.");
 
 		Logger.verify("1.2. OrangeHRM copyright text should be displayed.");
-		assertTrue(loginPage.isCopyRightTextDisplayed(), "OrangeHRM copyright text should be displayed.");
+		assertTrue(loginPage.isCopyRightTextDisplayed(Constant.COMPANY, Constant.VERSION), "OrangeHRM copyright text should be displayed.");
 
 		Logger.info("Step 2: Enter a valid username in the \"Username\" textbox");
+		loginPage.enterUsername(account.getUsername());
+
 		Logger.info("Step 3: Enter a valid password in the \"Password\" textbox");
+		loginPage.enterPassword(account.getPassword());
+
 		Logger.info("Step 4: Click the \"Login\" button");
-		pimPage = loginPage.loginOrangeHRM(account);
+		pimPage = loginPage.clickLoginBtn();
 
 		Logger.verify("4.1. VP. The PIM page should be displayed.");
-		assertTrue(pimPage.isHeaderTitleDisplayed(LeftPanelMenuItem.PIM.getName()), "The PIM page should be displayed");
+		assertTrue(pimPage.isHeaderTitleDisplayed(LeftPanelMenuItem.PIM), "The PIM page should be displayed");
 
 		Logger.verify("4.2. The currently selected tab is \"Employee List\".");
-		assertTrue(pimPage.isTopMenuButtonActived(PIMItem.EMPLOYEELIST.getName()),
-				"The currently selected tab is \"Employee List\".");
+		assertTrue(pimPage.isTopMenuButtonActived(PIMItem.EMPLOYEELIST), "The currently selected tab is \"Employee List\".");
 
 		Logger.verify("4.3 OrangeHRM copyright text should be displayed.");
-		assertTrue(homePage.isCopyRightTextDisplayed(), "OrangeHRM copyright text should be displayed.");
-
+		assertTrue(homePage.isCopyRightTextDisplayed(Constant.COMPANY, Constant.VERSION), "OrangeHRM copyright text should be displayed.");
 	}
 
 	@Test
@@ -59,7 +60,6 @@ public class LoginTest extends TestBase {
 		String invalidUsername = "Admin1";
 		String password = "admin123";
 		Logger.info("Step 1: Navigate to OrangeHRM");
-		loginPage.open(Constant.ORANGEHRM_URL);
 
 		Logger.info("Step 2: Enter an invalid username in the \"Username\" textbox");
 		Logger.info("Step 3: Enter a valid password in the \"Password\" textbox");
@@ -81,7 +81,6 @@ public class LoginTest extends TestBase {
 
 		Account account = new Account(UserRole.ADMIN);
 		Logger.info("Precondition: Login successfully with a valid account");
-		loginPage.open(Constant.ORANGEHRM_URL);
 		pimPage = loginPage.loginOrangeHRM(account);
 
 		Logger.info("Step 1: Click on the user's avatar");

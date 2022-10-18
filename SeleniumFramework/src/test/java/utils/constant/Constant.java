@@ -13,6 +13,10 @@ public class Constant {
 	public static final String DRIVER_SETTING_FILE = Utilities.getProjectPath()
 			+ "\\src\\test\\resource\\driver.setting.properties.json";
 	public static final String ACCOUNT_DATA = "\\src\\test\\resource\\data\\OrangeHRM\\Account.json";
+	
+	// Application info
+	public static final String COMPANY = "OrangeHRM, Inc";
+	public static final String VERSION = "OrangeHRM OS 5.1";
 
 	// Timeout
 	public static final int DEFAULT_TIMEOUT = 30;

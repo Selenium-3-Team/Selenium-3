@@ -1,8 +1,9 @@
 package pages.OrangeHRM;
 
 import core.element.base.Element;
-import dataType.OrangeHRM.CopyRight;
+import core.utilities.Utilities;
 import dataType.OrangeHRM.LeftPanelMenuItem;
+import dataType.OrangeHRM.PIMItem;
 import io.qameta.allure.Step;
 
 public class GeneralPage {
@@ -32,16 +33,19 @@ public class GeneralPage {
 		return GeneralPage.instance;
 	}
 
-	@Step("Check if text CopyRight is displayed")
-	public boolean isCopyRightTextDisplayed() {
-		txtCopyRight.generateDynamic(CopyRight.COMPANY.getData());
-		txtVersion.generateDynamic(CopyRight.VERSION.getData());
-		return (txtCopyRight.isDisplayed() && txtVersion.isDisplayed());
+	@Step("Check if text CopyRight {0} and {1} is displayed")
+	public boolean isCopyRightTextDisplayed(String companyName, String appVersion) {
+		txtCopyRight.generateDynamic(companyName);
+		txtVersion.generateDynamic(appVersion);
+		boolean result = true;
+		result &= Utilities.check(txtCopyRight.isDisplayed(), "Company name label should be displayed.");
+		result &= Utilities.check(txtVersion.isDisplayed(), "App version should be displayed.");
+		return result;
 	}
 
-	@Step("Check if header title is displayed")
-	public boolean isHeaderTitleDisplayed(String title) {
-		txtHeaderTitle.generateDynamic(title);
+	@Step("Check if header title {0} is displayed")
+	public boolean isHeaderTitleDisplayed(LeftPanelMenuItem item) {
+		txtHeaderTitle.generateDynamic(item.getName());
 		return txtHeaderTitle.isDisplayed();
 	}
 
@@ -58,8 +62,8 @@ public class GeneralPage {
 	}
 
 	@Step("Check if top menu button is actived")
-	public boolean isTopMenuButtonActived(String item) {
-		btnTopMenuActived.generateDynamic(item);
+	public boolean isTopMenuButtonActived(PIMItem item) {
+		btnTopMenuActived.generateDynamic(item.getName());
 		return btnTopMenuActived.isDisplayed();
 	}
 

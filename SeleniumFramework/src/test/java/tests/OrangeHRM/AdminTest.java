@@ -29,7 +29,6 @@ public class AdminTest extends TestBase {
 		Account account = new Account(UserRole.ADMIN);
 
 		Logger.info("Precondition: Login successfully with a valid account");
-		loginPage.open(Constant.ORANGEHRM_URL);
 		pimPage = loginPage.loginOrangeHRM(account);
 
 		Logger.info("Step 1: Click the \"Admin\" tab on the Left Menu");

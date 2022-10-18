@@ -53,7 +53,7 @@ public class Utilities {
 	 *				result &= check() {N.1}, result &= check() {N.2},...
 	 *				return result	 
 	 */
-	public boolean check(boolean actual, String message) {
+	public static boolean check(boolean actual, String message) {
 		try {
 			Assert.assertTrue(actual, message);
 			logger.info(message);
@@ -69,7 +69,7 @@ public class Utilities {
 		}
 	}
 	
-	public boolean returnCheckResult(ArrayList<Boolean> results) {
+	public static boolean returnCheckResult(ArrayList<Boolean> results) {
 		return results.contains(true);
 	}
 }
