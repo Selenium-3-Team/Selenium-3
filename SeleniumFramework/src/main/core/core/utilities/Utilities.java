@@ -9,11 +9,11 @@ import java.util.logging.Logger;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
+import org.testng.Assert;
 
 import core.common.Constant;
 import core.driver.manager.Driver;
 import core.driver.manager.DriverManager;
-import junit.framework.Assert;
 
 public class Utilities {
 	
@@ -55,7 +55,7 @@ public class Utilities {
 	 */
 	public boolean check(boolean actual, String message) {
 		try {
-			Assert.assertTrue(message, actual);
+			Assert.assertTrue(actual, message);
 			logger.info(message);
 			return true;
 		} catch (AssertionError assertionError) {
