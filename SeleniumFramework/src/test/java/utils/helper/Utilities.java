@@ -4,15 +4,12 @@ import java.time.Duration;
 import java.util.Arrays;
 import java.util.List;
 
-import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import core.driver.manager.Driver;
 import core.driver.manager.DriverManager;
-import utils.constant.Constant;
 
 public class Utilities {
 
@@ -24,18 +21,6 @@ public class Utilities {
 		};
 		WebDriverWait wait = new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(timeOutInSecond));
 		wait.until(pageLoadCondition);
-	}
-
-	public static boolean isAlertPresent() {
-		boolean foundAlert = false;
-		WebDriverWait wait = new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(Constant.DEFAULT_TIMEOUT));
-		try {
-			wait.until(ExpectedConditions.alertIsPresent());
-			foundAlert = true;
-		} catch (TimeoutException eTO) {
-			foundAlert = false;
-		}
-		return foundAlert;
 	}
 
 	public static String convertToNbsp(String input) {
@@ -122,5 +107,5 @@ public class Utilities {
 		String newString = originalString.replaceAll(character, "").trim();
 		return newString;
 	}
-
+	
 }

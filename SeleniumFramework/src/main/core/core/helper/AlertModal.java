@@ -1,11 +1,16 @@
 package core.helper;
 
+import java.time.Duration;
 import java.util.logging.Logger;
 
 import org.openqa.selenium.Alert;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import core.common.Constant;
+import core.driver.manager.DriverManager;
 
 /**
  * <p>
@@ -112,6 +117,28 @@ public class AlertModal {
 		} catch (Exception e) {
 			logger.severe(String.format("Has error when get text alert pop-up: %s", e.getMessage()));
 			return null;
+		}
+	}
+	
+	/**
+	 * Check if alert pop-up 
+	 * @return - True or False
+	 */
+	public boolean isAlertDisplayed() {
+		boolean foundAlert = false;
+		logger.info("Check if alert pop-up is displayed");
+		try {
+			WebDriverWait wait = new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(Constant.TIMEOUT));
+			try {
+				wait.until(ExpectedConditions.alertIsPresent());
+				foundAlert = true;
+			} catch (TimeoutException eTO) {
+				foundAlert = false;
+			}
+			return foundAlert;
+		} catch (Exception e) {
+			logger.severe(String.format("Has error when get text alert pop-up: %s", e.getMessage()));
+			return false;
 		}
 	}
 }

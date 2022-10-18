@@ -2,16 +2,22 @@ package core.utilities;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.logging.Logger;
 
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 
+import core.common.Constant;
+import core.driver.manager.Driver;
 import core.driver.manager.DriverManager;
-import core.helper.AlertModal;
+import junit.framework.Assert;
 
 public class Utilities {
+	
+	private static final Logger logger = Constant.createLogger(Utilities.class.getName());
 	
 	public static String getProjectPath() {
 		return System.getProperty("user.dir");
@@ -37,29 +43,33 @@ public class Utilities {
 			FileUtils.copyFile(SrcFile, DestFile);
 			path = DestFile.getAbsolutePath();
 		} catch (Exception e) {
-			System.err.println("An error occurred when capturing screen shot: " + e.getMessage());
+			logger.severe("An error occurred when capturing screen shot: " + e.getMessage());
 		}
 		return path;
 	}
 
-	public static String getAlertMessage() {
-		return new AlertModal(DriverManager.getDriver()).getAlertText();
+	/**
+	 *	@example: 	boolean result = true -> Declare a boolean variable
+	 *				result &= check() {N.1}, result &= check() {N.2},...
+	 *				return result	 
+	 */
+	public boolean check(boolean actual, String message) {
+		try {
+			Assert.assertTrue(message, actual);
+			logger.info(message);
+			return true;
+		} catch (AssertionError assertionError) {
+			logger.severe(message + ": " + assertionError);
+			try {
+				logger.info("URL: " + Driver.getURL());
+			} catch (Throwable throwable) {
+				logger.severe("Cannot get URL browser");
+			}
+			return false;
+		}
 	}
-
-	public static void promptAlert(String inputText) {
-		new AlertModal(DriverManager.getDriver()).prompt(inputText);
+	
+	public boolean returnCheckResult(ArrayList<Boolean> results) {
+		return !(results.contains(false));
 	}
-
-	public static void acceptAlert() {
-		new AlertModal(DriverManager.getDriver()).confirm();
-	}
-
-	public static void dismissAlert() {
-		new AlertModal(DriverManager.getDriver()).dismiss();
-	}
-
-	public static String convertToNbsp(String input) {
-		return String.format(input).replaceAll(" ", "�");
-	}
-
 }
