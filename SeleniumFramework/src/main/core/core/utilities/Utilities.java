@@ -70,6 +70,6 @@ public class Utilities {
 	}
 	
 	public boolean returnCheckResult(ArrayList<Boolean> results) {
-		return !(results.contains(false));
+		return results.contains(true);
 	}
 }
