@@ -1,17 +1,17 @@
 package pages.OrangeHRM;
 
-import core.element.base.Element;
-import core.utilities.Utilities;
+import core.element.wrapper.Button;
+import core.element.wrapper.Label;
+import core.element.wrapper.TextBox;
 import dataType.OrangeHRM.Account;
 import io.qameta.allure.Step;
 
 public class LoginPage extends GeneralPage {
 
-	private final Element txtUsername = new Element("//input[@name='username']");
-	private final Element txtPassword = new Element("//input[@name='password']");
-	private final Element btnLogin = new Element("//button[contains(@class,'orangehrm-login-button')]");
-	private final Element alertInvalidCredentials = new Element(
-			"//div[@role='alert']//p[text()='Invalid credentials']");
+	private final TextBox txtUsername = new TextBox("//input[@name='username']");
+	private final TextBox txtPassword = new TextBox("//input[@name='password']");
+	private final Button btnLogin = new Button("//button[contains(@class,'orangehrm-login-button')]");
+	private final Label lblErrorMessage = new Label("//div[@role='alert']//p");
 
 	private static LoginPage instance;
 
@@ -61,16 +61,12 @@ public class LoginPage extends GeneralPage {
 
 	@Step("Check if login page is displayed")
 	public boolean isDisplayed() {
-		boolean result = true;
-		result &= Utilities.check(btnLogin.isDisplayed(), "Login button should be displayed.");
-		result &= Utilities.check(txtUsername.isDisplayed(), "Username textbox should be displayed.");
-		result &= Utilities.check(txtPassword.isDisplayed(), "Password textbox should be displayed.");
-		return result;
+		return btnLogin.isDisplayed() && txtUsername.isDisplayed() && txtPassword.isDisplayed();
 	}
 
-	@Step("Check if invalid credentials alert is displayed")
-	public boolean isInvalidCredentialsAlertDisplayed() {
-		return alertInvalidCredentials.isDisplayed();
+	@Step("Get the error message")
+	public String getErrorMessage() {
+		return lblErrorMessage.getLabelText();
 	}
 
 }

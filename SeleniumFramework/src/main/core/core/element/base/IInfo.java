@@ -131,5 +131,7 @@ public interface IInfo {
 	 * @return The size of the element on the page
 	 */
 	Dimension getSize();
+	
+	boolean isAttributeValueDisplayed(String attribute, String value);
 
 }

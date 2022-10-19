@@ -1,5 +1,6 @@
 package tests.OrangeHRM;
 
+import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 import org.testng.annotations.Test;
@@ -70,8 +71,7 @@ public class LoginTest extends TestBase {
 		assertTrue(loginPage.isDisplayed(), "The Login page should still be displayed. ");
 
 		Logger.verify("4.2. The error \"Invalid credentials\" message should be displayed.");
-		assertTrue(loginPage.isInvalidCredentialsAlertDisplayed(),
-				"The error \"Invalid credentials\" message should be displayed.");
+		assertEquals(loginPage.getErrorMessage(), Constant.ERROR_LOGIN_MESSAGE, "The error \"Invalid credentials\" message should be displayed.");
 
 	}
 

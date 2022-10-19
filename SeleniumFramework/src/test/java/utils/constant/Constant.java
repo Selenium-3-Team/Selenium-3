@@ -17,6 +17,7 @@ public class Constant {
 	// Application info
 	public static final String COMPANY = "OrangeHRM, Inc";
 	public static final String VERSION = "OrangeHRM OS 5.1";
+	public static final String ERROR_LOGIN_MESSAGE = "Invalid credentials";
 
 	// Timeout
 	public static final int DEFAULT_TIMEOUT = 30;

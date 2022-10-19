@@ -126,8 +126,8 @@ public class Label extends Element {
 	/**
 	 * Get text of label
 	 */
-	public void getTextLabel() {
-		super.getText();
+	public String getLabelText() {
+		return super.getText();
 	}
 
 }
