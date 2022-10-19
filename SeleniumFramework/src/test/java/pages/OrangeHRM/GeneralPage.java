@@ -4,7 +4,7 @@ import core.element.base.Element;
 import core.element.wrapper.Button;
 import core.element.wrapper.Label;
 import dataType.OrangeHRM.LeftPanelMenuItem;
-import dataType.OrangeHRM.PIMItem;
+import dataType.OrangeHRM.TopBarMenuItem;
 import io.qameta.allure.Step;
 
 public class GeneralPage {
@@ -16,10 +16,7 @@ public class GeneralPage {
 	private final Element drpUser = new Element("//li[@class='oxd-userdropdown']");
 	private final Button btnLogout = new Button("//a[@role='menuitem' and text()='Logout']");
 	// Topbar menu
-	private final String sTopBarMenu = "//nav[@aria-label='Topbar Menu']";
-	private final Button btnTopMenu = new Button(sTopBarMenu + "//li[.='%s']");
-	private final Element drpPageOptionItem = new Element(sTopBarMenu + "//span[contains(text(),'%s')]");
-	private final Element drpTopMenuActived = new Element(sTopBarMenu + "//li[contains(@class,'visited')]//span[contains(text(),'%s')]");
+	private final Element topBarMenuItem = new Element("//nav[@aria-label='Topbar Menu']//li[normalize-space(.)='%s']");
 	// Left panel
 	private final Element leftPanel = new Element("//nav[@aria-label='Sidepanel']//span[text()='%s']");
 
@@ -44,34 +41,34 @@ public class GeneralPage {
 		return lblHeaderTitle.isDisplayed();
 	}
 
-	@Step("Check if top menu button is displayed")
-	public boolean isTopMenuButtonDisplayed(String item) {
-		btnTopMenu.generateDynamic(item);
-		return btnTopMenu.isDisplayed();
-	}
-
-	@Step("Check if top menu dropdown is displayed")
-	public boolean isTopMenuDropdownDisplayed(String item) {
-		drpPageOptionItem.generateDynamic(item);
-		return drpPageOptionItem.isDisplayed();
+	@Step("Check if top bar menu is displayed")
+	public boolean isTopBarMenuItemDisplayed(TopBarMenuItem menuItem) {
+		topBarMenuItem.generateDynamic(menuItem.getName());
+		return topBarMenuItem.isDisplayed();
 	}
 
 	@Step("Check if top menu button is actived")
-	public boolean isTopMenuButtonActived(PIMItem item) {
-		btnTopMenu.generateDynamic(item.getName());
-		return btnTopMenu.isAttributeValueDisplayed("class", "--visited");
+	public boolean isTopBarMenuItemActived(TopBarMenuItem menuItem) {
+		topBarMenuItem.generateDynamic(menuItem.getName());
+		return topBarMenuItem.isAttributeValueDisplayed("class", "--visited");
 	}
 
-	@Step("Check if top menu dropdown is actived")
-	public boolean isTopMenuDropdownActived(String item) {
-		drpTopMenuActived.generateDynamic(item);
-		return drpTopMenuActived.isDisplayed();
+	@Step("Click User dropdown")
+	public GeneralPage clickUserDropdown() {
+		drpUser.click();
+		return new LoginPage();
+	}
+
+	@Step("Click Logout button")
+	public LoginPage clickLogoutBtn() {
+		btnLogout.click();
+		return new LoginPage();
 	}
 
 	@Step("Logout OrangeHRM page")
 	public LoginPage logoutOrangeHRM() {
-		drpUser.click();
-		btnLogout.click();
+		clickUserDropdown();
+		clickLogoutBtn();
 		return new LoginPage();
 	}
 
@@ -82,9 +79,9 @@ public class GeneralPage {
 		return new AdminPage();
 	}
 
-	@Step("Click on top menu button")
-	public void clickTopMenuButton(String item) {
-		btnTopMenu.generateDynamic(item);
-		btnTopMenu.click();
+	@Step("Click on top bar menu item")
+	public void clickTopBarMenuItem(TopBarMenuItem menuItem) {
+		topBarMenuItem.generateDynamic(menuItem.getName());
+		topBarMenuItem.click();
 	}
 }

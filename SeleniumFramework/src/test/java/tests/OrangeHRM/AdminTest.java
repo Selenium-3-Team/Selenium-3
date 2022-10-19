@@ -6,14 +6,13 @@ import org.testng.annotations.Test;
 
 import core.report.Logger;
 import dataType.OrangeHRM.Account;
-import dataType.OrangeHRM.AdminItem;
+import dataType.OrangeHRM.TopBarMenuItem;
 import dataType.OrangeHRM.UserRole;
 import pages.OrangeHRM.AdminPage;
 import pages.OrangeHRM.HomePage;
 import pages.OrangeHRM.LoginPage;
 import pages.OrangeHRM.PIMPage;
 import tests.TestBase;
-import utils.constant.Constant;
 
 public class AdminTest extends TestBase {
 
@@ -35,8 +34,7 @@ public class AdminTest extends TestBase {
 		adminPage = pimPage.gotoAdminPage();
 
 		Logger.verify("1.1. The \"User Management\" page should be displayed.");
-		assertTrue(adminPage.isTopMenuDropdownActived(AdminItem.USERMANAGEMENT.getName()),
-				"The \"User Management\" page should be displayed.");
+		assertTrue(adminPage.isTopBarMenuItemActived(TopBarMenuItem.USERMANAGEMENT), "The \"User Management\" page should be displayed.");
 
 		Logger.verify("1.2. The \"System Users\" form should be displayed.");
 		assertTrue(adminPage.isSystemUsersLabelDisplayed(), "The \"System Users\" form should be displayed.");
@@ -48,8 +46,7 @@ public class AdminTest extends TestBase {
 		adminPage.clickSearchButton();
 
 		Logger.verify("3. At least 1 record should be displayed on the \"Record Found\" form.");
-		assertTrue(adminPage.isNoRecordsFoundLabelNotDisplayed(),
-				"At least 1 record should be displayed on the \\\"Record Found\\\" form.");
+		assertTrue(adminPage.isNoRecordsFoundLabelNotDisplayed(), "At least 1 record should be displayed on the \\\"Record Found\\\" form.");
 
 	}
 

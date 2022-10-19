@@ -8,7 +8,7 @@ import org.testng.annotations.Test;
 import core.report.Logger;
 import dataType.OrangeHRM.Account;
 import dataType.OrangeHRM.LeftPanelMenuItem;
-import dataType.OrangeHRM.PIMItem;
+import dataType.OrangeHRM.TopBarMenuItem;
 import dataType.OrangeHRM.UserRole;
 import pages.OrangeHRM.HomePage;
 import pages.OrangeHRM.LoginPage;
@@ -48,7 +48,7 @@ public class LoginTest extends TestBase {
 		assertTrue(pimPage.isHeaderTitleDisplayed(LeftPanelMenuItem.PIM), "The PIM page should be displayed");
 
 		Logger.verify("4.2. The currently selected tab is \"Employee List\".");
-		assertTrue(pimPage.isTopMenuButtonActived(PIMItem.EMPLOYEELIST), "The currently selected tab is \"Employee List\".");
+		assertTrue(pimPage.isTopBarMenuItemActived(TopBarMenuItem.EMPLOYEELIST), "The currently selected tab is \"Employee List\".");
 
 		Logger.verify("4.3 OrangeHRM copyright text should be displayed.");
 		assertTrue(homePage.isCopyRightTextDisplayed(Constant.COMPANY, Constant.VERSION), "OrangeHRM copyright text should be displayed.");
