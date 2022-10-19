@@ -435,6 +435,18 @@ public class Element implements IWaiter, IAction, IInfo {
 			return false;
 		}
 	}
+	
+	@Override
+	public boolean isAttributeValueDisplayed(String attribute, String expectedValue) {
+		logger.info(
+				String.format("Check attribute value of %s", getLocator().toString()));
+		try {
+			return getElement().getAttribute(attribute).contains(expectedValue);
+		} catch (Exception e) {
+			logger.severe(String.format("Has error with control '%s': %s", getLocator().toString(), e.getMessage()));
+			return false;
+		}
+	}
 
 	/**
 	 * Get the value of a given CSS property. This is probably not going to return

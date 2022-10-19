@@ -1,5 +1,6 @@
 package tests.OrangeHRM;
 
+import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 import org.testng.annotations.Test;
@@ -7,7 +8,7 @@ import org.testng.annotations.Test;
 import core.report.Logger;
 import dataType.OrangeHRM.Account;
 import dataType.OrangeHRM.LeftPanelMenuItem;
-import dataType.OrangeHRM.PIMItem;
+import dataType.OrangeHRM.TopBarMenuItem;
 import dataType.OrangeHRM.UserRole;
 import pages.OrangeHRM.HomePage;
 import pages.OrangeHRM.LoginPage;
@@ -47,7 +48,7 @@ public class LoginTest extends TestBase {
 		assertTrue(pimPage.isHeaderTitleDisplayed(LeftPanelMenuItem.PIM), "The PIM page should be displayed");
 
 		Logger.verify("4.2. The currently selected tab is \"Employee List\".");
-		assertTrue(pimPage.isTopMenuButtonActived(PIMItem.EMPLOYEELIST), "The currently selected tab is \"Employee List\".");
+		assertTrue(pimPage.isTopBarMenuItemActived(TopBarMenuItem.EMPLOYEELIST), "The currently selected tab is \"Employee List\".");
 
 		Logger.verify("4.3 OrangeHRM copyright text should be displayed.");
 		assertTrue(homePage.isCopyRightTextDisplayed(Constant.COMPANY, Constant.VERSION), "OrangeHRM copyright text should be displayed.");
@@ -70,8 +71,7 @@ public class LoginTest extends TestBase {
 		assertTrue(loginPage.isDisplayed(), "The Login page should still be displayed. ");
 
 		Logger.verify("4.2. The error \"Invalid credentials\" message should be displayed.");
-		assertTrue(loginPage.isInvalidCredentialsAlertDisplayed(),
-				"The error \"Invalid credentials\" message should be displayed.");
+		assertEquals(loginPage.getErrorMessage(), Constant.ERROR_LOGIN_MESSAGE, "The error \"Invalid credentials\" message should be displayed.");
 
 	}
 
