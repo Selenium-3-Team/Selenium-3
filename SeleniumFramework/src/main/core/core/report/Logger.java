@@ -4,7 +4,7 @@ import org.testng.Reporter;
 
 import com.aventstack.extentreports.Status;
 
-import core.utilities.Utilities;
+import core.helper.RandomHelper;
 import io.qameta.allure.Step;
 
 /**
@@ -21,7 +21,7 @@ public class Logger {
 	@Step("{0}")
 	public static void info(String message) {
 		Reporter.log("<b>INFO: </b>" + message);
-		Reporter.log(Utilities.getDateNow("MM.dd.yyyy - HH:mm:ss") + " - INFO: " + message, true);
+		Reporter.log(RandomHelper.getDateNow("MM.dd.yyyy - HH:mm:ss") + " - INFO: " + message, true);
 		ExtentTestManager.getTest().log(Status.INFO, message);
 	}
 
@@ -64,7 +64,7 @@ public class Logger {
 				+ message + "</b>";
 
 		Reporter.log(message);
-		Reporter.log(Utilities.getDateNow("MM.dd.yyyy - HH:mm:ss") + " - VERIFY POINT: " + messageLog, true);
+		Reporter.log(RandomHelper.getDateNow("MM.dd.yyyy - HH:mm:ss") + " - VERIFY POINT: " + messageLog, true);
 		ExtentTestManager.getTest().log(Status.INFO, message);
 	}
 
