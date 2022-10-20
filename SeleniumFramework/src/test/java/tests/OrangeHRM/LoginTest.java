@@ -57,8 +57,8 @@ public class LoginTest extends TestBase {
 	}
 
 	@Test
+	@Description("Test case 02: User can't log in successfully with an invalid username and a valid password.")
 	public void TC02() {
-		Logger.info("Test case 02: User can't log in successfully with an invalid username and a valid password");
 
 		String invalidUsername = "Admin1";
 		String password = "admin123";
