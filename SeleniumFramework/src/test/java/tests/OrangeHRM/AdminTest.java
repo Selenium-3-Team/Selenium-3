@@ -8,6 +8,7 @@ import core.report.Logger;
 import dataType.OrangeHRM.Account;
 import dataType.OrangeHRM.TopBarMenuItem;
 import dataType.OrangeHRM.UserRole;
+import io.qameta.allure.Description;
 import pages.OrangeHRM.AdminPage;
 import pages.OrangeHRM.HomePage;
 import pages.OrangeHRM.LoginPage;
@@ -22,8 +23,8 @@ public class AdminTest extends TestBase {
 	AdminPage adminPage = AdminPage.newInstance();
 
 	@Test
+	@Description("Test case 05: Admin User can search employees successfully by \"User Role\".")
 	public void TC05() {
-		Logger.info("Test case 05: Admin User can search employees successfully by \"User Role\"");
 
 		Account account = new Account(UserRole.ADMIN);
 
