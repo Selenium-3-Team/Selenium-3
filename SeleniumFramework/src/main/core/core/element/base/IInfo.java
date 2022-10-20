@@ -62,6 +62,15 @@ public interface IInfo {
 	boolean isSelected(int timeOutInSeconds);
 
 	/**
+	 * Check if attribute value of this element displayed or not
+	 * 
+	 * @param attribute - a string of attribute name
+	 * @param value     - the value of attribute
+	 * @return true or false
+	 */
+	boolean isAttributeValueDisplayed(String attribute, String value);
+
+	/**
 	 * Get the value of a given CSS property
 	 * 
 	 * @param propertyName - css name
@@ -131,7 +140,5 @@ public interface IInfo {
 	 * @return The size of the element on the page
 	 */
 	Dimension getSize();
-	
-	boolean isAttributeValueDisplayed(String attribute, String value);
 
 }

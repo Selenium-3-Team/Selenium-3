@@ -1,9 +1,8 @@
 package tests.OrangeHRM;
 
-import static org.testng.Assert.assertTrue;
-
 import org.testng.annotations.Test;
 
+import core.helper.AssertHelper;
 import core.report.Logger;
 import dataObject.OrangeHRM.Account;
 import dataType.OrangeHRM.TopBarMenuItem;
@@ -26,29 +25,30 @@ public class PIMTest extends TestBase {
 	@Description("Test case 06: User can add a new employee successful without Create Login Details.")
 	public void TC06() {
 
+		AssertHelper assertHelper = new AssertHelper();
 		Account account = new Account(UserRole.ADMIN);
 		String firstName = "Alex";
 		String middleName = " Mac";
 		String lastName = "Nguyen";
 		String employeeId = "123";
 
-		Logger.info("Precondition: Login successfully with a valid account");
+		Logger.info("Precondition: Login successfully with a valid account.");
 		pimPage = loginPage.loginOrangeHRM(account);
 
-		Logger.info("Step 1: Click \"Add\" or \"Add Employee\" button");
+		Logger.info("Step 1: Click \"Add\" or \"Add Employee\" button.");
 		pimPage.clickTopBarMenuItem(TopBarMenuItem.ADD_EMPLOYEE);
 
-		Logger.verify("1. User is redirected to \"Add Employee\" page.");
-		assertTrue(pimPage.isTopBarMenuItemActived(TopBarMenuItem.ADD_EMPLOYEE), "User is redirected to \"Add Employee\" page.");
+		Logger.verify("VP. User is redirected to \"Add Employee\" page.");
+		assertHelper.assertTrue(pimPage.isTopBarMenuItemActived(TopBarMenuItem.ADD_EMPLOYEE), "User is redirected to \"Add Employee\" page.");
 
-		Logger.info("Step 2: Enter all required information and turn off \"Create Login Details\" option");
-		Logger.info("Step 3: Click \"Save\" ");
-		Logger.info("Step 4: Verify new added employee is displayed in Employee list");
+		Logger.info("Step 2: Enter all required information and turn off \"Create Login Details\" option.");
+		Logger.info("Step 3: Click \"Save\".");
+		Logger.info("Step 4: Verify new added employee is displayed in Employee list.");
 		pimPage.addEmployeeWithoutCreateLoginDetails(firstName, middleName, lastName, employeeId);
 
-		Logger.verify("3. A new employee is added successful.");
-		Logger.verify("4. The employee is displayed.");
-		assertTrue(pimPage.isEmployeeNameDisplayed(firstName + " " + lastName), "A new employee is added successful.");
+		Logger.verify("VP. A new employee is added successful.");
+		Logger.verify("VP. The employee is displayed.");
+		assertHelper.assertTrue(pimPage.isEmployeeNameDisplayed(firstName + " " + lastName), "A new employee is added successful.");
 
 	}
 

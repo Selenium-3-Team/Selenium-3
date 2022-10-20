@@ -7,8 +7,7 @@ import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import com.aventstack.extentreports.reporter.configuration.ChartLocation;
 import com.aventstack.extentreports.reporter.configuration.Theme;
 
-import core.utilities.Utilities;
-
+import core.helper.RandomHelper;
 
 /**
  * In this class, we created an ExtentReport object and it can be reachable via
@@ -17,11 +16,30 @@ import core.utilities.Utilities;
  */
 public class ExtentReportManager {
 
+	/**
+	 * Extent reports
+	 */
 	private static ExtentReports extent;
-	private static String reportFileName = "Test-Automation-Report " + Utilities.getDateNow("MM.dd.yyyy - HH.mm.ss")
+
+	/**
+	 * Full report file name
+	 */
+	private static String reportFileName = "Test-Automation-Report " + RandomHelper.getDateNow("MM.dd.yyyy - HH.mm.ss")
 			+ ".html";
+
+	/**
+	 * Prefix file
+	 */
 	private static String fileSeperator = System.getProperty("file.separator");
+
+	/**
+	 * Report file path
+	 */
 	private static String reportFilepath = System.getProperty("user.dir") + fileSeperator + "TestReport";
+
+	/**
+	 * Full Report file location
+	 */
 	private static String reportFileLocation = reportFilepath + fileSeperator + reportFileName;
 
 	/**

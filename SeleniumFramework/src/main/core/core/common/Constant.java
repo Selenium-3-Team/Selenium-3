@@ -4,7 +4,6 @@ import java.util.logging.Logger;
 
 import core.utilities.Utilities;
 
-
 /**
  * A Constants class for drivers and elements
  */

@@ -17,10 +17,10 @@ import utils.constant.Constant;
 
 public class TestBase {
 
-	@Parameters({ "driverConfig", "platform"})
+	@Parameters({ "driverConfig", "platform" })
 	@BeforeMethod(alwaysRun = true)
-	public void beforeMethod(@Optional("chrome.local") String driverConfig,@Optional("Windows") String platform, ITestContext context, Method method)
-			throws Throwable {
+	public void beforeMethod(@Optional("chrome.local") String driverConfig, @Optional("Windows") String platform,
+			ITestContext context, Method method) throws Throwable {
 		ExtentTestManager.startTest(method.getName(), TestListener.testSuite.get(context.getName()));
 		DriverManager.loadDriverProperty(Constant.DRIVER_SETTING_FILE, platform, driverConfig);
 		DriverManager.initDriver();
@@ -33,5 +33,5 @@ public class TestBase {
 		System.out.println("Post Condition: Clean up.");
 		Driver.quitAll();
 	}
-	
+
 }
