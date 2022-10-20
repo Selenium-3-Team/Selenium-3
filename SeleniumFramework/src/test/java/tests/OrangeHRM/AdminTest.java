@@ -46,7 +46,7 @@ public class AdminTest extends TestBase {
 		adminPage.clickSearchButton();
 
 		Logger.verify("VP. At least 1 record should be displayed on the \"Record Found\" form.");
-		assertHelper.assertTrue(adminPage.isNoRecordsFoundLabelDisplayed(), "At least 1 record should be displayed on the \\\"Record Found\\\" form.");
+		assertHelper.assertFalse(adminPage.isNoRecordsFoundLabelDisplayed(), "At least 1 record should be displayed on the \\\"Record Found\\\" form.");
 
 	}
 
