@@ -5,7 +5,7 @@ import org.testng.annotations.Test;
 import core.helper.AssertHelper;
 import core.helper.RandomHelper;
 import core.report.Logger;
-import dataType.OrangeHRM.Account;
+import dataObject.OrangeHRM.Account;
 import dataType.OrangeHRM.LeftPanelMenuItem;
 import dataType.OrangeHRM.TopBarMenuItem;
 import dataType.OrangeHRM.UserRole;
@@ -27,7 +27,6 @@ public class LoginTest extends TestBase {
 	public void TC01() {
 
 		AssertHelper assertHelper = new AssertHelper();
-
 		Account account = new Account(UserRole.ADMIN);
 		Logger.info("Step 1: Navigate to OrangeHRM.");
 
@@ -35,8 +34,7 @@ public class LoginTest extends TestBase {
 		assertHelper.assertTrue(loginPage.isDisplayed(), "The login form should be displayed.");
 
 		Logger.verify("VP. OrangeHRM copyright text should be displayed.");
-		assertHelper.assertTrue(loginPage.isCopyRightTextDisplayed(Constant.COMPANY, Constant.VERSION),
-				"OrangeHRM copyright text should be displayed.");
+		assertHelper.assertTrue(loginPage.isCopyRightTextDisplayed(Constant.COMPANY, Constant.VERSION), "OrangeHRM copyright text should be displayed.");
 
 		Logger.info("Step 2: Enter a valid username in the \"Username\" textbox.");
 		loginPage.enterUsername(account.getUsername());
@@ -48,16 +46,13 @@ public class LoginTest extends TestBase {
 		loginPage.clickLoginBtn();
 
 		Logger.verify("VP. The PIM page should be displayed.");
-		assertHelper.assertTrue(pimPage.isHeaderTitleDisplayed(LeftPanelMenuItem.PIM),
-				"The PIM page should be displayed.");
+		assertHelper.assertTrue(pimPage.isHeaderTitleDisplayed(LeftPanelMenuItem.PIM), "The PIM page should be displayed.");
 
 		Logger.verify("VP. The currently selected tab is \"Employee List\".");
-		assertHelper.assertTrue(pimPage.isTopBarMenuItemActived(TopBarMenuItem.EMPLOYEELIST),
-				"The currently selected tab is \"Employee List\".");
+		assertHelper.assertTrue(pimPage.isTopBarMenuItemActived(TopBarMenuItem.EMPLOYEE_LIST), "The currently selected tab is \"Employee List\".");
 
 		Logger.verify("VP. OrangeHRM copyright text should be displayed.");
-		assertHelper.assertTrue(pimPage.isCopyRightTextDisplayed(Constant.COMPANY, Constant.VERSION),
-				"OrangeHRM copyright text should be displayed.");
+		assertHelper.assertTrue(pimPage.isCopyRightTextDisplayed(Constant.COMPANY, Constant.VERSION), "OrangeHRM copyright text should be displayed.");
 
 	}
 
@@ -66,14 +61,14 @@ public class LoginTest extends TestBase {
 	public void TC02() {
 
 		AssertHelper assertHelper = new AssertHelper();
-
+		Account account = new Account(RandomHelper.randomString(), RandomHelper.randomString());
 		Logger.info("Step 1: Navigate to OrangeHRM.");
 
 		Logger.info("Step 2: Enter an invalid username in the \"Username\" textbox.");
-		loginPage.enterUsername(RandomHelper.randomString());
-
+		loginPage.enterUsername(account.getUsername());
+		
 		Logger.info("Step 3: Enter a valid password in the \"Password\" textbox.");
-		loginPage.enterPassword(RandomHelper.randomString());
+		loginPage.enterPassword(account.getPassword());
 
 		Logger.info("Step 4: Click the \"Login\" button.");
 		loginPage.clickLoginBtn();
@@ -82,8 +77,7 @@ public class LoginTest extends TestBase {
 		assertHelper.assertTrue(loginPage.isDisplayed(), "The Login page should still be displayed.");
 
 		Logger.verify("VP. The error \"Invalid credentials\" message should be displayed.");
-		assertHelper.assertEquals(loginPage.getErrorMessage(), Constant.ERROR_LOGIN_MESSAGE,
-				"The error \"Invalid credentials\" message should be displayed.");
+		assertHelper.assertEquals(loginPage.getErrorMessage(), Constant.ERROR_LOGIN_MESSAGE, "The error \"Invalid credentials\" message should be displayed.");
 
 	}
 
@@ -92,7 +86,6 @@ public class LoginTest extends TestBase {
 	public void TC03() {
 
 		AssertHelper assertHelper = new AssertHelper();
-
 		Account account = new Account(UserRole.ADMIN);
 		Logger.info("Precondition: Login successfully with a valid account.");
 		pimPage = loginPage.loginOrangeHRM(account);

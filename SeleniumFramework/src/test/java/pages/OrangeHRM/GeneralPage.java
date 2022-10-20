@@ -71,11 +71,16 @@ public class GeneralPage {
 		clickLogoutBtn();
 		return new LoginPage();
 	}
-
-	@Step("Goto Admin page")
-	public AdminPage gotoAdminPage() {
-		leftPanel.generateDynamic(LeftPanelMenuItem.ADMIN.getName());
+	
+	@Step("Click tab {0} on Left panel")
+	public void clickTabOnLeftPanel(String tabName) {
+		leftPanel.generateDynamic(tabName);
 		leftPanel.click();
+	}
+
+	@Step("Click Admin tab on Left panel")
+	public AdminPage clickAdminTabOnLeftPanel() {
+		clickTabOnLeftPanel(LeftPanelMenuItem.ADMIN.getName());
 		return new AdminPage();
 	}
 

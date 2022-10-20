@@ -3,7 +3,7 @@ package pages.OrangeHRM;
 import core.element.wrapper.Button;
 import core.element.wrapper.Label;
 import core.element.wrapper.TextBox;
-import dataType.OrangeHRM.Account;
+import dataObject.OrangeHRM.Account;
 import io.qameta.allure.Step;
 
 public class LoginPage extends GeneralPage {

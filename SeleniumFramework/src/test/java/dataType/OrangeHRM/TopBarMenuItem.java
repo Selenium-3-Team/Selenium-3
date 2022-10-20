@@ -2,9 +2,9 @@ package dataType.OrangeHRM;
 
 public enum TopBarMenuItem {
 
-	USERMANAGEMENT("User Management"), JOB("Job"), ORGANIZATION("Organization"), QUALIFICATIONS("Qualifications"),
-	NATIONALTITIES("Nationalities"), CORPORATEBRANDING("Corporate Branding"), CONFIGURATION("Configuration"),
-	EMPLOYEELIST("Employee List"), ADDEMPLOYEELIST("Add Employee"), REPORTS("Reports");
+	USER_MANAGEMENT("User Management"), JOB("Job"), ORGANIZATION("Organization"), QUALIFICATIONS("Qualifications"),
+	NATIONALTITIES("Nationalities"), CORPORATE_BRANDING("Corporate Branding"), CONFIGURATION("Configuration"),
+	EMPLOYEE_LIST("Employee List"), ADD_EMPLOYEE("Add Employee"), REPORTS("Reports");
 
 	private final String value;
 

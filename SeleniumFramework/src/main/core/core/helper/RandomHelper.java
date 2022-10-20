@@ -42,7 +42,7 @@ public class RandomHelper {
 		String number = "0123456789";
 		String string = "";
 		Random rd = new Random();
-		int indx = rd.nextInt(20);
+		int indx = getRandomNumber(6, 20);
 
 		for (int i = 0; i < indx; i++) {
 			int kt = rd.nextInt(2);
