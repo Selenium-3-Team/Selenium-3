@@ -435,11 +435,18 @@ public class Element implements IWaiter, IAction, IInfo {
 			return false;
 		}
 	}
-	
+
+	/**
+	 * Is the attribute value of the element currently displayed or not?
+	 * 
+	 * @param attribute     - a string of attribute name
+	 * @param expectedValue - the expected value of attribute
+	 * 
+	 * @return True if attribute value displayed, false otherwise
+	 */
 	@Override
 	public boolean isAttributeValueDisplayed(String attribute, String expectedValue) {
-		logger.info(
-				String.format("Check attribute value of %s", getLocator().toString()));
+		logger.info(String.format("Check attribute value of %s", getLocator().toString()));
 		try {
 			return getElement().getAttribute(attribute).contains(expectedValue);
 		} catch (Exception e) {

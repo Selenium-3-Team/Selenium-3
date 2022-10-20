@@ -140,8 +140,8 @@ public class Link extends Element {
 	/**
 	 * Get href of link
 	 */
-	public void getReference() {
-		super.getAttribute("href");
+	public String getReference() {
+		return super.getAttribute("href");
 	}
 
 }

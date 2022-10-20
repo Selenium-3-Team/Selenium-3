@@ -1,8 +1,6 @@
 package core.utilities;
 
 import java.io.File;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.logging.Logger;
 
 import org.apache.commons.io.FileUtils;
@@ -12,25 +10,43 @@ import org.openqa.selenium.TakesScreenshot;
 import core.common.Constant;
 import core.driver.manager.DriverManager;
 
+/**
+ * A collection of methods to deal with various text related activities
+ */
 public class Utilities {
-	
+
+	/**
+	 * Contains log of the utilities used
+	 */
 	private static final Logger logger = Constant.createLogger(Utilities.class.getName());
-	
+
+	/**
+	 * Get project absolute path
+	 * 
+	 * @return a path string
+	 */
 	public static String getProjectPath() {
 		return System.getProperty("user.dir");
 	}
 
-	public static String getDateNow(String format) {
-		SimpleDateFormat formatter = new SimpleDateFormat(format);
-		Date date = new Date();
-		return formatter.format(date);
-	}
-
+	/**
+	 * Capture the screenshot
+	 * 
+	 * @return the output type for a screenshot
+	 */
 	public static byte[] takeScreenShot() {
 		TakesScreenshot scrShot = ((TakesScreenshot) DriverManager.getDriver());
 		return (byte[]) (scrShot.getScreenshotAs(OutputType.BYTES));
 	}
 
+	/**
+	 * Capture the screenshot
+	 * 
+	 * @param filename - a string of file name
+	 * @param filepath - a string of location
+	 * @return the specified location
+	 * @throws Exception - throw if driver cannot capture the screenshot
+	 */
 	public static String takeScreenShot(String filename, String filepath) throws Exception {
 		String path = "";
 		try {
@@ -44,5 +60,4 @@ public class Utilities {
 		}
 		return path;
 	}
-
 }

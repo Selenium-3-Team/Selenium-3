@@ -107,5 +107,5 @@ public class Utilities {
 		String newString = originalString.replaceAll(character, "").trim();
 		return newString;
 	}
-	
+
 }
