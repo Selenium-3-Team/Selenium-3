@@ -22,28 +22,26 @@ public class LoginPage extends GeneralPage {
 	}
 
 	@Step("Enter username {0}")
-	public LoginPage enterUsername(String username) {
+	public void enterUsername(String username) {
 		txtUsername.sendKeys(username);
-		return this;
 	}
 
 	@Step("Enter password {0}")
-	public LoginPage enterPassword(String password) {
+	public void enterPassword(String password) {
 		txtPassword.sendKeys(password);
-		return this;
 	}
 
 	@Step("Click Login button")
-	public PIMPage clickLoginBtn() {
+	public void clickLoginBtn() {
 		btnLogin.click();
-		return new PIMPage();
 	}
 
 	@Step("Login to OrangeHRM page")
 	public PIMPage loginOrangeHRM(Account account) {
 		enterUsername(account.getUsername());
 		enterPassword(account.getPassword());
-		return clickLoginBtn();
+		clickLoginBtn();
+		return new PIMPage();
 	}
 
 	@Step("Login failed to OrangeHRM page")

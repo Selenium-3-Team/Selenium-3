@@ -43,7 +43,7 @@ public class LoginTest extends TestBase {
 		loginPage.enterPassword(account.getPassword());
 
 		Logger.info("Step 4: Click the \"Login\" button.");
-		pimPage = loginPage.clickLoginBtn();
+		loginPage.clickLoginBtn();
 
 		Logger.verify("VP. The PIM page should be displayed.");
 		assertTrue(pimPage.isHeaderTitleDisplayed(LeftPanelMenuItem.PIM), "The PIM page should be displayed.");
@@ -62,17 +62,21 @@ public class LoginTest extends TestBase {
 
 		String invalidUsername = "Admin1";
 		String password = "admin123";
-		Logger.info("Step 1: Navigate to OrangeHRM");
+		Logger.info("Step 1: Navigate to OrangeHRM.");
 
-		Logger.info("Step 2: Enter an invalid username in the \"Username\" textbox");
-		Logger.info("Step 3: Enter a valid password in the \"Password\" textbox");
-		Logger.info("Step 4: Click the \"Login\" button");
-		loginPage.loginOrangeHRM(invalidUsername, password);
+		Logger.info("Step 2: Enter an invalid username in the \"Username\" textbox.");
+		loginPage.enterUsername(invalidUsername);
+		
+		Logger.info("Step 3: Enter a valid password in the \"Password\" textbox.");
+		loginPage.enterPassword(password);
+		
+		Logger.info("Step 4: Click the \"Login\" button.");
+		loginPage.clickLoginBtn();
 
-		Logger.verify("4.1. The sLogin page should still be displayed.");
-		assertTrue(loginPage.isDisplayed(), "The Login page should still be displayed. ");
+		Logger.verify("VP. The Login page should still be displayed.");
+		assertTrue(loginPage.isDisplayed(), "The Login page should still be displayed.");
 
-		Logger.verify("4.2. The error \"Invalid credentials\" message should be displayed.");
+		Logger.verify("VP. The error \"Invalid credentials\" message should be displayed.");
 		assertEquals(loginPage.getErrorMessage(), Constant.ERROR_LOGIN_MESSAGE, "The error \"Invalid credentials\" message should be displayed.");
 
 	}
