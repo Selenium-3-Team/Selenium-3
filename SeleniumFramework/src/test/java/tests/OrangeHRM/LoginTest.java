@@ -78,19 +78,21 @@ public class LoginTest extends TestBase {
 	}
 
 	@Test
+	@Description("Test case 03: User can log out of the account successfully.")
 	public void TC03() {
-		Logger.info("Test case 03: User can log out of the account successfully");
 
 		Account account = new Account(UserRole.ADMIN);
-		Logger.info("Precondition: Login successfully with a valid account");
+		Logger.info("Precondition: Login successfully with a valid account.");
 		pimPage = loginPage.loginOrangeHRM(account);
 
-		Logger.info("Step 1: Click on the user's avatar");
-		Logger.info("Step 2: Click on the \"Logout\" button");
-		loginPage = pimPage.logoutOrangeHRM();
+		Logger.info("Step 1: Click on the user's avatar.");
+		pimPage.clickUserDropdown();
+		
+		Logger.info("Step 2: Click on the \"Logout\" button.");
+		loginPage = pimPage.clickLogoutBtn();
 
-		Logger.verify("2. The Login page should still be displayed. ");
-		assertTrue(loginPage.isDisplayed(), "The Login page should still be displayed. ");
+		Logger.verify("VP. The Login page should still be displayed.");
+		assertTrue(loginPage.isDisplayed(), "The Login page should still be displayed.");
 
 	}
 
