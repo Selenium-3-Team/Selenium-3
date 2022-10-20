@@ -8,6 +8,7 @@ import core.report.Logger;
 import dataType.OrangeHRM.Account;
 import dataType.OrangeHRM.TopBarMenuItem;
 import dataType.OrangeHRM.UserRole;
+import io.qameta.allure.Description;
 import pages.OrangeHRM.AdminPage;
 import pages.OrangeHRM.HomePage;
 import pages.OrangeHRM.LoginPage;
@@ -22,8 +23,8 @@ public class PIMTest extends TestBase {
 	AdminPage adminPage = AdminPage.newInstance();
 
 	@Test
+	@Description("Test case 06: User can add a new employee successful without Create Login Details.")
 	public void TC06() {
-		Logger.info("Test case 06: User can add a new employee successful without Create Login Details");
 
 		Account account = new Account(UserRole.ADMIN);
 		String firstName = "Alex";
