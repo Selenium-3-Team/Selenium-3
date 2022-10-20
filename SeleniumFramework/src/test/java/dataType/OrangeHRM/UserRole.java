@@ -4,7 +4,7 @@ public enum UserRole {
 	/**
 	 * Declare constants for user role
 	 */
-	ADMIN("admin"), ESS("ess");
+	ADMIN("Admin"), ESS("ESS");
 
 	private final String userRole;
 

@@ -6,7 +6,7 @@ import static org.testng.Assert.assertTrue;
 import org.testng.annotations.Test;
 
 import core.report.Logger;
-import dataType.OrangeHRM.Account;
+import dataObject.OrangeHRM.Account;
 import dataType.OrangeHRM.LeftPanelMenuItem;
 import dataType.OrangeHRM.TopBarMenuItem;
 import dataType.OrangeHRM.UserRole;
@@ -49,7 +49,7 @@ public class LoginTest extends TestBase {
 		assertTrue(pimPage.isHeaderTitleDisplayed(LeftPanelMenuItem.PIM), "The PIM page should be displayed.");
 
 		Logger.verify("VP. The currently selected tab is \"Employee List\".");
-		assertTrue(pimPage.isTopBarMenuItemActived(TopBarMenuItem.EMPLOYEELIST), "The currently selected tab is \"Employee List\".");
+		assertTrue(pimPage.isTopBarMenuItemActived(TopBarMenuItem.EMPLOYEE_LIST), "The currently selected tab is \"Employee List\".");
 
 		Logger.verify("VP. OrangeHRM copyright text should be displayed.");
 		assertTrue(pimPage.isCopyRightTextDisplayed(Constant.COMPANY, Constant.VERSION), "OrangeHRM copyright text should be displayed.");
@@ -60,15 +60,14 @@ public class LoginTest extends TestBase {
 	@Description("Test case 02: User can't log in successfully with an invalid username and a valid password.")
 	public void TC02() {
 
-		String invalidUsername = "Admin1";
-		String password = "admin123";
+		Account account = new Account("", "");
 		Logger.info("Step 1: Navigate to OrangeHRM.");
 
 		Logger.info("Step 2: Enter an invalid username in the \"Username\" textbox.");
-		loginPage.enterUsername(invalidUsername);
+		loginPage.enterUsername(account.getUsername());
 		
 		Logger.info("Step 3: Enter a valid password in the \"Password\" textbox.");
-		loginPage.enterPassword(password);
+		loginPage.enterPassword(account.getPassword());
 		
 		Logger.info("Step 4: Click the \"Login\" button.");
 		loginPage.clickLoginBtn();

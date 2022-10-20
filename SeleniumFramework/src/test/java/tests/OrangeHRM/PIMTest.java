@@ -5,7 +5,7 @@ import static org.testng.Assert.assertTrue;
 import org.testng.annotations.Test;
 
 import core.report.Logger;
-import dataType.OrangeHRM.Account;
+import dataObject.OrangeHRM.Account;
 import dataType.OrangeHRM.TopBarMenuItem;
 import dataType.OrangeHRM.UserRole;
 import io.qameta.allure.Description;
@@ -36,10 +36,10 @@ public class PIMTest extends TestBase {
 		pimPage = loginPage.loginOrangeHRM(account);
 
 		Logger.info("Step 1: Click \"Add\" or \"Add Employee\" button");
-		pimPage.clickTopBarMenuItem(TopBarMenuItem.ADDEMPLOYEELIST);
+		pimPage.clickTopBarMenuItem(TopBarMenuItem.ADD_EMPLOYEE);
 
 		Logger.verify("1. User is redirected to \"Add Employee\" page.");
-		assertTrue(pimPage.isTopBarMenuItemActived(TopBarMenuItem.ADDEMPLOYEELIST), "User is redirected to \"Add Employee\" page.");
+		assertTrue(pimPage.isTopBarMenuItemActived(TopBarMenuItem.ADD_EMPLOYEE), "User is redirected to \"Add Employee\" page.");
 
 		Logger.info("Step 2: Enter all required information and turn off \"Create Login Details\" option");
 		Logger.info("Step 3: Click \"Save\" ");
