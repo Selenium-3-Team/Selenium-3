@@ -10,6 +10,7 @@ import dataType.OrangeHRM.Account;
 import dataType.OrangeHRM.LeftPanelMenuItem;
 import dataType.OrangeHRM.TopBarMenuItem;
 import dataType.OrangeHRM.UserRole;
+import io.qameta.allure.Description;
 import pages.OrangeHRM.HomePage;
 import pages.OrangeHRM.LoginPage;
 import pages.OrangeHRM.PIMPage;
@@ -23,35 +24,36 @@ public class LoginTest extends TestBase {
 	PIMPage pimPage = PIMPage.newInstance();
 
 	@Test
+	@Description("Test case 01: User can log in successfully with a valid username and a valid password.")
 	public void TC01() {
-		Logger.info("Test case 01: User can log in successfully with a valid username and a valid password");
 
 		Account account = new Account(UserRole.ADMIN);
-		Logger.info("Step 1: Navigate to OrangeHRM");
+		Logger.info("Step 1: Navigate to OrangeHRM.");
 
-		Logger.verify("1.1. The login form should be displayed.");
+		Logger.verify("VP. The login form should be displayed.");
 		assertTrue(loginPage.isDisplayed(), "The login form should be displayed.");
 
-		Logger.verify("1.2. OrangeHRM copyright text should be displayed.");
+		Logger.verify("VP. OrangeHRM copyright text should be displayed.");
 		assertTrue(loginPage.isCopyRightTextDisplayed(Constant.COMPANY, Constant.VERSION), "OrangeHRM copyright text should be displayed.");
 
-		Logger.info("Step 2: Enter a valid username in the \"Username\" textbox");
+		Logger.info("Step 2: Enter a valid username in the \"Username\" textbox.");
 		loginPage.enterUsername(account.getUsername());
 
-		Logger.info("Step 3: Enter a valid password in the \"Password\" textbox");
+		Logger.info("Step 3: Enter a valid password in the \"Password\" textbox.");
 		loginPage.enterPassword(account.getPassword());
 
-		Logger.info("Step 4: Click the \"Login\" button");
+		Logger.info("Step 4: Click the \"Login\" button.");
 		pimPage = loginPage.clickLoginBtn();
 
-		Logger.verify("4.1. VP. The PIM page should be displayed.");
-		assertTrue(pimPage.isHeaderTitleDisplayed(LeftPanelMenuItem.PIM), "The PIM page should be displayed");
+		Logger.verify("VP. The PIM page should be displayed.");
+		assertTrue(pimPage.isHeaderTitleDisplayed(LeftPanelMenuItem.PIM), "The PIM page should be displayed.");
 
-		Logger.verify("4.2. The currently selected tab is \"Employee List\".");
+		Logger.verify("VP. The currently selected tab is \"Employee List\".");
 		assertTrue(pimPage.isTopBarMenuItemActived(TopBarMenuItem.EMPLOYEELIST), "The currently selected tab is \"Employee List\".");
 
-		Logger.verify("4.3 OrangeHRM copyright text should be displayed.");
-		assertTrue(homePage.isCopyRightTextDisplayed(Constant.COMPANY, Constant.VERSION), "OrangeHRM copyright text should be displayed.");
+		Logger.verify("VP. OrangeHRM copyright text should be displayed.");
+		assertTrue(pimPage.isCopyRightTextDisplayed(Constant.COMPANY, Constant.VERSION), "OrangeHRM copyright text should be displayed.");
+		
 	}
 
 	@Test
