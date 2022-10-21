@@ -3,7 +3,7 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 
 <!-- Run parallel with number of threads -->
-<suite name="Suite" thread-count="2" parallel="methods">
+<suite name="Suite" thread-count="5" parallel="methods">
 
 	<listeners>
 		<listener class-name="core.report.TestListener" />
@@ -13,7 +13,7 @@
   		<parameter name="driverConfig" value="chrome.local" />
 		<parameter name="platform" value="windows" />	
   		<classes>
-			<class name="tests.OrangeHRM.LoginTest"><methods><include name="TC02"></include></methods></class>
+			<class name="tests.OrangeHRM.PIMTest"><methods><include name="TC06"></include></methods></class>
   		</classes>
   	</test>
   
