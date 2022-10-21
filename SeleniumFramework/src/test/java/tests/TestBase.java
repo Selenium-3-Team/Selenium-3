@@ -13,9 +13,18 @@ import core.driver.manager.Driver;
 import core.driver.manager.DriverManager;
 import core.report.ExtentTestManager;
 import core.report.TestListener;
+import pages.OrangeHRM.AdminPage;
+import pages.OrangeHRM.HomePage;
+import pages.OrangeHRM.LoginPage;
+import pages.OrangeHRM.PIMPage;
 import utils.constant.Constant;
 
 public class TestBase {
+	
+	protected LoginPage loginPage = LoginPage.newInstance();
+	protected HomePage homePage = HomePage.newInstance();
+	protected PIMPage pimPage = PIMPage.newInstance();
+	protected AdminPage adminPage = AdminPage.newInstance();
 
 	@Parameters({ "driverConfig", "platform" })
 	@BeforeMethod(alwaysRun = true)

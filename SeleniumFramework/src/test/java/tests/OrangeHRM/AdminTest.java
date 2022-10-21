@@ -8,18 +8,9 @@ import dataObject.OrangeHRM.Account;
 import dataType.OrangeHRM.TopBarMenuItem;
 import dataType.OrangeHRM.UserRole;
 import io.qameta.allure.Description;
-import pages.OrangeHRM.AdminPage;
-import pages.OrangeHRM.HomePage;
-import pages.OrangeHRM.LoginPage;
-import pages.OrangeHRM.PIMPage;
 import tests.TestBase;
 
 public class AdminTest extends TestBase {
-
-	LoginPage loginPage = LoginPage.newInstance();
-	HomePage homePage = HomePage.newInstance();
-	PIMPage pimPage = PIMPage.newInstance();
-	AdminPage adminPage = AdminPage.newInstance();
 
 	@Test
 	@Description("Test case 05: Admin User can search employees successfully by \"User Role\".")
