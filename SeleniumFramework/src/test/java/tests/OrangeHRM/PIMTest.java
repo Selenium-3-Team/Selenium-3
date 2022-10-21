@@ -6,6 +6,7 @@ import core.helper.AssertHelper;
 import core.report.Logger;
 import dataObject.OrangeHRM.Account;
 import dataObject.OrangeHRM.Employee;
+import dataType.OrangeHRM.EmployeeInformation;
 import dataType.OrangeHRM.TopBarMenuItem;
 import dataType.OrangeHRM.UserRole;
 import io.qameta.allure.Description;
@@ -45,8 +46,16 @@ public class PIMTest extends TestBase {
 		Logger.info("Step 3: Click \"Save\".");
 		pimPage.clickSaveBtn();
 		
-		Logger.info("Step 4: Verify new added employee is displayed in Employee list.");
+		Logger.verify("VP. Toast Success message is displayed.");
+		assertHelper.assertTrue(pimPage.isToastSuccessMessageDisplayed());
+		
+		Logger.verify("VP. A new employee is added successful.");
 		assertHelper.assertTrue(pimPage.isEmployeeNameDisplayed(employee), "A new employee is added successful.");
+		
+		Logger.info("Step 4: Verify new added employee is displayed in Employee list.");
+		pimPage.clickTopBarMenuItem(TopBarMenuItem.EMPLOYEE_LIST);
+		pimPage.enterValueToEmployeeInformationTextbox(EmployeeInformation.EMPLOYEE_ID_TEXTBOX, employee.getId()).clickSearchBtn();
+		assertHelper.assertTrue(pimPage.isEmployeeDisplayedInEmployeeList(employee), "A new employee is added successful in Employee list.");
 
 	}
 
