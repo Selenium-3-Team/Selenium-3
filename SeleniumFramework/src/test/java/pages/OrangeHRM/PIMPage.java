@@ -1,9 +1,11 @@
 package pages.OrangeHRM;
 
+import core.element.base.Element;
 import core.element.wrapper.Button;
 import core.element.wrapper.Label;
 import core.element.wrapper.TextBox;
 import dataObject.OrangeHRM.Employee;
+import dataType.OrangeHRM.EmployeeInformation;
 import io.qameta.allure.Step;
 
 public class PIMPage extends GeneralPage {
@@ -16,7 +18,11 @@ public class PIMPage extends GeneralPage {
 	private final Button btnSave = new Button("//button[@type='submit' and normalize-space(.)='Save']");
 	// Employee form
 	private final Label lblEmployeeName = new Label("//div[@class='orangehrm-edit-employee-name']//h6[text()='%s']");
-
+	// Employee Information
+	private final Element employeeInfoRow = new Element("//div[contains(@class,'oxd-table-card')]//div[contains(@class,'oxd-table-cell') and normalize-space(.)='%s']/following-sibling::div[normalize-space(.)='%s']/following-sibling::div[normalize-space(.)='%s']");
+	private final TextBox txtInEmployeeInformation = new TextBox("//label[normalize-space(text())='%s']/parent::div/following-sibling::div//input");
+	private final Button btnSeach = new Button("//button[@type='submit' and normalize-space(.)='Search']");
+	
 	private static PIMPage instance;
 
 	public static PIMPage newInstance() {
@@ -42,13 +48,19 @@ public class PIMPage extends GeneralPage {
 
 	@Step("Enter id {0}")
 	public void enterEmployeeId(String id) {
-		txtEmployeeId.clear();
+		txtEmployeeId.clearByHotKeys();
 		txtEmployeeId.sendKeys(id);
 	}
 
 	@Step("Click Save button")
 	public void clickSaveBtn() {
 		btnSave.click();
+	}
+	
+	@Step("Click Search button")
+	public PIMPage clickSearchBtn() {
+		btnSeach.click();
+		return this;
 	}
 	
 	@Step("Enter all required information")
@@ -81,5 +93,18 @@ public class PIMPage extends GeneralPage {
 	public boolean isEmployeeNameDisplayed(Employee employee) {
 		lblEmployeeName.generateDynamic(String.format("%s %s", employee.getFirstName(), employee.getLastName()));
 		return lblEmployeeName.isDisplayed();
+	}
+	
+	@Step("Enter value {0} to Employee Information Textbox")
+	public PIMPage enterValueToEmployeeInformationTextbox(EmployeeInformation itemName, String value) {
+		txtInEmployeeInformation.generateDynamic(itemName.getName());
+		txtInEmployeeInformation.sendKeys(value);
+		return this;
+	}
+	
+	@Step("Check if new added employee is displayed in Employee list")
+	public boolean isEmployeeDisplayedInEmployeeList(Employee employee) {
+		employeeInfoRow.generateDynamic(employee.getId(), String.format("%s %s", employee.getFirstName(), employee.getMiddleName()), employee.getLastName());
+		return employeeInfoRow.isDisplayed();
 	}
 }

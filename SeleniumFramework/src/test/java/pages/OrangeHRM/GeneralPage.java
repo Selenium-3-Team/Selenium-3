@@ -19,7 +19,9 @@ public class GeneralPage {
 	private final Element topBarMenuItem = new Element("//nav[@aria-label='Topbar Menu']//li[normalize-space(.)='%s']");
 	// Left panel
 	private final Element leftPanel = new Element("//nav[@aria-label='Sidepanel']//span[text()='%s']");
-
+	// Toast message
+	private final Label lblToastSuccessMessage = new Label("//p[contains(@class,'toast-message') and .='Successfully Saved']/preceding-sibling::p[contains(@class, 'toast-title') and .='Success']/parent::div[contains(@class, 'toast-content--success')]");
+	
 	private static GeneralPage instance;
 
 	public static GeneralPage newInstance() {
@@ -51,6 +53,11 @@ public class GeneralPage {
 	public boolean isTopBarMenuItemActived(TopBarMenuItem menuItem) {
 		topBarMenuItem.generateDynamic(menuItem.getName());
 		return topBarMenuItem.isAttributeValueDisplayed("class", "--visited");
+	}
+	
+	@Step("Check if toast Success message is displayed")
+	public boolean isToastSuccessMessageDisplayed() {
+		return lblToastSuccessMessage.isDisplayed();
 	}
 
 	@Step("Click User dropdown")

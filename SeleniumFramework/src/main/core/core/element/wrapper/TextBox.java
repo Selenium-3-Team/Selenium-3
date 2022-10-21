@@ -1,6 +1,7 @@
 package core.element.wrapper;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 
 import core.element.base.Element;
 import core.element.setting.FindBy;
@@ -135,5 +136,12 @@ public class TextBox extends Element {
 	 */
 	public void clear() {
 		super.clear();
+	}
+	
+	/**
+	 * Clear text of text box
+	 */
+	public void clearByHotKeys() {
+		super.sendKeys(Keys.chord(Keys.CONTROL,"a",Keys.DELETE));
 	}
 }
