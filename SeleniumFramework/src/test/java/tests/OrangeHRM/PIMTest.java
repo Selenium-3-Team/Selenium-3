@@ -5,6 +5,7 @@ import org.testng.annotations.Test;
 import core.helper.AssertHelper;
 import core.report.Logger;
 import dataObject.OrangeHRM.Account;
+import dataObject.OrangeHRM.Employee;
 import dataType.OrangeHRM.TopBarMenuItem;
 import dataType.OrangeHRM.UserRole;
 import io.qameta.allure.Description;
@@ -27,10 +28,7 @@ public class PIMTest extends TestBase {
 
 		AssertHelper assertHelper = new AssertHelper();
 		Account account = new Account(UserRole.ADMIN);
-		String firstName = "Alex";
-		String middleName = " Mac";
-		String lastName = "Nguyen";
-		String employeeId = "123";
+		Employee employee = new Employee();
 
 		Logger.info("Precondition: Login successfully with a valid account.");
 		pimPage = loginPage.loginOrangeHRM(account);
@@ -42,13 +40,13 @@ public class PIMTest extends TestBase {
 		assertHelper.assertTrue(pimPage.isTopBarMenuItemActived(TopBarMenuItem.ADD_EMPLOYEE), "User is redirected to \"Add Employee\" page.");
 
 		Logger.info("Step 2: Enter all required information and turn off \"Create Login Details\" option.");
+		pimPage.enterAllRequiredOnAddEmployeeForm(employee);
+		
 		Logger.info("Step 3: Click \"Save\".");
+		pimPage.clickSaveBtn();
+		
 		Logger.info("Step 4: Verify new added employee is displayed in Employee list.");
-		pimPage.addEmployeeWithoutCreateLoginDetails(firstName, middleName, lastName, employeeId);
-
-		Logger.verify("VP. A new employee is added successful.");
-		Logger.verify("VP. The employee is displayed.");
-		assertHelper.assertTrue(pimPage.isEmployeeNameDisplayed(firstName + " " + lastName), "A new employee is added successful.");
+		assertHelper.assertTrue(pimPage.isEmployeeNameDisplayed(employee), "A new employee is added successful.");
 
 	}
 

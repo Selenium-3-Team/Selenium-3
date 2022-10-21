@@ -1,7 +1,9 @@
 package utils.helper;
 
+import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import org.openqa.selenium.WebDriver;
@@ -106,6 +108,10 @@ public class Utilities {
 	public static String removeAllCharacterInString(String originalString, String character) {
 		String newString = originalString.replaceAll(character, "").trim();
 		return newString;
+	}
+	
+	public static String generateEmployeeId() {
+		return new SimpleDateFormat("HHmmss").format(new Date());
 	}
 
 }
