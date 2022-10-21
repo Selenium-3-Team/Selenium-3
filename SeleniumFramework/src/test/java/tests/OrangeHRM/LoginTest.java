@@ -10,17 +10,10 @@ import dataType.OrangeHRM.LeftPanelMenuItem;
 import dataType.OrangeHRM.TopBarMenuItem;
 import dataType.OrangeHRM.UserRole;
 import io.qameta.allure.Description;
-import pages.OrangeHRM.HomePage;
-import pages.OrangeHRM.LoginPage;
-import pages.OrangeHRM.PIMPage;
 import tests.TestBase;
 import utils.constant.Constant;
 
 public class LoginTest extends TestBase {
-
-	LoginPage loginPage = LoginPage.newInstance();
-	HomePage homePage = HomePage.newInstance();
-	PIMPage pimPage = PIMPage.newInstance();
 
 	@Test
 	@Description("Test case 01: User can log in successfully with a valid username and a valid password.")
@@ -36,15 +29,9 @@ public class LoginTest extends TestBase {
 		Logger.verify("VP. OrangeHRM copyright text should be displayed.");
 		assertHelper.assertTrue(loginPage.isCopyRightTextDisplayed(Constant.COMPANY, Constant.VERSION), "OrangeHRM copyright text should be displayed.");
 
-		Logger.info("Step 2: Enter a valid username in the \"Username\" textbox.");
-		loginPage.enterUsername(account.getUsername());
-
-		Logger.info("Step 3: Enter a valid password in the \"Password\" textbox.");
-		loginPage.enterPassword(account.getPassword());
-
-		Logger.info("Step 4: Click the \"Login\" button.");
-		loginPage.clickLoginBtn();
-
+		Logger.info("Step 2: Login successfully with a valid account.");
+		pimPage = loginPage.loginOrangeHRM(account);
+		
 		Logger.verify("VP. The PIM page should be displayed.");
 		assertHelper.assertTrue(pimPage.isHeaderTitleDisplayed(LeftPanelMenuItem.PIM), "The PIM page should be displayed.");
 
@@ -64,7 +51,7 @@ public class LoginTest extends TestBase {
 		Account account = new Account(RandomHelper.randomString(), RandomHelper.randomString());
 		Logger.info("Step 1: Navigate to OrangeHRM.");
 
-		Logger.info("Step 2: Enter an invalid username in the \"Username\" textbox.");
+		Logger.info("Step 2: Login with a invalid account.");
 		loginPage.enterUsername(account.getUsername());
 		
 		Logger.info("Step 3: Enter a valid password in the \"Password\" textbox.");

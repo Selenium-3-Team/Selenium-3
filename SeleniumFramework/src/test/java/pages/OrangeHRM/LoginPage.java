@@ -21,6 +21,13 @@ public class LoginPage extends GeneralPage {
 		return LoginPage.instance;
 	}
 
+	// Get Value
+	@Step("Get the error message")
+	public String getErrorMessage() {
+		return lblErrorMessage.getLabelText();
+	}
+
+	// Method
 	@Step("Enter username {0}")
 	public void enterUsername(String username) {
 		txtUsername.sendKeys(username);
@@ -44,27 +51,15 @@ public class LoginPage extends GeneralPage {
 		return new PIMPage();
 	}
 
-	@Step("Login failed to OrangeHRM page")
-	public LoginPage loginOrangeHRM(String username, String password) {
-		txtUsername.sendKeys(username);
-		txtPassword.sendKeys(password);
-		btnLogin.click();
-		return this;
-	}
-
 	@Step("Check if login button is displayed")
 	public boolean isLoginButtonDisplayed() {
 		return btnLogin.isDisplayed();
 	}
 
+	// Verify
 	@Step("Check if login page is displayed")
 	public boolean isDisplayed() {
 		return btnLogin.isDisplayed() && txtUsername.isDisplayed() && txtPassword.isDisplayed();
-	}
-
-	@Step("Get the error message")
-	public String getErrorMessage() {
-		return lblErrorMessage.getLabelText();
 	}
 
 }
