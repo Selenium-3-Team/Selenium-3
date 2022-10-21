@@ -13,7 +13,7 @@ public class PIMPage extends GeneralPage {
 	private final TextBox txtMiddleName = new TextBox("//input[@name='middleName']");
 	private final TextBox txtLastName = new TextBox("//input[@name='lastName']");
 	private final TextBox txtEmployeeId = new TextBox("//label[text()='Employee Id']/parent::div/following-sibling::div//input");
-	private final Button btnSave = new Button("//button[@type='submit']");
+	private final Button btnSave = new Button("//button[@type='submit' and normalize-space(.)='Save']");
 	// Employee form
 	private final Label lblEmployeeName = new Label("//div[@class='orangehrm-edit-employee-name']//h6[text()='%s']");
 
@@ -41,7 +41,7 @@ public class PIMPage extends GeneralPage {
 	}
 
 	@Step("Enter id {0}")
-	public void enterUsername(String id) {
+	public void enterEmployeeId(String id) {
 		txtEmployeeId.clear();
 		txtEmployeeId.sendKeys(id);
 	}
@@ -53,18 +53,18 @@ public class PIMPage extends GeneralPage {
 	
 	@Step("Enter all required information")
 	public void enterAllRequiredOnAddEmployeeForm(String firstName, String middleName, String lastName, String employeeId) {
-		enterUsername(firstName);
+		enterFirstName(firstName);
 		enterMiddleName(middleName);
 		enterLastName(lastName);
-		enterUsername(employeeId);
+		enterEmployeeId(employeeId);
 	}
 	
 	@Step("Enter all required information")
 	public void enterAllRequiredOnAddEmployeeForm(Employee employee) {
-		enterUsername(employee.getFirstName());
+		enterFirstName(employee.getFirstName());
 		enterMiddleName(employee.getMiddleName());
 		enterLastName(employee.getLastName());
-		enterUsername(employee.getId());
+		enterEmployeeId(employee.getId());
 	}
 
 	@Step("Add Employee without create login details")

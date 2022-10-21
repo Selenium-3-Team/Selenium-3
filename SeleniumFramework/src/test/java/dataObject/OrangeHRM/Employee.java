@@ -1,6 +1,7 @@
 package dataObject.OrangeHRM;
 
 import core.helper.RandomHelper;
+import utils.helper.Utilities;
 
 public class Employee {
 
@@ -10,10 +11,10 @@ public class Employee {
 	private String id;
 
 	public Employee() {
-		this.firstName = RandomHelper.getRandomString("first-name");
-		this.middleName = RandomHelper.getRandomString("middle-name");
-		this.lastName = RandomHelper.getRandomString("last-name");
-		this.id = RandomHelper.getRandomString("id");
+		this.firstName = RandomHelper.getRandomString("first");
+		this.middleName = RandomHelper.getRandomString("middle");
+		this.lastName = RandomHelper.getRandomString("last");
+		this.id = Utilities.generateEmployeeId();
 	}
 
 	public Employee(String firstName, String middleName, String lastName, String id) {
