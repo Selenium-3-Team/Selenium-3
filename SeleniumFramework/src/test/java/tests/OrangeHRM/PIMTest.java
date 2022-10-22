@@ -27,6 +27,7 @@ public class PIMTest extends TestBase {
 
 		Logger.info("Step 1: Click \"Add\" or \"Add Employee\" button.");
 		pimPage.clickTopBarMenuItem(TopBarMenuItem.ADD_EMPLOYEE);
+		pimPage.waitForPageLoad();
 
 		Logger.verify("VP. User is redirected to \"Add Employee\" page.");
 		assertHelper.assertTrue(pimPage.isTopBarMenuItemActived(TopBarMenuItem.ADD_EMPLOYEE), "User is redirected to \"Add Employee\" page.");
@@ -37,14 +38,12 @@ public class PIMTest extends TestBase {
 		Logger.info("Step 3: Click \"Save\".");
 		pimPage.clickSaveBtn().waitForEmployeeDetailsDisplayed();
 		
-		Logger.verify("VP. Toast Success message is displayed.");
-		assertHelper.assertTrue(pimPage.isToastSuccessMessageDisplayed());
-		
 		Logger.verify("VP. A new employee is added successful.");
 		assertHelper.assertTrue(pimPage.isEmployeeNameDisplayed(employee), "A new employee is added successful.");
 		
 		Logger.info("Step 4: Verify new added employee is displayed in Employee list.");
 		pimPage.clickTopBarMenuItem(TopBarMenuItem.EMPLOYEE_LIST);
+		pimPage.waitForPageLoad();
 		pimPage.enterValueToEmployeeInformationTextbox(EmployeeInformation.EMPLOYEE_ID_TEXTBOX, employee.getId()).clickSearchBtn();
 		assertHelper.assertTrue(pimPage.isEmployeeDisplayedInEmployeeList(employee), "A new employee is added successful in Employee list.");
 

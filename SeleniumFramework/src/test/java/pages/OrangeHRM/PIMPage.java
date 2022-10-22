@@ -98,7 +98,8 @@ public class PIMPage extends GeneralPage {
 	
 	@Step("Wait for employee displayed")
 	public PIMPage waitForEmployeeDetailsDisplayed() {
-		viewPersonalDetailedFrame.waitForEmployeeDetailsDisplayed();
+		viewPersonalDetailedFrame.waitForLoadingIconDisappear();
+		viewPersonalDetailedFrame.waitForFrameTitleDisplayed();
 		return this;
 	}
 	
