@@ -103,5 +103,11 @@ public class GeneralPage {
 		topBarMenuItem.click();
 		return this;
 	}
+	
+	@Step("Click Leave tab on Left panel")
+	public LeavePage clickLeaveTabOnLeftPanel() {
+		clickTabOnLeftPanel(LeftPanelMenuItem.LEAVE.getValue());
+		return new LeavePage();
+	}
 
 }

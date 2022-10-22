@@ -1,7 +1,14 @@
 package dataObject.OrangeHRM;
 
+import com.google.gson.JsonObject;
+
+import core.helper.JsonHelper;
 import core.helper.RandomHelper;
+import dataType.OrangeHRM.EmployeeData;
+import dataType.OrangeHRM.UserRole;
+import utils.constant.Constant;
 import utils.helper.Utilities;
+import core.utilities.CoreUtilities;
 
 public class Employee {
 
@@ -15,6 +22,15 @@ public class Employee {
 		this.middleName = RandomHelper.getRandomString("middle");
 		this.lastName = RandomHelper.getRandomString("last");
 		this.id = Utilities.generateEmployeeId();
+	}
+
+	public Employee(EmployeeData employeeData) {
+		JsonObject employee = JsonHelper.getJsonObject(CoreUtilities.getProjectPath() + Constant.EMPLOYEE_DATA);
+		String key = employeeData.getValue().toLowerCase();
+		this.firstName = employee.get(key).getAsJsonObject().get("firstName").getAsString();
+		this.middleName = employee.get(key).getAsJsonObject().get("middleName").getAsString();
+		this.lastName = employee.get(key).getAsJsonObject().get("lastName").getAsString();
+		this.id = employee.get(key).getAsJsonObject().get("id").getAsString();
 	}
 
 	public Employee(String firstName, String middleName, String lastName, String id) {

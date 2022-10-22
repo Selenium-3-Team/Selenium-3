@@ -1,13 +1,14 @@
 package utils.constant;
 
-import core.utilities.Utilities;
+import core.utilities.CoreUtilities;
 
 public class Constant {
 
 	public static final String ORANGEHRM_URL = "https://opensource-demo.orangehrmlive.com/";
-	public static final String DRIVER_SETTING_FILE = Utilities.getProjectPath()
+	public static final String DRIVER_SETTING_FILE = CoreUtilities.getProjectPath()
 			+ "\\src\\test\\resource\\driver.setting.properties.json";
 	public static final String ACCOUNT_DATA = "\\src\\test\\resource\\data\\OrangeHRM\\Account.json";
+	public static final String EMPLOYEE_DATA = "\\src\\test\\resource\\data\\OrangeHRM\\Employee.json";
 
 	// Application info
 	public static final String COMPANY = "OrangeHRM, Inc";

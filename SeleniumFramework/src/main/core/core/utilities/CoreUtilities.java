@@ -13,12 +13,12 @@ import core.driver.manager.DriverManager;
 /**
  * A collection of methods to deal with various text related activities
  */
-public class Utilities {
+public class CoreUtilities {
 
 	/**
 	 * Contains log of the utilities used
 	 */
-	private static final Logger logger = Constant.createLogger(Utilities.class.getName());
+	private static final Logger logger = Constant.createLogger(CoreUtilities.class.getName());
 
 	/**
 	 * Get project absolute path

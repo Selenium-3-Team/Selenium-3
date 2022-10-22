@@ -3,7 +3,7 @@ package dataObject.OrangeHRM;
 import com.google.gson.JsonObject;
 
 import core.helper.JsonHelper;
-import core.utilities.Utilities;
+import core.utilities.CoreUtilities;
 import dataType.OrangeHRM.UserRole;
 import utils.constant.Constant;
 
@@ -18,7 +18,7 @@ public class Account {
 	}
 
 	public Account(UserRole userRole) {
-		JsonObject account = JsonHelper.getJsonObject(Utilities.getProjectPath() + Constant.ACCOUNT_DATA);
+		JsonObject account = JsonHelper.getJsonObject(CoreUtilities.getProjectPath() + Constant.ACCOUNT_DATA);
 		String key = userRole.getValue().toLowerCase();
 		this.username = account.get(key).getAsJsonObject().get("username").getAsString();
 		this.password = account.get(key).getAsJsonObject().get("password").getAsString();
