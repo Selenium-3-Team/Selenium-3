@@ -42,10 +42,15 @@ public class LoginPage extends GeneralPage {
 		return this;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Step("Click Login button")
-	public LoginPage clickLoginBtn() {
+	public <T> T clickLoginBtn() {
 		btnLogin.click();
-		return this;
+		if (isLoginButtonDisplayed()) {
+			return (T) new LoginPage();
+		} else {
+			return (T) new PIMPage();
+		}
 	}
 
 	@Step("Login to OrangeHRM page")
