@@ -1,6 +1,9 @@
 package pages.OrangeHRM;
 
+import java.util.List;
+
 import dataObject.OrangeHRM.Employee;
+import dataType.OrangeHRM.EmployeeInfoRecordColumnTitle;
 import dataType.OrangeHRM.EmployeeInformation;
 import dataType.OrangeHRM.LeftPanelMenuItem;
 import frames.OrangeHRM.AddEmployeeFrame;
@@ -37,6 +40,7 @@ public class PIMPage extends GeneralPage {
 	@Step("Click Search button")
 	public PIMPage clickSearchBtn() {
 		addEmployeeFrame.clickSearchButton();
+		viewEmployeeListFrame.waitForLoadingIconDisappear();
 		return this;
 	}
 	
@@ -150,6 +154,35 @@ public class PIMPage extends GeneralPage {
 		enterNewPassword(newPassword);
 		enterConfirmPassword(confirmPassword);
 		return this;
+	}
+	
+	@Step("Click {0} dropdown on the System Users")
+	public PIMPage clickDropdownOnEmployeeInformation(String drpName) {
+		viewEmployeeListFrame.clickDropdownOption(drpName);
+		return this;
+	}
+	
+	@Step("Select {0} option")
+	public PIMPage selectOption(String optionName) {
+		viewEmployeeListFrame.selectOption(optionName);
+		return this;
+	}
+	
+	@Step("Select the User Role dropdown {0} with value {1}")
+	public PIMPage selectOptionOnEmployeeInformation(EmployeeInformation title, String value) {
+		clickDropdownOnEmployeeInformation(title.getValue());
+		selectOption(value);
+		return this;
+	}
+	
+	@Step("Get all cell value of column record table with title {0}")
+	public List<String> getAllCellValueOfColumn(EmployeeInfoRecordColumnTitle title) {
+		return viewEmployeeListFrame.getAllCellValueOfColumn(title);
+	}
+	
+	@Step("Check if all cell of column {0} is sorted in alphabel")
+	public boolean isAllCellValueOfColumnSortedAlphabet(EmployeeInfoRecordColumnTitle title) {
+		return viewEmployeeListFrame.isAllCellValueOfColumnSortedAlphabet(title);
 	}
 
 }
