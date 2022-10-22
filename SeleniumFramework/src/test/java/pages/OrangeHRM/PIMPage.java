@@ -4,6 +4,7 @@ import dataObject.OrangeHRM.Employee;
 import dataType.OrangeHRM.EmployeeInformation;
 import dataType.OrangeHRM.LeftPanelMenuItem;
 import frames.OrangeHRM.AddEmployeeFrame;
+import frames.OrangeHRM.UpdatePasswordFrame;
 import frames.OrangeHRM.ViewEmployeeListFrame;
 import frames.OrangeHRM.ViewPersonalDetailedFrame;
 import io.qameta.allure.Step;
@@ -15,7 +16,8 @@ public class PIMPage extends GeneralPage {
 	private final ViewPersonalDetailedFrame viewPersonalDetailedFrame = new ViewPersonalDetailedFrame();
 	private final ViewEmployeeListFrame viewEmployeeListFrame = new ViewEmployeeListFrame();
 	private final AddEmployeeFrame addEmployeeFrame = new AddEmployeeFrame();
-	
+	private final UpdatePasswordFrame updatePasswordFrame = new UpdatePasswordFrame();
+
 	private static PIMPage instance;
 
 	public static PIMPage newInstance() {
@@ -32,6 +34,19 @@ public class PIMPage extends GeneralPage {
 		return this;
 	}
 	
+	@Step("Click Search button")
+	public PIMPage clickSearchBtn() {
+		addEmployeeFrame.clickSearchButton();
+		return this;
+	}
+	
+	@Step("Click Save button")
+	public PIMPage clickSaveBtn() {
+		addEmployeeFrame.clickSaveButton();
+		return this;
+	}
+
+	// Add Employee form
 	@Step("Enter firstname {0}")
 	public void enterFirstName(String firstName) {
 		addEmployeeFrame.enterFirstName(firstName);
@@ -52,19 +67,7 @@ public class PIMPage extends GeneralPage {
 		addEmployeeFrame.enterEmployeeId(id);
 	}
 
-	@Step("Click Save button")
-	public PIMPage clickSaveBtn() {
-		addEmployeeFrame.clickSaveButton();;
-		return this;
-	}
-	
-	@Step("Click Search button")
-	public PIMPage clickSearchBtn() {
-		addEmployeeFrame.clickSearchButton();
-		return this;
-	}
-	
-	@Step("Enter all required information")
+	@Step("Enter all required information on Add Employee form")
 	public PIMPage enterAllRequiredOnAddEmployeeForm(String firstName, String middleName, String lastName, String employeeId) {
 		enterFirstName(firstName);
 		enterMiddleName(middleName);
@@ -72,8 +75,8 @@ public class PIMPage extends GeneralPage {
 		enterEmployeeId(employeeId);
 		return this;
 	}
-	
-	@Step("Enter all required information")
+
+	@Step("Enter all required information on Add Employee form")
 	public PIMPage enterAllRequiredOnAddEmployeeForm(Employee employee) {
 		return enterAllRequiredOnAddEmployeeForm(employee.getFirstName(), employee.getMiddleName(), employee.getLastName(), employee.getId());
 	}
@@ -84,13 +87,14 @@ public class PIMPage extends GeneralPage {
 		clickSaveBtn();
 		return this;
 	}
-	
+
 	@Step("Add Employee without create login details")
 	public PIMPage addEmployeeWithoutCreateLoginDetails(Employee employee) {
 		addEmployeeWithoutCreateLoginDetails(employee.getFirstName(), employee.getMiddleName(), employee.getLastName(), employee.getId());
 		return this;
 	}
 
+	// Employee Details frame
 	@Step("Check if the employee is displayed after add employee")
 	public boolean isEmployeeNameDisplayed(Employee employee) {
 		return viewPersonalDetailedFrame.isEmployeeNameDisplayed(employee);
@@ -104,14 +108,41 @@ public class PIMPage extends GeneralPage {
 	}
 	
 	@Step("Enter to {0} Textbox with value {0}")
-	public PIMPage enterValueToEmployeeInformationTextbox(EmployeeInformation title, String value) {
+	public void enterValueToEmployeeInformationTextbox(String title, String value) {
 		viewEmployeeListFrame.enterValueToEmployeeInformationTextbox(title, value);
-		return this;
 	}
 	
+	public PIMPage enterValueToEmployeeInformationTextbox(EmployeeInformation title, String value) {
+		enterValueToEmployeeInformationTextbox(title.getValue(), value);
+		return this;
+	}
+
 	@Step("Check if employee {0} is displayed in Employee list")
 	public boolean isEmployeeDisplayedInEmployeeList(Employee employee) {
 		return viewEmployeeListFrame.isEmployeeDisplayedInEmployeeList(employee);
 	}
 	
+	// Update Password form
+	@Step("Enter {0} to Current Password textbox")
+	public void enterCurrentPassword(String currentPassword) {
+		updatePasswordFrame.enterCurrentPassword(currentPassword);
+	}
+
+	@Step("Enter {0} to New Password textbox")
+	public void enterNewPassword(String currentPassword) {
+		updatePasswordFrame.enterNewPassword(currentPassword);
+	}
+
+	@Step("Enter {0} to Confirm Password textbox")
+	public void enterConfirmPassword(String currentPassword) {
+		updatePasswordFrame.enterConfirmPassword(currentPassword);
+	}
+	
+	@Step("Enter all required information on Update Password form")
+	public void enterAllRequiredOnUpdatePasswordForm(String currentPassword, String newPassword, String confirmPassword) {
+		enterCurrentPassword(currentPassword);
+		enterNewPassword(newPassword);
+		enterConfirmPassword(confirmPassword);
+	}
+
 }

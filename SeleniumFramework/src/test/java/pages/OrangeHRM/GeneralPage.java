@@ -1,10 +1,10 @@
 package pages.OrangeHRM;
 
 import core.element.base.Element;
-import core.element.wrapper.Button;
 import core.element.wrapper.Label;
 import dataType.OrangeHRM.LeftPanelMenuItem;
 import dataType.OrangeHRM.TopBarMenuItem;
+import dataType.OrangeHRM.UserDrpOption;
 import frames.OrangeHRM.ViewSystemUsersFrame;
 import io.qameta.allure.Step;
 
@@ -15,15 +15,13 @@ public class GeneralPage {
 	// Topbar header
 	protected final Label lblHeaderTitle = new Label("//div[@class='oxd-topbar-header-title']//h6[contains(.,'%s')]");
 	protected final Element drpUser = new Element("//li[@class='oxd-userdropdown']");
-	protected final Button btnLogout = new Button("//a[@role='menuitem' and text()='Logout']");
+	protected final Label lblUserDrpOption = new Label("//a[@role='menuitem' and text()='%s']");
 	// Topbar menu
-	protected final Element topBarMenuItem = new Element(
-			"//nav[@aria-label='Topbar Menu']//li[normalize-space(.)='%s']");
+	protected final Element topBarMenuItem = new Element("//nav[@aria-label='Topbar Menu']//li[normalize-space(.)='%s']");
 	// Left panel
 	protected final Element leftPanel = new Element("//nav[@aria-label='Sidepanel']//span[text()='%s']");
 	// Toast message
-	protected final Label lblToastSuccessMessage = new Label(
-			"//p[contains(@class,'toast-message') and .='Successfully Saved']/preceding-sibling::p[contains(@class, 'toast-title') and .='Success']/parent::div[contains(@class, 'toast-content--success')]");
+	protected final Label lblToastSuccessMessage = new Label("//p[contains(@class,'toast-message') and .='Successfully Saved']/preceding-sibling::p[contains(@class, 'toast-title') and .='Success']/parent::div[contains(@class, 'toast-content--success')]");
 
 	protected final ViewSystemUsersFrame viewSystemUsersFrame = new ViewSystemUsersFrame();
 
@@ -35,6 +33,56 @@ public class GeneralPage {
 		return GeneralPage.instance;
 	}
 
+	// Click|Select methods
+	@Step("Click User dropdown")
+	public GeneralPage clickUserDropdown() {
+		drpUser.click();
+		return this;
+	}
+	
+	@Step("Select {0} option in User dropdown")
+	public void selectOptionInUserDrp(String optionName) {
+		lblUserDrpOption.generateDynamic(optionName);
+		lblUserDrpOption.click();
+	}
+	
+	public LoginPage selectLogoutOption() {
+		selectOptionInUserDrp(UserDrpOption.LOGOUT.getValue());
+		return new LoginPage();
+	}
+	
+	public PIMPage selectChangePasswordOption() {
+		selectOptionInUserDrp(UserDrpOption.CHANGE_PASSWORD.getValue());
+		return new PIMPage();
+	}
+	
+	@Step("Logout OrangeHRM page")
+	public LoginPage logoutOrangeHRM() {
+		clickUserDropdown();
+		selectLogoutOption();
+		return new LoginPage();
+	}
+	
+	@Step("Click tab {0} on Left panel")
+	public GeneralPage clickTabOnLeftPanel(String tabName) {
+		leftPanel.generateDynamic(tabName);
+		leftPanel.click();
+		return this;
+	}
+	
+	public AdminPage clickAdminTabOnLeftPanel() {
+		clickTabOnLeftPanel(LeftPanelMenuItem.ADMIN.getValue());
+		return new AdminPage();
+	}
+
+	@Step("Click on top bar menu item")
+	public GeneralPage clickTopBarMenuItem(TopBarMenuItem menuItem) {
+		topBarMenuItem.generateDynamic(menuItem.getValue());
+		topBarMenuItem.click();
+		return this;
+	}
+	
+	// Verify methods
 	@Step("Check if text CopyRight {0} and {1} is displayed")
 	public boolean isCopyRightTextDisplayed(String companyName, String appVersion) {
 		lblCopyRight.generateDynamic(companyName);
@@ -64,44 +112,5 @@ public class GeneralPage {
 	public boolean isToastSuccessMessageDisplayed() {
 		return lblToastSuccessMessage.isDisplayed();
 	}
-
-	@Step("Click User dropdown")
-	public GeneralPage clickUserDropdown() {
-		drpUser.click();
-		return this;
-	}
-
-	@Step("Click Logout button")
-	public LoginPage clickLogoutBtn() {
-		btnLogout.click();
-		return new LoginPage();
-	}
-
-	@Step("Logout OrangeHRM page")
-	public LoginPage logoutOrangeHRM() {
-		clickUserDropdown();
-		clickLogoutBtn();
-		return new LoginPage();
-	}
-
-	@Step("Click tab {0} on Left panel")
-	public GeneralPage clickTabOnLeftPanel(String tabName) {
-		leftPanel.generateDynamic(tabName);
-		leftPanel.click();
-		return this;
-	}
-
-	@Step("Click Admin tab on Left panel")
-	public AdminPage clickAdminTabOnLeftPanel() {
-		clickTabOnLeftPanel(LeftPanelMenuItem.ADMIN.getValue());
-		return new AdminPage();
-	}
-
-	@Step("Click on top bar menu item")
-	public GeneralPage clickTopBarMenuItem(TopBarMenuItem menuItem) {
-		topBarMenuItem.generateDynamic(menuItem.getValue());
-		topBarMenuItem.click();
-		return this;
-	}
-
+	
 }
