@@ -1,11 +1,14 @@
 package frames.OrangeHRM;
 
+import java.util.List;
+
 import core.element.base.Element;
 import core.element.wrapper.Button;
 import core.element.wrapper.Label;
 import core.element.wrapper.Table;
 import core.element.wrapper.TextBox;
 import dataObject.OrangeHRM.Employee;
+import dataType.OrangeHRM.EmployeeInfoRecordColumnTitle;
 import utils.constant.Constant;
 
 public class GeneralFrame {
@@ -21,7 +24,40 @@ public class GeneralFrame {
 	protected final Element iconLoading = new Element("//div[@class='oxd-loading-spinner']");
 	protected final Label lblFrameTitle = new Label("//*[contains(@class,'-title') and contains(@class,'oxd-text') and not(contains(@class,'sub-title'))]");
 	protected final TextBox txtOption = new TextBox("//label[normalize-space(.)='%s']/parent::div/following-sibling::div//input");
+	protected final Label lblEmployeeInforRecordColumns = new Label("//div[@role='columnheader']");
+	protected final Label lblCellFollowingIndex = new Label("//div[@class='oxd-table-body']//div[contains(@class,'oxd-table-cell')][%s]/div");
 
+	public List<String> getAllEmployeeInforRecordColumnTitle() {
+		return lblEmployeeInforRecordColumns.getAllTexts();
+	}
+	
+	public int findEmployeeInforRecordColumnIndex(EmployeeInfoRecordColumnTitle title) {
+		int index = 1;
+		for(int i = 0; i < getAllEmployeeInforRecordColumnTitle().size(); i++) {
+			if(getAllEmployeeInforRecordColumnTitle().get(i).equals(title.getValue())) {
+				index = i + 1;
+				break;
+			}
+		}
+		return index;
+	}
+	
+	public List<String> getAllCellValueOfColumn(EmployeeInfoRecordColumnTitle title){
+		lblCellFollowingIndex.generateDynamic(Integer.toString(findEmployeeInforRecordColumnIndex(title)));
+		return lblCellFollowingIndex.getAllTexts();
+	}
+	
+	public boolean isAllCellValueOfColumnSortedAlphabet(EmployeeInfoRecordColumnTitle title) {
+		boolean isSorted = true;
+		for(int i = 0; i < getAllCellValueOfColumn(title).size() - 1; i++) {
+			if(getAllCellValueOfColumn(title).get(i).compareToIgnoreCase(getAllCellValueOfColumn(title).get(i+1)) > 0) {
+				isSorted = false;
+				break;
+			}
+		}
+		return isSorted;
+	}
+	
 	// Wait methods
 	public void waitForLoading() {
 		try {

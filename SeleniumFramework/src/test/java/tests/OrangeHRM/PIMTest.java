@@ -6,7 +6,9 @@ import core.helper.AssertHelper;
 import core.report.Logger;
 import dataObject.OrangeHRM.Account;
 import dataObject.OrangeHRM.Employee;
+import dataType.OrangeHRM.EmployeeInfoRecordColumnTitle;
 import dataType.OrangeHRM.EmployeeInformation;
+import dataType.OrangeHRM.EmploymentStatus;
 import dataType.OrangeHRM.TopBarMenuItem;
 import dataType.OrangeHRM.UserRole;
 import io.qameta.allure.Description;
@@ -49,4 +51,21 @@ public class PIMTest extends TestBase {
 
 	}
 
+	@Test
+	@Description("Test case 07: User can search employees with Employment Status successful.")
+	public void TC07() {
+		
+		AssertHelper assertHelper = new AssertHelper();
+		Account account = new Account(UserRole.ADMIN);
+		Logger.info("Precondition: Login successfully with a valid account.");
+		pimPage = loginPage.loginOrangeHRM(account).waitForPageLoad();
+		
+		Logger.info("Step 1: Filter by \"Employment Status\".");
+		pimPage.selectOptionOnEmployeeInformation(EmployeeInformation.EMPLOYEE_STATUS_DROPDOWN, EmploymentStatus.FULL_TIME_CONTRACT.getValue()).clickSearchBtn();
+		
+		Logger.verify("VP. Employee's name are displayed in the alphabet by default");
+		assertHelper.assertTrue(pimPage.isAllCellValueOfColumnSortedAlphabet(EmployeeInfoRecordColumnTitle.FIRST_AND_MIDDILE_NAME));
+	
+	}
+	
 }
