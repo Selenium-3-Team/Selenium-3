@@ -47,7 +47,7 @@ public class ChangePasswordTest extends TestBase {
 		Logger.info("Step 7: Click on the \"Logout\" button.");
 		loginPage = pimPage.logoutOrangeHRM();
 		
-		Logger.info("Step 8: Login with a valid account..");
+		Logger.info("Step 8: Login with a valid account.");
 		account.setPassword(newPassword);
 		pimPage = loginPage.loginOrangeHRM(account);
 		
