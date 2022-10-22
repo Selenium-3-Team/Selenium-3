@@ -63,8 +63,8 @@ public class PIMTest extends TestBase {
 		Logger.info("Step 1: Filter by \"Employment Status\".");
 		pimPage.selectOptionOnEmployeeInformation(EmployeeInformation.EMPLOYEE_STATUS_DROPDOWN, EmploymentStatus.FULL_TIME_CONTRACT.getValue()).clickSearchBtn();
 		
-		Logger.verify("VP. Employee's name are displayed in the alphabet by default");
-		assertHelper.assertTrue(pimPage.isAllCellValueOfColumnSortedAlphabet(EmployeeInfoRecordColumnTitle.FIRST_AND_MIDDILE_NAME));
+		Logger.verify("VP. Employee's name are displayed in the alphabet by default.");
+		assertHelper.assertTrue(pimPage.isAllCellValueOfColumnSortedAlphabet(EmployeeInfoRecordColumnTitle.FIRST_AND_MIDDILE_NAME), "Employee's name are not displayed in the alphabet");
 	
 	}
 	

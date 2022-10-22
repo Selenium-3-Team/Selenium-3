@@ -37,6 +37,8 @@ public class GeneralFrame {
 			if(getAllEmployeeInforRecordColumnTitle().get(i).equals(title.getValue())) {
 				index = i + 1;
 				break;
+			}else {
+				index = -1;
 			}
 		}
 		return index;
