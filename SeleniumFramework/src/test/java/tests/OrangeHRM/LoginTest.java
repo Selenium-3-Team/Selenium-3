@@ -30,7 +30,7 @@ public class LoginTest extends TestBase {
 		assertHelper.assertTrue(loginPage.isCopyRightTextDisplayed(Constant.COMPANY, Constant.VERSION), "OrangeHRM copyright text should be displayed.");
 
 		Logger.info("Step 2: Login successfully with a valid account.");
-		pimPage = loginPage.loginOrangeHRM(account);
+		pimPage = loginPage.loginOrangeHRM(account).waitForPageLoad();
 		
 		Logger.verify("VP. The PIM page should be displayed.");
 		assertHelper.assertTrue(pimPage.isHeaderTitleDisplayed(LeftPanelMenuItem.PIM), "The PIM page should be displayed.");
@@ -58,7 +58,7 @@ public class LoginTest extends TestBase {
 		loginPage.enterPassword(account.getPassword());
 
 		Logger.info("Step 4: Click the \"Login\" button.");
-		loginPage.clickLoginBtn();
+		loginPage.clickLoginBtn().waitForPageLoad();
 
 		Logger.verify("VP. The Login page should still be displayed.");
 		assertHelper.assertTrue(loginPage.isDisplayed(), "The Login page should still be displayed.");
@@ -75,13 +75,13 @@ public class LoginTest extends TestBase {
 		AssertHelper assertHelper = new AssertHelper();
 		Account account = new Account(UserRole.ADMIN);
 		Logger.info("Precondition: Login successfully with a valid account.");
-		pimPage = loginPage.loginOrangeHRM(account);
+		pimPage = loginPage.loginOrangeHRM(account).waitForPageLoad();
 
 		Logger.info("Step 1: Click on the user's avatar.");
 		pimPage.clickUserDropdown();
 
 		Logger.info("Step 2: Click on the \"Logout\" button.");
-		loginPage = pimPage.clickLogoutBtn();
+		loginPage = pimPage.clickLogoutBtn().waitForPageLoad();
 
 		Logger.verify("VP. The Login page should still be displayed.");
 		assertHelper.assertTrue(loginPage.isDisplayed(), "The Login page should still be displayed.");

@@ -5,22 +5,26 @@ import core.element.wrapper.Button;
 import core.element.wrapper.Label;
 import dataType.OrangeHRM.LeftPanelMenuItem;
 import dataType.OrangeHRM.TopBarMenuItem;
+import frames.OrangeHRM.ViewSystemUsersFrame;
 import io.qameta.allure.Step;
 
 public class GeneralPage {
 
-	private final Label lblCopyRight = new Label("//p[contains(@class,'copyright') and contains(.,'%s')]");
-	private final Label lblVersion = new Label("//p[contains(@class,'copyright') and text()='%s']");
+	protected final Label lblCopyRight = new Label("//p[contains(@class,'copyright') and contains(.,'%s')]");
+	protected final Label lblVersion = new Label("//p[contains(@class,'copyright') and text()='%s']");
 	// Topbar header
-	private final Label lblHeaderTitle = new Label("//div[@class='oxd-topbar-header-title']//h6[contains(.,'%s')]");
-	private final Element drpUser = new Element("//li[@class='oxd-userdropdown']");
-	private final Button btnLogout = new Button("//a[@role='menuitem' and text()='Logout']");
+	protected final Label lblHeaderTitle = new Label("//div[@class='oxd-topbar-header-title']//h6[contains(.,'%s')]");
+	protected final Element drpUser = new Element("//li[@class='oxd-userdropdown']");
+	protected final Button btnLogout = new Button("//a[@role='menuitem' and text()='Logout']");
 	// Topbar menu
-	private final Element topBarMenuItem = new Element("//nav[@aria-label='Topbar Menu']//li[normalize-space(.)='%s']");
+	protected final Element topBarMenuItem = new Element("//nav[@aria-label='Topbar Menu']//li[normalize-space(.)='%s']");
 	// Left panel
-	private final Element leftPanel = new Element("//nav[@aria-label='Sidepanel']//span[text()='%s']");
+	protected final Element leftPanel = new Element("//nav[@aria-label='Sidepanel']//span[text()='%s']");
 	// Toast message
-	private final Label lblToastSuccessMessage = new Label("//p[contains(@class,'toast-message') and .='Successfully Saved']/preceding-sibling::p[contains(@class, 'toast-title') and .='Success']/parent::div[contains(@class, 'toast-content--success')]");
+	protected final Label lblToastSuccessMessage = new Label("//p[contains(@class,'toast-message') and .='Successfully Saved']/preceding-sibling::p[contains(@class, 'toast-title') and .='Success']/parent::div[contains(@class, 'toast-content--success')]");
+	
+	protected final ViewSystemUsersFrame viewSystemUsersFrame = new ViewSystemUsersFrame();
+
 	
 	private static GeneralPage instance;
 
@@ -39,19 +43,19 @@ public class GeneralPage {
 
 	@Step("Check if header title {0} is displayed")
 	public boolean isHeaderTitleDisplayed(LeftPanelMenuItem item) {
-		lblHeaderTitle.generateDynamic(item.getName());
+		lblHeaderTitle.generateDynamic(item.getValue());
 		return lblHeaderTitle.isDisplayed();
 	}
 
 	@Step("Check if top bar menu is displayed")
 	public boolean isTopBarMenuItemDisplayed(TopBarMenuItem menuItem) {
-		topBarMenuItem.generateDynamic(menuItem.getName());
+		topBarMenuItem.generateDynamic(menuItem.getValue());
 		return topBarMenuItem.isDisplayed();
 	}
 
 	@Step("Check if top menu button is actived")
 	public boolean isTopBarMenuItemActived(TopBarMenuItem menuItem) {
-		topBarMenuItem.generateDynamic(menuItem.getName());
+		topBarMenuItem.generateDynamic(menuItem.getValue());
 		return topBarMenuItem.isAttributeValueDisplayed("class", "--visited");
 	}
 	
@@ -63,7 +67,7 @@ public class GeneralPage {
 	@Step("Click User dropdown")
 	public GeneralPage clickUserDropdown() {
 		drpUser.click();
-		return new LoginPage();
+		return this;
 	}
 
 	@Step("Click Logout button")
@@ -80,20 +84,23 @@ public class GeneralPage {
 	}
 	
 	@Step("Click tab {0} on Left panel")
-	public void clickTabOnLeftPanel(String tabName) {
+	public GeneralPage clickTabOnLeftPanel(String tabName) {
 		leftPanel.generateDynamic(tabName);
 		leftPanel.click();
+		return this;
 	}
 
 	@Step("Click Admin tab on Left panel")
 	public AdminPage clickAdminTabOnLeftPanel() {
-		clickTabOnLeftPanel(LeftPanelMenuItem.ADMIN.getName());
+		clickTabOnLeftPanel(LeftPanelMenuItem.ADMIN.getValue());
 		return new AdminPage();
 	}
 
 	@Step("Click on top bar menu item")
-	public void clickTopBarMenuItem(TopBarMenuItem menuItem) {
-		topBarMenuItem.generateDynamic(menuItem.getName());
+	public GeneralPage clickTopBarMenuItem(TopBarMenuItem menuItem) {
+		topBarMenuItem.generateDynamic(menuItem.getValue());
 		topBarMenuItem.click();
+		return this;
 	}
+	
 }

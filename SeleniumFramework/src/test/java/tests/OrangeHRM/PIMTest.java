@@ -23,7 +23,7 @@ public class PIMTest extends TestBase {
 		Employee employee = new Employee();
 
 		Logger.info("Precondition: Login successfully with a valid account.");
-		pimPage = loginPage.loginOrangeHRM(account);
+		pimPage = loginPage.loginOrangeHRM(account).waitForPageLoad();
 
 		Logger.info("Step 1: Click \"Add\" or \"Add Employee\" button.");
 		pimPage.clickTopBarMenuItem(TopBarMenuItem.ADD_EMPLOYEE);
@@ -35,7 +35,7 @@ public class PIMTest extends TestBase {
 		pimPage.enterAllRequiredOnAddEmployeeForm(employee);
 		
 		Logger.info("Step 3: Click \"Save\".");
-		pimPage.clickSaveBtn();
+		pimPage.clickSaveBtn().waitForEmployeeDetailsDisplayed();
 		
 		Logger.verify("VP. Toast Success message is displayed.");
 		assertHelper.assertTrue(pimPage.isToastSuccessMessageDisplayed());

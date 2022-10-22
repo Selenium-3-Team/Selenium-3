@@ -1,27 +1,20 @@
 package pages.OrangeHRM;
 
-import core.element.base.Element;
-import core.element.wrapper.Button;
-import core.element.wrapper.Label;
-import core.element.wrapper.TextBox;
 import dataObject.OrangeHRM.Employee;
 import dataType.OrangeHRM.EmployeeInformation;
+import dataType.OrangeHRM.LeftPanelMenuItem;
+import frames.OrangeHRM.AddEmployeeFrame;
+import frames.OrangeHRM.ViewEmployeeListFrame;
+import frames.OrangeHRM.ViewPersonalDetailedFrame;
 import io.qameta.allure.Step;
+import utils.constant.Constant;
 
 public class PIMPage extends GeneralPage {
 
-	// Add Employee form
-	private final TextBox txtFirstName = new TextBox("//input[@name='firstName']");
-	private final TextBox txtMiddleName = new TextBox("//input[@name='middleName']");
-	private final TextBox txtLastName = new TextBox("//input[@name='lastName']");
-	private final TextBox txtEmployeeId = new TextBox("//label[text()='Employee Id']/parent::div/following-sibling::div//input");
-	private final Button btnSave = new Button("//button[@type='submit' and normalize-space(.)='Save']");
-	// Employee form
-	private final Label lblEmployeeName = new Label("//div[@class='orangehrm-edit-employee-name']//h6[text()='%s']");
-	// Employee Information
-	private final Element employeeInfoRow = new Element("//div[contains(@class,'oxd-table-card')]//div[contains(@class,'oxd-table-cell') and normalize-space(.)='%s']/following-sibling::div[normalize-space(.)='%s']/following-sibling::div[normalize-space(.)='%s']");
-	private final TextBox txtInEmployeeInformation = new TextBox("//label[normalize-space(text())='%s']/parent::div/following-sibling::div//input");
-	private final Button btnSeach = new Button("//button[@type='submit' and normalize-space(.)='Search']");
+	// Frames
+	private final ViewPersonalDetailedFrame viewPersonalDetailedFrame = new ViewPersonalDetailedFrame();
+	private final ViewEmployeeListFrame viewEmployeeListFrame = new ViewEmployeeListFrame();
+	private final AddEmployeeFrame addEmployeeFrame = new AddEmployeeFrame();
 	
 	private static PIMPage instance;
 
@@ -31,49 +24,58 @@ public class PIMPage extends GeneralPage {
 		return PIMPage.instance;
 	}
 
+	@Step("Wait for PIM page dipplayed")
+	public PIMPage waitForPageLoad() {
+		lblHeaderTitle.generateDynamic(LeftPanelMenuItem.PIM);
+		lblHeaderTitle.waitForDisplayed(Constant.DEFAULT_TIMEOUT);
+		viewEmployeeListFrame.waitForLoading();
+		return this;
+	}
+	
 	@Step("Enter firstname {0}")
 	public void enterFirstName(String firstName) {
-		txtFirstName.sendKeys(firstName);
+		addEmployeeFrame.enterFirstName(firstName);
 	}
 
 	@Step("Enter middlename {0}")
 	public void enterMiddleName(String middleName) {
-		txtMiddleName.sendKeys(middleName);
+		addEmployeeFrame.enterMiddleName(middleName);
 	}
 
 	@Step("Enter lastname {0}")
 	public void enterLastName(String lastName) {
-		txtLastName.sendKeys(lastName);
+		addEmployeeFrame.enterLastName(lastName);
 	}
 
 	@Step("Enter id {0}")
 	public void enterEmployeeId(String id) {
-		txtEmployeeId.clearByHotKeys();
-		txtEmployeeId.sendKeys(id);
+		addEmployeeFrame.enterEmployeeId(id);
 	}
 
 	@Step("Click Save button")
-	public void clickSaveBtn() {
-		btnSave.click();
+	public PIMPage clickSaveBtn() {
+		addEmployeeFrame.clickSaveButton();;
+		return this;
 	}
 	
 	@Step("Click Search button")
 	public PIMPage clickSearchBtn() {
-		btnSeach.click();
+		addEmployeeFrame.clickSearchButton();
 		return this;
 	}
 	
 	@Step("Enter all required information")
-	public void enterAllRequiredOnAddEmployeeForm(String firstName, String middleName, String lastName, String employeeId) {
+	public PIMPage enterAllRequiredOnAddEmployeeForm(String firstName, String middleName, String lastName, String employeeId) {
 		enterFirstName(firstName);
 		enterMiddleName(middleName);
 		enterLastName(lastName);
 		enterEmployeeId(employeeId);
+		return this;
 	}
 	
 	@Step("Enter all required information")
-	public void enterAllRequiredOnAddEmployeeForm(Employee employee) {
-		enterAllRequiredOnAddEmployeeForm(employee.getFirstName(), employee.getMiddleName(), employee.getLastName(), employee.getId());
+	public PIMPage enterAllRequiredOnAddEmployeeForm(Employee employee) {
+		return enterAllRequiredOnAddEmployeeForm(employee.getFirstName(), employee.getMiddleName(), employee.getLastName(), employee.getId());
 	}
 
 	@Step("Add Employee without create login details")
@@ -91,20 +93,24 @@ public class PIMPage extends GeneralPage {
 
 	@Step("Check if the employee is displayed after add employee")
 	public boolean isEmployeeNameDisplayed(Employee employee) {
-		lblEmployeeName.generateDynamic(String.format("%s %s", employee.getFirstName(), employee.getLastName()));
-		return lblEmployeeName.isDisplayed();
+		return viewPersonalDetailedFrame.isEmployeeNameDisplayed(employee);
 	}
 	
-	@Step("Enter value {0} to Employee Information Textbox")
-	public PIMPage enterValueToEmployeeInformationTextbox(EmployeeInformation itemName, String value) {
-		txtInEmployeeInformation.generateDynamic(itemName.getName());
-		txtInEmployeeInformation.sendKeys(value);
+	@Step("Wait for employee displayed")
+	public PIMPage waitForEmployeeDetailsDisplayed() {
+		viewPersonalDetailedFrame.waitForEmployeeDetailsDisplayed();
 		return this;
 	}
 	
-	@Step("Check if new added employee is displayed in Employee list")
-	public boolean isEmployeeDisplayedInEmployeeList(Employee employee) {
-		employeeInfoRow.generateDynamic(employee.getId(), String.format("%s %s", employee.getFirstName(), employee.getMiddleName()), employee.getLastName());
-		return employeeInfoRow.isDisplayed();
+	@Step("Enter to {0} Textbox with value {0}")
+	public PIMPage enterValueToEmployeeInformationTextbox(EmployeeInformation title, String value) {
+		viewEmployeeListFrame.enterValueToEmployeeInformationTextbox(title, value);
+		return this;
 	}
+	
+	@Step("Check if employee {0} is displayed in Employee list")
+	public boolean isEmployeeDisplayedInEmployeeList(Employee employee) {
+		return viewEmployeeListFrame.isEmployeeDisplayedInEmployeeList(employee);
+	}
+	
 }

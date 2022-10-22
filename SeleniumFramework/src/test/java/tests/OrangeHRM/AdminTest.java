@@ -5,6 +5,7 @@ import org.testng.annotations.Test;
 import core.helper.AssertHelper;
 import core.report.Logger;
 import dataObject.OrangeHRM.Account;
+import dataType.OrangeHRM.SystemUsers;
 import dataType.OrangeHRM.TopBarMenuItem;
 import dataType.OrangeHRM.UserRole;
 import io.qameta.allure.Description;
@@ -19,10 +20,10 @@ public class AdminTest extends TestBase {
 		AssertHelper assertHelper = new AssertHelper();
 		Account account = new Account(UserRole.ADMIN);
 		Logger.info("Precondition: Login successfully with a valid account.");
-		pimPage = loginPage.loginOrangeHRM(account);
+		pimPage = loginPage.loginOrangeHRM(account).waitForPageLoad();
 
 		Logger.info("Step 1: Click the \"Admin\" tab on the Left Menu.");
-		adminPage = pimPage.clickAdminTabOnLeftPanel();
+		adminPage = pimPage.clickAdminTabOnLeftPanel().waitForPageLoad();
 
 		Logger.verify("VP. The \"User Management\" page should be displayed.");
 		assertHelper.assertTrue(adminPage.isTopBarMenuItemActived(TopBarMenuItem.USER_MANAGEMENT), "The \"User Management\" page should be displayed.");
@@ -31,7 +32,7 @@ public class AdminTest extends TestBase {
 		assertHelper.assertTrue(adminPage.isSystemUsersLabelDisplayed(), "The \"System Users\" form should be displayed.");
 
 		Logger.info("Step 2: Select \"Admin\" on the \"User Role\" dropdown.");
-		adminPage.selectOptionOnUserRoleDropdown(UserRole.ADMIN);
+		adminPage.selectOptionOnSystemUsers(SystemUsers.USER_ROLE_DROPDOWN, UserRole.ADMIN.getValue());
 
 		Logger.info("Step 3: Click on the \"Search\" button.");
 		adminPage.clickSearchButton();

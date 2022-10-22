@@ -12,7 +12,7 @@ public enum TopBarMenuItem {
 		this.value = value;
 	}
 
-	public String getName() {
+	public String getValue() {
 		return value;
 	}
 }
