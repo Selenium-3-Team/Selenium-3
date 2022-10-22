@@ -80,8 +80,8 @@ public class LoginTest extends TestBase {
 		Logger.info("Step 1: Click on the user's avatar.");
 		pimPage.clickUserDropdown();
 
-		Logger.info("Step 2: Click on the \"Logout\" button.");
-		loginPage = pimPage.clickLogoutBtn().waitForPageLoad();
+		Logger.info("Step 2: Select on the \"Logout\" option.");
+		loginPage = pimPage.selectLogoutOption().waitForPageLoad();
 
 		Logger.verify("VP. The Login page should still be displayed.");
 		assertHelper.assertTrue(loginPage.isDisplayed(), "The Login page should still be displayed.");
