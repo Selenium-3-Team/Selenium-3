@@ -17,15 +17,16 @@ public class GeneralPage {
 	protected final Element drpUser = new Element("//li[@class='oxd-userdropdown']");
 	protected final Button btnLogout = new Button("//a[@role='menuitem' and text()='Logout']");
 	// Topbar menu
-	protected final Element topBarMenuItem = new Element("//nav[@aria-label='Topbar Menu']//li[normalize-space(.)='%s']");
+	protected final Element topBarMenuItem = new Element(
+			"//nav[@aria-label='Topbar Menu']//li[normalize-space(.)='%s']");
 	// Left panel
 	protected final Element leftPanel = new Element("//nav[@aria-label='Sidepanel']//span[text()='%s']");
 	// Toast message
-	protected final Label lblToastSuccessMessage = new Label("//p[contains(@class,'toast-message') and .='Successfully Saved']/preceding-sibling::p[contains(@class, 'toast-title') and .='Success']/parent::div[contains(@class, 'toast-content--success')]");
-	
+	protected final Label lblToastSuccessMessage = new Label(
+			"//p[contains(@class,'toast-message') and .='Successfully Saved']/preceding-sibling::p[contains(@class, 'toast-title') and .='Success']/parent::div[contains(@class, 'toast-content--success')]");
+
 	protected final ViewSystemUsersFrame viewSystemUsersFrame = new ViewSystemUsersFrame();
 
-	
 	private static GeneralPage instance;
 
 	public static GeneralPage newInstance() {
@@ -58,7 +59,7 @@ public class GeneralPage {
 		topBarMenuItem.generateDynamic(menuItem.getValue());
 		return topBarMenuItem.isAttributeValueDisplayed("class", "--visited");
 	}
-	
+
 	@Step("Check if toast Success message is displayed")
 	public boolean isToastSuccessMessageDisplayed() {
 		return lblToastSuccessMessage.isDisplayed();
@@ -82,7 +83,7 @@ public class GeneralPage {
 		clickLogoutBtn();
 		return new LoginPage();
 	}
-	
+
 	@Step("Click tab {0} on Left panel")
 	public GeneralPage clickTabOnLeftPanel(String tabName) {
 		leftPanel.generateDynamic(tabName);
@@ -102,5 +103,5 @@ public class GeneralPage {
 		topBarMenuItem.click();
 		return this;
 	}
-	
+
 }

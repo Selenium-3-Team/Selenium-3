@@ -54,7 +54,7 @@ public class AdminPage extends GeneralPage {
 
 	@Step("Check if System Users label is displayed")
 	public boolean isSystemUsersLabelDisplayed() {
-		return viewSystemUsersFrame.isSystemUsersLabelDisplayed();
+		return viewSystemUsersFrame.isFrameTitleDisplayed();
 	}
 	
 	@Step("Check if 'No Records Found' label is displayed")
