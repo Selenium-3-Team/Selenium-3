@@ -1,21 +1,16 @@
 package pages.OrangeHRM;
 
-import core.element.base.Element;
-import core.element.wrapper.Button;
-import core.element.wrapper.Label;
+import dataType.OrangeHRM.LeftPanelMenuItem;
 import dataType.OrangeHRM.SystemUsers;
-import dataType.OrangeHRM.UserRole;
+import frames.OrangeHRM.ViewSystemUsersFrame;
 import io.qameta.allure.Step;
+import utils.constant.Constant;
 
 public class AdminPage extends GeneralPage {
 
-	// User management
-	private final Label lblSystemUsers = new Label("//h5[text()='System Users']");
-	private final Element drpOnSystemUsers = new Element("//div[.='%s']//following-sibling::div");
-	private final Label drpOption = new Label("//div[@class='oxd-select-option']//span[text()='%s']");
-	private final Button btnSearch = new Button("//button[@type='submit']");
-	private final Label lblNoRecordsFound = new Label("//span[text()='No Records Found']");
-
+	// Frames
+	private final ViewSystemUsersFrame viewSystemUsersFrame = new ViewSystemUsersFrame();
+	
 	private static AdminPage instance;
 
 	public static AdminPage newInstance() {
@@ -23,40 +18,48 @@ public class AdminPage extends GeneralPage {
 			AdminPage.instance = new AdminPage();
 		return AdminPage.instance;
 	}
-
-	@Step("Check if System Users label is displayed")
-	public boolean isSystemUsersLabelDisplayed() {
-		return lblSystemUsers.isDisplayed();
+	
+	@Step("Wait for Admin page displayed")
+	public AdminPage waitForPageLoad() {
+		lblHeaderTitle.generateDynamic(LeftPanelMenuItem.ADMIN);
+		lblHeaderTitle.waitForDisplayed(Constant.DEFAULT_TIMEOUT);
+		viewSystemUsersFrame.waitForLoading();
+		return this;
 	}
 
 	@Step("Click {0} dropdown on the System Users")
-	public void clickDropdownOnSystemUsers(String drpName) {
-		drpOnSystemUsers.generateDynamic(drpName);
-		drpOnSystemUsers.click();
+	public AdminPage clickDropdownOnSystemUsers(String drpName) {
+		viewSystemUsersFrame.clickDropdownOption(drpName);
+		return this;
 	}
-
+	
 	@Step("Select {0} option")
-	public void selectOption(String optionName) {
-		drpOption.generateDynamic(optionName);
-		drpOption.click();
+	public AdminPage selectOption(String optionName) {
+		viewSystemUsersFrame.selectOption(optionName);
+		return this;
 	}
-
+	
 	@Step("Select option on the User Role dropdown")
-	public AdminPage selectOptionOnUserRoleDropdown(UserRole userRole) {
-		clickDropdownOnSystemUsers(SystemUsers.USER_ROLE_DROPDOWN.getName());
-		selectOption(userRole.getUserRole());
+	public AdminPage selectOptionOnSystemUsers(SystemUsers systemUsers, String value) {
+		clickDropdownOnSystemUsers(systemUsers.getValue());
+		selectOption(value);
 		return this;
 	}
 
 	@Step("Click on search button")
 	public AdminPage clickSearchButton() {
-		btnSearch.click();
+		viewSystemUsersFrame.clickSearchButton();
 		return this;
 	}
 
+	@Step("Check if System Users label is displayed")
+	public boolean isSystemUsersLabelDisplayed() {
+		return viewSystemUsersFrame.isSystemUsersLabelDisplayed();
+	}
+	
 	@Step("Check if 'No Records Found' label is displayed")
 	public boolean isNoRecordsFoundLabelDisplayed() {
-		return lblNoRecordsFound.isDisplayed();
+		return viewSystemUsersFrame.isNoRecordsFoundLabelDisplayed();
 	}
 
 }

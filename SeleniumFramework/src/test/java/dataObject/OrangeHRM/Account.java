@@ -19,7 +19,7 @@ public class Account {
 
 	public Account(UserRole userRole) {
 		JsonObject account = JsonHelper.getJsonObject(Utilities.getProjectPath() + Constant.ACCOUNT_DATA);
-		String key = userRole.getUserRole().toLowerCase();
+		String key = userRole.getValue().toLowerCase();
 		this.username = account.get(key).getAsJsonObject().get("username").getAsString();
 		this.password = account.get(key).getAsJsonObject().get("password").getAsString();
 	}

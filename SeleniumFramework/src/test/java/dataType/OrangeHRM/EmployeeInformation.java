@@ -12,7 +12,7 @@ public enum EmployeeInformation {
 		this.itemName = itemName;
 	}
 
-	public String getName() {
+	public String getValue() {
 		return itemName;
 	}
 }
