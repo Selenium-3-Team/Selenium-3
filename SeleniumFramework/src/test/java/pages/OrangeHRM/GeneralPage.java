@@ -41,9 +41,10 @@ public class GeneralPage {
 	}
 	
 	@Step("Select {0} option in User dropdown")
-	public void selectOptionInUserDrp(String optionName) {
+	public GeneralPage selectOptionInUserDrp(String optionName) {
 		lblUserDrpOption.generateDynamic(optionName);
 		lblUserDrpOption.click();
+		return this;
 	}
 	
 	public LoginPage selectLogoutOption() {
