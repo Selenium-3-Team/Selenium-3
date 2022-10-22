@@ -48,18 +48,21 @@ public class PIMPage extends GeneralPage {
 
 	// Add Employee form
 	@Step("Enter firstname {0}")
-	public void enterFirstName(String firstName) {
+	public PIMPage enterFirstName(String firstName) {
 		addEmployeeFrame.enterFirstName(firstName);
+		return this;
 	}
 
 	@Step("Enter middlename {0}")
-	public void enterMiddleName(String middleName) {
+	public PIMPage enterMiddleName(String middleName) {
 		addEmployeeFrame.enterMiddleName(middleName);
+		return this;
 	}
 
 	@Step("Enter lastname {0}")
-	public void enterLastName(String lastName) {
+	public PIMPage enterLastName(String lastName) {
 		addEmployeeFrame.enterLastName(lastName);
+		return this;
 	}
 
 	@Step("Enter id {0}")
@@ -124,25 +127,29 @@ public class PIMPage extends GeneralPage {
 	
 	// Update Password form
 	@Step("Enter {0} to Current Password textbox")
-	public void enterCurrentPassword(String currentPassword) {
+	public PIMPage enterCurrentPassword(String currentPassword) {
 		updatePasswordFrame.enterCurrentPassword(currentPassword);
+		return this;
 	}
 
 	@Step("Enter {0} to New Password textbox")
-	public void enterNewPassword(String currentPassword) {
+	public PIMPage enterNewPassword(String currentPassword) {
 		updatePasswordFrame.enterNewPassword(currentPassword);
+		return this;
 	}
 
 	@Step("Enter {0} to Confirm Password textbox")
-	public void enterConfirmPassword(String currentPassword) {
+	public PIMPage enterConfirmPassword(String currentPassword) {
 		updatePasswordFrame.enterConfirmPassword(currentPassword);
+		return this;
 	}
 	
 	@Step("Enter all required information on Update Password form")
-	public void enterAllRequiredOnUpdatePasswordForm(String currentPassword, String newPassword, String confirmPassword) {
+	public PIMPage enterAllRequiredOnUpdatePasswordForm(String currentPassword, String newPassword, String confirmPassword) {
 		enterCurrentPassword(currentPassword);
 		enterNewPassword(newPassword);
 		enterConfirmPassword(confirmPassword);
+		return this;
 	}
 
 }
