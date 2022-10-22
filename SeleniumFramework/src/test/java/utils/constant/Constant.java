@@ -13,6 +13,7 @@ public class Constant {
 	public static final String COMPANY = "OrangeHRM, Inc";
 	public static final String VERSION = "OrangeHRM OS 5.1";
 	public static final String ERROR_LOGIN_MESSAGE = "Invalid credentials";
+	public static final String STRONG_PASSWORD = "Logigear123!!";
 
 	// Timeout
 	public static final int DEFAULT_TIMEOUT = 30;

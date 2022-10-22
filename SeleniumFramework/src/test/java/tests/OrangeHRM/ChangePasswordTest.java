@@ -9,6 +9,7 @@ import dataType.OrangeHRM.LeftPanelMenuItem;
 import dataType.OrangeHRM.UserRole;
 import io.qameta.allure.Description;
 import tests.TestBase;
+import utils.constant.Constant;
 
 public class ChangePasswordTest extends TestBase {
 	
@@ -18,8 +19,9 @@ public class ChangePasswordTest extends TestBase {
 
 		AssertHelper assertHelper = new AssertHelper();
 		Account account = new Account(UserRole.ADMIN);
+		String newPassword = Constant.STRONG_PASSWORD;
 		Logger.info("Precondition: Login successfully with a valid account.");
-		pimPage = loginPage.loginOrangeHRM(account).waitForPageLoad();
+		pimPage = loginPage.loginOrangeHRM(account);
 
 		Logger.info("Step 1: Click on the user's avatar.");
 		pimPage.clickUserDropdown();
@@ -31,30 +33,25 @@ public class ChangePasswordTest extends TestBase {
 		pimPage.enterCurrentPassword(account.getPassword());
 
 		Logger.info("Step 4: Enter the new password <newPassword> in the \"Password\" textbox.");
-//		pimPage.enterNewPassword();
+		pimPage.enterNewPassword(newPassword);
 
 		Logger.info("Step 5: Enter the <newPassword> in the \"Confirm Password\" textbox.");
-//		pimPage.enterConfirmPassword();
+		pimPage.enterConfirmPassword(newPassword);
 
 		Logger.info("Step 6: Click on the \"Save\" button.");
 		pimPage.clickSaveBtn();
 		
 		Logger.verify("VP. The success \"Successfully Saved\" message should be displayed.");
-		assertHelper.assertFalse(adminPage.isNoRecordsFoundLabelDisplayed(), "At least 1 record should be displayed on the \"Record Found\" form.");
+		assertHelper.assertTrue(pimPage.isToastSuccessMessageDisplayed(), "The success \"Successfully Saved\" message should be displayed.");
 		
 		Logger.info("Step 7: Click on the \"Logout\" button.");
-		loginPage = pimPage.selectLogoutOption();
+		loginPage = pimPage.logoutOrangeHRM();
 		
-		Logger.info("Step 8: Enter a valid username in the \"Username\" textbox.");
-		loginPage.enterUsername(account.getUsername());
-
-		Logger.info("Step 9: Enter a valid password <newPassword> in the \"Password\" textbox.");
-//		loginPage.enterPassword();
+		Logger.info("Step 8: Login with a valid account.");
+		account.setPassword(newPassword);
+		pimPage = loginPage.loginOrangeHRM(account);
 		
-		Logger.info("Step 10: Click the \"Login\" button.");
-		pimPage.clickSaveBtn();
-		
-		Logger.verify("VP.  The PIM page should be displayed.");
+		Logger.verify("VP. The PIM page should be displayed.");
 		assertHelper.assertTrue(pimPage.isHeaderTitleDisplayed(LeftPanelMenuItem.PIM), "The PIM page should be displayed.");
 
 	}
