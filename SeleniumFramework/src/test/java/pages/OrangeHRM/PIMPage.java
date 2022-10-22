@@ -107,14 +107,14 @@ public class PIMPage extends GeneralPage {
 		return this;
 	}
 	
-	@Step("Enter to {0} Textbox with value {0}")
-	public void enterValueToEmployeeInformationTextbox(String title, String value) {
+	@Step("Enter to {0} Textbox with value {1}")
+	public PIMPage enterValueToEmployeeInformationTextbox(String title, String value) {
 		viewEmployeeListFrame.enterValueToEmployeeInformationTextbox(title, value);
+		return this;
 	}
 	
 	public PIMPage enterValueToEmployeeInformationTextbox(EmployeeInformation title, String value) {
-		enterValueToEmployeeInformationTextbox(title.getValue(), value);
-		return this;
+		return enterValueToEmployeeInformationTextbox(title.getValue(), value);
 	}
 
 	@Step("Check if employee {0} is displayed in Employee list")

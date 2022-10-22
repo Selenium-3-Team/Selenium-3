@@ -20,7 +20,7 @@ public class GeneralFrame {
 	protected final Element employeeInfoRow = new Element("//div[contains(@class,'oxd-table-card')]//div[contains(@class,'oxd-table-cell') and normalize-space(.)='%s']/following-sibling::div[normalize-space(.)='%s']/following-sibling::div[normalize-space(.)='%s']");
 	protected final Element iconLoading = new Element("//div[@class='oxd-loading-spinner']");
 	protected final Label lblFrameTitle = new Label("//*[contains(@class,'-title') and contains(@class,'oxd-text') and not(contains(@class,'sub-title'))]");
-	protected final TextBox txtOption = new TextBox("//label[normalize-space(.)='%']/parent::div/following-sibling::div//input");
+	protected final TextBox txtOption = new TextBox("//label[normalize-space(.)='%s']/parent::div/following-sibling::div//input");
 
 	// Wait methods
 	public void waitForLoading() {
