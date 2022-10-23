@@ -21,6 +21,7 @@ public class LoginTest extends TestBase {
 
 		AssertHelper assertHelper = new AssertHelper();
 		Account account = new Account(UserRoleOption.ADMIN);
+		
 		Logger.info("Step 1: Navigate to OrangeHRM.");
 
 		Logger.verify("VP. The login form should be displayed.");
@@ -49,6 +50,7 @@ public class LoginTest extends TestBase {
 
 		AssertHelper assertHelper = new AssertHelper();
 		Account account = new Account(RandomHelper.randomString(), RandomHelper.randomString());
+		
 		Logger.info("Step 1: Navigate to OrangeHRM.");
 
 		Logger.info("Step 2: Login with a invalid account.");
@@ -74,6 +76,7 @@ public class LoginTest extends TestBase {
 
 		AssertHelper assertHelper = new AssertHelper();
 		Account account = new Account(UserRoleOption.ADMIN);
+
 		Logger.info("Precondition: Login successfully with a valid account.");
 		pimPage = loginPage.loginOrangeHRM(account);
 
