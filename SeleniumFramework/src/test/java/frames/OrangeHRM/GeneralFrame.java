@@ -4,6 +4,7 @@ import java.util.List;
 
 import core.element.base.Element;
 import core.element.wrapper.Button;
+import core.element.wrapper.Image;
 import core.element.wrapper.Label;
 import core.element.wrapper.Table;
 import core.element.wrapper.TextBox;
@@ -31,6 +32,7 @@ public class GeneralFrame {
 			employeeInfoRow.getLocatorAsString() + "/following-sibling::div//button/i[contains(@class,'bi-trash')]");
 	protected final Button btnEditRecord = new Button(employeeInfoRow.getLocatorAsString()
 			+ "/following-sibling::div//button/i[contains(@class,'bi-pencil-fill')]");
+	protected final Image employeeImage = new Image("//div[@class='orangehrm-edit-employee-image-wrapper']//img");
 
 	public List<String> getAllEmployeeInforRecordColumnTitle() {
 		return lblEmployeeInforRecordColumns.getAllTexts();
@@ -100,6 +102,10 @@ public class GeneralFrame {
 		btnEditRecord.click();
 	}
 
+	public void clickEmployeeImage() {
+		employeeImage.click();
+	}
+	
 	// Enter methods
 	public void enterValueToTextboxOption(String txtName, String value) {
 		txtOption.generateDynamic(txtName);

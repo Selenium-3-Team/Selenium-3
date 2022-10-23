@@ -110,4 +110,44 @@ public class PIMTest extends TestBase {
 		
 	}
 	
+	@Test
+	@Description("Test case 09: User cannot upload a valid format image by over the size of 1MB.")
+	public void TC09() {
+		
+		AssertHelper assertHelper = new AssertHelper();
+		Account account = new Account(UserRole.ADMIN);
+		Employee employee = new Employee();
+		
+		Logger.info("Precondition 1: Login successfully with a valid account.");
+		pimPage = loginPage.loginOrangeHRM(account);
+		
+		Logger.info("Precondition 2: Create successfully a new employee.");
+		pimPage.clickTopBarMenuItem(TopBarMenuItem.ADD_EMPLOYEE);
+		pimPage.enterAllRequiredOnAddEmployeeForm(employee).clickSaveButton();
+		pimPage.waitForEmployeeDetailsDisplayed().clickTopBarMenuItem(TopBarMenuItem.EMPLOYEE_LIST);
+		pimPage.enterValueToEmployeeInformationTextbox(EmployeeInformation.EMPLOYEE_ID_TEXTBOX, employee.getId()).clickSearchButton();
+		
+		Logger.info("Step 1: Select \"Edit\" button for the employee.");
+		pimPage.clickEditEmployeeInfoRecord(employee).waitForEmployeeDetailsDisplayed();
+		
+		Logger.verify("VP. User is redirected to the employee personal details.");
+		assertHelper.assertTrue(pimPage.isEmployeeInfoTypeTabDisplayed(EmployeeInformationTypeTab.PERSONAL_DETAILS), "User is not redirected to the employee personal details.");
+		assertHelper.assertTrue(pimPage.isEmployeeNameDisplayed(employee), "User is redirected wrong selected employee.");
+		
+		Logger.info("Step 2: Click on the photograph at the top left corner of the page.");
+		pimPage.clickEmployeeImageOnViewPersonalDetails();
+		
+		Logger.verify("VP. The photograph screen is displayed.");
+		assertHelper.assertTrue(pimPage.isChangeProfilePictureTitleDisplayed(), "The photograph screen is not displayed");
+		
+		Logger.info("Step 3: Click on plus button.");
+		pimPage.clickAddPicture();
+		
+		Logger.info("Step 4: Choose the image file type jpg/ png/ gif that is more than 1MB");
+		
+		Logger.verify("VP. The error message is displayed that \"Attchment Size Exceeded\"");
+		
+		
+	}
+	
 }
