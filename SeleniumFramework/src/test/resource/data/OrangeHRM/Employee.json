@@ -2,15 +2,15 @@
   "employee": {
     "firstName": "Alex",
     "middleName": "Mac",
-    "lastName": "Nguyen"
+    "lastName": "Nguyen",
     "jobTitle": "QA Lead",
-	"employeeStatus": "Full-Time Permanent",
-	"subUnit": "Quality Assurance",
-	"supervior": "Odis Adalwin",
-	"nationality": "Australian",
-	"officeLocation": "HQ - CA, USA",
-	"maritalStatus": "Single",
-	"dateOfBirth": "1990-10-10",
-	"gender": "Male"
+    "employeeStatus": "Full-Time Permanent",
+    "subUnit": "Quality Assurance",
+    "supervior": "Odis Adalwin",
+    "nationality": "Australian",
+    "officeLocation": "HQ - CA, USA",
+    "maritalStatus": "Single",
+    "dateOfBirth": "1990-10-10",
+    "gender": "Male"
   }
 }
