@@ -1,6 +1,10 @@
 package dataObject.OrangeHRM;
 
+import com.google.gson.JsonObject;
+
+import core.helper.JsonHelper;
 import core.helper.RandomHelper;
+import utils.constant.Constant;
 import utils.helper.Utilities;
 
 public class Employee {
@@ -26,6 +30,25 @@ public class Employee {
 		this.lastName = RandomHelper.getRandomString("last");
 		this.id = Utilities.generateEmployeeId();
 		this.fullName = String.format("%s %s %s", this.firstName, this.middleName, this.lastName);
+	}
+
+	public Employee(String key) {
+		JsonObject employee = JsonHelper.getJsonObject(Constant.EMPLOYEE_DATA);
+		this.firstName = employee.get(key).getAsJsonObject().get("firstName").getAsString();
+		this.middleName = employee.get(key).getAsJsonObject().get("middleName").getAsString();
+		this.lastName = employee.get(key).getAsJsonObject().get("lastName").getAsString();
+		this.fullName = String.format("%s %s %s", this.firstName, this.middleName, this.lastName);
+		this.id = Utilities.generateEmployeeId();
+		this.jobTitle = employee.get(key).getAsJsonObject().get("jobTitle").getAsString();
+		this.employeeStatus = employee.get(key).getAsJsonObject().get("employeeStatus").getAsString();
+		this.subUnit = employee.get(key).getAsJsonObject().get("subUnit").getAsString();
+		this.supervior = employee.get(key).getAsJsonObject().get("supervior").getAsString();
+		this.nationality = employee.get(key).getAsJsonObject().get("nationality").getAsString();
+		this.officeLocation = employee.get(key).getAsJsonObject().get("officeLocation").getAsString();
+		this.maritalStatus = employee.get(key).getAsJsonObject().get("maritalStatus").getAsString();
+		this.dateOfBirth = employee.get(key).getAsJsonObject().get("dateOfBirth").getAsString();
+		this.gender = employee.get(key).getAsJsonObject().get("gender").getAsString();
+		
 	}
 
 	public Employee(String firstName, String middleName, String lastName, String id) {

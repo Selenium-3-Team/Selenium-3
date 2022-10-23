@@ -14,6 +14,7 @@ import core.driver.manager.DriverManager;
 import core.report.ExtentTestManager;
 import core.report.TestListener;
 import pages.OrangeHRM.AdminPage;
+import pages.OrangeHRM.LeavePage;
 import pages.OrangeHRM.DirectoryPage;
 import pages.OrangeHRM.LoginPage;
 import pages.OrangeHRM.PIMPage;
@@ -24,6 +25,7 @@ public class TestBase {
 	protected LoginPage loginPage = LoginPage.newInstance();
 	protected PIMPage pimPage = PIMPage.newInstance();
 	protected AdminPage adminPage = AdminPage.newInstance();
+	protected LeavePage leavePage = LeavePage.newInstance();
 	protected DirectoryPage directoryPage = DirectoryPage.newInstance();
 
 	@Parameters({ "driverConfig", "platform" })

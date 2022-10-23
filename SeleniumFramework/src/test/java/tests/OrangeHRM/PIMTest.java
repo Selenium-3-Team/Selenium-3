@@ -30,7 +30,6 @@ public class PIMTest extends TestBase {
 
 		Logger.info("Step 1: Click \"Add\" or \"Add Employee\" button.");
 		pimPage.clickTopBarMenuItem(TopBarMenuItem.ADD_EMPLOYEE);
-		pimPage.waitForPageLoad();
 
 		Logger.verify("VP. User is redirected to \"Add Employee\" page.");
 		assertHelper.assertTrue(pimPage.isTopBarMenuItemActived(TopBarMenuItem.ADD_EMPLOYEE), "User is redirected to \"Add Employee\" page.");

@@ -19,12 +19,9 @@ public class GeneralFrame {
 			drpOption.getLocatorAsString() + "//div[@class='oxd-select-text-input']");
 	protected final Label lblOption = new Label("//div[@class='oxd-select-option']//span[text()='%s']");
 	protected final Label lblNoRecordsFound = new Label("//span[text()='No Records Found']");
-	protected final Element employeeInfoRow = new Element(
-			"//div[contains(@class,'oxd-table-card')]//div[contains(@class,'oxd-table-cell') and normalize-space(.)='%s']/following-sibling::div[normalize-space(.)='%s']/following-sibling::div[normalize-space(.)='%s']");
-	protected final Label lblFrameTitle = new Label(
-			"//*[contains(@class,'-title') and contains(@class,'oxd-text') and not(contains(@class,'sub-title'))]");
-	protected final TextBox txtOption = new TextBox(
-			"//label[normalize-space(.)='%s']/parent::div/following-sibling::div//input");
+	protected final Element employeeInfoRow = new Element("//div[contains(@class,'oxd-table-card')]//div[contains(@class,'oxd-table-cell') and normalize-space(.)='%s']/following-sibling::div[normalize-space(.)='%s']/following-sibling::div[normalize-space(.)='%s']");
+	protected final Label lblFrameTitle = new Label("//*[contains(@class,'-title') and contains(@class,'oxd-text') and not(contains(@class,'sub-title'))]");
+	protected final TextBox txtOption = new TextBox("//label[normalize-space(.)='%s']/parent::div/following-sibling::div//input");
 	protected final Label lblEmployeeInforRecordColumns = new Label("//div[@role='columnheader']");
 	protected final Label lblCellFollowingIndex = new Label(
 			"//div[@class='oxd-table-body']//div[contains(@class,'oxd-table-cell')][%s]/div");
@@ -124,6 +121,7 @@ public class GeneralFrame {
 	// Enter methods
 	public void enterValueToTextboxOption(String txtName, String value) {
 		txtOption.generateDynamic(txtName);
+		txtOption.clearByHotKeys();
 		txtOption.sendKeys(value);
 	}
 
