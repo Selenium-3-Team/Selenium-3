@@ -6,7 +6,7 @@ import core.helper.AssertHelper;
 import core.report.Logger;
 import dataObject.OrangeHRM.Account;
 import dataType.OrangeHRM.LeftPanelMenuItem;
-import dataType.OrangeHRM.UserRole;
+import dataType.OrangeHRM.UserRoleOption;
 import io.qameta.allure.Description;
 import tests.TestBase;
 import utils.constant.Constant;
@@ -18,7 +18,7 @@ public class ChangePasswordTest extends TestBase {
 	public void TC04() {
 
 		AssertHelper assertHelper = new AssertHelper();
-		Account account = new Account(UserRole.ADMIN);
+		Account account = new Account(UserRoleOption.ADMIN);
 		String newPassword = Constant.STRONG_PASSWORD;
 		Logger.info("Precondition: Login successfully with a valid account.");
 		pimPage = loginPage.loginOrangeHRM(account);
@@ -45,7 +45,7 @@ public class ChangePasswordTest extends TestBase {
 		assertHelper.assertTrue(pimPage.isToastSuccessMessageDisplayed(), "The success \"Successfully Saved\" message should be displayed.");
 		
 		Logger.info("Step 7: Click on the \"Logout\" button.");
-		loginPage = pimPage.logoutOrangeHRM();
+		loginPage = pimPage.logoutOrangeHRM().waitForPageLoad();
 		
 		Logger.info("Step 8: Login with a valid account.");
 		account.setPassword(newPassword);

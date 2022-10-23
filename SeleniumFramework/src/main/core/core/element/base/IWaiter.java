@@ -178,6 +178,15 @@ public interface IWaiter extends IFinder {
 	public default void waitForNotPresent(int timeOut) {
 		waitForCondition(Status.NOT_PRESENT, timeOut, true);
 	}
+	
+	/**
+	 * Wait for element is not presented in DOM
+	 * 
+	 * @param timeOut - wait for default time out
+	 */
+	public default void waitForNotPresent() {
+		waitForCondition(Status.NOT_PRESENT, Constant.SHORT_TIMEOUT, true);
+	}
 
 	/**
 	 * Wait for element is clickable
@@ -204,6 +213,15 @@ public interface IWaiter extends IFinder {
 	 */
 	public default void waitForDisplayed(int timeOut) {
 		waitForCondition(Status.DISPLAYED, timeOut, true);
+	}
+	
+	/**
+	 * Wait for element is displayed
+	 * 
+	 * @param timeOut - wait for default time out
+	 */
+	public default void waitForDisplayed() {
+		waitForCondition(Status.DISPLAYED, Constant.SHORT_TIMEOUT, true);
 	}
 
 	/**

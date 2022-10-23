@@ -7,10 +7,10 @@ import core.report.Logger;
 import dataObject.OrangeHRM.Account;
 import dataObject.OrangeHRM.Employee;
 import dataType.OrangeHRM.EmployeeInfoRecordColumnTitle;
-import dataType.OrangeHRM.EmployeeInformation;
-import dataType.OrangeHRM.EmploymentStatus;
+import dataType.OrangeHRM.EmployeeInformationForm;
+import dataType.OrangeHRM.EmploymentStatusOption;
 import dataType.OrangeHRM.TopBarMenuItem;
-import dataType.OrangeHRM.UserRole;
+import dataType.OrangeHRM.UserRoleOption;
 import io.qameta.allure.Description;
 import tests.TestBase;
 
@@ -21,7 +21,7 @@ public class PIMTest extends TestBase {
 	public void TC06() {
 
 		AssertHelper assertHelper = new AssertHelper();
-		Account account = new Account(UserRole.ADMIN);
+		Account account = new Account(UserRoleOption.ADMIN);
 		Employee employee = new Employee();
 
 		Logger.info("Precondition: Login successfully with a valid account.");
@@ -46,7 +46,7 @@ public class PIMTest extends TestBase {
 		Logger.info("Step 4: Verify new added employee is displayed in Employee list.");
 		pimPage.clickTopBarMenuItem(TopBarMenuItem.EMPLOYEE_LIST);
 		pimPage.waitForPageLoad();
-		pimPage.enterValueToEmployeeInformationTextbox(EmployeeInformation.EMPLOYEE_ID_TEXTBOX, employee.getId()).clickSearchBtn();
+		pimPage.enterValueToEmployeeInformationTextbox(EmployeeInformationForm.EMPLOYEE_ID_TEXTBOX, employee.getId()).clickSearchBtn();
 		assertHelper.assertTrue(pimPage.isEmployeeDisplayedInEmployeeList(employee), "A new employee is added successful in Employee list.");
 
 	}
@@ -56,12 +56,12 @@ public class PIMTest extends TestBase {
 	public void TC07() {
 		
 		AssertHelper assertHelper = new AssertHelper();
-		Account account = new Account(UserRole.ADMIN);
+		Account account = new Account(UserRoleOption.ADMIN);
 		Logger.info("Precondition: Login successfully with a valid account.");
 		pimPage = loginPage.loginOrangeHRM(account).waitForPageLoad();
 		
 		Logger.info("Step 1: Filter by \"Employment Status\".");
-		pimPage.selectOptionOnEmployeeInformation(EmployeeInformation.EMPLOYEE_STATUS_DROPDOWN, EmploymentStatus.FULL_TIME_CONTRACT.getValue()).clickSearchBtn();
+		pimPage.selectOptionOnEmployeeInformation(EmployeeInformationForm.EMPLOYEE_STATUS_DROPDOWN, EmploymentStatusOption.FULL_TIME_CONTRACT.getValue()).clickSearchBtn();
 		
 		Logger.verify("VP. Employee's name are displayed in the alphabet by default.");
 		assertHelper.assertTrue(pimPage.isAllCellValueOfColumnSortedAlphabet(EmployeeInfoRecordColumnTitle.FIRST_AND_MIDDILE_NAME), "Employee's name are not displayed in the alphabet.");

@@ -5,7 +5,6 @@ import core.element.wrapper.Label;
 import core.element.wrapper.TextBox;
 import dataObject.OrangeHRM.Account;
 import io.qameta.allure.Step;
-import utils.constant.Constant;
 
 public class LoginPage extends GeneralPage {
 
@@ -24,9 +23,9 @@ public class LoginPage extends GeneralPage {
 	
 	@Step("Wait for Login page displayed")
 	public LoginPage waitForPageLoad() {
-		txtUsername.waitForDisplayed(Constant.DEFAULT_TIMEOUT);
-		txtPassword.waitForDisplayed(Constant.DEFAULT_TIMEOUT);
-		btnLogin.waitForDisplayed(Constant.DEFAULT_TIMEOUT);
+		txtUsername.waitForDisplayed();
+		txtPassword.waitForDisplayed();
+		btnLogin.waitForDisplayed();
 		return this;
 	}
 
@@ -42,15 +41,9 @@ public class LoginPage extends GeneralPage {
 		return this;
 	}
 
-	@SuppressWarnings("unchecked")
 	@Step("Click Login button")
-	public <T> T clickLoginBtn() {
+	public void clickLoginBtn() {
 		btnLogin.click();
-		if (isLoginButtonDisplayed()) {
-			return (T) new LoginPage();
-		} else {
-			return (T) new PIMPage();
-		}
 	}
 
 	@Step("Login to OrangeHRM page")

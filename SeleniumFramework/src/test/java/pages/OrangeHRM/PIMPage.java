@@ -2,16 +2,16 @@ package pages.OrangeHRM;
 
 import java.util.List;
 
+import core.helper.RandomHelper;
 import dataObject.OrangeHRM.Employee;
 import dataType.OrangeHRM.EmployeeInfoRecordColumnTitle;
-import dataType.OrangeHRM.EmployeeInformation;
+import dataType.OrangeHRM.EmployeeInformationForm;
 import dataType.OrangeHRM.LeftPanelMenuItem;
 import frames.OrangeHRM.AddEmployeeFrame;
 import frames.OrangeHRM.UpdatePasswordFrame;
 import frames.OrangeHRM.ViewEmployeeListFrame;
 import frames.OrangeHRM.ViewPersonalDetailedFrame;
 import io.qameta.allure.Step;
-import utils.constant.Constant;
 
 public class PIMPage extends GeneralPage {
 
@@ -32,7 +32,7 @@ public class PIMPage extends GeneralPage {
 	@Step("Wait for PIM page dipplayed")
 	public PIMPage waitForPageLoad() {
 		lblHeaderTitle.generateDynamic(LeftPanelMenuItem.PIM);
-		lblHeaderTitle.waitForDisplayed(Constant.DEFAULT_TIMEOUT);
+		lblHeaderTitle.waitForDisplayed();
 		viewEmployeeListFrame.waitForLoading();
 		return this;
 	}
@@ -69,9 +69,10 @@ public class PIMPage extends GeneralPage {
 		return this;
 	}
 
-	@Step("Enter id {0}")
-	public void enterEmployeeId(String id) {
+	@Step("Enter employee id {0}")
+	public PIMPage enterEmployeeId(String id) {
 		addEmployeeFrame.enterEmployeeId(id);
+		return this;
 	}
 
 	@Step("Enter all required information on Add Employee form")
@@ -79,11 +80,9 @@ public class PIMPage extends GeneralPage {
 		enterFirstName(firstName);
 		enterMiddleName(middleName);
 		enterLastName(lastName);
-		enterEmployeeId(employeeId);
-		return this;
+		return enterEmployeeId(employeeId);
 	}
 
-	@Step("Enter all required information on Add Employee form")
 	public PIMPage enterAllRequiredOnAddEmployeeForm(Employee employee) {
 		return enterAllRequiredOnAddEmployeeForm(employee.getFirstName(), employee.getMiddleName(), employee.getLastName(), employee.getId());
 	}
@@ -91,14 +90,11 @@ public class PIMPage extends GeneralPage {
 	@Step("Add Employee without create login details")
 	public PIMPage addEmployeeWithoutCreateLoginDetails(String firstName, String middleName, String lastName, String employeeId) {
 		enterAllRequiredOnAddEmployeeForm(firstName, middleName, lastName, employeeId);
-		clickSaveBtn();
-		return this;
+		return clickSaveBtn();
 	}
 
-	@Step("Add Employee without create login details")
 	public PIMPage addEmployeeWithoutCreateLoginDetails(Employee employee) {
-		addEmployeeWithoutCreateLoginDetails(employee.getFirstName(), employee.getMiddleName(), employee.getLastName(), employee.getId());
-		return this;
+		return addEmployeeWithoutCreateLoginDetails(employee.getFirstName(), employee.getMiddleName(), employee.getLastName(), employee.getId());
 	}
 
 	// Employee Details frame
@@ -114,17 +110,17 @@ public class PIMPage extends GeneralPage {
 		return this;
 	}
 	
-	@Step("Enter to {0} Textbox with value {1}")
+	@Step("Enter to {0} textbox with value {1}")
 	public PIMPage enterValueToEmployeeInformationTextbox(String title, String value) {
 		viewEmployeeListFrame.enterValueToEmployeeInformationTextbox(title, value);
 		return this;
 	}
 	
-	public PIMPage enterValueToEmployeeInformationTextbox(EmployeeInformation title, String value) {
+	public PIMPage enterValueToEmployeeInformationTextbox(EmployeeInformationForm title, String value) {
 		return enterValueToEmployeeInformationTextbox(title.getValue(), value);
 	}
 
-	@Step("Check if employee {0} is displayed in Employee list")
+	@Step("Check if employee is displayed in Employee list")
 	public boolean isEmployeeDisplayedInEmployeeList(Employee employee) {
 		return viewEmployeeListFrame.isEmployeeDisplayedInEmployeeList(employee);
 	}
@@ -152,10 +148,10 @@ public class PIMPage extends GeneralPage {
 	public PIMPage enterAllRequiredOnUpdatePasswordForm(String currentPassword, String newPassword, String confirmPassword) {
 		enterCurrentPassword(currentPassword);
 		enterNewPassword(newPassword);
-		enterConfirmPassword(confirmPassword);
-		return this;
+		return enterConfirmPassword(confirmPassword);
 	}
 	
+	// Employee Information form
 	@Step("Click {0} dropdown on the System Users")
 	public PIMPage clickDropdownOnEmployeeInformation(String drpName) {
 		viewEmployeeListFrame.clickDropdownOption(drpName);
@@ -168,21 +164,38 @@ public class PIMPage extends GeneralPage {
 		return this;
 	}
 	
-	@Step("Select the User Role dropdown {0} with value {1}")
-	public PIMPage selectOptionOnEmployeeInformation(EmployeeInformation title, String value) {
+	public PIMPage selectOptionOnEmployeeInformation(EmployeeInformationForm title, String value) {
 		clickDropdownOnEmployeeInformation(title.getValue());
-		selectOption(value);
-		return this;
+		return selectOption(value);
 	}
 	
-	@Step("Get all cell value of column record table with title {0}")
 	public List<String> getAllCellValueOfColumn(EmployeeInfoRecordColumnTitle title) {
-		return viewEmployeeListFrame.getAllCellValueOfColumn(title);
+		return viewEmployeeListFrame.getAllCellValueOfColumn(title.getValue());
 	}
 	
-	@Step("Check if all cell of column {0} is sorted in alphabel")
 	public boolean isAllCellValueOfColumnSortedAlphabet(EmployeeInfoRecordColumnTitle title) {
-		return viewEmployeeListFrame.isAllCellValueOfColumnSortedAlphabet(title);
+		return viewEmployeeListFrame.isAllCellValueOfColumnSortedAlphabet(title.getValue());
 	}
-
+	
+	@Step("Get random employee name in Employee List")
+	public String getRandomValueOfColumn(EmployeeInfoRecordColumnTitle title) {
+		List<String> directoryList = getAllCellValueOfColumn(title);
+		String result = "";
+		while (result.trim().isEmpty()) {
+			int randomIndex = RandomHelper.getRandomNumber(0, directoryList.size());
+			result = directoryList.get(randomIndex);
+		}
+		return result;
+	}
+	
+	@Step("Get random employee name in Employee List")
+	public String getRandomEmployeeNameInList() {
+		return getRandomValueOfColumn(EmployeeInfoRecordColumnTitle.FIRST_AND_MIDDILE_NAME);
+	}
+	
+	@Step("Get random job title in Employee List")
+	public String getRandomJobTitleInList() {
+		return getRandomValueOfColumn(EmployeeInfoRecordColumnTitle.JOB_TITLE);
+	}
+	
 }
