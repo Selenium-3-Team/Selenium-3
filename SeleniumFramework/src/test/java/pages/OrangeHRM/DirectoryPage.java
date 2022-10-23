@@ -23,6 +23,7 @@ public class DirectoryPage extends GeneralPage {
 		lblHeaderTitle.generateDynamic(LeftPanelMenuItem.DIRECTORY.getValue());
 		lblHeaderTitle.waitForDisplayed();
 		viewDirectoryFrame.waitForLoading();
+		waitForLoadingIconDisappear();
 		return this;
 	}
 

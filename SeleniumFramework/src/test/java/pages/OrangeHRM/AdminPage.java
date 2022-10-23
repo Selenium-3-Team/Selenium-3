@@ -20,7 +20,7 @@ public class AdminPage extends GeneralPage {
 	
 	@Step("Wait for Admin page displayed")
 	public AdminPage waitForPageLoad() {
-		lblHeaderTitle.generateDynamic(LeftPanelMenuItem.ADMIN);
+		lblHeaderTitle.generateDynamic(LeftPanelMenuItem.ADMIN.getValue());
 		lblHeaderTitle.waitForDisplayed();
 		viewSystemUsersFrame.waitForLoading();
 		waitForLoadingIconDisappear();
