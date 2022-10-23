@@ -20,10 +20,8 @@ public class GeneralFrame {
 	protected final Label lblOption = new Label("//div[@class='oxd-select-option']//span[text()='%s']");
 	protected final Label lblNoRecordsFound = new Label("//span[text()='No Records Found']");
 	protected final Element employeeInfoRow = new Element("//div[contains(@class,'oxd-table-card')]//div[contains(@class,'oxd-table-cell') and normalize-space(.)='%s']/following-sibling::div[normalize-space(.)='%s']/following-sibling::div[normalize-space(.)='%s']");
-	protected final Element iconLoading = new Element("//div[@class='oxd-loading-spinner']");
 	protected final Label lblFrameTitle = new Label("//*[contains(@class,'-title') and contains(@class,'oxd-text') and not(contains(@class,'sub-title'))]");
 	protected final TextBox txtOption = new TextBox("//label[normalize-space(.)='%s']/parent::div/following-sibling::div//input");
-	protected final Button btnApply = new Button("//button[contains(.,'Apply')]");
 	protected final Label lblEmployeeInforRecordColumns = new Label("//div[@role='columnheader']");
 	protected final Label lblCellFollowingIndex = new Label(
 			"//div[@class='oxd-table-body']//div[contains(@class,'oxd-table-cell')][%s]/div");
@@ -140,10 +138,6 @@ public class GeneralFrame {
 
 	public boolean isFrameTitleDisplayed() {
 		return lblFrameTitle.isDisplayed();
-	}
-	
-	public void clickApplyButton() {
-		btnApply.click();
 	}
 
 }

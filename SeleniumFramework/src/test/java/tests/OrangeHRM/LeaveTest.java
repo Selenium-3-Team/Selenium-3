@@ -7,7 +7,7 @@ import core.report.Logger;
 import dataObject.OrangeHRM.Account;
 import dataObject.OrangeHRM.LeaveTicket;
 import dataType.OrangeHRM.TopBarMenuItem;
-import dataType.OrangeHRM.UserRole;
+import dataType.OrangeHRM.UserRoleOption;
 import io.qameta.allure.Description;
 import tests.TestBase;
 
@@ -18,7 +18,7 @@ public class LeaveTest extends TestBase {
 	public void TC11() {
 
 		AssertHelper assertHelper = new AssertHelper();
-		Account account = new Account(UserRole.ADMIN);
+		Account account = new Account(UserRoleOption.ADMIN);
 		LeaveTicket leaveTicket = new LeaveTicket("leaveTicket");
 
 		Logger.info("Precondition: Login successfully with a valid account.");

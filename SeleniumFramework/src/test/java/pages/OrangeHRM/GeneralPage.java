@@ -18,6 +18,7 @@ public class GeneralPage {
 	protected final Button btnAdd = new Button("//button[contains(.,'Add')]");
 	protected final Button btnSave = new Button("//button[contains(.,'Save')]");
 	protected final Element iconLoading = new Element("//div[@class='oxd-loading-spinner']");
+	protected final Button btnApply = new Button("//button[contains(.,'Apply')]");
 	
 	// Topbar header
 	protected final Label lblHeaderTitle = new Label("//div[@class='oxd-topbar-header-title']//h6[contains(.,'%s')]");
@@ -151,6 +152,12 @@ public class GeneralPage {
 		if (iconLoading.isDisplayed()) {
 			iconLoading.waitForNotPresent(Constant.DEFAULT_TIMEOUT);
 		}
+		return this;
+	}
+	
+	@Step("Click Apply button")
+	public GeneralPage clickApplyButton() {
+		btnApply.click();
 		return this;
 	}
 	

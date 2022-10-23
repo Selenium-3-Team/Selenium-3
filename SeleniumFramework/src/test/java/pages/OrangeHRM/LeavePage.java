@@ -76,8 +76,8 @@ public class LeavePage extends GeneralPage {
 	}
 	
 	@Step("Click on apply button")
-	public LeavePage clickApplyButton() {
-		applyLeaveFrame.clickApplyButton();
+	public LeavePage clickApplyButtonLeavePage() {
+		clickApplyButton();
 		return this;
 	}
 
