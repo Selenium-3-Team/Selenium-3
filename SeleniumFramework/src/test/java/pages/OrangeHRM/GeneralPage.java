@@ -1,17 +1,24 @@
 package pages.OrangeHRM;
 
 import core.element.base.Element;
+import core.element.wrapper.Button;
 import core.element.wrapper.Label;
 import dataType.OrangeHRM.LeftPanelMenuItem;
 import dataType.OrangeHRM.TopBarMenuItem;
 import dataType.OrangeHRM.UserDrpOption;
 import frames.OrangeHRM.ViewSystemUsersFrame;
 import io.qameta.allure.Step;
+import utils.constant.Constant;
 
 public class GeneralPage {
 
 	protected final Label lblCopyRight = new Label("//p[contains(@class,'copyright') and contains(.,'%s')]");
 	protected final Label lblVersion = new Label("//p[contains(@class,'copyright') and text()='%s']");
+	protected final Button btnSearch = new Button("//button[contains(.,'Search')]");
+	protected final Button btnAdd = new Button("//button[contains(.,'Add')]");
+	protected final Button btnSave = new Button("//button[contains(.,'Save')]");
+	protected final Element iconLoading = new Element("//div[@class='oxd-loading-spinner']");
+	
 	// Topbar header
 	protected final Label lblHeaderTitle = new Label("//div[@class='oxd-topbar-header-title']//h6[contains(.,'%s')]");
 	protected final Element drpUser = new Element("//li[@class='oxd-userdropdown']");
@@ -80,7 +87,13 @@ public class GeneralPage {
 	public GeneralPage clickTopBarMenuItem(TopBarMenuItem menuItem) {
 		topBarMenuItem.generateDynamic(menuItem.getValue());
 		topBarMenuItem.click();
+		waitForLoadingIconDisappear();
 		return this;
+	}
+	
+	public DirectoryPage clickDirectoryTabOnLeftPanel() {
+		clickTabOnLeftPanel(LeftPanelMenuItem.DIRECTORY.getValue());
+		return new DirectoryPage();
 	}
 	
 	// Verify methods
@@ -120,4 +133,25 @@ public class GeneralPage {
 		return new LeavePage();
 	}
 
+	@Step("Click Search button")
+	public GeneralPage clickSearchButton() {
+		btnSearch.click();
+		waitForLoadingIconDisappear();
+		return this;
+	}
+
+	@Step("Click Save button")
+	public GeneralPage clickSaveButton() {
+		btnSave.click();
+		return this;
+	}
+	
+	@Step("Wait for loading icon dispappear if it is displayed")
+	public GeneralPage waitForLoadingIconDisappear() {
+		if (iconLoading.isDisplayed()) {
+			iconLoading.waitForNotPresent(Constant.DEFAULT_TIMEOUT);
+		}
+		return this;
+	}
+	
 }

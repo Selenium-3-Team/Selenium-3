@@ -8,7 +8,7 @@ import core.report.Logger;
 import dataObject.OrangeHRM.Account;
 import dataType.OrangeHRM.LeftPanelMenuItem;
 import dataType.OrangeHRM.TopBarMenuItem;
-import dataType.OrangeHRM.UserRole;
+import dataType.OrangeHRM.UserRoleOption;
 import io.qameta.allure.Description;
 import tests.TestBase;
 import utils.constant.Constant;
@@ -20,7 +20,8 @@ public class LoginTest extends TestBase {
 	public void TC01() {
 
 		AssertHelper assertHelper = new AssertHelper();
-		Account account = new Account(UserRole.ADMIN);
+		Account account = new Account(UserRoleOption.ADMIN);
+		
 		Logger.info("Step 1: Navigate to OrangeHRM.");
 
 		Logger.verify("VP. The login form should be displayed.");
@@ -30,7 +31,7 @@ public class LoginTest extends TestBase {
 		assertHelper.assertTrue(loginPage.isCopyRightTextDisplayed(Constant.COMPANY, Constant.VERSION), "OrangeHRM copyright text should be displayed.");
 
 		Logger.info("Step 2: Login successfully with a valid account.");
-		pimPage = loginPage.loginOrangeHRM(account).waitForPageLoad();
+		pimPage = loginPage.loginOrangeHRM(account);
 		
 		Logger.verify("VP. The PIM page should be displayed.");
 		assertHelper.assertTrue(pimPage.isHeaderTitleDisplayed(LeftPanelMenuItem.PIM), "The PIM page should be displayed.");
@@ -49,6 +50,7 @@ public class LoginTest extends TestBase {
 
 		AssertHelper assertHelper = new AssertHelper();
 		Account account = new Account(RandomHelper.randomString(), RandomHelper.randomString());
+		
 		Logger.info("Step 1: Navigate to OrangeHRM.");
 
 		Logger.info("Step 2: Login with a invalid account.");
@@ -58,7 +60,7 @@ public class LoginTest extends TestBase {
 		loginPage.enterPassword(account.getPassword());
 
 		Logger.info("Step 4: Click the \"Login\" button.");
-		loginPage.clickLoginBtn().waitForPageLoad();
+		loginPage.clickLoginBtn();
 
 		Logger.verify("VP. The Login page should still be displayed.");
 		assertHelper.assertTrue(loginPage.isDisplayed(), "The Login page should still be displayed.");
@@ -73,9 +75,10 @@ public class LoginTest extends TestBase {
 	public void TC03() {
 
 		AssertHelper assertHelper = new AssertHelper();
-		Account account = new Account(UserRole.ADMIN);
+		Account account = new Account(UserRoleOption.ADMIN);
+
 		Logger.info("Precondition: Login successfully with a valid account.");
-		pimPage = loginPage.loginOrangeHRM(account).waitForPageLoad();
+		pimPage = loginPage.loginOrangeHRM(account);
 
 		Logger.info("Step 1: Click on the user's avatar.");
 		pimPage.clickUserDropdown();

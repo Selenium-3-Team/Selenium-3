@@ -20,6 +20,12 @@ public interface ILocator {
 	By getLocator();
 
 	/**
+	 * Get string locator
+	 * @return a string locator
+	 */
+	String getLocatorAsString();
+	
+	/**
 	 * Get parent element's By locator
 	 * 
 	 * @return By locator of the parent element

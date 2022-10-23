@@ -1,6 +1,6 @@
 package dataType.OrangeHRM;
 
-public enum EmployeeInformation {
+public enum EmployeeInformationForm {
 
 	EMPLOYEE_NAME_TEXTBOX("Employee Name"), EMPLOYEE_ID_TEXTBOX("Employee Id"),
 	EMPLOYEE_STATUS_DROPDOWN("Employment Status"), INCLUDE_DROPDOWN("Include"),
@@ -8,7 +8,7 @@ public enum EmployeeInformation {
 
 	private final String itemName;
 
-	EmployeeInformation(final String itemName) {
+	EmployeeInformationForm(final String itemName) {
 		this.itemName = itemName;
 	}
 

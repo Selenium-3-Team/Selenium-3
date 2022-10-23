@@ -315,6 +315,16 @@ public class Element implements IWaiter, IAction, IInfo {
 		return null;
 	}
 
+	/**
+	 * Get string locator of element
+	 * 
+	 * @return a string locator
+	 */
+	@Override
+	public String getLocatorAsString() {
+		return this.dynamicLocator;
+	}
+
 	/*
 	 * ========================= Check Status
 	 * ===========================================================================

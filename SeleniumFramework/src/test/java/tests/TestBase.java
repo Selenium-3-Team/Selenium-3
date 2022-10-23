@@ -15,6 +15,7 @@ import core.report.ExtentTestManager;
 import core.report.TestListener;
 import pages.OrangeHRM.AdminPage;
 import pages.OrangeHRM.LeavePage;
+import pages.OrangeHRM.DirectoryPage;
 import pages.OrangeHRM.LoginPage;
 import pages.OrangeHRM.PIMPage;
 import utils.constant.Constant;
@@ -25,6 +26,7 @@ public class TestBase {
 	protected PIMPage pimPage = PIMPage.newInstance();
 	protected AdminPage adminPage = AdminPage.newInstance();
 	protected LeavePage leavePage = LeavePage.newInstance();
+	protected DirectoryPage directoryPage = DirectoryPage.newInstance();
 
 	@Parameters({ "driverConfig", "platform" })
 	@BeforeMethod(alwaysRun = true)
