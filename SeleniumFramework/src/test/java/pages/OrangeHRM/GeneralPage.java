@@ -91,6 +91,11 @@ public class GeneralPage {
 		return this;
 	}
 	
+	public DirectoryPage clickDirectoryTabOnLeftPanel() {
+		clickTabOnLeftPanel(LeftPanelMenuItem.DIRECTORY.getValue());
+		return new DirectoryPage();
+	}
+	
 	// Verify methods
 	@Step("Check if text CopyRight {0} and {1} is displayed")
 	public boolean isCopyRightTextDisplayed(String companyName, String appVersion) {

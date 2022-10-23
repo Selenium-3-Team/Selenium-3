@@ -9,14 +9,14 @@ import core.element.wrapper.Label;
 import core.element.wrapper.Table;
 import core.element.wrapper.TextBox;
 import dataObject.OrangeHRM.Employee;
-import dataType.OrangeHRM.EmployeeInfoRecordColumnTitle;
-import utils.constant.Constant;
+import io.qameta.allure.Step;
 
 public class GeneralFrame {
 
 	protected final Table employeeInfoRecord = new Table("//div[@class='orangehrm-container']");
 	protected final Element drpOption = new Element("//div[.='%s']//following-sibling::div");
-	protected final	Label lblSelectedOption = new Label(drpOption.getLocatorAsString() + "//div[@class='oxd-select-text-input']");
+	protected final Label lblSelectedOption = new Label(
+			drpOption.getLocatorAsString() + "//div[@class='oxd-select-text-input']");
 	protected final Label lblOption = new Label("//div[@class='oxd-select-option']//span[text()='%s']");
 	protected final Label lblNoRecordsFound = new Label("//span[text()='No Records Found']");
 	protected final Element employeeInfoRow = new Element(
@@ -38,10 +38,10 @@ public class GeneralFrame {
 		return lblEmployeeInforRecordColumns.getAllTexts();
 	}
 
-	public int findEmployeeInforRecordColumnIndex(EmployeeInfoRecordColumnTitle title) {
+	public int findEmployeeInforRecordColumnIndex(String title) {
 		int index = 1;
 		for (int i = 0; i < getAllEmployeeInforRecordColumnTitle().size(); i++) {
-			if (getAllEmployeeInforRecordColumnTitle().get(i).equals(title.getValue())) {
+			if (getAllEmployeeInforRecordColumnTitle().get(i).equals(title)) {
 				index = i + 1;
 				break;
 			} else {
@@ -51,32 +51,47 @@ public class GeneralFrame {
 		return index;
 	}
 
-	public List<String> getAllCellValueOfColumn(EmployeeInfoRecordColumnTitle title) {
+	@Step("Get all cell value of column record table with {0} title")
+	public List<String> getAllCellValueOfColumn(String title) {
 		lblCellFollowingIndex.generateDynamic(Integer.toString(findEmployeeInforRecordColumnIndex(title)));
 		return lblCellFollowingIndex.getAllTexts();
 	}
-
-	public String getCellValueOfColumn(EmployeeInfoRecordColumnTitle title) {
+	
+	@Step("Get all cell value of column record table with {0} title")
+	public String getCellValueOfColumn(String title) {
 		lblCellFollowingIndex.generateDynamic(Integer.toString(findEmployeeInforRecordColumnIndex(title)));
 		return lblCellFollowingIndex.getText();
+	}
+
+	@Step("Check if all cell of {0} column is sorted in alphabel")
+	public boolean isAllCellValueOfColumnSortedAlphabet(String title) {
+		boolean isSorted = true;
+		for (int i = 0; i < getAllCellValueOfColumn(title).size() - 1; i++) {
+			if (getAllCellValueOfColumn(title).get(i)
+					.compareToIgnoreCase(getAllCellValueOfColumn(title).get(i + 1)) > 0) {
+				isSorted = false;
+				break;
+			}
+		}
+		return isSorted;
 	}
 
 	public String getSelectedOption(String drpName) {
 		lblSelectedOption.generateDynamic(drpName);
 		return lblSelectedOption.getLabelText();
 	}
-	
+
 	// Wait methods
 	public void waitForLoading() {
 		try {
-			lblFrameTitle.waitForDisplayed(Constant.DEFAULT_TIMEOUT);
+			lblFrameTitle.waitForDisplayed();
 		} catch (Exception e) {
 			e.getMessage();
 		}
 	}
 
 	public void waitForFrameTitleDisplayed() {
-		lblFrameTitle.waitForDisplayed(Constant.DEFAULT_TIMEOUT);
+		lblFrameTitle.waitForDisplayed();
 	}
 
 	// Click|Select methods
@@ -105,7 +120,7 @@ public class GeneralFrame {
 	public void clickEmployeeImage() {
 		employeeImage.click();
 	}
-	
+
 	// Enter methods
 	public void enterValueToTextboxOption(String txtName, String value) {
 		txtOption.generateDynamic(txtName);
@@ -125,18 +140,6 @@ public class GeneralFrame {
 
 	public boolean isFrameTitleDisplayed() {
 		return lblFrameTitle.isDisplayed();
-	}
-
-	public boolean isAllCellValueOfColumnSortedAlphabet(EmployeeInfoRecordColumnTitle title) {
-		boolean isSorted = true;
-		for (int i = 0; i < getAllCellValueOfColumn(title).size() - 1; i++) {
-			if (getAllCellValueOfColumn(title).get(i)
-					.compareToIgnoreCase(getAllCellValueOfColumn(title).get(i + 1)) > 0) {
-				isSorted = false;
-				break;
-			}
-		}
-		return isSorted;
 	}
 
 }

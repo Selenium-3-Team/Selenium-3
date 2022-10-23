@@ -1,6 +1,6 @@
 package dataType.OrangeHRM;
 
-public enum UserRole {
+public enum UserRoleOption {
 	/**
 	 * Declare constants for user role
 	 */
@@ -8,7 +8,7 @@ public enum UserRole {
 
 	private final String userRole;
 
-	UserRole(final String userRole) {
+	UserRoleOption(final String userRole) {
 		this.userRole = userRole;
 	}
 

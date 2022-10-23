@@ -8,7 +8,7 @@ import core.report.Logger;
 import dataObject.OrangeHRM.Account;
 import dataType.OrangeHRM.LeftPanelMenuItem;
 import dataType.OrangeHRM.TopBarMenuItem;
-import dataType.OrangeHRM.UserRole;
+import dataType.OrangeHRM.UserRoleOption;
 import io.qameta.allure.Description;
 import tests.TestBase;
 import utils.constant.Constant;
@@ -20,7 +20,7 @@ public class LoginTest extends TestBase {
 	public void TC01() {
 
 		AssertHelper assertHelper = new AssertHelper();
-		Account account = new Account(UserRole.ADMIN);
+		Account account = new Account(UserRoleOption.ADMIN);
 		
 		Logger.info("Step 1: Navigate to OrangeHRM.");
 
@@ -60,7 +60,7 @@ public class LoginTest extends TestBase {
 		loginPage.enterPassword(account.getPassword());
 
 		Logger.info("Step 4: Click the \"Login\" button.");
-		loginPage = loginPage.clickLoginBtn();
+		loginPage.clickLoginBtn();
 
 		Logger.verify("VP. The Login page should still be displayed.");
 		assertHelper.assertTrue(loginPage.isDisplayed(), "The Login page should still be displayed.");
@@ -75,8 +75,8 @@ public class LoginTest extends TestBase {
 	public void TC03() {
 
 		AssertHelper assertHelper = new AssertHelper();
-		Account account = new Account(UserRole.ADMIN);
-		
+		Account account = new Account(UserRoleOption.ADMIN);
+
 		Logger.info("Precondition: Login successfully with a valid account.");
 		pimPage = loginPage.loginOrangeHRM(account);
 

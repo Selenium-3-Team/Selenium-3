@@ -7,11 +7,11 @@ import core.report.Logger;
 import dataObject.OrangeHRM.Account;
 import dataObject.OrangeHRM.Employee;
 import dataType.OrangeHRM.EmployeeInfoRecordColumnTitle;
-import dataType.OrangeHRM.EmployeeInformation;
+import dataType.OrangeHRM.EmployeeInformationForm;
 import dataType.OrangeHRM.EmployeeInformationTypeTab;
-import dataType.OrangeHRM.EmploymentStatus;
+import dataType.OrangeHRM.EmploymentStatusOption;
 import dataType.OrangeHRM.TopBarMenuItem;
-import dataType.OrangeHRM.UserRole;
+import dataType.OrangeHRM.UserRoleOption;
 import io.qameta.allure.Description;
 import tests.TestBase;
 
@@ -22,7 +22,7 @@ public class PIMTest extends TestBase {
 	public void TC06() {
 
 		AssertHelper assertHelper = new AssertHelper();
-		Account account = new Account(UserRole.ADMIN);
+		Account account = new Account(UserRoleOption.ADMIN);
 		Employee employee = new Employee();
 
 		Logger.info("Precondition: Login successfully with a valid account.");
@@ -48,7 +48,7 @@ public class PIMTest extends TestBase {
 		Logger.info("Step 4: Verify new added employee is displayed in Employee list.");
 		pimPage.clickTopBarMenuItem(TopBarMenuItem.EMPLOYEE_LIST);
 		pimPage.waitForPageLoad();
-		pimPage.enterValueToEmployeeInformationTextbox(EmployeeInformation.EMPLOYEE_ID_TEXTBOX, employee.getId()).clickSearchButton();
+		pimPage.enterValueToEmployeeInformationTextbox(EmployeeInformationForm.EMPLOYEE_ID_TEXTBOX, employee.getId()).clickSearchBtn();
 		assertHelper.assertTrue(pimPage.isEmployeeDisplayedInEmployeeList(employee), "A new employee is added successful in Employee list.");
 
 	}
@@ -58,13 +58,13 @@ public class PIMTest extends TestBase {
 	public void TC07() {
 		
 		AssertHelper assertHelper = new AssertHelper();
-		Account account = new Account(UserRole.ADMIN);
+		Account account = new Account(UserRoleOption.ADMIN);
 		
 		Logger.info("Precondition: Login successfully with a valid account.");
 		pimPage = loginPage.loginOrangeHRM(account);
 		
 		Logger.info("Step 1: Filter by \"Employment Status\".");
-		pimPage.selectOptionOnEmployeeInformation(EmployeeInformation.EMPLOYEE_STATUS_DROPDOWN, EmploymentStatus.FULL_TIME_CONTRACT.getValue()).clickSearchButton();
+		pimPage.selectOptionOnEmployeeInformation(EmployeeInformationForm.EMPLOYEE_STATUS_DROPDOWN, EmploymentStatusOption.FULL_TIME_CONTRACT.getValue()).clickSearchBtn();
 		
 		Logger.verify("VP. Employee's name are displayed in the alphabet by default.");
 		assertHelper.assertTrue(pimPage.isAllCellValueOfColumnSortedAlphabet(EmployeeInfoRecordColumnTitle.FIRST_AND_MIDDILE_NAME), "Employee's name are not displayed in the alphabet.");
@@ -76,7 +76,7 @@ public class PIMTest extends TestBase {
 	public void TC08() {
 	
 		AssertHelper assertHelper = new AssertHelper();
-		Account account = new Account(UserRole.ADMIN);
+		Account account = new Account(UserRoleOption.ADMIN);
 		Employee employee = new Employee();
 		
 		Logger.info("Precondition 1: Login successfully with a valid account.");
@@ -86,7 +86,7 @@ public class PIMTest extends TestBase {
 		pimPage.clickTopBarMenuItem(TopBarMenuItem.ADD_EMPLOYEE);
 		pimPage.enterAllRequiredOnAddEmployeeForm(employee).clickSaveButton();
 		pimPage.waitForEmployeeDetailsDisplayed().clickTopBarMenuItem(TopBarMenuItem.EMPLOYEE_LIST);
-		pimPage.enterValueToEmployeeInformationTextbox(EmployeeInformation.EMPLOYEE_ID_TEXTBOX, employee.getId()).clickSearchButton();
+		pimPage.enterValueToEmployeeInformationTextbox(EmployeeInformationForm.EMPLOYEE_ID_TEXTBOX, employee.getId()).clickSearchButton();
 		String actualResult = pimPage.getCellValueOfColumn(EmployeeInfoRecordColumnTitle.EMPLOYMENT_STATUS);
 		
 		Logger.info("Step 1: Select \"Edit\" button for the employee.");
@@ -100,12 +100,12 @@ public class PIMTest extends TestBase {
 		pimPage.selectEmployeeInfoTypeTab(EmployeeInformationTypeTab.JOB);
 		
 		Logger.info("Step 3: Modify Employement Status");
-		pimPage.selectOptionOnEmployeeInformation(EmployeeInformation.EMPLOYEE_STATUS_DROPDOWN, EmploymentStatus.FULL_TIME_CONTRACT.getValue()).clickSaveButton();
-		String expectedResult = pimPage.getSelectedOptionOnViewJobDetail(EmployeeInformation.EMPLOYEE_STATUS_DROPDOWN.getValue());
+		pimPage.selectOptionOnEmployeeInformation(EmployeeInformationForm.EMPLOYEE_STATUS_DROPDOWN, EmploymentStatusOption.FULL_TIME_CONTRACT.getValue()).clickSaveButton();
+		String expectedResult = pimPage.getSelectedOptionOnViewJobDetail(EmployeeInformationForm.EMPLOYEE_STATUS_DROPDOWN.getValue());
 		
 		Logger.verify("VP. Employee's job Employment Status is changed successfull.");
 		pimPage.clickTopBarMenuItem(TopBarMenuItem.EMPLOYEE_LIST);
-		pimPage.enterValueToEmployeeInformationTextbox(EmployeeInformation.EMPLOYEE_ID_TEXTBOX, employee.getId()).clickSearchButton();
+		pimPage.enterValueToEmployeeInformationTextbox(EmployeeInformationForm.EMPLOYEE_ID_TEXTBOX, employee.getId()).clickSearchButton();
 		assertHelper.assertNotEquals(actualResult, expectedResult, "Employee's job Employment Status is not changed successfull.");
 		
 	}
@@ -115,7 +115,7 @@ public class PIMTest extends TestBase {
 	public void TC09() {
 		
 		AssertHelper assertHelper = new AssertHelper();
-		Account account = new Account(UserRole.ADMIN);
+		Account account = new Account(UserRoleOption.ADMIN);
 		Employee employee = new Employee();
 		
 		Logger.info("Precondition 1: Login successfully with a valid account.");
@@ -125,7 +125,7 @@ public class PIMTest extends TestBase {
 		pimPage.clickTopBarMenuItem(TopBarMenuItem.ADD_EMPLOYEE);
 		pimPage.enterAllRequiredOnAddEmployeeForm(employee).clickSaveButton();
 		pimPage.waitForEmployeeDetailsDisplayed().clickTopBarMenuItem(TopBarMenuItem.EMPLOYEE_LIST);
-		pimPage.enterValueToEmployeeInformationTextbox(EmployeeInformation.EMPLOYEE_ID_TEXTBOX, employee.getId()).clickSearchButton();
+		pimPage.enterValueToEmployeeInformationTextbox(EmployeeInformationForm.EMPLOYEE_ID_TEXTBOX, employee.getId()).clickSearchButton();
 		
 		Logger.info("Step 1: Select \"Edit\" button for the employee.");
 		pimPage.clickEditEmployeeInfoRecord(employee).waitForEmployeeDetailsDisplayed();
@@ -138,15 +138,14 @@ public class PIMTest extends TestBase {
 		pimPage.clickEmployeeImageOnViewPersonalDetails();
 		
 		Logger.verify("VP. The photograph screen is displayed.");
-		assertHelper.assertTrue(pimPage.isChangeProfilePictureTitleDisplayed(), "The photograph screen is not displayed");
+		assertHelper.assertTrue(pimPage.isChangeProfilePictureTitleDisplayed(), "The photograph screen is not displayed.");
 		
 		Logger.info("Step 3: Click on plus button.");
 		pimPage.clickAddPicture();
 		
-		Logger.info("Step 4: Choose the image file type jpg/ png/ gif that is more than 1MB");
+		Logger.info("Step 4: Choose the image file type jpg/ png/ gif that is more than 1MB.");
 		
-		Logger.verify("VP. The error message is displayed that \"Attchment Size Exceeded\"");
-		
+		Logger.verify("VP. The error message is displayed that \"Attchment Size Exceeded\".");
 		
 	}
 	

@@ -1,10 +1,9 @@
 package pages.OrangeHRM;
 
 import dataType.OrangeHRM.LeftPanelMenuItem;
-import dataType.OrangeHRM.SystemUsers;
+import dataType.OrangeHRM.SystemUsersForm;
 import frames.OrangeHRM.ViewSystemUsersFrame;
 import io.qameta.allure.Step;
-import utils.constant.Constant;
 
 public class AdminPage extends GeneralPage {
 
@@ -21,8 +20,8 @@ public class AdminPage extends GeneralPage {
 	
 	@Step("Wait for Admin page displayed")
 	public AdminPage waitForPageLoad() {
-		lblHeaderTitle.generateDynamic(LeftPanelMenuItem.ADMIN);
-		lblHeaderTitle.waitForDisplayed(Constant.DEFAULT_TIMEOUT);
+		lblHeaderTitle.generateDynamic(LeftPanelMenuItem.ADMIN.getValue());
+		lblHeaderTitle.waitForDisplayed();
 		viewSystemUsersFrame.waitForLoading();
 		waitForLoadingIconDisappear();
 		return this;
@@ -41,7 +40,7 @@ public class AdminPage extends GeneralPage {
 	}
 	
 	@Step("Select option on the User Role dropdown")
-	public AdminPage selectOptionOnSystemUsers(SystemUsers systemUsers, String value) {
+	public AdminPage selectOptionOnSystemUsers(SystemUsersForm systemUsers, String value) {
 		clickDropdownOnSystemUsers(systemUsers.getValue());
 		selectOption(value);
 		return this;
