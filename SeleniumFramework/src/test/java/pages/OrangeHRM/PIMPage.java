@@ -12,6 +12,7 @@ import frames.OrangeHRM.UpdatePasswordFrame;
 import frames.OrangeHRM.ViewEmployeeListFrame;
 import frames.OrangeHRM.ViewJobDetailsFrame;
 import frames.OrangeHRM.ViewPersonalDetailedFrame;
+import frames.OrangeHRM.ViewPhotographFrame;
 import io.qameta.allure.Step;
 import utils.constant.Constant;
 
@@ -23,6 +24,7 @@ public class PIMPage extends GeneralPage {
 	private final AddEmployeeFrame addEmployeeFrame = new AddEmployeeFrame();
 	private final UpdatePasswordFrame updatePasswordFrame = new UpdatePasswordFrame();
 	private final ViewJobDetailsFrame viewJobDetailsFrame = new ViewJobDetailsFrame();
+	private final ViewPhotographFrame viewPhotographFrame = new ViewPhotographFrame();
 
 	private static PIMPage instance;
 
@@ -212,6 +214,22 @@ public class PIMPage extends GeneralPage {
 	@Step("Get selected value of option {0}")
 	public String getSelectedOptionOnViewJobDetail(String drpName){
 		return viewJobDetailsFrame.getSelectedOption(drpName);
+	}
+	
+	@Step("Click employee image")
+	public PIMPage clickEmployeeImageOnViewPersonalDetails() {
+		viewPersonalDetailedFrame.clickEmployeeImage();
+		return this;
+	}
+	
+	@Step("Check if change profile picture title displayed")
+	public boolean isChangeProfilePictureTitleDisplayed() {
+		return viewPhotographFrame.isFrameTitleDisplayed();
+	}
+	
+	public PIMPage clickAddPicture() {
+		viewPhotographFrame.clickAddPicture();
+		return this;
 	}
 
 }
