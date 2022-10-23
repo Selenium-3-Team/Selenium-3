@@ -21,7 +21,8 @@ public class GeneralFrame {
 	protected final Element iconLoading = new Element("//div[@class='oxd-loading-spinner']");
 	protected final Label lblFrameTitle = new Label("//*[contains(@class,'-title') and contains(@class,'oxd-text') and not(contains(@class,'sub-title'))]");
 	protected final TextBox txtOption = new TextBox("//label[normalize-space(.)='%s']/parent::div/following-sibling::div//input");
-
+	protected final Button btnApply = new Button("//button[contains(.,'Apply')]");
+	
 	// Wait methods
 	public void waitForLoading() {
 		try {
@@ -64,6 +65,7 @@ public class GeneralFrame {
 	// Enter methods
 	public void enterValueToTextboxOption(String txtName, String value) {
 		txtOption.generateDynamic(txtName);
+		txtOption.clearByHotKeys();
 		txtOption.sendKeys(value);
 	}
 
@@ -79,6 +81,10 @@ public class GeneralFrame {
 
 	public boolean isFrameTitleDisplayed() {
 		return lblFrameTitle.isDisplayed();
+	}
+	
+	public void clickApplyButton() {
+		btnApply.click();
 	}
 
 }

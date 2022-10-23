@@ -1,14 +1,7 @@
 {
-  "employeetc06": {
+  "employee": {
     "firstName": "Alex",
     "middleName": "Mac",
-    "lastName": "Nguyen",
-    "id": "123"
-  },
-  "employeetc07": {
-    "firstName": "ABC",
-    "middleName": "XYZ",
-    "lastName": "MNQ",
-    "id": "456"
+    "lastName": "Nguyen"
   }
 }

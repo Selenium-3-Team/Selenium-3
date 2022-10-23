@@ -12,7 +12,7 @@ import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.Status;
 
-import core.utilities.CoreUtilities;
+import core.utilities.Utilities;
 import io.qameta.allure.Allure;
 import io.qameta.allure.Attachment;
 
@@ -74,7 +74,7 @@ public class TestListener implements ITestListener {
 	 */
 	@Attachment(value = "Screenshot of {0}", type = "image/png")
 	public byte[] saveScreenshot(String name) {
-		return CoreUtilities.takeScreenShot();
+		return Utilities.takeScreenShot();
 	}
 
 	/**
@@ -91,7 +91,7 @@ public class TestListener implements ITestListener {
 		String screenshotFilePath = "";
 		try {
 			saveScreenshot(result.getName());
-			screenshotFilePath = CoreUtilities.takeScreenShot(screenshotFileName,
+			screenshotFilePath = Utilities.takeScreenShot(screenshotFileName,
 					ExtentReportManager.getScreenshotFolder());
 		} catch (Exception e) {
 			e.printStackTrace();

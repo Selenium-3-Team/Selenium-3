@@ -2,7 +2,7 @@ package core.common;
 
 import java.util.logging.Logger;
 
-import core.utilities.CoreUtilities;
+import core.utilities.Utilities;
 
 /**
  * A Constants class for drivers and elements
@@ -34,7 +34,7 @@ public class Constant {
 	 * properties file
 	 */
 	static {
-		String path = CoreUtilities.getProjectPath() + "src\\main\\core\\Core\\common\\logger.properties";
+		String path = Utilities.getProjectPath() + "src\\main\\core\\Core\\common\\logger.properties";
 		System.setProperty("java.util.logging.config.file", path);
 	}
 
