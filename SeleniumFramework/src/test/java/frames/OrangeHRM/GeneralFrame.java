@@ -14,70 +14,67 @@ import utils.constant.Constant;
 public class GeneralFrame {
 
 	protected final Table employeeInfoRecord = new Table("//div[@class='orangehrm-container']");
-	protected final Button btnSearch = new Button("//button[contains(.,'Search')]");
-	protected final Button btnAdd = new Button("//button[contains(.,'Add')]");
-	protected final Button btnSave = new Button("//button[contains(.,'Save')]");
 	protected final Element drpOption = new Element("//div[.='%s']//following-sibling::div");
+	protected final	Label lblSelectedOption = new Label(drpOption.getLocatorAsString() + "//div[@class='oxd-select-text-input']");
 	protected final Label lblOption = new Label("//div[@class='oxd-select-option']//span[text()='%s']");
 	protected final Label lblNoRecordsFound = new Label("//span[text()='No Records Found']");
-	protected final Element employeeInfoRow = new Element("//div[contains(@class,'oxd-table-card')]//div[contains(@class,'oxd-table-cell') and normalize-space(.)='%s']/following-sibling::div[normalize-space(.)='%s']/following-sibling::div[normalize-space(.)='%s']");
-	protected final Element iconLoading = new Element("//div[@class='oxd-loading-spinner']");
-	protected final Label lblFrameTitle = new Label("//*[contains(@class,'-title') and contains(@class,'oxd-text') and not(contains(@class,'sub-title'))]");
-	protected final TextBox txtOption = new TextBox("//label[normalize-space(.)='%s']/parent::div/following-sibling::div//input");
+	protected final Element employeeInfoRow = new Element(
+			"//div[contains(@class,'oxd-table-card')]//div[contains(@class,'oxd-table-cell') and normalize-space(.)='%s']/following-sibling::div[normalize-space(.)='%s']/following-sibling::div[normalize-space(.)='%s']");
+	protected final Label lblFrameTitle = new Label(
+			"//*[contains(@class,'-title') and contains(@class,'oxd-text') and not(contains(@class,'sub-title'))]");
+	protected final TextBox txtOption = new TextBox(
+			"//label[normalize-space(.)='%s']/parent::div/following-sibling::div//input");
 	protected final Label lblEmployeeInforRecordColumns = new Label("//div[@role='columnheader']");
-	protected final Label lblCellFollowingIndex = new Label("//div[@class='oxd-table-body']//div[contains(@class,'oxd-table-cell')][%s]/div");
+	protected final Label lblCellFollowingIndex = new Label(
+			"//div[@class='oxd-table-body']//div[contains(@class,'oxd-table-cell')][%s]/div");
+	protected final Button btnDeleteRecord = new Button(
+			employeeInfoRow.getLocatorAsString() + "/following-sibling::div//button/i[contains(@class,'bi-trash')]");
+	protected final Button btnEditRecord = new Button(employeeInfoRow.getLocatorAsString()
+			+ "/following-sibling::div//button/i[contains(@class,'bi-pencil-fill')]");
 
 	public List<String> getAllEmployeeInforRecordColumnTitle() {
 		return lblEmployeeInforRecordColumns.getAllTexts();
 	}
-	
+
 	public int findEmployeeInforRecordColumnIndex(EmployeeInfoRecordColumnTitle title) {
 		int index = 1;
-		for(int i = 0; i < getAllEmployeeInforRecordColumnTitle().size(); i++) {
-			if(getAllEmployeeInforRecordColumnTitle().get(i).equals(title.getValue())) {
+		for (int i = 0; i < getAllEmployeeInforRecordColumnTitle().size(); i++) {
+			if (getAllEmployeeInforRecordColumnTitle().get(i).equals(title.getValue())) {
 				index = i + 1;
 				break;
-			}else {
+			} else {
 				index = -1;
 			}
 		}
 		return index;
 	}
-	
-	public List<String> getAllCellValueOfColumn(EmployeeInfoRecordColumnTitle title){
+
+	public List<String> getAllCellValueOfColumn(EmployeeInfoRecordColumnTitle title) {
 		lblCellFollowingIndex.generateDynamic(Integer.toString(findEmployeeInforRecordColumnIndex(title)));
 		return lblCellFollowingIndex.getAllTexts();
 	}
-	
-	public boolean isAllCellValueOfColumnSortedAlphabet(EmployeeInfoRecordColumnTitle title) {
-		boolean isSorted = true;
-		for(int i = 0; i < getAllCellValueOfColumn(title).size() - 1; i++) {
-			if(getAllCellValueOfColumn(title).get(i).compareToIgnoreCase(getAllCellValueOfColumn(title).get(i+1)) > 0) {
-				isSorted = false;
-				break;
-			}
-		}
-		return isSorted;
+
+	public String getCellValueOfColumn(EmployeeInfoRecordColumnTitle title) {
+		lblCellFollowingIndex.generateDynamic(Integer.toString(findEmployeeInforRecordColumnIndex(title)));
+		return lblCellFollowingIndex.getText();
+	}
+
+	public String getSelectedOption(String drpName) {
+		lblSelectedOption.generateDynamic(drpName);
+		return lblSelectedOption.getLabelText();
 	}
 	
 	// Wait methods
 	public void waitForLoading() {
 		try {
-			waitForLoadingIconDisappear();
 			lblFrameTitle.waitForDisplayed(Constant.DEFAULT_TIMEOUT);
 		} catch (Exception e) {
 			e.getMessage();
 		}
 	}
-	
+
 	public void waitForFrameTitleDisplayed() {
 		lblFrameTitle.waitForDisplayed(Constant.DEFAULT_TIMEOUT);
-	}
-	
-	public void waitForLoadingIconDisappear() {
-		if (iconLoading.isDisplayed()) {
-			iconLoading.waitForNotPresent(Constant.DEFAULT_TIMEOUT);
-		}
 	}
 
 	// Click|Select methods
@@ -90,13 +87,17 @@ public class GeneralFrame {
 		lblOption.generateDynamic(optionName);
 		lblOption.click();
 	}
-	
-	public void clickSearchButton() {
-		btnSearch.click();
+
+	public void clickDeleteEmployeeInfoRecord(Employee employee) {
+		btnDeleteRecord.generateDynamic(employee.getId(),
+				String.format("%s %s", employee.getFirstName(), employee.getMiddleName()), employee.getLastName());
+		btnDeleteRecord.click();
 	}
-	
-	public void clickSaveButton() {
-		btnSave.click();
+
+	public void clickEditEmployeeInfoRecord(Employee employee) {
+		btnEditRecord.generateDynamic(employee.getId(),
+				String.format("%s %s", employee.getFirstName(), employee.getMiddleName()), employee.getLastName());
+		btnEditRecord.click();
 	}
 
 	// Enter methods
@@ -111,12 +112,25 @@ public class GeneralFrame {
 	}
 
 	public boolean isEmployeeDisplayedInEmployeeList(Employee employee) {
-		employeeInfoRow.generateDynamic(employee.getId(),String.format("%s %s", employee.getFirstName(), employee.getMiddleName()), employee.getLastName());
+		employeeInfoRow.generateDynamic(employee.getId(),
+				String.format("%s %s", employee.getFirstName(), employee.getMiddleName()), employee.getLastName());
 		return employeeInfoRow.isDisplayed();
 	}
 
 	public boolean isFrameTitleDisplayed() {
 		return lblFrameTitle.isDisplayed();
+	}
+
+	public boolean isAllCellValueOfColumnSortedAlphabet(EmployeeInfoRecordColumnTitle title) {
+		boolean isSorted = true;
+		for (int i = 0; i < getAllCellValueOfColumn(title).size() - 1; i++) {
+			if (getAllCellValueOfColumn(title).get(i)
+					.compareToIgnoreCase(getAllCellValueOfColumn(title).get(i + 1)) > 0) {
+				isSorted = false;
+				break;
+			}
+		}
+		return isSorted;
 	}
 
 }

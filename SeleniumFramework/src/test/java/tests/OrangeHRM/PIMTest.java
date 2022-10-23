@@ -8,6 +8,7 @@ import dataObject.OrangeHRM.Account;
 import dataObject.OrangeHRM.Employee;
 import dataType.OrangeHRM.EmployeeInfoRecordColumnTitle;
 import dataType.OrangeHRM.EmployeeInformation;
+import dataType.OrangeHRM.EmployeeInformationTypeTab;
 import dataType.OrangeHRM.EmploymentStatus;
 import dataType.OrangeHRM.TopBarMenuItem;
 import dataType.OrangeHRM.UserRole;
@@ -25,7 +26,7 @@ public class PIMTest extends TestBase {
 		Employee employee = new Employee();
 
 		Logger.info("Precondition: Login successfully with a valid account.");
-		pimPage = loginPage.loginOrangeHRM(account).waitForPageLoad();
+		pimPage = loginPage.loginOrangeHRM(account);
 
 		Logger.info("Step 1: Click \"Add\" or \"Add Employee\" button.");
 		pimPage.clickTopBarMenuItem(TopBarMenuItem.ADD_EMPLOYEE);
@@ -38,7 +39,8 @@ public class PIMTest extends TestBase {
 		pimPage.enterAllRequiredOnAddEmployeeForm(employee);
 		
 		Logger.info("Step 3: Click \"Save\".");
-		pimPage.clickSaveBtn().waitForEmployeeDetailsDisplayed();
+		pimPage.clickSaveButton();
+		pimPage.waitForEmployeeDetailsDisplayed();
 		
 		Logger.verify("VP. A new employee is added successful.");
 		assertHelper.assertTrue(pimPage.isEmployeeNameDisplayed(employee), "A new employee is added successful.");
@@ -46,7 +48,7 @@ public class PIMTest extends TestBase {
 		Logger.info("Step 4: Verify new added employee is displayed in Employee list.");
 		pimPage.clickTopBarMenuItem(TopBarMenuItem.EMPLOYEE_LIST);
 		pimPage.waitForPageLoad();
-		pimPage.enterValueToEmployeeInformationTextbox(EmployeeInformation.EMPLOYEE_ID_TEXTBOX, employee.getId()).clickSearchBtn();
+		pimPage.enterValueToEmployeeInformationTextbox(EmployeeInformation.EMPLOYEE_ID_TEXTBOX, employee.getId()).clickSearchButton();
 		assertHelper.assertTrue(pimPage.isEmployeeDisplayedInEmployeeList(employee), "A new employee is added successful in Employee list.");
 
 	}
@@ -57,15 +59,55 @@ public class PIMTest extends TestBase {
 		
 		AssertHelper assertHelper = new AssertHelper();
 		Account account = new Account(UserRole.ADMIN);
+		
 		Logger.info("Precondition: Login successfully with a valid account.");
-		pimPage = loginPage.loginOrangeHRM(account).waitForPageLoad();
+		pimPage = loginPage.loginOrangeHRM(account);
 		
 		Logger.info("Step 1: Filter by \"Employment Status\".");
-		pimPage.selectOptionOnEmployeeInformation(EmployeeInformation.EMPLOYEE_STATUS_DROPDOWN, EmploymentStatus.FULL_TIME_CONTRACT.getValue()).clickSearchBtn();
+		pimPage.selectOptionOnEmployeeInformation(EmployeeInformation.EMPLOYEE_STATUS_DROPDOWN, EmploymentStatus.FULL_TIME_CONTRACT.getValue()).clickSearchButton();
 		
 		Logger.verify("VP. Employee's name are displayed in the alphabet by default.");
 		assertHelper.assertTrue(pimPage.isAllCellValueOfColumnSortedAlphabet(EmployeeInfoRecordColumnTitle.FIRST_AND_MIDDILE_NAME), "Employee's name are not displayed in the alphabet.");
 	
+	}
+	
+	@Test
+	@Description("Test case 08: User can modify employee's Employment Status successful.")
+	public void TC08() {
+	
+		AssertHelper assertHelper = new AssertHelper();
+		Account account = new Account(UserRole.ADMIN);
+		Employee employee = new Employee();
+		
+		Logger.info("Precondition 1: Login successfully with a valid account.");
+		pimPage = loginPage.loginOrangeHRM(account);
+		
+		Logger.info("Precondition 2: Create successfully a new employee.");
+		pimPage.clickTopBarMenuItem(TopBarMenuItem.ADD_EMPLOYEE);
+		pimPage.enterAllRequiredOnAddEmployeeForm(employee).clickSaveButton();
+		pimPage.waitForEmployeeDetailsDisplayed().clickTopBarMenuItem(TopBarMenuItem.EMPLOYEE_LIST);
+		pimPage.enterValueToEmployeeInformationTextbox(EmployeeInformation.EMPLOYEE_ID_TEXTBOX, employee.getId()).clickSearchButton();
+		String actualResult = pimPage.getCellValueOfColumn(EmployeeInfoRecordColumnTitle.EMPLOYMENT_STATUS);
+		
+		Logger.info("Step 1: Select \"Edit\" button for the employee.");
+		pimPage.clickEditEmployeeInfoRecord(employee).waitForEmployeeDetailsDisplayed();
+		
+		Logger.verify("VP. User is redirected to the employee personal details.");
+		assertHelper.assertTrue(pimPage.isEmployeeInfoTypeTabDisplayed(EmployeeInformationTypeTab.PERSONAL_DETAILS), "User is not redirected to the employee personal details.");
+		assertHelper.assertTrue(pimPage.isEmployeeNameDisplayed(employee), "User is redirected wrong selected employee.");
+		
+		Logger.info("Step 2: Select \"Job\" employee information type.");
+		pimPage.selectEmployeeInfoTypeTab(EmployeeInformationTypeTab.JOB);
+		
+		Logger.info("Step 3: Modify Employement Status");
+		pimPage.selectOptionOnEmployeeInformation(EmployeeInformation.EMPLOYEE_STATUS_DROPDOWN, EmploymentStatus.FULL_TIME_CONTRACT.getValue()).clickSaveButton();
+		String expectedResult = pimPage.getSelectedOptionOnViewJobDetail(EmployeeInformation.EMPLOYEE_STATUS_DROPDOWN.getValue());
+		
+		Logger.verify("VP. Employee's job Employment Status is changed successfull.");
+		pimPage.clickTopBarMenuItem(TopBarMenuItem.EMPLOYEE_LIST);
+		pimPage.enterValueToEmployeeInformationTextbox(EmployeeInformation.EMPLOYEE_ID_TEXTBOX, employee.getId()).clickSearchButton();
+		assertHelper.assertNotEquals(actualResult, expectedResult, "Employee's job Employment Status is not changed successfull.");
+		
 	}
 	
 }

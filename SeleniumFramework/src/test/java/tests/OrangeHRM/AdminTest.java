@@ -19,6 +19,7 @@ public class AdminTest extends TestBase {
 
 		AssertHelper assertHelper = new AssertHelper();
 		Account account = new Account(UserRole.ADMIN);
+		
 		Logger.info("Precondition: Login successfully with a valid account.");
 		pimPage = loginPage.loginOrangeHRM(account).waitForPageLoad();
 
