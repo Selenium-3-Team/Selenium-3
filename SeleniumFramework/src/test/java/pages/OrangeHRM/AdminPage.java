@@ -24,6 +24,7 @@ public class AdminPage extends GeneralPage {
 		lblHeaderTitle.generateDynamic(LeftPanelMenuItem.ADMIN);
 		lblHeaderTitle.waitForDisplayed(Constant.DEFAULT_TIMEOUT);
 		viewSystemUsersFrame.waitForLoading();
+		waitForLoadingIconDisappear();
 		return this;
 	}
 
@@ -43,12 +44,6 @@ public class AdminPage extends GeneralPage {
 	public AdminPage selectOptionOnSystemUsers(SystemUsers systemUsers, String value) {
 		clickDropdownOnSystemUsers(systemUsers.getValue());
 		selectOption(value);
-		return this;
-	}
-
-	@Step("Click on search button")
-	public AdminPage clickSearchButton() {
-		viewSystemUsersFrame.clickSearchButton();
 		return this;
 	}
 

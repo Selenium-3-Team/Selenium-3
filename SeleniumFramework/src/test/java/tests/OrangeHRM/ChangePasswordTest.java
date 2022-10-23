@@ -20,6 +20,7 @@ public class ChangePasswordTest extends TestBase {
 		AssertHelper assertHelper = new AssertHelper();
 		Account account = new Account(UserRole.ADMIN);
 		String newPassword = Constant.STRONG_PASSWORD;
+		
 		Logger.info("Precondition: Login successfully with a valid account.");
 		pimPage = loginPage.loginOrangeHRM(account);
 
@@ -39,7 +40,7 @@ public class ChangePasswordTest extends TestBase {
 		pimPage.enterConfirmPassword(newPassword);
 
 		Logger.info("Step 6: Click on the \"Save\" button.");
-		pimPage.clickSaveBtn();
+		pimPage.clickSaveButton();
 		
 		Logger.verify("VP. The success \"Successfully Saved\" message should be displayed.");
 		assertHelper.assertTrue(pimPage.isToastSuccessMessageDisplayed(), "The success \"Successfully Saved\" message should be displayed.");
@@ -55,4 +56,5 @@ public class ChangePasswordTest extends TestBase {
 		assertHelper.assertTrue(pimPage.isHeaderTitleDisplayed(LeftPanelMenuItem.PIM), "The PIM page should be displayed.");
 
 	}
+	
 }
