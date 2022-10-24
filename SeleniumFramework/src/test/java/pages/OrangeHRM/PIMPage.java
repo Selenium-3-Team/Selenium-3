@@ -85,7 +85,7 @@ public class PIMPage extends GeneralPage {
 
 	public PIMPage enterAllRequiredOnAddEmployeeForm(Employee employee) {
 		return enterAllRequiredOnAddEmployeeForm(employee.getFirstName(), employee.getMiddleName(),
-				employee.getLastName(), employee.getId());
+				employee.getLastName(), employee.getEmloyeeId());
 	}
 
 	@Step("Add Employee without create login details")
@@ -98,7 +98,7 @@ public class PIMPage extends GeneralPage {
 
 	public PIMPage addEmployeeWithoutCreateLoginDetails(Employee employee) {
 		return addEmployeeWithoutCreateLoginDetails(employee.getFirstName(), employee.getMiddleName(),
-				employee.getLastName(), employee.getId());
+				employee.getLastName(), employee.getEmloyeeId());
 	}
 
 	// Employee Details frame

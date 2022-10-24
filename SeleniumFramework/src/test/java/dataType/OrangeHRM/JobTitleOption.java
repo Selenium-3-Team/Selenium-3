@@ -1,5 +1,7 @@
 package dataType.OrangeHRM;
 
+import core.helper.RandomHelper;
+
 public enum JobTitleOption {
 
 	DEFAULT("-- Select --"), ACCOUNT_ASSISTANT("Account Assistant"), CHIEF_EXECUTIVE_OFFICER("Chief Executive Officer"),
@@ -22,5 +24,10 @@ public enum JobTitleOption {
 
 	public String getValue() {
 		return value;
+	}
+
+	public static String randomLocationOption() {
+		JobTitleOption[] jobTitleOptions = values();
+		return jobTitleOptions[RandomHelper.getRandomNumber(1, jobTitleOptions.length - 1)].getValue();
 	}
 }

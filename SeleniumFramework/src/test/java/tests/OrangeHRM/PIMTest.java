@@ -48,7 +48,7 @@ public class PIMTest extends TestBase {
 		Logger.info("Step 4: Verify new added employee is displayed in Employee list.");
 		pimPage.clickTopBarMenuItem(TopBarMenuItem.EMPLOYEE_LIST);
 		pimPage.waitForPageLoad();
-		pimPage.enterValueToEmployeeInformationTextbox(EmployeeInformationForm.EMPLOYEE_ID_TEXTBOX, employee.getId()).clickSearchBtn();
+		pimPage.enterValueToEmployeeInformationTextbox(EmployeeInformationForm.EMPLOYEE_ID_TEXTBOX, employee.getEmloyeeId()).clickSearchBtn();
 		assertHelper.assertTrue(pimPage.isEmployeeDisplayedInEmployeeList(employee), "A new employee is added successful in Employee list.");
 
 	}
@@ -86,7 +86,7 @@ public class PIMTest extends TestBase {
 		pimPage.clickTopBarMenuItem(TopBarMenuItem.ADD_EMPLOYEE);
 		pimPage.enterAllRequiredOnAddEmployeeForm(employee).clickSaveButton();
 		pimPage.waitForEmployeeDetailsDisplayed().clickTopBarMenuItem(TopBarMenuItem.EMPLOYEE_LIST);
-		pimPage.enterValueToEmployeeInformationTextbox(EmployeeInformationForm.EMPLOYEE_ID_TEXTBOX, employee.getId()).clickSearchButton();
+		pimPage.enterValueToEmployeeInformationTextbox(EmployeeInformationForm.EMPLOYEE_ID_TEXTBOX, employee.getEmloyeeId()).clickSearchButton();
 		String actualResult = pimPage.getCellValueOfColumn(EmployeeInfoRecordColumnTitle.EMPLOYMENT_STATUS);
 		
 		Logger.info("Step 1: Select \"Edit\" button for the employee.");
@@ -105,7 +105,7 @@ public class PIMTest extends TestBase {
 		
 		Logger.verify("VP. Employee's job Employment Status is changed successfull.");
 		pimPage.clickTopBarMenuItem(TopBarMenuItem.EMPLOYEE_LIST);
-		pimPage.enterValueToEmployeeInformationTextbox(EmployeeInformationForm.EMPLOYEE_ID_TEXTBOX, employee.getId()).clickSearchButton();
+		pimPage.enterValueToEmployeeInformationTextbox(EmployeeInformationForm.EMPLOYEE_ID_TEXTBOX, employee.getEmloyeeId()).clickSearchButton();
 		assertHelper.assertNotEquals(actualResult, expectedResult, "Employee's job Employment Status is not changed successfull.");
 		
 	}
@@ -125,7 +125,7 @@ public class PIMTest extends TestBase {
 		pimPage.clickTopBarMenuItem(TopBarMenuItem.ADD_EMPLOYEE);
 		pimPage.enterAllRequiredOnAddEmployeeForm(employee).clickSaveButton();
 		pimPage.waitForEmployeeDetailsDisplayed().clickTopBarMenuItem(TopBarMenuItem.EMPLOYEE_LIST);
-		pimPage.enterValueToEmployeeInformationTextbox(EmployeeInformationForm.EMPLOYEE_ID_TEXTBOX, employee.getId()).clickSearchButton();
+		pimPage.enterValueToEmployeeInformationTextbox(EmployeeInformationForm.EMPLOYEE_ID_TEXTBOX, employee.getEmloyeeId()).clickSearchButton();
 		
 		Logger.info("Step 1: Select \"Edit\" button for the employee.");
 		pimPage.clickEditEmployeeInfoRecord(employee).waitForEmployeeDetailsDisplayed();

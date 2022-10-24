@@ -103,13 +103,13 @@ public class GeneralFrame {
 	}
 
 	public void clickDeleteEmployeeInfoRecord(Employee employee) {
-		btnDeleteRecord.generateDynamic(employee.getId(),
+		btnDeleteRecord.generateDynamic(employee.getEmloyeeId(),
 				String.format("%s %s", employee.getFirstName(), employee.getMiddleName()), employee.getLastName());
 		btnDeleteRecord.click();
 	}
 
 	public void clickEditEmployeeInfoRecord(Employee employee) {
-		btnEditRecord.generateDynamic(employee.getId(),
+		btnEditRecord.generateDynamic(employee.getEmloyeeId(),
 				String.format("%s %s", employee.getFirstName(), employee.getMiddleName()), employee.getLastName());
 		btnEditRecord.click();
 	}
@@ -131,7 +131,7 @@ public class GeneralFrame {
 	}
 
 	public boolean isEmployeeDisplayedInEmployeeList(Employee employee) {
-		employeeInfoRow.generateDynamic(employee.getId(),
+		employeeInfoRow.generateDynamic(employee.getEmloyeeId(),
 				String.format("%s %s", employee.getFirstName(), employee.getMiddleName()), employee.getLastName());
 		return employeeInfoRow.isDisplayed();
 	}
