@@ -5,6 +5,7 @@ import org.testng.annotations.Test;
 import core.helper.AssertHelper;
 import core.report.Logger;
 import dataObject.OrangeHRM.Account;
+import dataObject.OrangeHRM.CustomField;
 import dataObject.OrangeHRM.Employee;
 import dataType.OrangeHRM.EmployeeInfoRecordColumnTitle;
 import dataType.OrangeHRM.EmployeeInformationForm;
@@ -149,6 +150,40 @@ public class PIMTest extends TestBase {
 		Logger.verify("VP. The error message is displayed that \"Attchment Size Exceeded\".");
 		assertHelper.assertTrue(pimPage.IsUploadImageErrorMessageDisplayed(), "The error message is not displayed as expected.");
 		assertHelper.assertEquals(pimPage.getUploadImageErrorMessage(), Constant.UPLOAD_IMAGE_ERROR_MESSAGE, "The error message is not displayed as \"Attchment Size Exceeded\".");
+		
+	}
+	
+	@Test
+	@Description("Test case 10: User can add a custom field for employee successful.")
+	public void TC10() {
+		
+		AssertHelper assertHelper = new AssertHelper();
+		Account account = new Account(UserRoleOption.ADMIN);
+		CustomField customField = new CustomField("customField");
+		
+		Logger.info("Precondition: Login successfully with a valid account.");
+		pimPage = loginPage.loginOrangeHRM(account);
+		
+		Logger.info("Step 1: Select Configuration -> Custom Fields.");
+		pimPage.clickTopBarMenuItem(TopBarMenuItem.CONFIGURATION).clickTopBarMenuItem(TopBarMenuItem.CUSTOM_FIELDS);
+		
+		Logger.verify("VP. Custom Field page is displayed");
+		assertHelper.assertTrue(pimPage.isCustomFieldsTitleDisplayed(), "Custom Field page is not displayed.");
+		
+		Logger.info("Step 2: Click add button");
+		pimPage.clickAddButton().waitForLoadingIconDisappear();
+		
+		Logger.info("Step 3: Enter all required information (Field Name, Screen, Type)");
+		pimPage.fillInformationForAddCustomField(customField.getFieldName(), customField.getScreen(), customField.getType(), customField.getSelectOptions());
+		
+		Logger.info("Step 4: Click save button");
+		pimPage.clickSaveButton().waitForLoadingIconDisappear();
+		
+		Logger.verify("VP. New custom field is displayed in the custom field list.");
+		assertHelper.assertTrue(pimPage.isCustomFieldDisplayedInCustomFieldList(customField), "New custom field is not displayed in the custom field list.");
+		
+		Logger.info("Post-condition: Delete added custom field.");
+		pimPage.clickDeleteCustomFieldInfoRecord(customField).waitForLoadingIconDisappear();
 		
 	}
 	

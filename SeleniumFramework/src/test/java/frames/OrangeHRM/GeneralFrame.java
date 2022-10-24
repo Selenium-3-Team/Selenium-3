@@ -8,7 +8,6 @@ import core.element.wrapper.Image;
 import core.element.wrapper.Label;
 import core.element.wrapper.Table;
 import core.element.wrapper.TextBox;
-import dataObject.OrangeHRM.Employee;
 import io.qameta.allure.Step;
 
 public class GeneralFrame {
@@ -19,26 +18,33 @@ public class GeneralFrame {
 			drpOption.getLocatorAsString() + "//div[@class='oxd-select-text-input']");
 	protected final Label lblOption = new Label("//div[@class='oxd-select-option']//span[text()='%s']");
 	protected final Label lblNoRecordsFound = new Label("//span[text()='No Records Found']");
-	protected final Element employeeInfoRow = new Element("//div[contains(@class,'oxd-table-card')]//div[contains(@class,'oxd-table-cell') and normalize-space(.)='%s']/following-sibling::div[normalize-space(.)='%s']/following-sibling::div[normalize-space(.)='%s']");
-	protected final Label lblFrameTitle = new Label("//*[contains(@class,'-title') and contains(@class,'oxd-text') and not(contains(@class,'sub-title'))]");
-	protected final TextBox txtOption = new TextBox("//label[normalize-space(.)='%s']/parent::div/following-sibling::div//input");
-	protected final Label lblEmployeeInforRecordColumns = new Label("//div[@role='columnheader']");
+	protected final Element infoRecordRow = new Element(
+			"//div[contains(@class,'oxd-table-card')]//div[contains(@class,'oxd-table-cell') and normalize-space(.)='%s']/following-sibling::div[normalize-space(.)='%s']/following-sibling::div[normalize-space(.)='%s']");
+	protected final Label lblFrameTitle = new Label(
+			"//*[contains(@class,'-title') and contains(@class,'oxd-text') and not(contains(@class,'sub-title'))]");
+	protected final TextBox txtOption = new TextBox(
+			"//label[normalize-space(.)='%s']/parent::div/following-sibling::div//input");
+	protected final Label lblInforRecordColumns = new Label("//div[@role='columnheader']");
 	protected final Label lblCellFollowingIndex = new Label(
 			"//div[@class='oxd-table-body']//div[contains(@class,'oxd-table-cell')][%s]/div");
 	protected final Button btnDeleteRecord = new Button(
-			employeeInfoRow.getLocatorAsString() + "/following-sibling::div//button/i[contains(@class,'bi-trash')]");
-	protected final Button btnEditRecord = new Button(employeeInfoRow.getLocatorAsString()
+			infoRecordRow.getLocatorAsString() + "/following-sibling::div//button/i[contains(@class,'bi-trash')]");
+	protected final Button btnEditRecord = new Button(infoRecordRow.getLocatorAsString()
 			+ "/following-sibling::div//button/i[contains(@class,'bi-pencil-fill')]");
 	protected final Image employeeImage = new Image("//div[@class='orangehrm-edit-employee-image-wrapper']//img");
+	private final Button btnCancelDelete = new Button(
+			"//div[@class='orangehrm-modal-footer']//button[contains(@class,'text ')]");
+	private final Button btnConfirmDelete = new Button(
+			"//div[@class='orangehrm-modal-footer']//button[contains(@class,'label-danger')]");
 
-	public List<String> getAllEmployeeInforRecordColumnTitle() {
-		return lblEmployeeInforRecordColumns.getAllTexts();
+	public List<String> getAllInforRecordColumnTitle() {
+		return lblInforRecordColumns.getAllTexts();
 	}
 
-	public int findEmployeeInforRecordColumnIndex(String title) {
+	public int findInforRecordColumnIndex(String title) {
 		int index = 1;
-		for (int i = 0; i < getAllEmployeeInforRecordColumnTitle().size(); i++) {
-			if (getAllEmployeeInforRecordColumnTitle().get(i).equals(title)) {
+		for (int i = 0; i < getAllInforRecordColumnTitle().size(); i++) {
+			if (getAllInforRecordColumnTitle().get(i).equals(title)) {
 				index = i + 1;
 				break;
 			} else {
@@ -50,13 +56,13 @@ public class GeneralFrame {
 
 	@Step("Get all cell value of column record table with {0} title")
 	public List<String> getAllCellValueOfColumn(String title) {
-		lblCellFollowingIndex.generateDynamic(Integer.toString(findEmployeeInforRecordColumnIndex(title)));
+		lblCellFollowingIndex.generateDynamic(Integer.toString(findInforRecordColumnIndex(title)));
 		return lblCellFollowingIndex.getAllTexts();
 	}
-	
+
 	@Step("Get all cell value of column record table with {0} title")
 	public String getCellValueOfColumn(String title) {
-		lblCellFollowingIndex.generateDynamic(Integer.toString(findEmployeeInforRecordColumnIndex(title)));
+		lblCellFollowingIndex.generateDynamic(Integer.toString(findInforRecordColumnIndex(title)));
 		return lblCellFollowingIndex.getText();
 	}
 
@@ -102,20 +108,26 @@ public class GeneralFrame {
 		lblOption.click();
 	}
 
-	public void clickDeleteEmployeeInfoRecord(Employee employee) {
-		btnDeleteRecord.generateDynamic(employee.getEmloyeeId(),
-				String.format("%s %s", employee.getFirstName(), employee.getMiddleName()), employee.getLastName());
+	public void clickDeleteInfoRecord(String firstCellValue, String secondCellValue, String thridCellValue) {
+		btnDeleteRecord.generateDynamic(firstCellValue, secondCellValue, thridCellValue);
 		btnDeleteRecord.click();
 	}
 
-	public void clickEditEmployeeInfoRecord(Employee employee) {
-		btnEditRecord.generateDynamic(employee.getEmloyeeId(),
-				String.format("%s %s", employee.getFirstName(), employee.getMiddleName()), employee.getLastName());
+	public void clickEditInfoRecord(String firstCellValue, String secondCellValue, String thridCellValue) {
+		btnEditRecord.generateDynamic(firstCellValue, secondCellValue, thridCellValue);
 		btnEditRecord.click();
 	}
 
 	public void clickEmployeeImage() {
 		employeeImage.click();
+	}
+
+	public void clickConfirmDeleteButton() {
+		btnConfirmDelete.click();
+	}
+
+	public void clickCancelDeleteButton() {
+		btnCancelDelete.click();
 	}
 
 	// Enter methods
@@ -130,10 +142,10 @@ public class GeneralFrame {
 		return lblNoRecordsFound.isDisplayed();
 	}
 
-	public boolean isEmployeeDisplayedInEmployeeList(Employee employee) {
-		employeeInfoRow.generateDynamic(employee.getEmloyeeId(),
-				String.format("%s %s", employee.getFirstName(), employee.getMiddleName()), employee.getLastName());
-		return employeeInfoRow.isDisplayed();
+	public boolean isInfoRecordDisplayedInRecordList(String firstCellValue, String secondCellValue,
+			String thridCellValue) {
+		infoRecordRow.generateDynamic(firstCellValue, secondCellValue, thridCellValue);
+		return infoRecordRow.isDisplayed();
 	}
 
 	public boolean isFrameTitleDisplayed() {
