@@ -19,7 +19,7 @@ public enum LocationOption {
 
 	public static String randomLocationOption() {
 		LocationOption[] locations = values();
-		return locations[RandomHelper.getRandomNumber(1, locations.length)].getValue();
+		return locations[RandomHelper.getRandomNumber(1, locations.length - 1)].getValue();
 	}
 
 }
