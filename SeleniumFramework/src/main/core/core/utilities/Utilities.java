@@ -1,5 +1,9 @@
 package core.utilities;
 
+import java.awt.datatransfer.StringSelection;
+import java.awt.event.KeyEvent;
+import java.awt.Robot;
+import java.awt.Toolkit;
 import java.io.File;
 import java.util.logging.Logger;
 
@@ -59,5 +63,36 @@ public class Utilities {
 			logger.severe("An error occurred when capturing screen shot: " + e.getMessage());
 		}
 		return path;
+	}
+
+	/**
+	 * Put path to your file in a clipboard
+	 * 
+	 * @param string - file path
+	 */
+	public static void setClipboardData(String string) {
+		StringSelection stringSelection = new StringSelection(string);
+		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(stringSelection, null);
+	}
+
+	/**
+	 * Imitate mouse events like ENTER, CTRL+C, CTRL+V to paste the data from
+	 * clipboard
+	 * 
+	 * @param fileLocation - file path
+	 */
+	public static void uploadFile(String fileLocation) {
+		try {
+			setClipboardData(fileLocation);
+			Robot robot = new Robot();
+			robot.keyPress(KeyEvent.VK_CONTROL);
+			robot.keyPress(KeyEvent.VK_V);
+			robot.keyRelease(KeyEvent.VK_V);
+			robot.keyRelease(KeyEvent.VK_CONTROL);
+			robot.keyPress(KeyEvent.VK_ENTER);
+			robot.keyRelease(KeyEvent.VK_ENTER);
+		} catch (Exception exp) {
+			exp.printStackTrace();
+		}
 	}
 }

@@ -169,6 +169,16 @@ public class Driver {
 		}
 	}
 
+	public static void switchToActiveElement() {
+		try {
+			logger.info("Switch to active element");
+			getDriver().switchTo().activeElement();
+
+		} catch (Exception e) {
+			logger.severe("An severe occurred when switching to active element: " + e.getMessage());
+		}
+	}
+
 	/**
 	 * Send future commands to a different frame or window and select a frame by its
 	 * name or ID

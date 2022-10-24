@@ -14,6 +14,7 @@ import dataType.OrangeHRM.TopBarMenuItem;
 import dataType.OrangeHRM.UserRoleOption;
 import io.qameta.allure.Description;
 import tests.TestBase;
+import utils.constant.Constant;
 
 public class PIMTest extends TestBase {
 	
@@ -140,11 +141,14 @@ public class PIMTest extends TestBase {
 		assertHelper.assertTrue(pimPage.isChangeProfilePictureTitleDisplayed(), "The photograph screen is not displayed.");
 		
 		Logger.info("Step 3: Click on plus button.");
-		pimPage.clickAddPicture();
+		pimPage.clickAddImageButton();
 		
 		Logger.info("Step 4: Choose the image file type jpg/ png/ gif that is more than 1MB.");
+		pimPage.uploadImage(Constant.IMAGE_DATA);
 		
 		Logger.verify("VP. The error message is displayed that \"Attchment Size Exceeded\".");
+		assertHelper.assertTrue(pimPage.IsUploadImageErrorMessageDisplayed(), "The error message is not displayed as expected.");
+		assertHelper.assertEquals(pimPage.getUploadImageErrorMessage(), Constant.UPLOAD_IMAGE_ERROR_MESSAGE, "The error message is not displayed as \"Attchment Size Exceeded\".");
 		
 	}
 	

@@ -241,9 +241,26 @@ public class PIMPage extends GeneralPage {
 		return viewPhotographFrame.isFrameTitleDisplayed();
 	}
 
-	public PIMPage clickAddPicture() {
-		viewPhotographFrame.clickAddPicture();
+	@Step("Click add image button")
+	public PIMPage clickAddImageButton() {
+		viewPhotographFrame.clickAddImage();
 		return this;
+	}
+
+	@Step("Upload a image")
+	public PIMPage uploadImage(String filePath) {
+		viewPhotographFrame.uploadPicture(filePath);
+		return this;
+	}
+
+	@Step("Get upload image error message")
+	public boolean IsUploadImageErrorMessageDisplayed() {
+		return viewPhotographFrame.isLblErrorMessageDisplayed();
+	}
+
+	@Step("Get upload image error message")
+	public String getUploadImageErrorMessage() {
+		return viewPhotographFrame.getLblErrorMessage();
 	}
 
 }
