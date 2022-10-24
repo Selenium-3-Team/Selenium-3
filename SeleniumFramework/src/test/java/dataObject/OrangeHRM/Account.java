@@ -3,7 +3,6 @@ package dataObject.OrangeHRM;
 import com.google.gson.JsonObject;
 
 import core.helper.JsonHelper;
-import core.utilities.Utilities;
 import dataType.OrangeHRM.UserRoleOption;
 import utils.constant.Constant;
 
