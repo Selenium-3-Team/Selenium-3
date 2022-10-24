@@ -3,130 +3,74 @@ package dataObject.OrangeHRM;
 import com.google.gson.JsonObject;
 
 import core.helper.JsonHelper;
-import core.helper.RandomHelper;
 import utils.constant.Constant;
 import utils.helper.Utilities;
 
-public class Employee {
+public class Employee extends PersonalInfo {
 
-	private String firstName;
-	private String middleName;
-	private String lastName;
-	private String fullName;
-	private String id;
-	private String jobTitle;
-	private String employeeStatus;
-	private String subUnit;
+	private String emloyeeId;
 	private String supervior;
-	private String nationality;
-	private String officeLocation;
-	private String maritalStatus;
-	private String dateOfBirth;
-	private String gender;
+	private Job job = new Job();
 
 	public Employee() {
-		this.firstName = RandomHelper.getRandomString("first");
-		this.middleName = RandomHelper.getRandomString("middle");
-		this.lastName = RandomHelper.getRandomString("last");
-		this.id = Utilities.generateEmployeeId();
-		this.fullName = String.format("%s %s %s", this.firstName, this.middleName, this.lastName);
+		super();
+		this.emloyeeId = Utilities.generateEmployeeId();
 	}
 
 	public Employee(String key) {
 		JsonObject employee = JsonHelper.getJsonObject(Constant.EMPLOYEE_DATA);
-		this.firstName = employee.get(key).getAsJsonObject().get("firstName").getAsString();
-		this.middleName = employee.get(key).getAsJsonObject().get("middleName").getAsString();
-		this.lastName = employee.get(key).getAsJsonObject().get("lastName").getAsString();
-		this.fullName = String.format("%s %s %s", this.firstName, this.middleName, this.lastName);
-		this.id = Utilities.generateEmployeeId();
-		this.jobTitle = employee.get(key).getAsJsonObject().get("jobTitle").getAsString();
-		this.employeeStatus = employee.get(key).getAsJsonObject().get("employeeStatus").getAsString();
-		this.subUnit = employee.get(key).getAsJsonObject().get("subUnit").getAsString();
+		super.setFirstName(employee.get(key).getAsJsonObject().get("firstName").getAsString());
+		super.setMiddleName(employee.get(key).getAsJsonObject().get("middleName").getAsString());
+		super.setLastName(employee.get(key).getAsJsonObject().get("lastName").getAsString());
+		super.setFullName(String.format("%s %s %s", this.firstName, this.middleName, this.lastName));
+		super.setNationality(employee.get(key).getAsJsonObject().get("nationality").getAsString());
+		super.setMaritalStatus(employee.get(key).getAsJsonObject().get("maritalStatus").getAsString());
+		super.setDateOfBirth(employee.get(key).getAsJsonObject().get("dateOfBirth").getAsString());
+		super.setGender(employee.get(key).getAsJsonObject().get("gender").getAsString());
+		this.emloyeeId = Utilities.generateEmployeeId();
+		this.job.setJobTitle(employee.get(key).getAsJsonObject().get("jobTitle").getAsString());
+		this.job.setEmployeeStatus(employee.get(key).getAsJsonObject().get("employeeStatus").getAsString());
+		this.job.setSubUnit(employee.get(key).getAsJsonObject().get("subUnit").getAsString());
+		this.job.setOfficeLocation(employee.get(key).getAsJsonObject().get("officeLocation").getAsString());
 		this.supervior = employee.get(key).getAsJsonObject().get("supervior").getAsString();
-		this.nationality = employee.get(key).getAsJsonObject().get("nationality").getAsString();
-		this.officeLocation = employee.get(key).getAsJsonObject().get("officeLocation").getAsString();
-		this.maritalStatus = employee.get(key).getAsJsonObject().get("maritalStatus").getAsString();
-		this.dateOfBirth = employee.get(key).getAsJsonObject().get("dateOfBirth").getAsString();
-		this.gender = employee.get(key).getAsJsonObject().get("gender").getAsString();
-		
-	}
-
-	public Employee(String firstName, String middleName, String lastName, String id) {
-		this.firstName = firstName;
-		this.middleName = middleName;
-		this.lastName = lastName;
-		this.id = id;
-		this.fullName = String.format("%s %s %s", this.firstName, this.middleName, this.lastName);
 	}
 
 	public Employee(String fullName, String jobTitle, String officeLocation) {
-		this.fullName = fullName;
-		this.jobTitle = jobTitle;
-		this.officeLocation = officeLocation;
+		super.setFullName(fullName);
+		this.job.setJobTitle(jobTitle);
+		this.job.setOfficeLocation(officeLocation);
 	}
 
-	public String getFirstName() {
-		return firstName;
+	public String getEmloyeeId() {
+		return emloyeeId;
 	}
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getMiddleName() {
-		return middleName;
-	}
-
-	public void setMiddleName(String middleName) {
-		this.middleName = middleName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
-	public String getFullName() {
-		return this.fullName;
-	}
-
-	public void setFullName(String fullName) {
-		this.fullName = fullName;
-	}
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
+	public void setEmloyeeId(String emloyeeId) {
+		this.emloyeeId = emloyeeId;
 	}
 
 	public String getJobTitle() {
-		return jobTitle;
+		return this.job.getJobTitle();
 	}
 
 	public void setJobTitle(String jobTitle) {
-		this.jobTitle = jobTitle;
+		this.job.setJobTitle(jobTitle);
 	}
 
 	public String getEmployeeStatus() {
-		return employeeStatus;
+		return this.job.getEmployeeStatus();
 	}
 
 	public void setEmployeeStatus(String employeeStatus) {
-		this.employeeStatus = employeeStatus;
+		this.job.setEmployeeStatus(employeeStatus);
 	}
 
 	public String getSubUnit() {
-		return subUnit;
+		return this.job.getSubUnit();
 	}
 
 	public void setSubUnit(String subUnit) {
-		this.subUnit = subUnit;
+		this.job.setSubUnit(subUnit);
 	}
 
 	public String getSupervior() {
@@ -137,44 +81,12 @@ public class Employee {
 		this.supervior = supervior;
 	}
 
-	public String getNationality() {
-		return nationality;
-	}
-
-	public void setNationality(String nationality) {
-		this.nationality = nationality;
-	}
-
 	public String getOfficeLocation() {
-		return officeLocation;
+		return this.job.getOfficeLocation();
 	}
 
 	public void setOfficeLocation(String officeLocation) {
-		this.officeLocation = officeLocation;
-	}
-
-	public String getMaritalStatus() {
-		return maritalStatus;
-	}
-
-	public void setMaritalStatus(String maritalStatus) {
-		this.maritalStatus = maritalStatus;
-	}
-
-	public String getDateOfBirth() {
-		return dateOfBirth;
-	}
-
-	public void setDateOfBirth(String dateOfBirth) {
-		this.dateOfBirth = dateOfBirth;
-	}
-
-	public String getGender() {
-		return gender;
-	}
-
-	public void setGender(String gender) {
-		this.gender = gender;
+		this.job.setOfficeLocation(officeLocation);
 	}
 
 }
