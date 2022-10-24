@@ -6,7 +6,7 @@ public enum TopBarMenuItem {
 	NATIONALTITIES("Nationalities"), CORPORATE_BRANDING("Corporate Branding"), CONFIGURATION("Configuration"),
 	EMPLOYEE_LIST("Employee List"), ADD_EMPLOYEE("Add Employee"), REPORTS("Reports"), APPLY("Apply"),
 	MYLEAVE("My Leave"), ENTITLEMENTS("Entitlements"), CONFIGURE("Configure"), LEAVELIST("Leave List"),
-	ASSIGNLEAVE("Assign Leave");
+	ASSIGNLEAVE("Assign Leave"), CUSTOM_FIELDS("Custom Fields");
 
 	private final String value;
 

@@ -3,12 +3,17 @@ package pages.OrangeHRM;
 import java.util.List;
 
 import core.helper.RandomHelper;
+import dataObject.OrangeHRM.CustomField;
 import dataObject.OrangeHRM.Employee;
+import dataType.OrangeHRM.AddCustomField;
+import dataType.OrangeHRM.CustomFieldType;
 import dataType.OrangeHRM.EmployeeInfoRecordColumnTitle;
 import dataType.OrangeHRM.EmployeeInformationForm;
 import dataType.OrangeHRM.EmployeeInformationTypeTab;
 import dataType.OrangeHRM.LeftPanelMenuItem;
+import frames.OrangeHRM.AddCustomFieldFrame;
 import frames.OrangeHRM.AddEmployeeFrame;
+import frames.OrangeHRM.ListCustomFieldsFrame;
 import frames.OrangeHRM.UpdatePasswordFrame;
 import frames.OrangeHRM.ViewEmployeeListFrame;
 import frames.OrangeHRM.ViewJobDetailsFrame;
@@ -25,6 +30,8 @@ public class PIMPage extends GeneralPage {
 	private final UpdatePasswordFrame updatePasswordFrame = new UpdatePasswordFrame();
 	private final ViewJobDetailsFrame viewJobDetailsFrame = new ViewJobDetailsFrame();
 	private final ViewPhotographFrame viewPhotographFrame = new ViewPhotographFrame();
+	private final ListCustomFieldsFrame listCustomFieldsFrame = new ListCustomFieldsFrame();
+	private final AddCustomFieldFrame addCustomFieldFrame = new AddCustomFieldFrame();
 
 	private static PIMPage instance;
 
@@ -126,7 +133,12 @@ public class PIMPage extends GeneralPage {
 
 	@Step("Check if employee is displayed in Employee list")
 	public boolean isEmployeeDisplayedInEmployeeList(Employee employee) {
-		return viewEmployeeListFrame.isEmployeeDisplayedInEmployeeList(employee);
+		return viewEmployeeListFrame.isInfoRecordDisplayedInRecordList(employee.getEmloyeeId(), String.format("%s %s", employee.getFirstName(), employee.getMiddleName()), employee.getLastName());
+	}
+	
+	@Step("Check if custom field is displayed in custom field list")
+	public boolean isCustomFieldDisplayedInCustomFieldList(CustomField customField) {
+		return listCustomFieldsFrame.isInfoRecordDisplayedInRecordList(customField.getFieldName(), customField.getScreen(), customField.getType());
 	}
 
 	// Update Password form
@@ -164,14 +176,14 @@ public class PIMPage extends GeneralPage {
 	}
 
 	@Step("Select {0} option")
-	public PIMPage selectOption(String optionName) {
+	public PIMPage selectOptionOnEmployeeInformation(String optionName) {
 		viewEmployeeListFrame.selectOption(optionName);
 		return this;
 	}
 
 	public PIMPage selectOptionOnEmployeeInformation(EmployeeInformationForm title, String value) {
 		clickDropdownOnEmployeeInformation(title.getValue());
-		return selectOption(value);
+		return selectOptionOnEmployeeInformation(value);
 	}
 
 	public List<String> getAllCellValueOfColumn(EmployeeInfoRecordColumnTitle title) {
@@ -209,10 +221,17 @@ public class PIMPage extends GeneralPage {
 
 	@Step("Click edit button for the employee {0}")
 	public PIMPage clickEditEmployeeInfoRecord(Employee employee) {
-		viewEmployeeListFrame.clickEditEmployeeInfoRecord(employee);
+		viewEmployeeListFrame.clickEditInfoRecord(employee.getEmloyeeId(), String.format("%s %s", employee.getFirstName(), employee.getMiddleName()), employee.getLastName());
 		return this;
 	}
 
+	@Step("Click Delete button for the custom Field {0}")
+	public PIMPage clickDeleteCustomFieldInfoRecord(CustomField customField) {
+		listCustomFieldsFrame.clickDeleteInfoRecord(customField.getFieldName(), customField.getScreen(), customField.getType());
+		listCustomFieldsFrame.clickConfirmDeleteButton();
+		return this;
+	}
+	
 	@Step("Check if employee information type {0} display")
 	public boolean isEmployeeInfoTypeTabDisplayed(EmployeeInformationTypeTab employeeInformationTypeTab) {
 		return viewPersonalDetailedFrame.isEmployeeInfoTypeTabDisplayed(employeeInformationTypeTab);
@@ -263,4 +282,50 @@ public class PIMPage extends GeneralPage {
 		return viewPhotographFrame.getLblErrorMessage();
 	}
 
+	@Step("Check if Custom Fieldstitle displayed")
+	public boolean isCustomFieldsTitleDisplayed() {
+		return listCustomFieldsFrame.isFrameTitleDisplayed();
+	}
+
+	// Add Custom Field form
+	@Step("Enter {0} to Field Name")
+	public PIMPage enterFieldName(String fieldName) {
+		addCustomFieldFrame.enterValueToTextboxOption(AddCustomField.FIELD_NAME.getValue(), fieldName);
+		return this;
+	}
+
+	@Step("Click {0} dropdown on Add Custom Field")
+	public PIMPage clickDropdownOnAddCustomField(String drpName) {
+		addCustomFieldFrame.clickDropdownOption(drpName);
+		return this;
+	}
+
+	@Step("Select {0} option")
+	public PIMPage selectOptionOnAddCustomField(String optionName) {
+		addCustomFieldFrame.selectOption(optionName);
+		return this;
+	}
+
+	public PIMPage selectOptionOnAddCustomField(AddCustomField title, String value) {
+		clickDropdownOnAddCustomField(title.getValue());
+		return selectOptionOnAddCustomField(value);
+	}
+
+	@Step("Enter values {0} for select options")
+	public PIMPage enterValueSelectOptions(String selectOptions) {
+		addCustomFieldFrame.enterValueToTextboxOption(AddCustomField.SELECT_OPTIONS.getValue(), selectOptions);
+		return this;
+	}
+
+	@Step("Fill {fieldName}, {screen}, {Type}, {selectOptions} for custom field information")
+	public PIMPage fillInformationForAddCustomField(String fieldName, String screen, String Type, String selectOptions) {
+		enterFieldName(fieldName);
+		selectOptionOnAddCustomField(AddCustomField.SCREEN, screen);
+		selectOptionOnAddCustomField(AddCustomField.TYPE, Type);
+		if(Type.equals(CustomFieldType.DROP_DOWN.getValue())) {
+			enterValueSelectOptions(selectOptions);
+		}
+		return this;
+	}
+	
 }

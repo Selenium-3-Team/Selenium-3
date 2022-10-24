@@ -1,0 +1,8 @@
+{
+  "customField": {
+    "fieldName": "Skill",
+    "screen": "Personal Details",
+    "type": "Drop Down",
+    "selectOptions": "Java,C#,PHP"
+  }
+}

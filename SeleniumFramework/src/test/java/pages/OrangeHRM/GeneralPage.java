@@ -19,17 +19,19 @@ public class GeneralPage {
 	protected final Button btnSave = new Button("//button[contains(.,'Save')]");
 	protected final Element iconLoading = new Element("//div[@class='oxd-loading-spinner']");
 	protected final Button btnApply = new Button("//button[contains(.,'Apply')]");
-	
+
 	// Topbar header
 	protected final Label lblHeaderTitle = new Label("//div[@class='oxd-topbar-header-title']//h6[contains(.,'%s')]");
 	protected final Element drpUser = new Element("//li[@class='oxd-userdropdown']");
 	protected final Label lblUserDrpOption = new Label("//a[@role='menuitem' and text()='%s']");
 	// Topbar menu
-	protected final Element topBarMenuItem = new Element("//nav[@aria-label='Topbar Menu']//li[normalize-space(.)='%s']");
+	protected final Element topBarMenuItem = new Element(
+			"//nav[@aria-label='Topbar Menu']//li[normalize-space(.)='%s']");
 	// Left panel
 	protected final Element leftPanel = new Element("//nav[@aria-label='Sidepanel']//span[text()='%s']");
 	// Toast message
-	protected final Label lblToastSuccessMessage = new Label("//p[contains(@class,'toast-message') and .='Successfully Saved']/preceding-sibling::p[contains(@class, 'toast-title') and .='Success']/parent::div[contains(@class, 'toast-content--success')]");
+	protected final Label lblToastSuccessMessage = new Label(
+			"//p[contains(@class,'toast-message') and .='Successfully Saved']/preceding-sibling::p[contains(@class, 'toast-title') and .='Success']/parent::div[contains(@class, 'toast-content--success')]");
 
 	protected final ViewSystemUsersFrame viewSystemUsersFrame = new ViewSystemUsersFrame();
 
@@ -47,38 +49,38 @@ public class GeneralPage {
 		drpUser.click();
 		return this;
 	}
-	
+
 	@Step("Select {0} option in User dropdown")
 	public GeneralPage selectOptionInUserDrp(String optionName) {
 		lblUserDrpOption.generateDynamic(optionName);
 		lblUserDrpOption.click();
 		return this;
 	}
-	
+
 	public LoginPage selectLogoutOption() {
 		selectOptionInUserDrp(UserDrpOption.LOGOUT.getValue());
 		return new LoginPage();
 	}
-	
+
 	public PIMPage selectChangePasswordOption() {
 		selectOptionInUserDrp(UserDrpOption.CHANGE_PASSWORD.getValue());
 		return new PIMPage();
 	}
-	
+
 	@Step("Logout OrangeHRM page")
 	public LoginPage logoutOrangeHRM() {
 		clickUserDropdown();
 		selectLogoutOption();
 		return new LoginPage();
 	}
-	
+
 	@Step("Click tab {0} on Left panel")
 	public GeneralPage clickTabOnLeftPanel(String tabName) {
 		leftPanel.generateDynamic(tabName);
 		leftPanel.click();
 		return this;
 	}
-	
+
 	public AdminPage clickAdminTabOnLeftPanel() {
 		clickTabOnLeftPanel(LeftPanelMenuItem.ADMIN.getValue());
 		return new AdminPage();
@@ -91,12 +93,12 @@ public class GeneralPage {
 		waitForLoadingIconDisappear();
 		return this;
 	}
-	
+
 	public DirectoryPage clickDirectoryTabOnLeftPanel() {
 		clickTabOnLeftPanel(LeftPanelMenuItem.DIRECTORY.getValue());
 		return new DirectoryPage();
 	}
-	
+
 	// Verify methods
 	@Step("Check if text CopyRight {0} and {1} is displayed")
 	public boolean isCopyRightTextDisplayed(String companyName, String appVersion) {
@@ -127,7 +129,7 @@ public class GeneralPage {
 	public boolean isToastSuccessMessageDisplayed() {
 		return lblToastSuccessMessage.isDisplayed();
 	}
-	
+
 	@Step("Click Leave tab on Left panel")
 	public LeavePage clickLeaveTabOnLeftPanel() {
 		clickTabOnLeftPanel(LeftPanelMenuItem.LEAVE.getValue());
@@ -146,7 +148,13 @@ public class GeneralPage {
 		btnSave.click();
 		return this;
 	}
-	
+
+	@Step("Click Add button")
+	public GeneralPage clickAddButton() {
+		btnAdd.click();
+		return this;
+	}
+
 	@Step("Wait for loading icon dispappear if it is displayed")
 	public GeneralPage waitForLoadingIconDisappear() {
 		if (iconLoading.isDisplayed()) {
@@ -154,11 +162,11 @@ public class GeneralPage {
 		}
 		return this;
 	}
-	
+
 	@Step("Click Apply button")
 	public GeneralPage clickApplyButton() {
 		btnApply.click();
 		return this;
 	}
-	
+
 }
