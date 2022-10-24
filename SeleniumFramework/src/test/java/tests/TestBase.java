@@ -21,7 +21,7 @@ import pages.OrangeHRM.PIMPage;
 import utils.constant.Constant;
 
 public class TestBase {
-	
+
 	protected LoginPage loginPage = LoginPage.newInstance();
 	protected PIMPage pimPage = PIMPage.newInstance();
 	protected AdminPage adminPage = AdminPage.newInstance();
