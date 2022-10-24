@@ -4,7 +4,7 @@ import core.helper.RandomHelper;
 
 public enum LocationOption {
 
-	DEFAULT("-- Select --"), ABCD("Abcd"), CANADIAN_REGIONAL_HQ("Canadian Regional HQ"), HQ_CA_USA("HQ - CA, USA"),
+	DEFAULT("-- Select --"), CANADIAN_REGIONAL_HQ("Canadian Regional HQ"), HQ_CA_USA("HQ - CA, USA"),
 	NEW_YORK_SALES_OFFICE("New York Sales Office"), TEXAS_R_AND_D("Texas R&D");
 
 	private final String value;
@@ -19,7 +19,7 @@ public enum LocationOption {
 
 	public static String randomLocationOption() {
 		LocationOption[] locations = values();
-		return locations[RandomHelper.getRandomNumber(2, locations.length - 1)].getValue();
+		return locations[RandomHelper.getRandomNumber(1, locations.length - 1)].getValue();
 	}
 
 }
