@@ -13,11 +13,23 @@ import core.driver.manager.Driver;
 import core.driver.manager.DriverManager;
 import core.report.ExtentTestManager;
 import core.report.TestListener;
+import pages.OrangeHRM.AddEmployeePage;
 import pages.OrangeHRM.AdminPage;
+import pages.OrangeHRM.ApplyLeavePage;
 import pages.OrangeHRM.LeavePage;
+import pages.OrangeHRM.ListCustomFieldsPage;
 import pages.OrangeHRM.DirectoryPage;
 import pages.OrangeHRM.LoginPage;
 import pages.OrangeHRM.PIMPage;
+import pages.OrangeHRM.SaveCustomFieldsPage;
+import pages.OrangeHRM.UpdatePasswordPage;
+import pages.OrangeHRM.ViewDirectoryPage;
+import pages.OrangeHRM.ViewEmployeeListPage;
+import pages.OrangeHRM.ViewJobDetailsPage;
+import pages.OrangeHRM.ViewLeaveListPage;
+import pages.OrangeHRM.ViewPersonalDetailsPage;
+import pages.OrangeHRM.ViewPhotographPage;
+import pages.OrangeHRM.ViewSystemUsersPage;
 import utils.constant.Constant;
 
 public class TestBase {
@@ -27,6 +39,18 @@ public class TestBase {
 	protected AdminPage adminPage = AdminPage.newInstance();
 	protected LeavePage leavePage = LeavePage.newInstance();
 	protected DirectoryPage directoryPage = DirectoryPage.newInstance();
+	protected UpdatePasswordPage updatePasswordPage = UpdatePasswordPage.newInstance();
+	protected ViewEmployeeListPage viewEmployeeListPage = ViewEmployeeListPage.newInstance();
+	protected ViewSystemUsersPage viewSystemUsersPage = ViewSystemUsersPage.newInstance();
+	protected AddEmployeePage addEmployeePage = AddEmployeePage.newInstance();
+	protected ViewPersonalDetailsPage viewPersonalDetailsPage = ViewPersonalDetailsPage.newInstance();
+	protected ViewJobDetailsPage viewJobDetailsPage = ViewJobDetailsPage.newInstance();
+	protected ViewPhotographPage viewPhotographPage = ViewPhotographPage.newInstance();
+	protected ListCustomFieldsPage listCustomFieldsPage = ListCustomFieldsPage.newInstance();
+	protected SaveCustomFieldsPage saveCustomFieldsPage = SaveCustomFieldsPage.newInstance();
+	protected ViewLeaveListPage viewLeaveListPage = ViewLeaveListPage.newInstance();
+	protected ApplyLeavePage applyLeavePage = ApplyLeavePage.newInstance();
+	protected ViewDirectoryPage viewDirectoryPage = ViewDirectoryPage.newInstance();
 
 	@Parameters({ "driverConfig", "platform" })
 	@BeforeMethod(alwaysRun = true)

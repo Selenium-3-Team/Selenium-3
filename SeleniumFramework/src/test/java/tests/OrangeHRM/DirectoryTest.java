@@ -5,8 +5,10 @@ import org.testng.annotations.Test;
 import core.helper.AssertHelper;
 import core.report.Logger;
 import dataObject.OrangeHRM.Account;
-import dataType.OrangeHRM.DirectoryForm;
+import dataType.OrangeHRM.DropdownTitle;
+import dataType.OrangeHRM.LeftPanelMenuItem;
 import dataType.OrangeHRM.LocationOption;
+import dataType.OrangeHRM.TextBoxTitle;
 import dataType.OrangeHRM.UserRoleOption;
 import io.qameta.allure.Description;
 import tests.TestBase;
@@ -21,20 +23,20 @@ public class DirectoryTest extends TestBase {
 		Account account = new Account(UserRoleOption.ADMIN);
 		
 		Logger.info("Precondition: Login successfully with a valid account.");
-		pimPage = loginPage.loginOrangeHRM(account).waitForPageLoad();
-		String employeeName = pimPage.getRandomEmployeeNameInList();
+		viewEmployeeListPage = loginPage.loginOrangeHRM(account);
+		String employeeName = viewEmployeeListPage.getRandomEmployeeNameInList();
 
 		Logger.info("Step 1: Click Directory on Left menu");
-		directoryPage = pimPage.clickDirectoryTabOnLeftPanel().waitForPageLoad();
+		viewDirectoryPage = viewEmployeeListPage.clickTabOnLeftPanel(LeftPanelMenuItem.DIRECTORY);
 
 		Logger.info("Step 2: Enter employee name in the employee name textbox.");
-		directoryPage.enterEmployeeName(employeeName);
+		viewDirectoryPage.enterValueToTextboxOption(TextBoxTitle.EMPLOYEE_NAME, employeeName);
 
 		Logger.info("Step 3: Click Search button.");
-		directoryPage.clickSearchBtn();
+		viewDirectoryPage.clickSearchButton();
 
 		Logger.info("VP: Employees have name that is searched are displayed.");
-		assertHelper.assertTrue(directoryPage.isEmployeeListDisplayedCorrectlyAccordingTo(employeeName), "Employee list is displayed incorrectly.");
+		assertHelper.assertTrue(viewDirectoryPage.isEmployeeListDisplayedCorrectlyAccordingTo(employeeName), "Employee list is displayed incorrectly.");
 
 	}
 
@@ -46,20 +48,20 @@ public class DirectoryTest extends TestBase {
 		Account account = new Account(UserRoleOption.ADMIN);
 		
 		Logger.info("Precondition: Login successfully with a valid account.");
-		pimPage = loginPage.loginOrangeHRM(account).waitForPageLoad();
-		String jobTitle = pimPage.getRandomJobTitleInList();
+		viewEmployeeListPage = loginPage.loginOrangeHRM(account);
+		String jobTitle = viewEmployeeListPage.getRandomJobTitleInList();
 
 		Logger.info("Step 1: Click Directory on Left menu");
-		directoryPage = pimPage.clickDirectoryTabOnLeftPanel().waitForPageLoad();
+		viewDirectoryPage = viewEmployeeListPage.clickTabOnLeftPanel(LeftPanelMenuItem.DIRECTORY);
 
 		Logger.info("Step 2: Select job title in the job title dropbox list.");
-		directoryPage.selectOptionOnDirectoryForm(DirectoryForm.JOB_TITLE_DROPDOWN, jobTitle);
+		viewDirectoryPage.selectOption(DropdownTitle.JOB_TITLE, jobTitle);
 
 		Logger.info("Step 3: Click Search button.");
-		directoryPage.clickSearchBtn();
+		viewDirectoryPage.clickSearchButton();
 
 		Logger.info("VP: Employees have job title that is searched are displayed.");
-		assertHelper.assertTrue(directoryPage.isEmployeeListDisplayedCorrectlyAccordingTo(jobTitle), "Employee list is displayed incorrectly.");
+		assertHelper.assertTrue(viewDirectoryPage.isEmployeeListDisplayedCorrectlyAccordingTo(jobTitle), "Employee list is displayed incorrectly.");
 
 	}
 
@@ -70,20 +72,20 @@ public class DirectoryTest extends TestBase {
 		AssertHelper assertHelper = new AssertHelper();
 		Account account = new Account(UserRoleOption.ADMIN);
 		Logger.info("Precondition: Login successfully with a valid account.");
-		pimPage = loginPage.loginOrangeHRM(account).waitForPageLoad();
+		viewEmployeeListPage = loginPage.loginOrangeHRM(account);
 
 		Logger.info("Step 1: Click Directory on Left menu");
-		directoryPage = pimPage.clickDirectoryTabOnLeftPanel().waitForPageLoad();
+		viewDirectoryPage = viewEmployeeListPage.clickTabOnLeftPanel(LeftPanelMenuItem.DIRECTORY);
 
 		Logger.info("Step 2: Select location in the location dropbox list.");
 		String location = LocationOption.randomLocationOption();
-		directoryPage.selectOptionOnDirectoryForm(DirectoryForm.LOCATION_DROPDOWN, location);
+		viewDirectoryPage.selectOption(DropdownTitle.LOCATION, location);
 
 		Logger.info("Step 3: Click Search button.");
-		directoryPage.clickSearchBtn();
+		viewDirectoryPage.clickSearchButton();
 
 		Logger.info("VP: Employees have location that is searched are displayed.");
-		assertHelper.assertTrue(directoryPage.isEmployeeListDisplayedCorrectlyAccordingTo(location), "Employee list is displayed incorrectly.");
+		assertHelper.assertTrue(viewDirectoryPage.isEmployeeListDisplayedCorrectlyAccordingTo(location), "Employee list is displayed incorrectly.");
 
 	}
 

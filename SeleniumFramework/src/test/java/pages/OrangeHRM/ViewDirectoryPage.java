@@ -1,23 +1,25 @@
-package frames.OrangeHRM;
+package pages.OrangeHRM;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import core.element.wrapper.Label;
 import dataObject.OrangeHRM.Employee;
-import dataType.OrangeHRM.DirectoryForm;
 
-public class ViewDirectoryFrame extends GeneralFrame {
+public class ViewDirectoryPage extends GeneralPage{
 
-	// Locators
 	private final Label lblCardHeader = new Label("//p[contains(@class,'directory-card-header')]");
 	private final Label lblCardSubtitle = new Label("//p[contains(@class,'card-subtitle')]");
 	private final Label lblCardDescription = new Label("//p[contains(@class,'card-description')]/parent::div");
+	
+	private static ViewDirectoryPage instance;
 
-	public void enterEmployeeName(String employeeName) {
-		enterValueToTextboxOption(DirectoryForm.EMPLOYEE_NAME_TEXTBOX.getValue(), employeeName);
+	public static ViewDirectoryPage newInstance() {
+		if (ViewDirectoryPage.instance == null)
+			ViewDirectoryPage.instance = new ViewDirectoryPage();
+		return ViewDirectoryPage.instance;
 	}
-
+	
 	public List<Employee> getEmployeeInfoInDirectoryData() {
 		List<Employee> results = new ArrayList<Employee>();
 		List<String> employeeNameList = lblCardHeader.getAllTexts();
@@ -31,7 +33,7 @@ public class ViewDirectoryFrame extends GeneralFrame {
 		}
 		return results;
 	}
-
+	
 	public boolean isEmployeeListDisplayedCorrectlyAccordingTo(String valueToSearch) {
 		boolean result = true;
 		List<Employee> employeeList = getEmployeeInfoInDirectoryData();
@@ -47,5 +49,5 @@ public class ViewDirectoryFrame extends GeneralFrame {
 		}
 		return result;
 	}
-
+	
 }
