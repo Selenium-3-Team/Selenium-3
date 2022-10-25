@@ -47,11 +47,11 @@ public class LoginPage extends GeneralPage {
 	}
 
 	@Step("Login to OrangeHRM page")
-	public PIMPage loginOrangeHRM(Account account) {
+	public ViewEmployeeListPage loginOrangeHRM(Account account) {
 		enterUsername(account.getUsername());
 		enterPassword(account.getPassword());
 		clickLoginBtn();
-		return new PIMPage();
+		return new ViewEmployeeListPage();
 	}
 
 	@Step("Get the error message")

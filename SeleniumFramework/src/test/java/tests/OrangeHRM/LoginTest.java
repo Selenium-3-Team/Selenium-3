@@ -31,16 +31,16 @@ public class LoginTest extends TestBase {
 		assertHelper.assertTrue(loginPage.isCopyRightTextDisplayed(Constant.COMPANY, Constant.VERSION), "OrangeHRM copyright text should be displayed.");
 
 		Logger.info("Step 2: Login successfully with a valid account.");
-		pimPage = loginPage.loginOrangeHRM(account);
+		viewEmployeeListPage = loginPage.loginOrangeHRM(account);
 		
 		Logger.verify("VP. The PIM page should be displayed.");
-		assertHelper.assertTrue(pimPage.isHeaderTitleDisplayed(LeftPanelMenuItem.PIM), "The PIM page should be displayed.");
+		assertHelper.assertTrue(viewEmployeeListPage.isHeaderTitleDisplayed(LeftPanelMenuItem.PIM), "The PIM page should be displayed.");
 
 		Logger.verify("VP. The currently selected tab is \"Employee List\".");
-		assertHelper.assertTrue(pimPage.isTopBarMenuItemActived(TopBarMenuItem.EMPLOYEE_LIST), "The currently selected tab is \"Employee List\".");
+		assertHelper.assertTrue(viewEmployeeListPage.isTopBarMenuItemActived(TopBarMenuItem.EMPLOYEE_LIST), "The currently selected tab is \"Employee List\".");
 
 		Logger.verify("VP. OrangeHRM copyright text should be displayed.");
-		assertHelper.assertTrue(pimPage.isCopyRightTextDisplayed(Constant.COMPANY, Constant.VERSION), "OrangeHRM copyright text should be displayed.");
+		assertHelper.assertTrue(viewEmployeeListPage.isCopyRightTextDisplayed(Constant.COMPANY, Constant.VERSION), "OrangeHRM copyright text should be displayed.");
 
 	}
 
@@ -78,13 +78,13 @@ public class LoginTest extends TestBase {
 		Account account = new Account(UserRoleOption.ADMIN);
 
 		Logger.info("Precondition: Login successfully with a valid account.");
-		pimPage = loginPage.loginOrangeHRM(account);
+		viewEmployeeListPage = loginPage.loginOrangeHRM(account);
 
 		Logger.info("Step 1: Click on the user's avatar.");
-		pimPage.clickUserDropdown();
+		viewEmployeeListPage.clickUserDropdown();
 
 		Logger.info("Step 2: Select on the \"Logout\" option.");
-		loginPage = pimPage.selectLogoutOption().waitForPageLoad();
+		loginPage = viewEmployeeListPage.selectLogoutOption().waitForPageLoad();
 
 		Logger.verify("VP. The Login page should still be displayed.");
 		assertHelper.assertTrue(loginPage.isDisplayed(), "The Login page should still be displayed.");

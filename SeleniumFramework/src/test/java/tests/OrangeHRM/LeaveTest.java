@@ -6,6 +6,7 @@ import core.helper.AssertHelper;
 import core.report.Logger;
 import dataObject.OrangeHRM.Account;
 import dataObject.OrangeHRM.LeaveTicket;
+import dataType.OrangeHRM.LeftPanelMenuItem;
 import dataType.OrangeHRM.TopBarMenuItem;
 import dataType.OrangeHRM.UserRoleOption;
 import io.qameta.allure.Description;
@@ -22,20 +23,21 @@ public class LeaveTest extends TestBase {
 		LeaveTicket leaveTicket = new LeaveTicket("leaveTicket");
 
 		Logger.info("Precondition: Login successfully with a valid account.");
-		pimPage = loginPage.loginOrangeHRM(account).waitForPageLoad();
+		viewEmployeeListPage = loginPage.loginOrangeHRM(account);
 
 		Logger.info("Step 1: Select Leave -> Apply.");
-		leavePage = pimPage.clickLeaveTabOnLeftPanel().waitForPageLoad();
-		leavePage.clickTopBarMenuItem(TopBarMenuItem.APPLY);
+		viewLeaveListPage = viewEmployeeListPage.clickTabOnLeftPanel(LeftPanelMenuItem.LEAVE);
+		applyLeavePage = viewEmployeeListPage.clickTopBarMenuItem(TopBarMenuItem.APPLY);
 
 		Logger.info("Step 2: Enter all required information.");
-		leavePage.enterAllRequiredOnApplyLeaveForm(leaveTicket);
+		applyLeavePage.enterAllRequiredOnApplyLeaveForm(leaveTicket);
 
 		Logger.info("Step 3: Click Apply button.");
-		leavePage.clickApplyButton();
+		applyLeavePage.clickApplyButton().waitForLoadingIconDisappear();
 
 		Logger.verify("VP. Success popup is displyed.");
-		assertHelper.assertTrue(leavePage.isToastSuccessMessageDisplayed(), "Success popup is displyed.");
+		assertHelper.assertTrue(applyLeavePage.isToastSuccessMessageDisplayed(), "Success popup is displyed.");
+		
 	}
 
 }

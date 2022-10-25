@@ -1,6 +1,6 @@
 package dataType.OrangeHRM;
 
-public enum EmployeeInfoRecordColumnTitle {
+public enum InfoRecordColumnTitle {
 
 	NULL(""), FIRST_AND_MIDDILE_NAME("First (& Middle) Name"),
 	LAST_NAME("Last Name"), JOB_TITLE("Job Title"),
@@ -8,7 +8,7 @@ public enum EmployeeInfoRecordColumnTitle {
 
 	private final String itemName;
 
-	EmployeeInfoRecordColumnTitle(final String itemName) {
+	InfoRecordColumnTitle(final String itemName) {
 		this.itemName = itemName;
 	}
 

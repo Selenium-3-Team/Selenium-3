@@ -25,5 +25,6 @@ public class Constant {
 	
 	// Timeout
 	public static final int DEFAULT_TIMEOUT = 30;
+	public static final int VERY_SHORT_TIMEOUT = 10;
 
 }

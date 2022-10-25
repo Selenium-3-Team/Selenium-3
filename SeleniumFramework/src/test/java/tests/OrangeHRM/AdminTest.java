@@ -5,7 +5,9 @@ import org.testng.annotations.Test;
 import core.helper.AssertHelper;
 import core.report.Logger;
 import dataObject.OrangeHRM.Account;
-import dataType.OrangeHRM.SystemUsersForm;
+import dataType.OrangeHRM.DropdownTitle;
+import dataType.OrangeHRM.FrameTitle;
+import dataType.OrangeHRM.LeftPanelMenuItem;
 import dataType.OrangeHRM.TopBarMenuItem;
 import dataType.OrangeHRM.UserRoleOption;
 import io.qameta.allure.Description;
@@ -21,25 +23,26 @@ public class AdminTest extends TestBase {
 		Account account = new Account(UserRoleOption.ADMIN);
 
 		Logger.info("Precondition: Login successfully with a valid account.");
-		pimPage = loginPage.loginOrangeHRM(account);
+		viewEmployeeListPage = loginPage.loginOrangeHRM(account);
 
 		Logger.info("Step 1: Click the \"Admin\" tab on the Left Menu.");
-		adminPage = pimPage.clickAdminTabOnLeftPanel().waitForPageLoad();
+		viewSystemUsersPage = viewEmployeeListPage.clickTabOnLeftPanel(LeftPanelMenuItem.ADMIN);
+		viewSystemUsersPage.waitForLoadingIconDisappear();
 
 		Logger.verify("VP. The \"User Management\" page should be displayed.");
-		assertHelper.assertTrue(adminPage.isTopBarMenuItemActived(TopBarMenuItem.USER_MANAGEMENT), "The \"User Management\" page should be displayed.");
+		assertHelper.assertTrue(viewSystemUsersPage.isTopBarMenuItemActived(TopBarMenuItem.USER_MANAGEMENT), "The \"User Management\" page should be displayed.");
 
 		Logger.verify("VP. The \"System Users\" form should be displayed.");
-		assertHelper.assertTrue(adminPage.isSystemUsersLabelDisplayed(), "The \"System Users\" form should be displayed.");
+		assertHelper.assertEquals(viewSystemUsersPage.getFrameTitleDisplayed(), FrameTitle.SYSTEM_USERS.getValue(), "The \"System Users\" form should be displayed.");
 
 		Logger.info("Step 2: Select \"Admin\" on the \"User Role\" dropdown.");
-		adminPage.selectOptionOnSystemUsers(SystemUsersForm.USER_ROLE_DROPDOWN, UserRoleOption.ADMIN.getValue());
+		viewSystemUsersPage.selectOption(DropdownTitle.USER_ROLE, UserRoleOption.ADMIN.getValue());
 
 		Logger.info("Step 3: Click on the \"Search\" button.");
-		adminPage.clickSearchButton();
+		viewSystemUsersPage.clickSearchButton();
 
 		Logger.verify("VP. At least 1 record should be displayed on the \"Record Found\" form.");
-		assertHelper.assertFalse(adminPage.isNoRecordsFoundLabelDisplayed(), "At least 1 record should be displayed on the \\\"Record Found\\\" form.");
+		assertHelper.assertFalse(viewSystemUsersPage.isNoRecordsFoundLabelDisplayed(), "At least 1 record should be displayed on the \\\"Record Found\\\" form.");
 
 	}
 
