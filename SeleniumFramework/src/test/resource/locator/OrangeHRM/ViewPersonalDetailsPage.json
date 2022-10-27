@@ -1,0 +1,6 @@
+{
+	"windows.chrome": {
+		"lblEmployeeName": "//div[@class='orangehrm-edit-employee-name']//h6[text()='%s']",
+		"employeeInfoTypeTab": "//div[@role='tab']/a[text()='%s']"
+	}
+}

@@ -7,6 +7,7 @@ import core.element.wrapper.Button;
 import core.element.wrapper.Image;
 import core.element.wrapper.Label;
 import core.element.wrapper.TextBox;
+import core.helper.LocatorHelper;
 import dataObject.OrangeHRM.CustomField;
 import dataObject.OrangeHRM.Employee;
 import dataType.OrangeHRM.DropdownTitle;
@@ -21,52 +22,40 @@ import utils.helper.Utilities;
 
 public class GeneralPage {
 
-	// Element type
-	protected final Element iconLoading = new Element("//div[@class='oxd-loading-spinner']");
-	protected final Element drpUser = new Element("//li[@class='oxd-userdropdown']");
-	protected final Element topBarMenuItem = new Element(
-			"//nav[@aria-label='Topbar Menu']//li[normalize-space(.)='%s']");
-	protected final Element leftPanel = new Element("//nav[@aria-label='Sidepanel']//span[text()='%s']");
-	protected final Element drpOption = new Element("//div[.='%s']//following-sibling::div");
-	protected final Element infoRecordRow = new Element(
-			"//div[contains(@class,'oxd-table-card')]//div[contains(@class,'oxd-table-cell') and normalize-space(.)='%s']/following-sibling::div[normalize-space(.)='%s']/following-sibling::div[normalize-space(.)='%s']");
+	LocatorHelper locator = new LocatorHelper(Constant.LOCATOR_FOLDER_PATH, GeneralPage.class);
+	
+	protected final Label lblCopyRight = new Label(locator.getLocator("lblCopyRight"));
+	protected final Label lblVersion = new Label(locator.getLocator("lblVersion"));
+	protected final Button btnSearch = new Button(locator.getLocator("btnSearch"));
+	protected final Button btnAdd = new Button(locator.getLocator("btnAdd"));
+	protected final Button btnSave = new Button(locator.getLocator("btnSave"));
+	protected final Element iconLoading = new Element(locator.getLocator("iconLoading"));
+	protected final Button btnApply = new Button(locator.getLocator("btnApply"));
+	protected final TextBox txtOption = new TextBox(locator.getLocator("txtOption"));
+	protected final Label lblFrameTitle = new Label(locator.getLocator("lblFrameTitle"));
 
-	// Label type
-	protected final Label lblCopyRight = new Label("//p[contains(@class,'copyright') and contains(.,'%s')]");
-	protected final Label lblVersion = new Label("//p[contains(@class,'copyright') and text()='%s']");
-	protected final Label lblHeaderTitle = new Label("//div[@class='oxd-topbar-header-title']//h6[contains(.,'%s')]");
-	protected final Label lblUserDrpOption = new Label("//a[@role='menuitem' and text()='%s']");
-	protected final Label lblOption = new Label("//div[@class='oxd-select-option']//span[text()='%s']");
-	protected final Label lblNoRecordsFound = new Label("//span[text()='No Records Found']");
-	protected final Label lblInforRecordColumns = new Label("//div[@role='columnheader']");
-	protected final Label lblSelectedOption = new Label(
-			drpOption.getLocatorAsString() + "//div[@class='oxd-select-text-input']");
-	protected final Label lblCellFollowingIndex = new Label(
-			"//div[@class='oxd-table-body']//div[contains(@class,'oxd-table-cell')][%s]/div");
-	protected final Label lblFrameTitle = new Label(
-			"//*[contains(@class,'-title') and contains(@class,'oxd-text') and not(contains(@class,'sub-title'))]");
-	protected final Label lblToastSuccessMessage = new Label(
-			"//p[contains(@class,'toast-message') and .='Successfully Saved']/preceding-sibling::p[contains(@class, 'toast-title') and .='Success']/parent::div[contains(@class, 'toast-content--success')]");
-
-	// Button type
-	protected final Button btnSearch = new Button("//button[contains(.,'Search')]");
-	protected final Button btnAdd = new Button("//button[contains(.,'Add')]");
-	protected final Button btnSave = new Button("//button[contains(.,'Save')]");
-	protected final Button btnApply = new Button("//button[contains(.,'Apply')]");
-	protected final Button btnEditRecord = new Button(infoRecordRow.getLocatorAsString()
-			+ "/following-sibling::div//button/i[contains(@class,'bi-pencil-fill')]");
-	protected final Button btnDeleteRecord = new Button(
-			infoRecordRow.getLocatorAsString() + "/following-sibling::div//button/i[contains(@class,'bi-trash')]");
-	private final Button btnConfirmDelete = new Button(
-			"//div[@class='orangehrm-modal-footer']//button[contains(@class,'label-danger')]");
-
-	// TextBox type
-	protected final TextBox txtOption = new TextBox(
-			"//label[normalize-space(.)='%s']/parent::div/following-sibling::div//input");
-
-	// Image type
-	protected final Image employeeImage = new Image("//div[@class='orangehrm-edit-employee-image-wrapper']//img");
-
+	// Topbar header
+	protected final Label lblHeaderTitle = new Label(locator.getLocator("lblHeaderTitle"));
+	protected final Element drpUser = new Element(locator.getLocator("drpUser"));
+	protected final Label lblUserDrpOption = new Label(locator.getLocator("lblUserDrpOption"));
+	// Topbar menu
+	protected final Element topBarMenuItem = new Element(locator.getLocator("topBarMenuItem"));
+	// Left panel
+	protected final Element leftPanel = new Element(locator.getLocator("leftPanel"));
+	// Toast message
+	protected final Label lblToastSuccessMessage = new Label(locator.getLocator("lblToastSuccessMessage"));
+	protected final Element drpOption = new Element(locator.getLocator("drpOption"));
+	protected final Label lblOption = new Label(locator.getLocator("lblOption"));
+	protected final Label lblNoRecordsFound = new Label(locator.getLocator("lblNoRecordsFound"));
+	protected final Element infoRecordRow = new Element(locator.getLocator("infoRecordRow"));
+	protected final Label lblCellFollowingIndex = new Label(locator.getLocator("lblCellFollowingIndex"));
+	protected final Label lblInforRecordColumns = new Label(locator.getLocator("lblInforRecordColumns"));
+	private final Button btnConfirmDelete = new Button(locator.getLocator("btnConfirmDelete"));
+	protected final Image employeeImage = new Image(locator.getLocator("employeeImage"));
+	protected final Button btnEditRecord = new Button(infoRecordRow.getLocatorAsString() + locator.getLocator("btnEditRecord"));
+	protected final Button btnDeleteRecord = new Button(infoRecordRow.getLocatorAsString() + locator.getLocator("btnDeleteRecord"));
+	protected final Label lblSelectedOption = new Label(drpOption.getLocatorAsString() + locator.getLocator("lblSelectedOption"));
+	
 	private static GeneralPage instance;
 
 	public static GeneralPage newInstance() {

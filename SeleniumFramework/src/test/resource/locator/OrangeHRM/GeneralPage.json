@@ -1,0 +1,30 @@
+{
+	"windows.chrome": {
+		"lblCopyRight": "//p[contains(@class,'copyright') and contains(.,'%s')]",
+		"lblVersion": "//p[contains(@class,'copyright') and text()='%s']",
+		"btnSearch": "//button[contains(.,'Search')]",
+		"btnAdd": "//button[contains(.,'Add')]",
+		"btnSave": "//button[contains(.,'Save')]",
+		"iconLoading": "//div[@class='oxd-loading-spinner']",
+		"btnApply": "//button[contains(.,'Apply')]",
+		"txtOption": "//label[normalize-space(.)='%s']/parent::div/following-sibling::div//input",
+		"lblFrameTitle": "//*[contains(@class,'-title') and contains(@class,'oxd-text') and not(contains(@class,'sub-title'))]",
+		"lblHeaderTitle": "//div[@class='oxd-topbar-header-title']//h6[contains(.,'%s')]",
+		"drpUser": "//li[@class='oxd-userdropdown']",
+		"lblUserDrpOption": "//a[@role='menuitem' and text()='%s']",
+		"topBarMenuItem": "//nav[@aria-label='Topbar Menu']//li[normalize-space(.)='%s']",
+		"leftPanel": "//nav[@aria-label='Sidepanel']//span[text()='%s']",
+		"lblToastSuccessMessage": "//p[contains(@class,'toast-message') and .='Successfully Saved']/preceding-sibling::p[contains(@class, 'toast-title') and .='Success']/parent::div[contains(@class, 'toast-content--success')]",
+		"drpOption": "//div[.='%s']//following-sibling::div",
+		"lblOption": "//div[@class='oxd-select-option']//span[text()='%s']",
+		"lblNoRecordsFound": "//span[text()='No Records Found']",
+		"infoRecordRow": "//div[contains(@class,'oxd-table-card')]//div[contains(@class,'oxd-table-cell') and normalize-space(.)='%s']/following-sibling::div[normalize-space(.)='%s']/following-sibling::div[normalize-space(.)='%s']",
+		"lblCellFollowingIndex": "//div[@class='oxd-table-body']//div[contains(@class,'oxd-table-cell')][%s]/div",
+		"lblInforRecordColumns": "//div[@role='columnheader']",
+		"btnConfirmDelete": "//div[@class='orangehrm-modal-footer']//button[contains(@class,'label-danger')]",
+		"employeeImage": "//div[@class='orangehrm-edit-employee-image-wrapper']//img",
+		"btnEditRecord": "/following-sibling::div//button/i[contains(@class,'bi-pencil-fill')]",
+		"btnDeleteRecord": "/following-sibling::div//button/i[contains(@class,'bi-trash')]",
+		"lblSelectedOption": "//div[@class='oxd-select-text-input']"
+	}
+}

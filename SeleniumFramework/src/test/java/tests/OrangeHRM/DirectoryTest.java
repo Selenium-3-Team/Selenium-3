@@ -11,6 +11,9 @@ import dataType.OrangeHRM.LocationOption;
 import dataType.OrangeHRM.TextBoxTitle;
 import dataType.OrangeHRM.UserRoleOption;
 import io.qameta.allure.Description;
+import pages.OrangeHRM.LoginPage;
+import pages.OrangeHRM.ViewDirectoryPage;
+import pages.OrangeHRM.ViewEmployeeListPage;
 import tests.TestBase;
 
 public class DirectoryTest extends TestBase {
@@ -19,6 +22,10 @@ public class DirectoryTest extends TestBase {
 	@Description("Test case 18: User can search the employees in the directory by name.")
 	public void TC18() {
 
+		LoginPage loginPage = LoginPage.newInstance();
+		ViewEmployeeListPage viewEmployeeListPage = ViewEmployeeListPage.newInstance();
+		ViewDirectoryPage viewDirectoryPage = ViewDirectoryPage.newInstance();
+		
 		AssertHelper assertHelper = new AssertHelper();
 		Account account = new Account(UserRoleOption.ADMIN);
 		
@@ -44,6 +51,10 @@ public class DirectoryTest extends TestBase {
 	@Description("Test case 19: User can search the employees in the directory by job title.")
 	public void TC19() {
 
+		LoginPage loginPage = LoginPage.newInstance();
+		ViewEmployeeListPage viewEmployeeListPage = ViewEmployeeListPage.newInstance();
+		ViewDirectoryPage viewDirectoryPage = ViewDirectoryPage.newInstance();
+		
 		AssertHelper assertHelper = new AssertHelper();
 		Account account = new Account(UserRoleOption.ADMIN);
 		
@@ -69,6 +80,10 @@ public class DirectoryTest extends TestBase {
 	@Description("Test case 20: User can search the employees in the directory by location.")
 	public void TC20() {
 
+		LoginPage loginPage = LoginPage.newInstance();
+		ViewEmployeeListPage viewEmployeeListPage = ViewEmployeeListPage.newInstance();
+		ViewDirectoryPage viewDirectoryPage = ViewDirectoryPage.newInstance();
+		
 		AssertHelper assertHelper = new AssertHelper();
 		Account account = new Account(UserRoleOption.ADMIN);
 		Logger.info("Precondition: Login successfully with a valid account.");

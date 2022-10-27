@@ -2,13 +2,17 @@ package pages.OrangeHRM;
 
 import core.element.wrapper.Label;
 import core.element.wrapper.Tab;
+import core.helper.LocatorHelper;
 import dataObject.OrangeHRM.Employee;
 import dataType.OrangeHRM.EmployeeInformationTypeTab;
+import utils.constant.Constant;
 
 public class ViewPersonalDetailsPage extends PIMPage{
 
-	private final Label lblEmployeeName = new Label("//div[@class='orangehrm-edit-employee-name']//h6[text()='%s']");
-	private final Tab employeeInfoTypeTab = new Tab("//div[@role='tab']/a[text()='%s']"); 
+	LocatorHelper locator = new LocatorHelper(Constant.LOCATOR_FOLDER_PATH, ViewPersonalDetailsPage.class);
+	
+	private final Label lblEmployeeName = new Label(locator.getLocator("lblEmployeeName"));
+	private final Tab employeeInfoTypeTab = new Tab(locator.getLocator("employeeInfoTypeTab")); 
 	
 	private static ViewPersonalDetailsPage instance;
 

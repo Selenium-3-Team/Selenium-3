@@ -11,6 +11,9 @@ import dataType.OrangeHRM.LeftPanelMenuItem;
 import dataType.OrangeHRM.TopBarMenuItem;
 import dataType.OrangeHRM.UserRoleOption;
 import io.qameta.allure.Description;
+import pages.OrangeHRM.LoginPage;
+import pages.OrangeHRM.ViewEmployeeListPage;
+import pages.OrangeHRM.ViewSystemUsersPage;
 import tests.TestBase;
 
 public class AdminTest extends TestBase {
@@ -19,6 +22,10 @@ public class AdminTest extends TestBase {
 	@Description("Test case 05: Admin User can search employees successfully by \"User Role\".")
 	public void TC05() {
 
+		LoginPage loginPage = LoginPage.newInstance();
+		ViewEmployeeListPage viewEmployeeListPage = ViewEmployeeListPage.newInstance();
+		ViewSystemUsersPage viewSystemUsersPage = ViewSystemUsersPage.newInstance();
+		
 		AssertHelper assertHelper = new AssertHelper();
 		Account account = new Account(UserRoleOption.ADMIN);
 
