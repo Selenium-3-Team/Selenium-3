@@ -37,7 +37,11 @@ public class LeaveTest extends TestBase {
 
 		Logger.verify("VP. Success popup is displyed.");
 		assertHelper.assertTrue(applyLeavePage.isToastSuccessMessageDisplayed(), "Success popup is displyed.");
-		
+
+		Logger.info("Post-condition: Delete leave ticket.");
+		viewMyLeaveListPage = applyLeavePage.clickTopBarMenuItem(TopBarMenuItem.MYLEAVE);
+		viewMyLeaveListPage.cancelLeaveTicket(leaveTicket);
+
 	}
 
 }

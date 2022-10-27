@@ -16,9 +16,9 @@ import core.report.TestListener;
 import pages.OrangeHRM.AddEmployeePage;
 import pages.OrangeHRM.AdminPage;
 import pages.OrangeHRM.ApplyLeavePage;
+import pages.OrangeHRM.DirectoryPage;
 import pages.OrangeHRM.LeavePage;
 import pages.OrangeHRM.ListCustomFieldsPage;
-import pages.OrangeHRM.DirectoryPage;
 import pages.OrangeHRM.LoginPage;
 import pages.OrangeHRM.PIMPage;
 import pages.OrangeHRM.SaveCustomFieldsPage;
@@ -27,6 +27,7 @@ import pages.OrangeHRM.ViewDirectoryPage;
 import pages.OrangeHRM.ViewEmployeeListPage;
 import pages.OrangeHRM.ViewJobDetailsPage;
 import pages.OrangeHRM.ViewLeaveListPage;
+import pages.OrangeHRM.ViewMyLeaveListPage;
 import pages.OrangeHRM.ViewPersonalDetailsPage;
 import pages.OrangeHRM.ViewPhotographPage;
 import pages.OrangeHRM.ViewSystemUsersPage;
@@ -51,6 +52,7 @@ public class TestBase {
 	protected ViewLeaveListPage viewLeaveListPage = ViewLeaveListPage.newInstance();
 	protected ApplyLeavePage applyLeavePage = ApplyLeavePage.newInstance();
 	protected ViewDirectoryPage viewDirectoryPage = ViewDirectoryPage.newInstance();
+	protected ViewMyLeaveListPage viewMyLeaveListPage = ViewMyLeaveListPage.newInstance();
 
 	@Parameters({ "driverConfig", "platform" })
 	@BeforeMethod(alwaysRun = true)

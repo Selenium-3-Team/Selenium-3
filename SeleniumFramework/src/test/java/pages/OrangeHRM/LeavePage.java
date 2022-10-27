@@ -1,11 +1,15 @@
 package pages.OrangeHRM;
 
+import core.element.wrapper.Button;
 import dataObject.OrangeHRM.LeaveTicket;
 import dataType.OrangeHRM.DropdownTitle;
 import dataType.OrangeHRM.TextBoxTitle;
 import io.qameta.allure.Step;
 
 public class LeavePage extends GeneralPage {
+
+	private final Button btnCancelLeaveTicket = new Button(
+			"//div[text()='%s to %s']/parent::div/following-sibling::div//button[contains(.,'Cancel')]");
 
 	private static LeavePage instance;
 
@@ -28,5 +32,13 @@ public class LeavePage extends GeneralPage {
 		return enterAllRequiredOnApplyLeaveForm(leaveTicket.getLeaveType(), leaveTicket.getFromDate(),
 				leaveTicket.getToDate());
 	}
-	
+
+	@Step("Cancel a leave ticket")
+	public ViewPersonalDetailsPage cancelLeaveTicket(LeaveTicket leaveTicket) {
+		btnCancelLeaveTicket.generateDynamic(leaveTicket.getFromDate(), leaveTicket.getToDate());
+		btnCancelLeaveTicket.click();
+		waitForLoadingIconDisappear();
+		return new ViewPersonalDetailsPage();
+	}
+
 }

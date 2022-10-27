@@ -145,6 +145,8 @@ public class GeneralPage {
 			return (T) new ListCustomFieldsPage();
 		case APPLY:
 			return (T) new ApplyLeavePage();
+		case MYLEAVE:
+			return (T) new ViewMyLeaveListPage();
 		default:
 			return null;
 		}
