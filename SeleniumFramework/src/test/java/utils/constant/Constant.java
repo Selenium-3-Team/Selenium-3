@@ -8,6 +8,7 @@ public class Constant {
 	public static final String ORANGEHRM_URL = "https://opensource-demo.orangehrmlive.com/";
 	public static final String DRIVER_SETTING_FILE = PROJECT_PATH
 			+ "\\src\\test\\resource\\driver.setting.properties.json";
+	public static final String LOCATOR_FOLDER_PATH = PROJECT_PATH + "\\src\\test\\resource\\locator\\OrangeHRM\\";
 	public static final String ACCOUNT_DATA = PROJECT_PATH + "\\src\\test\\resource\\data\\OrangeHRM\\Account.json";
 	public static final String EMPLOYEE_DATA = PROJECT_PATH + "\\src\\test\\resource\\data\\OrangeHRM\\Employee.json";
 	public static final String LEAVE_DATA = PROJECT_PATH + "\\src\\test\\resource\\data\\OrangeHRM\\LeaveTicket.json";

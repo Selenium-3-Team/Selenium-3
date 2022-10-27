@@ -1,14 +1,18 @@
 package pages.OrangeHRM;
 
 import core.element.wrapper.TextBox;
+import core.helper.LocatorHelper;
 import dataObject.OrangeHRM.Employee;
+import utils.constant.Constant;
 
 public class AddEmployeePage extends PIMPage{
 	
-	private final TextBox txtFirstName = new TextBox("//input[@name='firstName']");
-	private final TextBox txtMiddleName = new TextBox("//input[@name='middleName']");
-	private final TextBox txtLastName = new TextBox("//input[@name='lastName']");
-	private final TextBox txtEmployeeId = new TextBox("//label[text()='Employee Id']/parent::div/following-sibling::div//input");
+	LocatorHelper locator = new LocatorHelper(Constant.LOCATOR_FOLDER_PATH, AddEmployeePage.class);
+	
+	private final TextBox txtFirstName = new TextBox(locator.getLocator("txtFirstName"));
+	private final TextBox txtMiddleName = new TextBox(locator.getLocator("txtMiddleName"));
+	private final TextBox txtLastName = new TextBox(locator.getLocator("txtLastName"));
+	private final TextBox txtEmployeeId = new TextBox(locator.getLocator("txtEmployeeId"));
 
 	private static AddEmployeePage instance;
 

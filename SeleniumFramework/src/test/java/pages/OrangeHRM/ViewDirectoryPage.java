@@ -4,13 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import core.element.wrapper.Label;
+import core.helper.LocatorHelper;
 import dataObject.OrangeHRM.Employee;
+import utils.constant.Constant;
 
 public class ViewDirectoryPage extends GeneralPage{
 
-	private final Label lblCardHeader = new Label("//p[contains(@class,'directory-card-header')]");
-	private final Label lblCardSubtitle = new Label("//p[contains(@class,'card-subtitle')]");
-	private final Label lblCardDescription = new Label("//p[contains(@class,'card-description')]/parent::div");
+	LocatorHelper locator = new LocatorHelper(Constant.LOCATOR_FOLDER_PATH, ViewDirectoryPage.class);
+	
+	private final Label lblCardHeader = new Label(locator.getLocator("lblCardHeader"));
+	private final Label lblCardSubtitle = new Label(locator.getLocator("lblCardSubtitle"));
+	private final Label lblCardDescription = new Label(locator.getLocator("lblCardDescription"));
 	
 	private static ViewDirectoryPage instance;
 

@@ -10,6 +10,8 @@ import dataType.OrangeHRM.LeftPanelMenuItem;
 import dataType.OrangeHRM.TopBarMenuItem;
 import dataType.OrangeHRM.UserRoleOption;
 import io.qameta.allure.Description;
+import pages.OrangeHRM.LoginPage;
+import pages.OrangeHRM.ViewEmployeeListPage;
 import tests.TestBase;
 import utils.constant.Constant;
 
@@ -18,7 +20,10 @@ public class LoginTest extends TestBase {
 	@Test
 	@Description("Test case 01: User can log in successfully with a valid username and a valid password.")
 	public void TC01() {
-
+		
+		LoginPage loginPage = LoginPage.newInstance();
+		ViewEmployeeListPage viewEmployeeListPage = ViewEmployeeListPage.newInstance();
+		
 		AssertHelper assertHelper = new AssertHelper();
 		Account account = new Account(UserRoleOption.ADMIN);
 		
@@ -48,6 +53,8 @@ public class LoginTest extends TestBase {
 	@Description("Test case 02: User can't log in successfully with an invalid username and a valid password.")
 	public void TC02() {
 
+		LoginPage loginPage = LoginPage.newInstance();
+		
 		AssertHelper assertHelper = new AssertHelper();
 		Account account = new Account(RandomHelper.randomString(), RandomHelper.randomString());
 		
@@ -74,6 +81,9 @@ public class LoginTest extends TestBase {
 	@Description("Test case 03: User can log out of the account successfully.")
 	public void TC03() {
 
+		LoginPage loginPage = LoginPage.newInstance();
+		ViewEmployeeListPage viewEmployeeListPage = ViewEmployeeListPage.newInstance();
+		
 		AssertHelper assertHelper = new AssertHelper();
 		Account account = new Account(UserRoleOption.ADMIN);
 

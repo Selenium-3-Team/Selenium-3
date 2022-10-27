@@ -16,6 +16,15 @@ import dataType.OrangeHRM.TextBoxTitle;
 import dataType.OrangeHRM.TopBarMenuItem;
 import dataType.OrangeHRM.UserRoleOption;
 import io.qameta.allure.Description;
+import pages.OrangeHRM.AddEmployeePage;
+import pages.OrangeHRM.ListCustomFieldsPage;
+import pages.OrangeHRM.LoginPage;
+import pages.OrangeHRM.PIMPage;
+import pages.OrangeHRM.SaveCustomFieldsPage;
+import pages.OrangeHRM.ViewEmployeeListPage;
+import pages.OrangeHRM.ViewJobDetailsPage;
+import pages.OrangeHRM.ViewPersonalDetailsPage;
+import pages.OrangeHRM.ViewPhotographPage;
 import tests.TestBase;
 import utils.constant.Constant;
 
@@ -25,6 +34,12 @@ public class PIMTest extends TestBase {
 	@Description("Test case 06: User can add a new employee successful without Create Login Details.")
 	public void TC06() {
 
+		LoginPage loginPage = LoginPage.newInstance();
+		ViewEmployeeListPage viewEmployeeListPage = ViewEmployeeListPage.newInstance();
+		AddEmployeePage addEmployeePage = AddEmployeePage.newInstance();
+		ViewPersonalDetailsPage viewPersonalDetailsPage = ViewPersonalDetailsPage.newInstance();
+		PIMPage pimPage = PIMPage.newInstance();
+		
 		AssertHelper assertHelper = new AssertHelper();
 		Account account = new Account(UserRoleOption.ADMIN);
 		Employee employee = new Employee();
@@ -60,6 +75,9 @@ public class PIMTest extends TestBase {
 	@Description("Test case 07: User can search employees with Employment Status successful.")
 	public void TC07() {
 		
+		LoginPage loginPage = LoginPage.newInstance();
+		ViewEmployeeListPage viewEmployeeListPage = ViewEmployeeListPage.newInstance();
+		
 		AssertHelper assertHelper = new AssertHelper();
 		Account account = new Account(UserRoleOption.ADMIN);
 		
@@ -78,6 +96,12 @@ public class PIMTest extends TestBase {
 	@Description("Test case 08: User can modify employee's Employment Status successful.")
 	public void TC08() {
 	
+		LoginPage loginPage = LoginPage.newInstance();
+		ViewEmployeeListPage viewEmployeeListPage = ViewEmployeeListPage.newInstance();
+		AddEmployeePage addEmployeePage = AddEmployeePage.newInstance();
+		ViewPersonalDetailsPage viewPersonalDetailsPage = ViewPersonalDetailsPage.newInstance();
+		ViewJobDetailsPage viewJobDetailsPage = ViewJobDetailsPage.newInstance();
+		
 		AssertHelper assertHelper = new AssertHelper();
 		Account account = new Account(UserRoleOption.ADMIN);
 		Employee employee = new Employee();
@@ -116,6 +140,12 @@ public class PIMTest extends TestBase {
 	@Test
 	@Description("Test case 09: User cannot upload a valid format image by over the size of 1MB.")
 	public void TC09() {
+		
+		LoginPage loginPage = LoginPage.newInstance();
+		ViewEmployeeListPage viewEmployeeListPage = ViewEmployeeListPage.newInstance();
+		AddEmployeePage addEmployeePage = AddEmployeePage.newInstance();
+		ViewPersonalDetailsPage viewPersonalDetailsPage = ViewPersonalDetailsPage.newInstance();
+		ViewPhotographPage viewPhotographPage = ViewPhotographPage.newInstance();
 		
 		AssertHelper assertHelper = new AssertHelper();
 		Account account = new Account(UserRoleOption.ADMIN);
@@ -158,6 +188,11 @@ public class PIMTest extends TestBase {
 	@Test
 	@Description("Test case 10: User can add a custom field for employee successful.")
 	public void TC10() {
+		
+		LoginPage loginPage = LoginPage.newInstance();
+		ViewEmployeeListPage viewEmployeeListPage = ViewEmployeeListPage.newInstance();
+		ListCustomFieldsPage listCustomFieldsPage = ListCustomFieldsPage.newInstance();
+		SaveCustomFieldsPage saveCustomFieldsPage = SaveCustomFieldsPage.newInstance();
 		
 		AssertHelper assertHelper = new AssertHelper();
 		Account account = new Account(UserRoleOption.ADMIN);
