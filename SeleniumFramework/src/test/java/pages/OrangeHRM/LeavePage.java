@@ -15,7 +15,7 @@ public class LeavePage extends GeneralPage {
 		return LeavePage.instance;
 	}
 
-	@Step("Enter all required information on Apply Leave Form")
+	@Step("Enter all required information {0} for leaveType, {1} for fromDate, {2} for toDate on Apply Leave Form")
 	public LeavePage enterAllRequiredOnApplyLeaveForm(String leaveType, String fromDate, String toDate) {
 		selectOption(DropdownTitle.LEAVETYPE, leaveType);
 		enterValueToTextboxOption(TextBoxTitle.FROMDATE, fromDate);
@@ -23,10 +23,8 @@ public class LeavePage extends GeneralPage {
 		return this;
 	}
 
-	@Step("Enter all required information on Apply Leave Form")
 	public LeavePage enterAllRequiredOnApplyLeaveForm(LeaveTicket leaveTicket) {
-		return enterAllRequiredOnApplyLeaveForm(leaveTicket.getLeaveType(), leaveTicket.getFromDate(),
-				leaveTicket.getToDate());
+		return enterAllRequiredOnApplyLeaveForm(leaveTicket.getLeaveType(), leaveTicket.getFromDate(), leaveTicket.getToDate());
 	}
 	
 }

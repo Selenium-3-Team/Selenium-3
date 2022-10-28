@@ -33,19 +33,19 @@ public class LoginPage extends GeneralPage {
 		return this;
 	}
 
-	@Step("Enter username {0}")
+	@Step("Enter username {0} on Login form")
 	public LoginPage enterUsername(String username) {
 		txtUsername.sendKeys(username);
 		return this;
 	}
 
-	@Step("Enter password {0}")
+	@Step("Enter password {0} on Login form")
 	public LoginPage enterPassword(String password) {
 		txtPassword.sendKeys(password);
 		return this;
 	}
 
-	@Step("Click Login button")
+	@Step("Click Login button on Login form")
 	public void clickLoginBtn() {
 		btnLogin.click();
 	}
@@ -63,12 +63,12 @@ public class LoginPage extends GeneralPage {
 		return lblErrorMessage.getLabelText();
 	}
 	
-	@Step("Check if login button is displayed")
+	@Step("Check Login button is displayed")
 	public boolean isLoginButtonDisplayed() {
 		return btnLogin.isDisplayed();
 	}
 
-	@Step("Check if login page is displayed")
+	@Step("Check Login page is displayed")
 	public boolean isDisplayed() {
 		return btnLogin.isDisplayed() && txtUsername.isDisplayed() && txtPassword.isDisplayed();
 	}

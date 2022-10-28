@@ -1,5 +1,7 @@
 package pages.OrangeHRM;
 
+import io.qameta.allure.Step;
+
 public class ListCustomFieldsPage extends PIMPage{
 
 	private static ListCustomFieldsPage instance;
@@ -10,6 +12,7 @@ public class ListCustomFieldsPage extends PIMPage{
 		return ListCustomFieldsPage.instance;
 	}
 	
+	@Step("Click Add button on Save Custom Fields page")
 	public SaveCustomFieldsPage clickAddButton() {
 		super.clickAddButton();
 		waitForLoadingIconDisappear();

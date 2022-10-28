@@ -1,5 +1,7 @@
 package pages.OrangeHRM;
 
+import io.qameta.allure.Step;
+
 public class PIMPage extends GeneralPage {
 
 	private static PIMPage instance;
@@ -10,6 +12,7 @@ public class PIMPage extends GeneralPage {
 		return PIMPage.instance;
 	}
 
+	@Step("Click Search button on PIM page")
 	public PIMPage clickSearchBtn() {
 		clickSearchButton();
 		waitForLoadingIconDisappear();

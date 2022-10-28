@@ -85,7 +85,7 @@ public class GeneralPage {
 	// Click methods
 	@Step("Click tab on Left panel menu")
 	@SuppressWarnings("unchecked")
-	public <T> T clickTabOnLeftPanel(LeftPanelMenuItem item) {
+	public <T extends GeneralPage> T clickTabOnLeftPanel(LeftPanelMenuItem item) {
 		leftPanel.generateDynamic(item.getValue());
 		leftPanel.click();
 		switch (item) {
@@ -104,7 +104,7 @@ public class GeneralPage {
 
 	@Step("Click item on TopBar menu")
 	@SuppressWarnings("unchecked")
-	public <T> T clickTopBarMenuItem(String pagePath, String delimiter) {
+	public <T extends GeneralPage> T clickTopBarMenuItem(String pagePath, String delimiter) {
 		String[] pageNames = Utilities.splitString(pagePath, delimiter);
 		int length = pageNames.length;
 		for (int i = 0; i < length; i++) {
@@ -121,7 +121,7 @@ public class GeneralPage {
 
 	@Step("Click item on TopBar menu")
 	@SuppressWarnings("unchecked")
-	public <T> T clickTopBarMenuItem(TopBarMenuItem menuItem) {
+	public <T extends GeneralPage> T clickTopBarMenuItem(TopBarMenuItem menuItem) {
 		topBarMenuItem.generateDynamic(menuItem.getValue());
 		topBarMenuItem.click();
 		waitForLoadingIconDisappear();
