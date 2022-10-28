@@ -2,13 +2,16 @@ package pages.OrangeHRM;
 
 import core.element.wrapper.Button;
 import core.element.wrapper.Label;
+import core.helper.LocatorHelper;
 import core.utilities.Utilities;
+import utils.constant.Constant;
 
 public class ViewPhotographPage extends PIMPage{
 
-	private final Button btnPlus = new Button("//button[contains(@class,'employee-image-action')]");
-	private final Label lblErrorMsg = new Label(
-			"//div[@class='orangehrm-employee-picture']//span[contains(@class,'oxd-input-field-error-message')]");
+	LocatorHelper locator = new LocatorHelper(Constant.LOCATOR_FOLDER_PATH, ViewPhotographPage.class);
+	
+	private final Button btnPlus = new Button(locator.getLocator("btnPlus"));
+	private final Label lblErrorMsg = new Label(locator.getLocator("lblErrorMsg"));
 	
 	private static ViewPhotographPage instance;
 

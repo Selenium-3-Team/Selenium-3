@@ -1,0 +1,8 @@
+{
+	"windows.chrome": {
+		"txtUsername": "//input[@name='username']",
+		"txtPassword": "//input[@name='password']",
+		"btnLogin": "//button[contains(@class,'orangehrm-login-button')]",
+		"lblErrorMessage": "//div[@role='alert']//p"
+	}
+}

@@ -9,6 +9,9 @@ import dataType.OrangeHRM.LeftPanelMenuItem;
 import dataType.OrangeHRM.TextBoxTitle;
 import dataType.OrangeHRM.UserRoleOption;
 import io.qameta.allure.Description;
+import pages.OrangeHRM.LoginPage;
+import pages.OrangeHRM.UpdatePasswordPage;
+import pages.OrangeHRM.ViewEmployeeListPage;
 import tests.TestBase;
 import utils.constant.Constant;
 
@@ -18,6 +21,10 @@ public class ChangePasswordTest extends TestBase {
 	@Description("Test case 04: User can change passwords successfully.")
 	public void TC04() {
 
+		LoginPage loginPage = LoginPage.newInstance();
+		ViewEmployeeListPage viewEmployeeListPage = ViewEmployeeListPage.newInstance();
+		UpdatePasswordPage updatePasswordPage = UpdatePasswordPage.newInstance();
+		
 		AssertHelper assertHelper = new AssertHelper();
 		Account account = new Account(UserRoleOption.ADMIN);
 		String newPassword = Constant.STRONG_PASSWORD;

@@ -10,6 +10,10 @@ import dataType.OrangeHRM.LeftPanelMenuItem;
 import dataType.OrangeHRM.TopBarMenuItem;
 import dataType.OrangeHRM.UserRoleOption;
 import io.qameta.allure.Description;
+import pages.OrangeHRM.ApplyLeavePage;
+import pages.OrangeHRM.LoginPage;
+import pages.OrangeHRM.ViewEmployeeListPage;
+import pages.OrangeHRM.ViewLeaveListPage;
 import tests.TestBase;
 
 public class LeaveTest extends TestBase {
@@ -18,6 +22,11 @@ public class LeaveTest extends TestBase {
 	@Description("Test case 11: User can apply leave.")
 	public void TC11() {
 
+		ViewEmployeeListPage viewEmployeeListPage = ViewEmployeeListPage.newInstance();
+		LoginPage loginPage = LoginPage.newInstance();
+		ViewLeaveListPage viewLeaveListPage = ViewLeaveListPage.newInstance();
+		ApplyLeavePage applyLeavePage = ApplyLeavePage.newInstance();
+		
 		AssertHelper assertHelper = new AssertHelper();
 		Account account = new Account(UserRoleOption.ADMIN);
 		LeaveTicket leaveTicket = new LeaveTicket("leaveTicket");

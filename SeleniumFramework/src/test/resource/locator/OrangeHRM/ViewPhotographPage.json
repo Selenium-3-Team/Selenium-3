@@ -1,0 +1,6 @@
+{
+	"windows.chrome": {
+		"btnPlus": "//button[contains(@class,'employee-image-action')]",
+		"lblErrorMsg": "//div[@class='orangehrm-employee-picture']//span[contains(@class,'oxd-input-field-error-message')]"
+	}
+}
