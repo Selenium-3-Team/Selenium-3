@@ -22,11 +22,11 @@ public class AdminTest extends TestBase {
 	@Description("Test case 05: Admin User can search employees successfully by \"User Role\".")
 	public void TC05() {
 
+		AssertHelper assertHelper = new AssertHelper();
 		LoginPage loginPage = LoginPage.newInstance();
 		ViewEmployeeListPage viewEmployeeListPage = ViewEmployeeListPage.newInstance();
 		ViewSystemUsersPage viewSystemUsersPage = ViewSystemUsersPage.newInstance();
 		
-		AssertHelper assertHelper = new AssertHelper();
 		Account account = new Account(UserRoleOption.ADMIN);
 
 		Logger.info("Precondition: Login successfully with a valid account.");
@@ -34,7 +34,6 @@ public class AdminTest extends TestBase {
 
 		Logger.info("Step 1: Click the \"Admin\" tab on the Left Menu.");
 		viewSystemUsersPage = viewEmployeeListPage.clickTabOnLeftPanel(LeftPanelMenuItem.ADMIN);
-		viewSystemUsersPage.waitForLoadingIconDisappear();
 
 		Logger.verify("VP. The \"User Management\" page should be displayed.");
 		assertHelper.assertTrue(viewSystemUsersPage.isTopBarMenuItemActived(TopBarMenuItem.USER_MANAGEMENT), "The \"User Management\" page should be displayed.");
@@ -46,7 +45,7 @@ public class AdminTest extends TestBase {
 		viewSystemUsersPage.selectOption(DropdownTitle.USER_ROLE, UserRoleOption.ADMIN.getValue());
 
 		Logger.info("Step 3: Click on the \"Search\" button.");
-		viewSystemUsersPage.clickSearchButton();
+		viewSystemUsersPage.clickSearchButton().waitForLoadingIconDisappear();
 
 		Logger.verify("VP. At least 1 record should be displayed on the \"Record Found\" form.");
 		assertHelper.assertFalse(viewSystemUsersPage.isNoRecordsFoundLabelDisplayed(), "At least 1 record should be displayed on the \\\"Record Found\\\" form.");

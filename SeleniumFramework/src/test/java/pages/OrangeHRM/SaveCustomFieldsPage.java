@@ -26,7 +26,7 @@ public class SaveCustomFieldsPage extends PIMPage {
 		return this;
 	}
 
-	@Step("Click Save button on Save Custom Fields page")
+	@Step("Click Save button")
 	public ListCustomFieldsPage clickSaveButton() {
 		super.clickSaveButton();
 		waitForLoadingIconDisappear();

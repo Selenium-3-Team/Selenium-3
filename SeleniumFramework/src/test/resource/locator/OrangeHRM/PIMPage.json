@@ -1,0 +1,7 @@
+{
+	"windows.chrome": {
+		"txtFirstName": "//input[@name='firstName']",
+		"txtMiddleName": "//input[@name='middleName']",
+		"txtLastName": "//input[@name='lastName']"
+	}
+}

@@ -5,13 +5,13 @@ import core.element.wrapper.Label;
 import core.element.wrapper.TextBox;
 import core.helper.LocatorHelper;
 import dataObject.OrangeHRM.Account;
-import utils.constant.Constant;
 import io.qameta.allure.Step;
+import utils.constant.Constant;
 
 public class LoginPage extends GeneralPage {
-	
+
 	LocatorHelper locator = new LocatorHelper(Constant.LOCATOR_FOLDER_PATH, LoginPage.class);
-	
+
 	private final TextBox txtUsername = new TextBox(locator.getLocator("txtUsername"));
 	private final TextBox txtPassword = new TextBox(locator.getLocator("txtPassword"));
 	private final Button btnLogin = new Button(locator.getLocator("btnLogin"));
@@ -24,7 +24,7 @@ public class LoginPage extends GeneralPage {
 			LoginPage.instance = new LoginPage();
 		return LoginPage.instance;
 	}
-	
+
 	@Step("Wait for Login page displayed")
 	public LoginPage waitForPageLoad() {
 		txtUsername.waitForDisplayed();
@@ -50,19 +50,27 @@ public class LoginPage extends GeneralPage {
 		btnLogin.click();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Step("Login to OrangeHRM page")
-	public ViewEmployeeListPage loginOrangeHRM(Account account) {
+	public <T extends GeneralPage> T loginOrangeHRM(Account account) {
 		enterUsername(account.getUsername());
 		enterPassword(account.getPassword());
 		clickLoginBtn();
-		return new ViewEmployeeListPage();
+		switch (account.getRole()) {
+		case "admin":
+			return (T) new ViewEmployeeListPage();
+		case "":
+			return (T) new ViewPersonalDetailsPage();
+		default:
+			return null;
+		}
 	}
 
 	@Step("Get the error message")
 	public String getErrorMessage() {
 		return lblErrorMessage.getLabelText();
 	}
-	
+
 	@Step("Check Login button is displayed")
 	public boolean isLoginButtonDisplayed() {
 		return btnLogin.isDisplayed();

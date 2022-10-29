@@ -21,10 +21,10 @@ public class LoginTest extends TestBase {
 	@Description("Test case 01: User can log in successfully with a valid username and a valid password.")
 	public void TC01() {
 		
+		AssertHelper assertHelper = new AssertHelper();
 		LoginPage loginPage = LoginPage.newInstance();
 		ViewEmployeeListPage viewEmployeeListPage = ViewEmployeeListPage.newInstance();
 		
-		AssertHelper assertHelper = new AssertHelper();
 		Account account = new Account(UserRoleOption.ADMIN);
 		
 		Logger.info("Step 1: Navigate to OrangeHRM.");
@@ -53,9 +53,9 @@ public class LoginTest extends TestBase {
 	@Description("Test case 02: User can't log in successfully with an invalid username and a valid password.")
 	public void TC02() {
 
+		AssertHelper assertHelper = new AssertHelper();
 		LoginPage loginPage = LoginPage.newInstance();
 		
-		AssertHelper assertHelper = new AssertHelper();
 		Account account = new Account(RandomHelper.randomString(), RandomHelper.randomString());
 		
 		Logger.info("Step 1: Navigate to OrangeHRM.");
@@ -81,10 +81,10 @@ public class LoginTest extends TestBase {
 	@Description("Test case 03: User can log out of the account successfully.")
 	public void TC03() {
 
+		AssertHelper assertHelper = new AssertHelper();
 		LoginPage loginPage = LoginPage.newInstance();
 		ViewEmployeeListPage viewEmployeeListPage = ViewEmployeeListPage.newInstance();
 		
-		AssertHelper assertHelper = new AssertHelper();
 		Account account = new Account(UserRoleOption.ADMIN);
 
 		Logger.info("Precondition: Login successfully with a valid account.");
