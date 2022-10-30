@@ -1,5 +1,11 @@
 package dataObject.OrangeHRM;
 
+import com.google.gson.JsonObject;
+
+import core.helper.JsonHelper;
+import core.helper.RandomHelper;
+import utils.constant.Constant;
+
 public class ContactDetails {
 
 	// Address
@@ -103,6 +109,21 @@ public class ContactDetails {
 
 	public void setOtherEmail(String otherEmail) {
 		this.otherEmail = otherEmail;
+	}
+
+	public ContactDetails(String key) {
+		JsonObject jsonObject = JsonHelper.getJsonObject(Constant.CONTACT_DETAILS_DATA);
+		this.street1 = jsonObject.get(key).getAsJsonObject().get("street1").getAsString();
+		this.street2 = jsonObject.get(key).getAsJsonObject().get("street2").getAsString();
+		this.city = jsonObject.get(key).getAsJsonObject().get("city").getAsString();
+		this.province = jsonObject.get(key).getAsJsonObject().get("province").getAsString();
+		this.postalCode = jsonObject.get(key).getAsJsonObject().get("postalCode").getAsString();
+		this.country = jsonObject.get(key).getAsJsonObject().get("country").getAsString();
+		this.homePhone = jsonObject.get(key).getAsJsonObject().get("homePhone").getAsString();
+		this.mobilePhone = jsonObject.get(key).getAsJsonObject().get("mobilePhone").getAsString();
+		this.workPhone = jsonObject.get(key).getAsJsonObject().get("workPhone").getAsString();
+		this.workEmail = RandomHelper.getRandomString("") + jsonObject.get(key).getAsJsonObject().get("workEmail").getAsString();
+		this.otherEmail = RandomHelper.getRandomString("") + jsonObject.get(key).getAsJsonObject().get("otherEmail").getAsString();
 	}
 
 }

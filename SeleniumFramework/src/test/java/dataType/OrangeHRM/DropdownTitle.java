@@ -3,7 +3,7 @@ package dataType.OrangeHRM;
 public enum DropdownTitle {
 
 	USER_ROLE("User Role"), STATUS("Status"), EMPLOYEE_STATUS("Employment Status"), SCREEN("Screen"), TYPE("Type"),
-	LEAVETYPE("Leave Type"), JOB_TITLE("Job Title"), LOCATION("Location");
+	LEAVETYPE("Leave Type"), JOB_TITLE("Job Title"), LOCATION("Location"), COUNTRY("Country");
 
 	private final String value;
 

@@ -5,7 +5,9 @@ public enum TextBoxTitle {
 	EMPLOYEE_ID("Employee Id"), CURRENT_PASSWORD("Current Password"), NEW_PASSWORD("Password"),
 	CONFIRM_PASSWORD("Confirm Password"), FIELD_NAME("Field Name"), SELECT_OPTIONS("Select Options"),
 	FROMDATE("From Date"), TODATE("To Date"), EMPLOYEE_NAME("Employee Name"), USERNAME("Username"),
-	PASSWORD("Password");
+	PASSWORD("Password"), STREET_1("Street 1"), STREET_2("Street 2"), CITY("City"), PROVINCE("State/Province"),
+	POSTAL_CODE("Zip/Postal Code"), HOME("Home"), MOBILE("Mobile"), WORK("Work"), WORK_EMAIL("Work Email"),
+	OTHER_EMAIL("Other Email");
 
 	private final String value;
 

@@ -2,7 +2,7 @@ package dataObject.OrangeHRM;
 
 import core.helper.RandomHelper;
 
-public class PersonalInfo extends ContactDetails {
+public class PersonalInfo {
 
 	protected String fullName;
 	protected String firstName;
@@ -164,7 +164,7 @@ public class PersonalInfo extends ContactDetails {
 		this.lastName = RandomHelper.getRandomString("last");
 		this.fullName = String.format("%s %s %s", this.firstName, this.middleName, this.lastName);
 	}
-	
+
 	public PersonalInfo(String firstName, String middleName, String lastName) {
 		this.firstName = firstName;
 		this.middleName = middleName;

@@ -13,7 +13,7 @@
   		<parameter name="driverConfig" value="chrome.local" />
 		<parameter name="platform" value="windows" />	
   		<classes>
-			<class name="tests.OrangeHRM.PIMTest"><methods><include name="TC06"></include></methods></class>
+			<class name="tests.OrangeHRM.PIMTest"></class>
   		</classes>
   	</test>
   
