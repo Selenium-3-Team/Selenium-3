@@ -24,13 +24,13 @@ public class LeaveTest extends TestBase {
 	@Description("Test case 11: User can apply leave.")
 	public void TC11() {
 
+		AssertHelper assertHelper = new AssertHelper();
 		ViewEmployeeListPage viewEmployeeListPage = ViewEmployeeListPage.newInstance();
 		LoginPage loginPage = LoginPage.newInstance();
 		ViewLeaveListPage viewLeaveListPage = ViewLeaveListPage.newInstance();
 		ApplyLeavePage applyLeavePage = ApplyLeavePage.newInstance();
 		ViewMyLeaveListPage viewMyLeaveListPage = ViewMyLeaveListPage.newInstance();
 
-		AssertHelper assertHelper = new AssertHelper();
 		Account account = new Account(UserRoleOption.ADMIN);
 		LeaveTicket leaveTicket = new LeaveTicket("leaveTicket");
 
@@ -48,7 +48,7 @@ public class LeaveTest extends TestBase {
 		applyLeavePage.clickApplyButton().waitForLoadingIconDisappear();
 
 		Logger.verify("VP. Success popup is displyed.");
-		assertHelper.assertTrue(applyLeavePage.isToastSuccessMessageDisplayed(), "Success popup is displyed.");
+		assertHelper.assertTrue(applyLeavePage.isSavedSuccessMessageDisplayed(), "Success popup is displyed.");
 
 		Logger.info("Post-condition: Delete leave ticket.");
 		viewMyLeaveListPage = applyLeavePage.clickTopBarMenuItem(TopBarMenuItem.MYLEAVE);

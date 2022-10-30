@@ -1,14 +1,10 @@
 package core.utilities;
 
-import java.awt.datatransfer.StringSelection;
-import java.awt.event.KeyEvent;
 import java.awt.Robot;
 import java.awt.Toolkit;
+import java.awt.datatransfer.StringSelection;
+import java.awt.event.KeyEvent;
 import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.logging.Logger;
 
 import org.apache.commons.io.FileUtils;

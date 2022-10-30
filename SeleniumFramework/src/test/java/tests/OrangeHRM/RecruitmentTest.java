@@ -85,7 +85,7 @@ public class RecruitmentTest extends TestBase {
 		viewCandidates.clickSaveButton();
 
 		Logger.verify("VP. Success popup is displyed.");
-		assertHelper.assertTrue(viewCandidates.isToastSuccessMessageDisplayed(), "Success popup is displyed.");
+		assertHelper.assertTrue(viewCandidates.isSavedSuccessMessageDisplayed(), "Success popup is displyed.");
 
 		Logger.info("Step 7: Click on \"Candidates\" tab.");
 		viewCandidates.clickTopBarMenuItem(TopBarMenuItem.CANDIDATES);

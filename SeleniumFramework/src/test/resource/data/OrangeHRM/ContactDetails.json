@@ -1,0 +1,15 @@
+{
+  "contact-details-test-data-1": {
+    "street1": "462 Phan Xich Long",
+    "street2": "Ward 2",
+    "city": "Ho Chi Minh",
+    "province": "Phu Nhuan District",
+    "postalCode": "12345-1234",
+    "country": "Viet Nam",
+    "homePhone": "+84 28 3995 4072",
+    "mobilePhone": "+84 28 3995 4072",
+    "workPhone": "+84 28 3995 4072",
+    "workEmail": "automation.tester@logigear.com",
+    "otherEmail": "automation.tester@domain.com"
+  }
+}

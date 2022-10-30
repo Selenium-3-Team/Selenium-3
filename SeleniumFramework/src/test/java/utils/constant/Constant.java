@@ -15,7 +15,8 @@ public class Constant {
 	public static final String CUSTOM_FIELD_DATA = PROJECT_PATH + "\\src\\test\\resource\\data\\OrangeHRM\\CustomField.json";
 	public static final String IMAGE_DATA = PROJECT_PATH + "\\src\\test\\resource\\data\\Images\\Test.jpg";
 	public static final String CANDIDATE_DATA = PROJECT_PATH + "\\src\\test\\resource\\data\\OrangeHRM\\Candidate.json";
-	
+	public static final String CONTACT_DETAILS_DATA = PROJECT_PATH + "\\src\\test\\resource\\data\\OrangeHRM\\ContactDetails.json";
+
 	// Application info
 	public static final String COMPANY = "OrangeHRM, Inc";
 	public static final String VERSION = "OrangeHRM OS 5.1";
