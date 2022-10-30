@@ -45,7 +45,7 @@
     "platform": "Windows",
     "isHeadless": false,
     "driverType": "Chrome",
-    "remoteUrl": "http://192.168.1.12:5566/wd/hub",
+    "remoteUrl": "http://localhost:4444/wd/hub",
     "driverExecutable": "src/test/resource/drivers/win/chromedriver.exe",
     "pageTimeOut": 60,
     "elementTimeOut": 0
@@ -56,7 +56,7 @@
     "platform": "Windows",
     "isHeadless": false,
     "driverType": "Firefox",
-    "remoteUrl": "http://192.168.1.12:5566/wd/hub",
+    "remoteUrl": "http://localhost:4444/wd/hub",
     "driverExecutable": "src/test/resource/drivers/win/geckodriver.exe",
     "pageTimeOut": 60,
     "elementTimeOut": 0
@@ -67,7 +67,7 @@
     "platform": "Windows",
     "isHeadless": false,
     "driverType": "Edge",
-    "remoteUrl": "http://192.168.1.12:5566/wd/hub",
+    "remoteUrl": "http://localhost:4444/wd/hub",
     "driverExecutable": "src/test/resource/drivers/win/msedgedriver.exe",
     "pageTimeOut": 60,
     "elementTimeOut": 0
@@ -78,7 +78,7 @@
     "platform": "Windows",
     "isHeadless": false,
     "driverType": "IE",
-    "remoteUrl": "http://192.168.1.12:5566/wd/hub",
+    "remoteUrl": "http://localhost:4444/wd/hub",
     "driverExecutable": "src/test/resource/drivers/win/IEDriverServer.exe",
     "pageTimeOut": 60,
     "elementTimeOut": 0
