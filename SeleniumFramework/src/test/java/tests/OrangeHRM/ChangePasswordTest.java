@@ -48,10 +48,10 @@ public class ChangePasswordTest extends TestBase {
 		updatePasswordPage.enterValueToTextboxOption(TextBoxTitle.CONFIRM_PASSWORD, newPassword);
 
 		Logger.info("Step 6: Click on the \"Save\" button.");
-		updatePasswordPage.clickSaveButton();
+		updatePasswordPage.clickSaveButton().waitForLoadingIconDisappear();
 		
 		Logger.verify("VP. The success \"Successfully Saved\" message should be displayed.");
-		assertHelper.assertTrue(updatePasswordPage.isToastSuccessMessageDisplayed(), "The success \"Successfully Saved\" message should be displayed.");
+		assertHelper.assertTrue(updatePasswordPage.isSavedSuccessMessageDisplayed(), "The success \"Successfully Saved\" message should be displayed.");
 		
 		Logger.info("Step 7: Click on the \"Logout\" button.");
 		loginPage = updatePasswordPage.logoutOrangeHRM().waitForPageLoad();

@@ -22,11 +22,11 @@ public class DirectoryTest extends TestBase {
 	@Description("Test case 18: User can search the employees in the directory by name.")
 	public void TC18() {
 
+		AssertHelper assertHelper = new AssertHelper();
 		LoginPage loginPage = LoginPage.newInstance();
 		ViewEmployeeListPage viewEmployeeListPage = ViewEmployeeListPage.newInstance();
 		ViewDirectoryPage viewDirectoryPage = ViewDirectoryPage.newInstance();
 		
-		AssertHelper assertHelper = new AssertHelper();
 		Account account = new Account(UserRoleOption.ADMIN);
 		
 		Logger.info("Precondition: Login successfully with a valid account.");
@@ -51,11 +51,11 @@ public class DirectoryTest extends TestBase {
 	@Description("Test case 19: User can search the employees in the directory by job title.")
 	public void TC19() {
 
+		AssertHelper assertHelper = new AssertHelper();
 		LoginPage loginPage = LoginPage.newInstance();
 		ViewEmployeeListPage viewEmployeeListPage = ViewEmployeeListPage.newInstance();
 		ViewDirectoryPage viewDirectoryPage = ViewDirectoryPage.newInstance();
 		
-		AssertHelper assertHelper = new AssertHelper();
 		Account account = new Account(UserRoleOption.ADMIN);
 		
 		Logger.info("Precondition: Login successfully with a valid account.");
@@ -80,11 +80,11 @@ public class DirectoryTest extends TestBase {
 	@Description("Test case 20: User can search the employees in the directory by location.")
 	public void TC20() {
 
+		AssertHelper assertHelper = new AssertHelper();
 		LoginPage loginPage = LoginPage.newInstance();
 		ViewEmployeeListPage viewEmployeeListPage = ViewEmployeeListPage.newInstance();
 		ViewDirectoryPage viewDirectoryPage = ViewDirectoryPage.newInstance();
 		
-		AssertHelper assertHelper = new AssertHelper();
 		Account account = new Account(UserRoleOption.ADMIN);
 		Logger.info("Precondition: Login successfully with a valid account.");
 		viewEmployeeListPage = loginPage.loginOrangeHRM(account);

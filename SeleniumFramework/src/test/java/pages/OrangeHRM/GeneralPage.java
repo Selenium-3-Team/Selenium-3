@@ -43,7 +43,8 @@ public class GeneralPage {
 	// Left panel
 	protected final Element leftPanel = new Element(locator.getLocator("leftPanel"));
 	// Toast message
-	protected final Label lblToastSuccessMessage = new Label(locator.getLocator("lblToastSuccessMessage"));
+	protected final Label lblSavedSuccessMessage = new Label(locator.getLocator("lblSavedSuccessMessage"));
+	protected final Label lblUpdatedSuccessMessage = new Label(locator.getLocator("lblUpdatedSuccessMessage"));
 	protected final Element drpOption = new Element(locator.getLocator("drpOption"));
 	protected final Label lblOption = new Label(locator.getLocator("lblOption"));
 	protected final Label lblNoRecordsFound = new Label(locator.getLocator("lblNoRecordsFound"));
@@ -85,9 +86,10 @@ public class GeneralPage {
 	// Click methods
 	@Step("Click tab on Left panel menu")
 	@SuppressWarnings("unchecked")
-	public <T> T clickTabOnLeftPanel(LeftPanelMenuItem item) {
+	public <T extends GeneralPage> T clickTabOnLeftPanel(LeftPanelMenuItem item) {
 		leftPanel.generateDynamic(item.getValue());
 		leftPanel.click();
+		waitForLoadingIconDisappear();
 		switch (item) {
 		case ADMIN:
 			return (T) new ViewSystemUsersPage();
@@ -104,7 +106,7 @@ public class GeneralPage {
 
 	@Step("Click item on TopBar menu")
 	@SuppressWarnings("unchecked")
-	public <T> T clickTopBarMenuItem(String pagePath, String delimiter) {
+	public <T extends GeneralPage> T clickTopBarMenuItem(String pagePath, String delimiter) {
 		String[] pageNames = Utilities.splitString(pagePath, delimiter);
 		int length = pageNames.length;
 		for (int i = 0; i < length; i++) {
@@ -112,6 +114,7 @@ public class GeneralPage {
 			topBarMenuItem.waitForPresent(Constant.VERY_SHORT_TIMEOUT);
 			topBarMenuItem.click();
 		}
+		waitForLoadingIconDisappear();
 		if (pageNames[length - 1].equals(TopBarMenuItem.CUSTOM_FIELDS.getValue())) {
 			return (T) new ListCustomFieldsPage();
 		} else {
@@ -121,7 +124,7 @@ public class GeneralPage {
 
 	@Step("Click item on TopBar menu")
 	@SuppressWarnings("unchecked")
-	public <T> T clickTopBarMenuItem(TopBarMenuItem menuItem) {
+	public <T extends GeneralPage> T clickTopBarMenuItem(TopBarMenuItem menuItem) {
 		topBarMenuItem.generateDynamic(menuItem.getValue());
 		topBarMenuItem.click();
 		waitForLoadingIconDisappear();
@@ -198,7 +201,6 @@ public class GeneralPage {
 	@Step("Click Search button")
 	public GeneralPage clickSearchButton() {
 		btnSearch.click();
-		waitForLoadingIconDisappear();
 		return this;
 	}
 
@@ -313,9 +315,14 @@ public class GeneralPage {
 		return topBarMenuItem.isAttributeValueDisplayed("class", "--visited");
 	}
 
-	@Step("Check toast success message is displayed")
-	public boolean isToastSuccessMessageDisplayed() {
-		return lblToastSuccessMessage.isDisplayed();
+	@Step("Check toast saved success message is displayed")
+	public boolean isSavedSuccessMessageDisplayed() {
+		return lblSavedSuccessMessage.isDisplayed();
+	}
+	
+	@Step("Check toast updated success message is displayed")
+	public boolean isUpdatedSuccessMessageDisplayed() {
+		return lblUpdatedSuccessMessage.isDisplayed();
 	}
 
 	@Step("Check text CopyRight includes {0} and {1}")
