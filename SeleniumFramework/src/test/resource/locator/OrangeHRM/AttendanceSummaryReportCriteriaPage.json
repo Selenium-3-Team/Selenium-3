@@ -1,0 +1,6 @@
+{
+	"windows.chrome": {
+		"txtFrom": "//input[@placeholder='From']",
+		"txtTo": "//input[@placeholder='To']"
+	}
+}

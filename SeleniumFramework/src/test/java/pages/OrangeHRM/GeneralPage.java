@@ -8,6 +8,7 @@ import core.element.wrapper.Image;
 import core.element.wrapper.Label;
 import core.element.wrapper.TextBox;
 import core.helper.LocatorHelper;
+import dataObject.OrangeHRM.Candidate;
 import dataObject.OrangeHRM.CustomField;
 import dataObject.OrangeHRM.Employee;
 import dataType.OrangeHRM.DropdownTitle;
@@ -23,7 +24,7 @@ import utils.helper.Utilities;
 public class GeneralPage {
 
 	LocatorHelper locator = new LocatorHelper(Constant.LOCATOR_FOLDER_PATH, GeneralPage.class);
-	
+
 	protected final Label lblCopyRight = new Label(locator.getLocator("lblCopyRight"));
 	protected final Label lblVersion = new Label(locator.getLocator("lblVersion"));
 	protected final Button btnSearch = new Button(locator.getLocator("btnSearch"));
@@ -44,6 +45,7 @@ public class GeneralPage {
 	protected final Element leftPanel = new Element(locator.getLocator("leftPanel"));
 	// Toast message
 	protected final Label lblToastSuccessMessage = new Label(locator.getLocator("lblToastSuccessMessage"));
+	protected final Label lblUpdatedSuccessMessage = new Label(locator.getLocator("lblUpdatedSuccessMessage"));
 	protected final Element drpOption = new Element(locator.getLocator("drpOption"));
 	protected final Label lblOption = new Label(locator.getLocator("lblOption"));
 	protected final Label lblNoRecordsFound = new Label(locator.getLocator("lblNoRecordsFound"));
@@ -55,7 +57,10 @@ public class GeneralPage {
 	protected final Button btnEditRecord = new Button(infoRecordRow.getLocatorAsString() + locator.getLocator("btnEditRecord"));
 	protected final Button btnDeleteRecord = new Button(infoRecordRow.getLocatorAsString() + locator.getLocator("btnDeleteRecord"));
 	protected final Label lblSelectedOption = new Label(drpOption.getLocatorAsString() + locator.getLocator("lblSelectedOption"));
-	
+	protected final Button btnView = new Button(locator.getLocator("btnView"));
+	protected final Button btnYesDelete = new Button(locator.getLocator("btnYesDelete"));
+	protected final Label lblCandidateName = new Label(locator.getLocator("lblCandidateName"));
+
 	private static GeneralPage instance;
 
 	public static GeneralPage newInstance() {
@@ -97,6 +102,10 @@ public class GeneralPage {
 			return (T) new ViewLeaveListPage();
 		case DIRECTORY:
 			return (T) new ViewDirectoryPage();
+		case TIME:
+			return (T) new ViewEmployeeTimesheetPage();
+		case RECRUITMENT:
+			return (T) new ViewCandidatesPage();
 		default:
 			return null;
 		}
@@ -114,6 +123,8 @@ public class GeneralPage {
 		}
 		if (pageNames[length - 1].equals(TopBarMenuItem.CUSTOM_FIELDS.getValue())) {
 			return (T) new ListCustomFieldsPage();
+		} else if (pageNames[length - 1].equals(TopBarMenuItem.ATTENDANCE_SUMMARY.getValue())) {
+			return (T) new AttendanceSummaryReportCriteriaPage();
 		} else {
 			return null;
 		}
@@ -136,6 +147,10 @@ public class GeneralPage {
 			return (T) new ApplyLeavePage();
 		case MYLEAVE:
 			return (T) new ViewMyLeaveListPage();
+		case VACANCIES:
+			return (T) new ViewJobVacancyPage();
+		case CANDIDATES:
+			return (T) new ViewCandidatesPage();
 		default:
 			return null;
 		}
@@ -200,6 +215,20 @@ public class GeneralPage {
 	@Step("Click Search button")
 	public GeneralPage clickSearchButton() {
 		btnSearch.click();
+		waitForLoadingIconDisappear();
+		return this;
+	}
+	
+	@Step("Click View button")
+	public GeneralPage clickViewButton() {
+		btnView.click();
+		waitForLoadingIconDisappear();
+		return this;
+	}
+	
+	@Step("Click YesDelete button")
+	public GeneralPage clickYesDeleteButton() {
+		btnYesDelete.click();
 		waitForLoadingIconDisappear();
 		return this;
 	}
@@ -320,6 +349,11 @@ public class GeneralPage {
 		return lblToastSuccessMessage.isDisplayed();
 	}
 
+	@Step("Check updated success message is displayed")
+	public boolean isUpdatedSuccessMessageDisplayed() {
+		return lblUpdatedSuccessMessage.isDisplayed();
+	}
+
 	@Step("Check text CopyRight includes {0} and {1}")
 	public boolean isCopyRightTextDisplayed(String companyName, String appVersion) {
 		lblCopyRight.generateDynamic(companyName);
@@ -361,6 +395,11 @@ public class GeneralPage {
 	public boolean isInfoRecordDisplayedInRecordList(Employee employee) {
 		return isInfoRecordDisplayedInRecordList(employee.getEmloyeeId(),
 				String.format("%s %s", employee.getFirstName(), employee.getMiddleName()), employee.getLastName());
+	}
+	
+	public boolean isDisplayedCadidateNameInRecordList(Candidate candidate) {
+		lblCandidateName.generateDynamic(candidate.getFirstName(), candidate.getMiddleName(), candidate.getLastName());
+		return lblCandidateName.isDisplayed();
 	}
 
 	@Step("Check \"No Records Found\" label displayed")

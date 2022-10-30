@@ -1,15 +1,18 @@
 package pages.OrangeHRM;
 
 import core.element.wrapper.Button;
+import core.helper.LocatorHelper;
 import dataObject.OrangeHRM.LeaveTicket;
 import dataType.OrangeHRM.DropdownTitle;
 import dataType.OrangeHRM.TextBoxTitle;
 import io.qameta.allure.Step;
+import utils.constant.Constant;
 
 public class LeavePage extends GeneralPage {
 
-	private final Button btnCancelLeaveTicket = new Button(
-			"//div[text()='%s to %s']/parent::div/following-sibling::div//button[contains(.,'Cancel')]");
+	LocatorHelper locator = new LocatorHelper(Constant.LOCATOR_FOLDER_PATH, LeavePage.class);
+
+	protected final Button btnCancelLeaveTicket = new Button(locator.getLocator("btnCancelLeaveTicket"));
 
 	private static LeavePage instance;
 
@@ -37,7 +40,6 @@ public class LeavePage extends GeneralPage {
 	public ViewPersonalDetailsPage cancelLeaveTicket(LeaveTicket leaveTicket) {
 		btnCancelLeaveTicket.generateDynamic(leaveTicket.getFromDate(), leaveTicket.getToDate());
 		btnCancelLeaveTicket.click();
-		waitForLoadingIconDisappear();
 		return new ViewPersonalDetailsPage();
 	}
 
