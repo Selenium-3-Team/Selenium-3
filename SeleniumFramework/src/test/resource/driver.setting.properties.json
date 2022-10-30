@@ -7,8 +7,9 @@
     "driverType": "Chrome",
     "driverExecutable": "src/test/resource/drivers/win/chromedriver.exe",
     "pageTimeOut": 60,
-    "elementTimeOut": 0,
+    "elementTimeOut": 0
   },
+  
   "firefox.local": {
     "mode": "Local",
     "platform": "Windows",
@@ -16,8 +17,9 @@
     "driverType": "Firefox",
     "driverExecutable": "src/test/resource/drivers/win/geckodriver.exe",
     "pageTimeOut": 60,
-    "elementTimeOut": 0,
+    "elementTimeOut": 0
   },
+  
   "edge.local": {
     "mode": "Local",
     "platform": "Windows",
@@ -25,8 +27,9 @@
     "driverType": "Edge",
     "driverExecutable": "src/test/resource/drivers/win/msedgedriver.exe",
     "pageTimeOut": 60,
-    "elementTimeOut": 0,
+    "elementTimeOut": 0
   },
+  
   "ie.local": {
     "mode": "Local",
     "platform": "Windows",
@@ -34,9 +37,8 @@
     "driverType": "IE",
     "driverExecutable": "src/test/resource/drivers/win/IEDriverServer.exe",
     "pageTimeOut": 60,
-    "elementTimeOut": 0,
-  }
-  
+    "elementTimeOut": 0
+  },
 
   "chrome.remote": {
     "mode": "Remote",
@@ -46,8 +48,9 @@
     "remoteUrl": "http://192.168.1.12:5566/wd/hub",
     "driverExecutable": "src/test/resource/drivers/win/chromedriver.exe",
     "pageTimeOut": 60,
-    "elementTimeOut": 0,
+    "elementTimeOut": 0
   },
+  
   "firefox.remote": {
     "mode": "Remote",
     "platform": "Windows",
@@ -56,8 +59,9 @@
     "remoteUrl": "http://192.168.1.12:5566/wd/hub",
     "driverExecutable": "src/test/resource/drivers/win/geckodriver.exe",
     "pageTimeOut": 60,
-    "elementTimeOut": 0,
+    "elementTimeOut": 0
   },
+  
   "edge.remote": {
     "mode": "Remote",
     "platform": "Windows",
@@ -66,8 +70,9 @@
     "remoteUrl": "http://192.168.1.12:5566/wd/hub",
     "driverExecutable": "src/test/resource/drivers/win/msedgedriver.exe",
     "pageTimeOut": 60,
-    "elementTimeOut": 0,
+    "elementTimeOut": 0
   },
+  
   "ie.remote": {
     "mode": "Remote",
     "platform": "Windows",
@@ -76,7 +81,7 @@
     "remoteUrl": "http://192.168.1.12:5566/wd/hub",
     "driverExecutable": "src/test/resource/drivers/win/IEDriverServer.exe",
     "pageTimeOut": 60,
-    "elementTimeOut": 0,
+    "elementTimeOut": 0
   }
    
 }

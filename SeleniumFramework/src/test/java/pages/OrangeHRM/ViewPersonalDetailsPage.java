@@ -3,8 +3,11 @@ package pages.OrangeHRM;
 import core.element.wrapper.Label;
 import core.element.wrapper.Tab;
 import core.helper.LocatorHelper;
+import dataObject.OrangeHRM.ContactDetails;
 import dataObject.OrangeHRM.Employee;
+import dataType.OrangeHRM.DropdownTitle;
 import dataType.OrangeHRM.EmployeeInformationTypeTab;
+import dataType.OrangeHRM.TextBoxTitle;
 import io.qameta.allure.Step;
 import utils.constant.Constant;
 
@@ -47,6 +50,22 @@ public class ViewPersonalDetailsPage extends PIMPage {
 		default:
 			return null;
 		}
+	}
+
+	@Step("Check employee info tab option is displayed on Personal details form")
+	public ViewPersonalDetailsPage fillContactDetailsForm(ContactDetails contactDetails) {
+		enterValueToTextboxOption(TextBoxTitle.WORK_EMAIL, contactDetails.getWorkEmail());
+		enterValueToTextboxOption(TextBoxTitle.OTHER_EMAIL, contactDetails.getOtherEmail());
+		enterValueToTextboxOption(TextBoxTitle.STREET_1, contactDetails.getStreet1());
+		enterValueToTextboxOption(TextBoxTitle.STREET_2, contactDetails.getStreet2());
+		enterValueToTextboxOption(TextBoxTitle.CITY, contactDetails.getCity());
+		enterValueToTextboxOption(TextBoxTitle.PROVINCE, contactDetails.getProvince());
+		enterValueToTextboxOption(TextBoxTitle.POSTAL_CODE, contactDetails.getPostalCode());
+		enterValueToTextboxOption(TextBoxTitle.HOME, contactDetails.getHomePhone());
+		enterValueToTextboxOption(TextBoxTitle.MOBILE, contactDetails.getMobilePhone());
+		enterValueToTextboxOption(TextBoxTitle.WORK, contactDetails.getWorkPhone());
+		selectOption(DropdownTitle.COUNTRY, contactDetails.getCountry());
+		return this;
 	}
 
 }

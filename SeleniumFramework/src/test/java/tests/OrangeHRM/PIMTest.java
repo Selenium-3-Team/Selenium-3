@@ -5,6 +5,7 @@ import org.testng.annotations.Test;
 import core.helper.AssertHelper;
 import core.report.Logger;
 import dataObject.OrangeHRM.Account;
+import dataObject.OrangeHRM.ContactDetails;
 import dataObject.OrangeHRM.CustomField;
 import dataObject.OrangeHRM.Employee;
 import dataObject.OrangeHRM.PersonalInfo;
@@ -260,7 +261,51 @@ public class PIMTest extends TestBase {
 		viewPersonalDetailsPage.enterLastName(personalInfo.getLastName());
 
 		Logger.info("Step 4: Click Save button.");
-		viewPersonalDetailsPage.clickSaveButton().waitForLoadingIconDisappear();
+		viewPersonalDetailsPage.clickSaveButton();
+		
+		Logger.verify("VP. The \"Successful Updated\" message should be displayed.");
+		assertHelper.assertTrue(viewPersonalDetailsPage.isUpdatedSuccessMessageDisplayed(), "The \"Successful Updated\" message is not displayed.");
+				
+	}
+	
+	@Test
+	@Description("Test case 17: User can update the contact details.")
+	public void TC17() {
+
+		AssertHelper assertHelper = new AssertHelper();
+		LoginPage loginPage = LoginPage.newInstance();
+		ContactDetails contactDetails = new ContactDetails("contact-details-test-data-1");
+		ViewEmployeeListPage viewEmployeeListPage = ViewEmployeeListPage.newInstance();
+		AddEmployeePage addEmployeePage = AddEmployeePage.newInstance();
+		ViewPersonalDetailsPage viewPersonalDetailsPage = ViewPersonalDetailsPage.newInstance();
+
+		Account account = new Account(UserRoleOption.ADMIN);
+		Account newAccount = new Account();
+		Employee employee = new Employee();
+		
+		
+		Logger.info("Precondition 1: Login successfully with a valid account.");
+		viewEmployeeListPage = loginPage.loginOrangeHRM(account);
+
+		Logger.info("Precondition 2: Add a employee with Create login details.");
+		addEmployeePage = viewEmployeeListPage.clickTopBarMenuItem(TopBarMenuItem.ADD_EMPLOYEE);
+		viewPersonalDetailsPage = addEmployeePage.addEmployeeWithCreateLogilnDetails(employee, newAccount, State.ENABLED);
+
+		Logger.info("Precondition 3: Logout OrangeHRM.");
+		loginPage = viewPersonalDetailsPage.logoutOrangeHRM();
+
+		Logger.info("Precondition 4: Login successfully with a new account.");
+		viewPersonalDetailsPage = loginPage.loginOrangeHRM(newAccount);
+		viewPersonalDetailsPage.waitForLoadingIconDisappear();
+		
+		Logger.info("Step 1: Select My info > Personal Details > Contact Details.");
+		viewPersonalDetailsPage.selectEmployeeInfoType(EmployeeInformationTypeTab.CONTACT_DETAILS);
+
+		Logger.info("Step 2: Enter appropropriate values in the contact details form.");
+		viewPersonalDetailsPage.fillContactDetailsForm(contactDetails);
+
+		Logger.info("Step 3: Click Save button.");
+		viewPersonalDetailsPage.clickSaveButton();
 		
 		Logger.verify("VP. The \"Successful Updated\" message should be displayed.");
 		assertHelper.assertTrue(viewPersonalDetailsPage.isUpdatedSuccessMessageDisplayed(), "The \"Successful Updated\" message is not displayed.");
