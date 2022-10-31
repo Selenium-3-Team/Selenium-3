@@ -1,0 +1,8 @@
+{
+	"windows.chrome": {
+		"btnCancelLeaveTicket": "//div[text()='%s to %s']/parent::div/following-sibling::div//button[contains(.,'Cancel')]"
+	},
+	"windows.firefox": {
+		"btnCancelLeaveTicket": "//div[text()='%s to %s']/parent::div/following-sibling::div//button[contains(.,'Cancel')]"
+	}
+}

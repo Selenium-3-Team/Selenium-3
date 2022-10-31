@@ -3,5 +3,10 @@
 		"lblCardHeader": "//p[contains(@class,'directory-card-header')]",
 		"lblCardSubtitle": "//p[contains(@class,'card-subtitle')]",
 		"lblCardDescription": "//p[contains(@class,'card-description')]/parent::div"
+	},
+	"windows.firefox": {
+		"lblCardHeader": "//p[contains(@class,'directory-card-header')]",
+		"lblCardSubtitle": "//p[contains(@class,'card-subtitle')]",
+		"lblCardDescription": "//p[contains(@class,'card-description')]/parent::div"
 	}
 }
