@@ -12,7 +12,7 @@ public class LeavePage extends GeneralPage {
 
 	LocatorHelper locator = new LocatorHelper(Constant.LOCATOR_FOLDER_PATH, LeavePage.class);
 
-	protected final Button btnCancelLeaveTicket = new Button(locator.getLocator("btnCancelLeaveTicket"));
+	private final Button btnCancelLeaveTicket = new Button(locator.getLocator("btnCancelLeaveTicket"));
 
 	private static LeavePage instance;
 

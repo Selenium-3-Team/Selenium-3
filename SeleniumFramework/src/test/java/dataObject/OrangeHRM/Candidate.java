@@ -5,11 +5,8 @@ import com.google.gson.JsonObject;
 import core.helper.JsonHelper;
 import utils.constant.Constant;
 
-public class Candidate {
+public class Candidate extends PersonalInfo{
 
-	private String firstName;
-	private String middleName;
-	private String lastName;
 	private String vacancy;
 	private String email;
 	private String contactNumber;
@@ -21,9 +18,9 @@ public class Candidate {
 
 	public Candidate(String key) {
 		JsonObject candidate = JsonHelper.getJsonObject(Constant.CANDIDATE_DATA);
-		this.firstName = candidate.get(key).getAsJsonObject().get("firstName").getAsString();
-		this.middleName = candidate.get(key).getAsJsonObject().get("middleName").getAsString();
-		this.lastName = candidate.get(key).getAsJsonObject().get("lastName").getAsString();
+		super.setFirstName(candidate.get(key).getAsJsonObject().get("firstName").getAsString());
+		super.setMiddleName(candidate.get(key).getAsJsonObject().get("middleName").getAsString());
+		super.setLastName(candidate.get(key).getAsJsonObject().get("lastName").getAsString());
 		this.vacancy = candidate.get(key).getAsJsonObject().get("vacancy").getAsString();
 		this.email = candidate.get(key).getAsJsonObject().get("email").getAsString();
 		this.contactNumber = candidate.get(key).getAsJsonObject().get("contactNumber").getAsString();
@@ -35,35 +32,11 @@ public class Candidate {
 	}
 
 	public Candidate(String firstName, String middleName, String lastName, String vacancy, String email) {
-		this.firstName = firstName;
-		this.middleName = middleName;
-		this.lastName = lastName;
+		super.setFirstName(firstName);
+		super.setMiddleName(middleName);
+		super.setLastName(lastName);
 		this.vacancy = vacancy;
 		this.email = email;
-	}
-
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getMiddleName() {
-		return middleName;
-	}
-
-	public void setMiddleName(String middleName) {
-		this.middleName = middleName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
 	}
 
 	public String getVacancy() {

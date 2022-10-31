@@ -2,5 +2,9 @@
 	"windows.chrome": {
 		"txtFrom": "//input[@placeholder='From']",
 		"txtTo": "//input[@placeholder='To']"
+	},
+	"windows.firefox": {
+		"tglCreateLoginDetails": "//p[normalize-space(.)='Create Login Details']/parent::div/div[contains(@class, 'switch-wrapper')]//span",
+		"rdStatus": "//div[contains(@class, 'radio-wrapper') and normalize-space(.)='%s']//span"
 	}
 }

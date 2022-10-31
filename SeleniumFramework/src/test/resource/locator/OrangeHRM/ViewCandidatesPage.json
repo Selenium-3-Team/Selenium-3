@@ -3,5 +3,10 @@
 		"txtFirstName": "//input[@name='firstName']",
 		"txtMiddleName": "//input[@name='middleName']",
 		"txtLastName": "//input[@name='lastName']"
+	},
+	"windows.firefox": {
+		"txtFirstName": "//input[@name='firstName']",
+		"txtMiddleName": "//input[@name='middleName']",
+		"txtLastName": "//input[@name='lastName']"
 	}
 }
