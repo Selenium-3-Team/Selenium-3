@@ -10,10 +10,11 @@
 	</listeners>
 	
   	<test name="Run Local Suit Test">
-  		<parameter name="driverConfig" value="chrome.remote" />
+  		<parameter name="driverConfig" value="chrome.local" />
 		<parameter name="platform" value="windows" />	
   		<classes>
-			<class name="tests.OrangeHRM.LoginTest"></class>
+			<class name="tests.OrangeHRM.LoginTest"><methods><include name="TC01"></include></methods></class>
+			<class name="tests.OrangeHRM.ChangePasswordTest"><methods><include name="TC04"></include></methods></class>
   		</classes>
   	</test>
   
