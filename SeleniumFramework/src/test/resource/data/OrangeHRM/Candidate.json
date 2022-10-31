@@ -4,6 +4,12 @@
     "middleName": "Mac",
     "lastName": "Nguyen",
     "vacancy": "Senior QA Lead",
-    "email": "macnguyen@gmail.com"
+    "email": "macnguyen@gmail.com",
+    "contactNumber": "098712345",
+    "resume": "CV Updated",
+    "keywords": "Candidate key",
+    "dateOfApplication": "2022-10-31",
+    "notes": "Notes",
+    "consentToKeepData": "off"
   }
 }

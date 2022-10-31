@@ -81,20 +81,23 @@ public class RecruitmentTest extends TestBase {
 		Logger.info("Step 5: Enter email on \"Email\" textbox.");
 		viewCandidates.enterValueToTextboxOption(TextBoxTitle.EMAIL, candidate.getEmail());
 
-		Logger.info("Step 6: Click \"Save\" button.");
+		Logger.info("Step 6: Enter date on \"Date\" textbox.");
+		viewCandidates.enterValueToTextboxOption(TextBoxTitle.DATE_OF_APPLICATION, candidate.getDateOfApplication());
+		
+		Logger.info("Step 7: Click \"Save\" button.");
 		viewCandidates.clickSaveButton();
 
 		Logger.verify("VP. Success popup is displyed.");
 		assertHelper.assertTrue(viewCandidates.isSavedSuccessMessageDisplayed(), "Success popup is displyed.");
 
-		Logger.info("Step 7: Click on \"Candidates\" tab.");
+		Logger.info("Step 8: Click on \"Candidates\" tab.");
 		viewCandidates.clickTopBarMenuItem(TopBarMenuItem.CANDIDATES);
 
 		Logger.verify("VP. The cadidate is displayed in record list.");
 		assertHelper.assertTrue(viewCandidates.isDisplayedCadidateNameInRecordList(candidate), "The cadidate is displayed on \"Candidates\" table.");
 		
 		Logger.info("Post-condition: Delete the candidate created.");
-		viewCandidates.deleteCadidate(candidate);
+		viewCandidates.clickDeleteInfoRecord(candidate);
 
 	}
 

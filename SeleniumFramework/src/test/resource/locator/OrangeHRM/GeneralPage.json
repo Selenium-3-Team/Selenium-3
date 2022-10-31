@@ -29,8 +29,6 @@
 		"lblSelectedOption": "//div[@class='oxd-select-text-input']",
 		"lblUpdatedSuccessMessage": "//p[contains(@class,'toast-message') and .='Successfully Updated']/preceding-sibling::p[contains(@class, 'toast-title') and .='Success']/parent::div[contains(@class, 'toast-content--success')]",
 		"btnView": "//button[contains(.,'View')]",
-		"btnYesDelete": "//button[contains(.,'Yes, Delete')]",
 		"lblCandidateName": "//div[contains(@class,'oxd-table-cell')]//div[contains(text(),'%s %s %s')]"
-		
 	}
 }

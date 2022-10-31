@@ -2,7 +2,6 @@
 	"windows.chrome": {
 		"txtFirstName": "//input[@name='firstName']",
 		"txtMiddleName": "//input[@name='middleName']",
-		"txtLastName": "//input[@name='lastName']",
-		"btnDeleteCadidate": "//div[text()='%s %s %s']/parent::div/following-sibling::div//i[@class='oxd-icon bi-trash']"
+		"txtLastName": "//input[@name='lastName']"
 	}
 }

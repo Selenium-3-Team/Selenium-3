@@ -52,13 +52,12 @@ public class GeneralPage {
 	protected final Element infoRecordRow = new Element(locator.getLocator("infoRecordRow"));
 	protected final Label lblCellFollowingIndex = new Label(locator.getLocator("lblCellFollowingIndex"));
 	protected final Label lblInforRecordColumns = new Label(locator.getLocator("lblInforRecordColumns"));
-	private final Button btnConfirmDelete = new Button(locator.getLocator("btnConfirmDelete"));
+	protected final Button btnConfirmDelete = new Button(locator.getLocator("btnConfirmDelete"));
 	protected final Image employeeImage = new Image(locator.getLocator("employeeImage"));
 	protected final Button btnEditRecord = new Button(infoRecordRow.getLocatorAsString() + locator.getLocator("btnEditRecord"));
 	protected final Button btnDeleteRecord = new Button(infoRecordRow.getLocatorAsString() + locator.getLocator("btnDeleteRecord"));
 	protected final Label lblSelectedOption = new Label(drpOption.getLocatorAsString() + locator.getLocator("lblSelectedOption"));
 	protected final Button btnView = new Button(locator.getLocator("btnView"));
-	protected final Button btnYesDelete = new Button(locator.getLocator("btnYesDelete"));
 	protected final Label lblCandidateName = new Label(locator.getLocator("lblCandidateName"));
 
 	private static GeneralPage instance;
@@ -183,6 +182,21 @@ public class GeneralPage {
 		return this;
 	}
 
+	@Step("Delete info record on Custom field")
+	public GeneralPage clickDeleteInfoRecord(Candidate candidate) {
+		String fullName = "";
+		String firstName = candidate.getFirstName();
+		fullName += firstName.isEmpty() ? "" : firstName;
+		String middleName = candidate.getMiddleName();
+		fullName += middleName.isEmpty() ? "" : " " + middleName;
+		String lastName = candidate.getLastName();
+		fullName += lastName.isEmpty() ? "" : " " + lastName;
+
+		clickDeleteInfoRecord(candidate.getVacancy(), fullName, candidate.getDateOfApplication());
+		clickConfirmDeleteButton();
+		return this;
+	}
+
 	@Step("Click Confirm button on Delete form")
 	public GeneralPage clickConfirmDeleteButton() {
 		btnConfirmDelete.click();
@@ -219,17 +233,10 @@ public class GeneralPage {
 		btnSearch.click();
 		return this;
 	}
-	
+
 	@Step("Click View button")
 	public GeneralPage clickViewButton() {
 		btnView.click();
-		waitForLoadingIconDisappear();
-		return this;
-	}
-	
-	@Step("Click YesDelete button")
-	public GeneralPage clickYesDeleteButton() {
-		btnYesDelete.click();
 		waitForLoadingIconDisappear();
 		return this;
 	}
@@ -349,7 +356,7 @@ public class GeneralPage {
 	public boolean isSavedSuccessMessageDisplayed() {
 		return lblSavedSuccessMessage.isDisplayed();
 	}
-	
+
 	@Step("Check toast updated success message is displayed")
 	public boolean isUpdatedSuccessMessageDisplayed() {
 		return lblUpdatedSuccessMessage.isDisplayed();
@@ -397,7 +404,7 @@ public class GeneralPage {
 		return isInfoRecordDisplayedInRecordList(employee.getEmloyeeId(),
 				String.format("%s %s", employee.getFirstName(), employee.getMiddleName()), employee.getLastName());
 	}
-	
+
 	public boolean isDisplayedCadidateNameInRecordList(Candidate candidate) {
 		lblCandidateName.generateDynamic(candidate.getFirstName(), candidate.getMiddleName(), candidate.getLastName());
 		return lblCandidateName.isDisplayed();

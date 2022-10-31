@@ -1,10 +1,8 @@
 package pages.OrangeHRM;
 
-import core.element.wrapper.Button;
 import core.element.wrapper.TextBox;
 import core.helper.LocatorHelper;
 import dataObject.OrangeHRM.Candidate;
-import io.qameta.allure.Step;
 import utils.constant.Constant;
 
 public class ViewCandidatesPage extends RecruitmentPage {
@@ -14,7 +12,6 @@ public class ViewCandidatesPage extends RecruitmentPage {
 	private final TextBox txtFirstName = new TextBox(locator.getLocator("txtFirstName"));
 	private final TextBox txtMiddleName = new TextBox(locator.getLocator("txtMiddleName"));
 	private final TextBox txtLastName = new TextBox(locator.getLocator("txtLastName"));
-	private final Button btnDeleteCadidate = new Button(locator.getLocator("btnDeleteCadidate"));
 
 	private static ViewCandidatesPage instance;
 
@@ -48,14 +45,6 @@ public class ViewCandidatesPage extends RecruitmentPage {
 
 	public ViewCandidatesPage enterFullName(Candidate candidate) {
 		return enterFullName(candidate.getFirstName(), candidate.getMiddleName(), candidate.getLastName());
-	}
-
-	@Step("Delete a candidate")
-	public ViewCandidatesPage deleteCadidate(Candidate candidate) {
-		btnDeleteCadidate.generateDynamic(candidate.getFirstName(), candidate.getMiddleName(), candidate.getLastName());
-		btnDeleteCadidate.click();
-		clickYesDeleteButton();
-		return new ViewCandidatesPage();
 	}
 
 }

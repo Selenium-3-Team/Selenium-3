@@ -7,7 +7,7 @@ public enum TextBoxTitle {
 	FROMDATE("From Date"), TODATE("To Date"), EMPLOYEE_NAME("Employee Name"), PROJECT_NAME("Project Name"),
 	EMAIL("Email"), USERNAME("Username"), PASSWORD("Password"), STREET_1("Street 1"), STREET_2("Street 2"),
 	CITY("City"), PROVINCE("State/Province"), POSTAL_CODE("Zip/Postal Code"), HOME("Home"), MOBILE("Mobile"),
-	WORK("Work"), WORK_EMAIL("Work Email"), OTHER_EMAIL("Other Email");
+	WORK("Work"), WORK_EMAIL("Work Email"), OTHER_EMAIL("Other Email"), DATE_OF_APPLICATION("Date of Application");
 
 	private final String value;
 
