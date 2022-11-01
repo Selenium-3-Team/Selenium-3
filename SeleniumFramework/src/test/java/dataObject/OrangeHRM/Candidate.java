@@ -5,7 +5,7 @@ import com.google.gson.JsonObject;
 import core.helper.JsonHelper;
 import utils.constant.Constant;
 
-public class Candidate extends PersonalInfo{
+public class Candidate extends PersonalInfo {
 
 	private String vacancy;
 	private String email;
@@ -21,6 +21,7 @@ public class Candidate extends PersonalInfo{
 		super.setFirstName(candidate.get(key).getAsJsonObject().get("firstName").getAsString());
 		super.setMiddleName(candidate.get(key).getAsJsonObject().get("middleName").getAsString());
 		super.setLastName(candidate.get(key).getAsJsonObject().get("lastName").getAsString());
+		super.setFullName(super.generateFullName());
 		this.vacancy = candidate.get(key).getAsJsonObject().get("vacancy").getAsString();
 		this.email = candidate.get(key).getAsJsonObject().get("email").getAsString();
 		this.contactNumber = candidate.get(key).getAsJsonObject().get("contactNumber").getAsString();
@@ -54,7 +55,7 @@ public class Candidate extends PersonalInfo{
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
+
 	public String getContactNumber() {
 		return contactNumber;
 	}
@@ -62,7 +63,7 @@ public class Candidate extends PersonalInfo{
 	public void setContactNumber(String contactNumber) {
 		this.contactNumber = contactNumber;
 	}
-	
+
 	public String getResume() {
 		return resume;
 	}
@@ -70,7 +71,7 @@ public class Candidate extends PersonalInfo{
 	public void setResume(String resume) {
 		this.resume = resume;
 	}
-	
+
 	public String getKeywords() {
 		return keywords;
 	}
@@ -78,7 +79,7 @@ public class Candidate extends PersonalInfo{
 	public void setKeywords(String keywords) {
 		this.keywords = keywords;
 	}
-	
+
 	public String getDateOfApplication() {
 		return dateOfApplication;
 	}
@@ -86,7 +87,7 @@ public class Candidate extends PersonalInfo{
 	public void setDateOfApplication(String dateOfApplication) {
 		this.dateOfApplication = dateOfApplication;
 	}
-	
+
 	public String getNotes() {
 		return notes;
 	}
@@ -94,7 +95,7 @@ public class Candidate extends PersonalInfo{
 	public void setNotes(String notes) {
 		this.notes = notes;
 	}
-	
+
 	public String getConsentToKeepData() {
 		return consentToKeepData;
 	}
