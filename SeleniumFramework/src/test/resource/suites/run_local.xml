@@ -3,28 +3,18 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 
 <!-- Run parallel with number of threads -->
-<suite name="Suite" thread-count="5" parallel="methods">
+<suite name="Suite" thread-count="3" parallel="methods">
 
 	<listeners>
 		<listener class-name="core.report.TestListener" />
 	</listeners>
 	
-  	<test name="Run Local Suit Test">
-  		<parameter name="driverConfig" value="chrome.local" />
+  	<test name="Run Chrome Local Suit Test">
+  		<parameter name="driverConfig" value="chrome.remote" />
 		<parameter name="platform" value="windows" />	
   		<classes>
-			<class name="tests.OrangeHRM.LeaveTest"><methods><include name="TC12"></include></methods></class>
-			<class name="tests.OrangeHRM.PIMTest"><methods><include name="TC06"></include></methods></class>
-			<class name="tests.OrangeHRM.RecruitmentTest"><methods><include name="TC15"></include></methods></class>
-  		</classes>
-  	</test>
-  	<test name="Run Firefox Local Suit Test">
-  		<parameter name="driverConfig" value="firefox.local" />
-		<parameter name="platform" value="windows" />	
-  		<classes>
-			<class name="tests.OrangeHRM.LeaveTest"><methods><include name="TC12"></include></methods></class>
-			<class name="tests.OrangeHRM.PIMTest"><methods><include name="TC06"></include></methods></class>
-			<class name="tests.OrangeHRM.RecruitmentTest"><methods><include name="TC15"></include></methods></class>
+			<class name="tests.OrangeHRM.LoginTest"></class>
+			<class name="tests.OrangeHRM.ChangePasswordTest"></class>
   		</classes>
   	</test>
   
