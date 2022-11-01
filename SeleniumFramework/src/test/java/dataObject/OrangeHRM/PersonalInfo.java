@@ -158,18 +158,26 @@ public class PersonalInfo {
 		this.bloodType = bloodType;
 	}
 
+	public String generateFullName() {
+		String fullName = "";
+		fullName += this.firstName.isEmpty() ? "" : this.firstName;
+		fullName += this.middleName.isEmpty() ? "" : " " + this.middleName;
+		fullName += this.lastName.isEmpty() ? "" : " " + this.lastName;
+		return fullName.trim();
+	}
+
 	public PersonalInfo() {
 		this.firstName = RandomHelper.getRandomString("first");
 		this.middleName = RandomHelper.getRandomString("middle");
 		this.lastName = RandomHelper.getRandomString("last");
-		this.fullName = String.format("%s %s %s", this.firstName, this.middleName, this.lastName);
+		this.fullName = this.generateFullName();
 	}
 
 	public PersonalInfo(String firstName, String middleName, String lastName) {
 		this.firstName = firstName;
 		this.middleName = middleName;
 		this.lastName = lastName;
-		this.fullName = String.format("%s %s %s", this.firstName, this.middleName, this.lastName);
+		this.fullName = this.generateFullName();
 	}
 
 }

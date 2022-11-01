@@ -54,9 +54,12 @@ public class GeneralPage {
 	protected final Label lblInforRecordColumns = new Label(locator.getLocator("lblInforRecordColumns"));
 	protected final Button btnConfirmDelete = new Button(locator.getLocator("btnConfirmDelete"));
 	protected final Image employeeImage = new Image(locator.getLocator("employeeImage"));
-	protected final Button btnEditRecord = new Button(infoRecordRow.getLocatorAsString() + locator.getLocator("btnEditRecord"));
-	protected final Button btnDeleteRecord = new Button(infoRecordRow.getLocatorAsString() + locator.getLocator("btnDeleteRecord"));
-	protected final Label lblSelectedOption = new Label(drpOption.getLocatorAsString() + locator.getLocator("lblSelectedOption"));
+	protected final Button btnEditRecord = new Button(
+			infoRecordRow.getLocatorAsString() + locator.getLocator("btnEditRecord"));
+	protected final Button btnDeleteRecord = new Button(
+			infoRecordRow.getLocatorAsString() + locator.getLocator("btnDeleteRecord"));
+	protected final Label lblSelectedOption = new Label(
+			drpOption.getLocatorAsString() + locator.getLocator("lblSelectedOption"));
 	protected final Button btnView = new Button(locator.getLocator("btnView"));
 	protected final Label lblCandidateName = new Label(locator.getLocator("lblCandidateName"));
 
@@ -184,15 +187,7 @@ public class GeneralPage {
 
 	@Step("Delete info record on Custom field")
 	public GeneralPage clickDeleteInfoRecord(Candidate candidate) {
-		String fullName = "";
-		String firstName = candidate.getFirstName();
-		fullName += firstName.isEmpty() ? "" : firstName;
-		String middleName = candidate.getMiddleName();
-		fullName += middleName.isEmpty() ? "" : " " + middleName;
-		String lastName = candidate.getLastName();
-		fullName += lastName.isEmpty() ? "" : " " + lastName;
-
-		clickDeleteInfoRecord(candidate.getVacancy(), fullName, candidate.getDateOfApplication());
+		clickDeleteInfoRecord(candidate.getVacancy(), candidate.getFullName(), candidate.getDateOfApplication());
 		clickConfirmDeleteButton();
 		return this;
 	}

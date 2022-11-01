@@ -14,8 +14,17 @@
 		<parameter name="platform" value="windows" />	
   		<classes>
 			<class name="tests.OrangeHRM.LeaveTest"><methods><include name="TC12"></include></methods></class>
-			<class name="tests.OrangeHRM.LoginTest"><methods><include name="TC01"></include></methods></class>
-			<class name="tests.OrangeHRM.ChangePasswordTest"><methods><include name="TC04"></include></methods></class>
+			<class name="tests.OrangeHRM.PIMTest"><methods><include name="TC06"></include></methods></class>
+			<class name="tests.OrangeHRM.RecruitmentTest"><methods><include name="TC15"></include></methods></class>
+  		</classes>
+  	</test>
+  	<test name="Run Firefox Local Suit Test">
+  		<parameter name="driverConfig" value="firefox.local" />
+		<parameter name="platform" value="windows" />	
+  		<classes>
+			<class name="tests.OrangeHRM.LeaveTest"><methods><include name="TC12"></include></methods></class>
+			<class name="tests.OrangeHRM.PIMTest"><methods><include name="TC06"></include></methods></class>
+			<class name="tests.OrangeHRM.RecruitmentTest"><methods><include name="TC15"></include></methods></class>
   		</classes>
   	</test>
   
